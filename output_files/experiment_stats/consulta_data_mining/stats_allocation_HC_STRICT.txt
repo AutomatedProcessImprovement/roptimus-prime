@@ -1,0 +1,22 @@
+Function Evaluations:  271
+Solutions Explored:    271
+Pareto front size:     9
+In Joint Pareto:       7
+Not In Joint Pareto:   2
+Average Cycle Time:    0:35:09.010636
+Average Resource Cost: 190985.812623
+------------------------- METRICS --------------------------
+# Hyperarea Ratio:     0.939581
+# Hausdorff Distance:  114721.229179
+# Delta Metric:        1.200819
+# Purity Metric:       0.777778
+--------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
+[SYSTEM:  1, Role 1:  1, Role 2:  1, Role 3:  1] -> [aCost:  81911.38, cTime: 0:38:29.399467]
+[SYSTEM:  1, Role 1:  1, Role 2:  1, Role 3: 26] -> [aCost: 619032.58, cTime: 0:34:25.802570]
+[SYSTEM:  1, Role 1:  1, Role 2:  1, Role 3:  2] -> [aCost: 103833.32, cTime: 0:35:13.789626]
+[SYSTEM:  1, Role 1:  2, Role 2:  1, Role 3:  2] -> [aCost: 121660.16, cTime: 0:34:58.328304]
+[SYSTEM:  1, Role 1:  1, Role 2:  2, Role 3:  2] -> [aCost: 122664.58, cTime: 0:34:49.343969]
+[SYSTEM:  1, Role 1:  1, Role 2:  2, Role 3:  4] -> [aCost: 167243.82, cTime: 0:34:35.037690]
+[SYSTEM:  2, Role 1:  1, Role 2:  2, Role 3:  2] -> [aCost: 144562.45, cTime: 0:34:44.647753]
+[SYSTEM:  2, Role 1:  1, Role 2:  2, Role 3:  3] -> [aCost: 168980.51, cTime: 0:34:33.679095]
+[SYSTEM:  4, Role 1:  1, Role 2:  2, Role 3:  2] -> [aCost: 188983.51, cTime: 0:34:31.067254]

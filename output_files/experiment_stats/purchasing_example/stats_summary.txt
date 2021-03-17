@@ -1,0 +1,8 @@
+['Joint Pareto Size (without MAD): 30 --------------------------------------------------------']
+Alg_Name                          #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
+joint_pareto(purchasing_example)  16133   10466  30      30     0    1.0        0.0             1.494801    1.0          2 days, 20:34:35.426497  206450.88
+HC_STRICT(purchasing_example)     683     683    23      16     7    0.999966   12093.53        1.471674    0.695652     3 days, 0:22:08.906837   210043.30
+HC_FLEX(purchasing_example)       3084    3084   27      18     9    0.999993   10503.33        1.454444    0.666667     2 days, 22:13:59.679181  220070.52
+TS_STRICT(purchasing_example)     2457    2457   22      21     1    0.999999   12411.89        1.496234    0.954545     3 days, 1:43:02.914955   198841.12
+NSGA-II(purchasing_example)       9909    6242   33      28     5    0.999995   93709.59        1.326563    0.848485     2 days, 18:08:38.105767  254829.79
+------------------------------------------------------
