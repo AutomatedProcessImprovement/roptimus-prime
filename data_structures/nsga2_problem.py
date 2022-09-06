@@ -2,7 +2,7 @@ import sys
 import copy
 
 import autograd.numpy as anp
-from pymoo.model.problem import Problem
+from pymoo.core.problem import Problem
 
 from data_structures.pools_info import PoolInfo
 from support_modules.bpmn_parser import update_resource_pools
@@ -29,8 +29,8 @@ class NSGA2Problem(Problem):
     def _evaluate(self, x, out, *args, **kwargs):
         population_times = []
         population_costs = []
-        for resorces_count in x:
-            [cost, cycle_time] = self._generate_solution(resorces_count)
+        for resources_count in x:
+            [cost, cycle_time] = self._generate_solution(resources_count)
             population_costs.append(cost)
             population_times.append(cycle_time)
 

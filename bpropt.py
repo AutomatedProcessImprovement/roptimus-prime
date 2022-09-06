@@ -47,14 +47,14 @@ def execute_algorithm_variants(process_index, max_func_ev, non_opt_ratio, tot_si
 
 def main():
     # Uncomment to execute the algorithms on all the available process  ...
-    # for log_index in range(0, len(experiment_logs)):
-    #     execute_algorithm_variants(log_index, 10000, 0.08, 15)
+    for log_index in range(0, len(experiment_logs)):
+        execute_algorithm_variants(log_index, 10000, 0.08, 15)
 
     # 1st Parameter: Index of the process to optimize -- from list experiment_logs
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(0, 10000, 0.08, 15)
+    # execute_algorithm_variants(0, 10000, 0.08, 15)
     os._exit(0)
 
 

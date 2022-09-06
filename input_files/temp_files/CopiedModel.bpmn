@@ -1248,7 +1248,7 @@ node_f55826ab-6162-469f-8f77-97cb49ba8e78</ns0:outgoing>
       <ns5:resource costPerHour="1" id="QBP_DEFAULT_RESOURCE" name="SYSTEM" timetableId="QBP_ARR_DEFAULT_TIMETABLE" totalAmount="20" />
       <ns5:resource costPerHour="1" id="qbp_d237c3e4-817f-4c59-81b7-e794aef2de58" name="Role 1" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="13" />
       <ns5:resource costPerHour="1" id="qbp_b174e71d-3078-4a6a-adda-c1aad311a72f" name="Role 2" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="10" />
-      <ns5:resource costPerHour="1" id="qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59" name="Role 3" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="4" />
+      <ns5:resource costPerHour="1" id="qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59" name="Role 3" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="7" />
       <ns5:resource costPerHour="1" id="qbp_f836b175-4521-409c-a0f6-a30ee06962fe" name="Role 5" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="3" />
       <ns5:resource costPerHour="1" id="qbp_75b36817-f46d-4187-9324-8ba43ef7ce84" name="Role 6" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="2" />
       <ns5:resource costPerHour="1" id="qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c" name="Role 7" timetableId="QBP_RES_DEFAULT_TIMETABLE" totalAmount="2" />

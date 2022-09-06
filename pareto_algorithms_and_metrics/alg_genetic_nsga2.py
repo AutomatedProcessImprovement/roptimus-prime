@@ -5,6 +5,12 @@ from data_structures.nsga2_problem import NSGA2Problem
 from pymoo.optimize import minimize
 from pymoo.factory import get_algorithm, get_crossover, get_mutation, get_sampling
 
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.operators.sampling.rnd import IntegerRandomSampling
+from pymoo.operators.crossover.sbx import SBX
+from pymoo.operators.mutation.pm import PolynomialMutation
+from pymoo.operators.repair.rounding import RoundingRepair
+
 from pareto_algorithms_and_metrics.alg_hill_climb_tabu_search import set_up_cost
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 from support_modules.file_manager import temp_bpmn_file, create_genetic_stats_files, read_stats_file
@@ -20,13 +26,19 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
     initial_pools_info = set_up_cost(cost_type, xes_log_info)
 
     resource_opt_problem = NSGA2Problem(log_name, initial_pools_info, total_simulations)
+    algorithm = NSGA2(pop_size=40,
+                      sampling=IntegerRandomSampling(),
+                      crossover=SBX(prob=0.9, eta=15, repair=RoundingRepair()),
+                      mutation=PolynomialMutation(prob=1.0, eta=20, repair=RoundingRepair()),
+                      eliminate_duplicates=True)
 
-    algorithm = get_algorithm("nsga2",
-                              pop_size=40,
-                              sampling=get_sampling("int_random"),
-                              crossover=get_crossover("int_sbx", prob=0.9, eta=15),
-                              mutation=get_mutation("int_pm", eta=20),
-                              eliminate_duplicates=True)
+    # __DEPRECATED__
+    # algorithm = get_algorithm("nsga2",
+    #                           pop_size=40,
+    #                           sampling=get_sampling("int_random"),
+    #                           crossover=get_crossover("int_sbx", prob=0.9, eta=15),
+    #                           mutation=get_mutation("int_pm", eta=20),
+    #                           eliminate_duplicates=True)
 
     minimize(resource_opt_problem,
              algorithm,

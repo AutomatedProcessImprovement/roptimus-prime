@@ -30,7 +30,8 @@ def perform_simulation(pools_info,
         # Executing simulation with BIMP
         starting_time = time.time()
         if os.system(
-                "java -jar {bimp_engine_path} {model_file_path} -csv {results_file_path} > {simulation_log}".format(
+                "java --add-opens java.base/java.lang=ALL-UNNAMED -jar {bimp_engine_path} {model_file_path} -csv " +
+                "{results_file_path} > {simulation_log}".format(
                     bimp_engine_path=bimp_engine_path,
                     model_file_path=model_file_path,
                     results_file_path=results_file_path,
