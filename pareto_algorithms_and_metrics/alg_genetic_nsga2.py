@@ -17,7 +17,7 @@ from support_modules.file_manager import temp_bpmn_file, create_genetic_stats_fi
 from support_modules.log_parser import extract_data_from_xes_event_log
 
 
-def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulations, cost_type=1):
+def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulations, json_path, cost_type=1):
     copyfile(bpmn_path, temp_bpmn_file)
     create_genetic_stats_files(log_name)
     starting_time = time.time()
@@ -25,7 +25,7 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
     xes_log_info = extract_data_from_xes_event_log(xes_path)
     initial_pools_info = set_up_cost(cost_type, xes_log_info)
 
-    resource_opt_problem = NSGA2Problem(log_name, initial_pools_info, total_simulations)
+    resource_opt_problem = NSGA2Problem(log_name, initial_pools_info, total_simulations, json_path=json_path)
     algorithm = NSGA2(pop_size=40,
                       sampling=IntegerRandomSampling(),
                       crossover=SBX(prob=0.9, eta=15, repair=RoundingRepair()),

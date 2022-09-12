@@ -23,10 +23,13 @@ experiment_logs = {0: 'production',
                    7: 'bpi_challenge_2017'}
 
 
-def execute_algorithm_variants(process_index, max_func_ev, non_opt_ratio, tot_simulations):
+def execute_algorithm_variants(process_index, xes_path, max_func_ev, non_opt_ratio, tot_simulations, bpmn_path, json_path):
     log_name = experiment_logs[process_index]
-    xes_path = xes_simodbpmn_file_paths[log_name][0]
-    bpmn_path = xes_simodbpmn_file_paths[log_name][1]
+    # xes_path = xes_simodbpmn_file_paths[log_name][0]
+    # bpmn_path = xes_simodbpmn_file_paths[log_name][1]
+    xes_path = xes_path
+    json_path = json_path
+    bpmn_path = bpmn_path
     if to_execute['HC-STRICT']:
         # Executing Hill-Climbing without Median Absolute Deviation (HC-STRICT)
         refined_hill_pareto(log_name, xes_path, bpmn_path, max_func_ev, non_opt_ratio, tot_simulations, False, False)
@@ -38,7 +41,7 @@ def execute_algorithm_variants(process_index, max_func_ev, non_opt_ratio, tot_si
         refined_hill_pareto(log_name, xes_path, bpmn_path, max_func_ev, non_opt_ratio, tot_simulations, True, False)
     if to_execute['NSGA-II']:
         # Executing Genetic Algorithm NSGA-II without Median Absolute Deviation
-        nsga2_genetic(log_name, xes_path, bpmn_path, max_func_ev / 40, tot_simulations)
+        nsga2_genetic(log_name, xes_path, bpmn_path, max_func_ev / 40, tot_simulations, json_path)
     if to_execute['METRICS']:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad',
                                                  'nsga2'])
@@ -47,14 +50,14 @@ def execute_algorithm_variants(process_index, max_func_ev, non_opt_ratio, tot_si
 
 def main():
     # Uncomment to execute the algorithms on all the available process  ...
-    for log_index in range(0, len(experiment_logs)):
-        execute_algorithm_variants(log_index, 10000, 0.08, 15)
+    # for log_index in range(0, len(experiment_logs)):
+    #     execute_algorithm_variants(log_index, 10000, 0.08, 15)
 
     # 1st Parameter: Index of the process to optimize -- from list experiment_logs
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    # execute_algorithm_variants(0, 10000, 0.08, 15)
+    execute_algorithm_variants(0, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 100, './test_assets/Credit Application Simulation.bpmn', './test_assets/demo_filtered_opt.json')
     os._exit(0)
 
 

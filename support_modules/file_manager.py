@@ -36,14 +36,14 @@ def save_simulation_results(log_name, pools_info, simulation_list, median_simula
     try:
         with open(simulation_results + ("%s_full.csv" % log_name), mode='a', newline='') as full_csv_file:
             with open(simulation_results + ("%s_median.csv" % log_name), mode='a', newline='') as median_csv_file:
-                update_simutaion_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
+                update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
     except IOError:
         with open(simulation_results + ("%s_full.csv" % log_name), mode='w', newline='') as full_csv_file:
             with open(simulation_results + ("%s_median.csv" % log_name), mode='w', newline='') as median_csv_file:
-                update_simutaion_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
+                update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
 
 
-def update_simutaion_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation):
+def update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation):
     save_one_simulation_result(pools_info, median_csv_file, median_simulation)
     for simulation_info in simulation_list:
         save_one_simulation_result(pools_info, full_csv_file, simulation_info)

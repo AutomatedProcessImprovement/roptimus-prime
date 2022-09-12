@@ -4,6 +4,9 @@ from datetime import datetime
 from data_structures.event_log_info import *
 
 date_format = "%Y-%m-%dT%H:%M:%S.%f%z"
+date_format_2 = "%Y-%m-%dT%H:%M:%S%z"
+
+formats = [date_format, date_format_2]
 
 
 def extract_data_from_xes_event_log(log_path):
@@ -11,10 +14,10 @@ def extract_data_from_xes_event_log(log_path):
         tree = ET.parse(log_path)
         root = tree.getroot()
         ns = {'xes': root.tag.split('}')[0].strip('{')}
-        tags = dict(trace='xes:trace',
-                    string='xes:string',
-                    event='xes:event',
-                    date='xes:date')
+        tags = dict(trace='trace',
+                    string='string',
+                    event='event',
+                    date='date')
         traces = root.findall(tags['trace'], ns)
 
         return _extract_log_info(traces, tags, ns)
@@ -53,7 +56,11 @@ def _extract_log_info(traces, tags, ns):
             timestamp = ''
             for date in event.findall(tags['date'], ns):
                 if date.attrib['key'] == 'time:timestamp':
-                    timestamp = datetime.strptime(date.attrib['value'], date_format)
+                    for fmt in formats: # TODO NEW ADDITION, PARSING TIMESTAMPS WITHOUT %F.
+                        try:
+                            timestamp = datetime.strptime(date.attrib['value'], fmt)
+                        except ValueError:
+                            pass
             if task_name not in ['0', '-1', 'Start', 'End', 'start', 'end']:
                 start_date = _update_date(start_date, timestamp, 'min')
                 end_date = _update_date(end_date, timestamp, 'max')
