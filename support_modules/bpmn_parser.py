@@ -36,8 +36,9 @@ def update_resource_cost(resource_costs={}):
 
     bpmn_resources = root.find('xmlns:process', bpmn_element_ns).find('xmlns:extensionElements', bpmn_element_ns).find("qbp:processSimulationInfo", simod_ns).find("qbp:resources", simod_ns)
     for resource in bpmn_resources:
-        resource.attrib["costPerHour"] = "1" if len(resource_costs) == 0 \
-            else str(resource_costs[resource.attrib["name"]])
+        # resource.attrib["costPerHour"] = "1" if len(resource_costs) == 0 \
+        #     else str(resource_costs[resource.attrib["name"]])
+        pass
     tree.write(temp_bpmn_file)
 
 

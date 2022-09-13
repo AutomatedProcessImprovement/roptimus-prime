@@ -7,7 +7,7 @@
         {
           "id": "Clerk_2",
           "name": "Clerk_2",
-          "cost_per_hour": 1,
+          "cost_per_hour": 25,
           "amount": 1,
           "calendar": "Clerk_2timetable",
           "assigned_tasks": [
@@ -18,7 +18,7 @@
         {
           "id": "Clerk_1",
           "name": "Clerk_1",
-          "cost_per_hour": 1,
+          "cost_per_hour": 25,
           "amount": 1,
           "calendar": "Clerk_1timetable",
           "assigned_tasks": [
@@ -35,7 +35,7 @@
         {
           "id": "Clerk_2",
           "name": "Clerk_2",
-          "cost_per_hour": 1,
+          "cost_per_hour": 25,
           "amount": 1,
           "calendar": "Clerk_2timetable",
           "assigned_tasks": [
@@ -46,7 +46,7 @@
         {
           "id": "Clerk_1",
           "name": "Clerk_1",
-          "cost_per_hour": 1,
+          "cost_per_hour": 25,
           "amount": 1,
           "calendar": "Clerk_1timetable",
           "assigned_tasks": [
@@ -63,7 +63,7 @@
         {
           "id": "Credit_Officer_1",
           "name": "Credit_Officer_1",
-          "cost_per_hour": 1,
+          "cost_per_hour": 50,
           "amount": 1,
           "calendar": "Credit_Officer_1timetable",
           "assigned_tasks": [
@@ -79,7 +79,7 @@
         {
           "id": "Credit_Officer_2",
           "name": "Credit_Officer_2",
-          "cost_per_hour": 1,
+          "cost_per_hour": 50,
           "amount": 1,
           "calendar": "Credit_Officer_2timetable",
           "assigned_tasks": [
@@ -96,7 +96,7 @@
         {
           "id": "Credit_Officer_2",
           "name": "Credit_Officer_2",
-          "cost_per_hour": 1,
+          "cost_per_hour": 50,
           "amount": 1,
           "calendar": "Credit_Officer_2timetable",
           "assigned_tasks": [
@@ -113,7 +113,7 @@
         {
           "id": "System",
           "name": "System",
-          "cost_per_hour": 1,
+          "cost_per_hour": 0,
           "amount": 1,
           "calendar": "Systemtimetable",
           "assigned_tasks": [

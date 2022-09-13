@@ -28,8 +28,8 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
     resource_opt_problem = NSGA2Problem(log_name, initial_pools_info, total_simulations, json_path=json_path)
     algorithm = NSGA2(pop_size=40,
                       sampling=IntegerRandomSampling(),
-                      crossover=SBX(prob=0.9, eta=15, repair=RoundingRepair()),
-                      mutation=PolynomialMutation(prob=1.0, eta=20, repair=RoundingRepair()),
+                      crossover=SBX(prob=0.9, eta=15),
+                      mutation=PolynomialMutation(prob=1.0, eta=20),
                       eliminate_duplicates=True)
 
     # __DEPRECATED__

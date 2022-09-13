@@ -57,7 +57,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(0, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 100, './test_assets/Credit Application Simulation.bpmn', './test_assets/demo_filtered_opt.json')
+    execute_algorithm_variants(0, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 150, './test_assets/Credit Application Simulation.bpmn', './test_assets/demo_filtered_opt.json')
     os._exit(0)
 
 

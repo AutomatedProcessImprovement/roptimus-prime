@@ -27,68 +27,68 @@ def perform_prosimos_simulation(pools_info,
         return simulated_info
     simulation_results = list()
     skipped = 0
+    x = 6
     # while simulations_count > 0:
+    while x > 0:
         # Executing simulation with PROSIMOS
-    starting_time = time.time()
-    executable_string = "python ../Prosimos/diff_res_bpsim.py start-simulation --bpmn_path {model_file_path} " \
-                        "--json_path {json_path} --total_cases {simulations_count} --stat_out_path ../bpm-r-opt/output_files/bimp_temp_files/output.csv"\
-                        " --log_out_path ../bpm-r-opt/output_files/bimp_temp_files/log_out.csv > ./output_files/bimp_temp_files/output.txt"\
-        .format(
-            model_file_path=model_file_path,
-            json_path=json_path,
-            simulations_count=simulations_count,
-        )
-    if starting_at != None:
-        executable_string += f"--starting_at {starting_time}"
-    if os.system(
-            executable_string):
-        raise RuntimeError('program {} failed!')
-    if os.system(
-            "@type output_files\\bimp_temp_files\\output.csv > output_files\\bimp_temp_files\\output.txt"):
-        raise RuntimeError('program {} failed!')
-    # TODO These still haven't been assigned properly
-    # --stat_out_path {stat_out_path} --log_out_path {simulation_log} --starting_at {starting_at}
-    simulation_info = SimulationInfo(pools_info)
-    simulation_info.simulation_time = time.time() - starting_time
-    simulation_start_end = extract_simulation_dates_from_simulation_log(simulation_log)
-    # if simulation_start_end[0] is None:
-    #     skipped += 1
-    #     if skipped > 10:
-    #         print('BIMP-ERROR: Max cycle time for a simulation exceeded.')
-    #         return None
-    #     # continue
-    output_data = csv.reader(open(stat_out_path))
-    simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
+        starting_time = time.time()
+        executable_string = "python ../Prosimos/diff_res_bpsim.py start-simulation --bpmn_path {model_file_path} " \
+                            "--json_path {json_path} --total_cases {simulations_count} --stat_out_path ../bpm-r-opt/output_files/bimp_temp_files/output.csv"\
+                            " --log_out_path ../bpm-r-opt/output_files/bimp_temp_files/log_out.csv > ./output_files/bimp_temp_files/output.txt"\
+            .format(
+                model_file_path=model_file_path,
+                json_path=json_path,
+                simulations_count=simulations_count,
+            )
+        if starting_at != None:
+            executable_string += f"--starting_at {starting_time}"
+        if os.system(executable_string):
+            raise RuntimeError('simulation {} failed!')
+        if os.system(
+                "@type output_files\\bimp_temp_files\\output.csv > output_files\\bimp_temp_files\\output.txt"):
+            raise RuntimeError('.csv > .txt {} failed!')
+        simulation_info = SimulationInfo(pools_info)
+        simulation_info.simulation_time = time.time() - starting_time
+        simulation_start_end = extract_simulation_dates_from_simulation_log(simulation_log)
+        # if simulation_start_end[0] is None:
+        #     skipped += 1
+        #     if skipped > 10:
+        #         print('BIMP-ERROR: Max cycle time for a simulation exceeded.')
+        #         return None
+        #     # continue
+        output_data = csv.reader(open(stat_out_path))
+        simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
-    output_section = 0
+        output_section = 0
 
-    for _, row in enumerate(output_data):
-        if len(row) > 1:
-            if row[0] == "Resource ID":
-                output_section = 1
-                continue
-            elif row[0] == "Name":
-                output_section = 2
-                continue
-            elif row[0] == "KPI":
-                output_section = 3
-                continue
+        for _, row in enumerate(output_data):
+            if len(row) > 1:
+                if row[0] == "Resource ID":
+                    output_section = 1
+                    continue
+                elif row[0] == "Name":
+                    output_section = 2
+                    continue
+                elif row[0] == "KPI":
+                    output_section = 3
+                    continue
 
-            if output_section == 1:
-                if float(row[2]) < 0:
-                    row[2] = 0
-                simulation_info.update_resource_utilization(row[0], float(row[2]))
-            elif output_section == 2:
-                if row[0] in pools_info.task_pools:
-                    simulation_info.add_task_statistics(pools_info.task_pools, row[0], float(row[8]), float(row[4]),
-                                                        pools_info.pools[
-                                                            pools_info.task_pools[row[0]]].get_total_cost())
-            elif output_section == 3:
-                if row[0] == "Process Cycle Time (s)":
-                    simulation_info.mean_process_cycle_time = float(row[2])
+                if output_section == 1:
+                    if float(row[2]) < 0:
+                        row[2] = 0
+                    simulation_info.update_resource_utilization(row[0], float(row[2]))
+                elif output_section == 2:
+                    if row[0] in pools_info.task_pools:
+                        simulation_info.add_task_statistics(pools_info.task_pools, row[0], float(row[8]), float(row[4]),
+                                                            pools_info.pools[
+                                                                pools_info.task_pools[row[0]]].get_total_cost())
+                elif output_section == 3:
+                    if row[0] == "cycle_time":
+                        simulation_info.mean_process_cycle_time = float(row[3])
 
-    simulation_results.append(simulation_info)
+        simulation_results.append(simulation_info)
         # simulations_count -= 1
+        x -= 1
 
     return estimate_median_absolute_deviation(pools_info, log_name, simulation_results)
 

@@ -230,7 +230,7 @@ def read_genetic_stats_file(log_name):
                     if block_count:
                         if row[1] not in resource_pools:
                             resource_pools[row[1]] = list()
-                        resource_pools[row[1]].append(ResourceInfo(row[2], int(row[3]), float(row[4]), float(row[5])))
+                        resource_pools[row[1]].append(ResourceInfo(row[2], float(row[3]), float(row[4]), float(row[5])))
                 return [explored_solutions, resource_pools]
     except IOError:
         return None
