@@ -1,0 +1,19 @@
+Function Evaluations:  1189
+Solutions Explored:    1189
+Pareto front size:     6
+In Joint Pareto:       6
+Not In Joint Pareto:   0
+Average Cycle Time:    54 days, 15:39:40.721151
+Average Resource Cost: 1110973.695581
+------------------------- METRICS --------------------------
+# Hyperarea Ratio:     1.000000
+# Hausdorff Distance:  0.000000
+# Delta Metric:        0.707264
+# Purity Metric:       1.000000
+--------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  2, Credit_Officer_2:  1, System:  2] -> [aCost: 1524686.12, cTime: 53 days, 7:55:28.267299]
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  1, Credit_Officer_2:  1, System: 10] -> [aCost: 1020298.47, cTime: 53 days, 17:47:54.278765]
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  1, Credit_Officer_2:  1, System:  1] -> [aCost:  984314.05, cTime: 54 days, 14:25:41.343608]
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  1, Credit_Officer_2:  1, System:  1] -> [aCost:  991644.20, cTime: 54 days, 1:47:28.001645]
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  1, Credit_Officer_2:  1, System:  1] -> [aCost:  979180.91, cTime: 58 days, 18:27:03.625945]
+[Clerk_1:  1, Credit_Officer_1:  1, Clerk_2:  1, Credit_Officer_2:  1, System:  3] -> [aCost: 1165718.41, cTime: 53 days, 9:34:28.809643]

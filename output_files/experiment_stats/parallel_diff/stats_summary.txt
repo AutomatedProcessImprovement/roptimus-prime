@@ -1,0 +1,5 @@
+['Joint Pareto Size (without MAD): 6 --------------------------------------------------------']
+Alg_Name                     #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
+joint_pareto(parallel_diff)  1189    1189   6       6      0    1.0        0.0             0.707264    1.0          54 days, 15:39:40.721151  1110973.70
+NSGA-II(parallel_diff)       1189    1189   6       6      0    1.0        0.0             0.707264    1.0          54 days, 15:39:40.721151  1110973.70
+------------------------------------------------------

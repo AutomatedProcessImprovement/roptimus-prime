@@ -24,7 +24,8 @@ experiment_logs = {0: 'production',
                    7: 'bpi_challenge_2017',
                    8: 'baseline_undiff',
                    9: 'baseline_diff',
-                   10: 'parallel'}
+                   10: 'parallel_undiff',
+                   11: 'parallel_diff'}
 
 
 def execute_algorithm_variants(process_index, xes_path, max_func_ev, non_opt_ratio, tot_simulations, bpmn_path, json_path):
@@ -62,7 +63,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(10, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 15,
+    execute_algorithm_variants(11, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 15,
                                'test_assets/Credit Application Simulation_diff.bpmn',
                                'test_assets/demo_filtered_opt_diff.json')
     os._exit(0)

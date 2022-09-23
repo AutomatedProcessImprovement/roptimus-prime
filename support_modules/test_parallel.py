@@ -55,6 +55,7 @@ def test_parallel(pools_info,
                   starting_at=None):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
     simulated_info = load_simulation_result(log_name, pools_info)
+    parallel_start_time = time.time()
     if simulated_info is not None:
         return simulated_info
     pool = multiprocessing.Pool(5)
@@ -62,14 +63,14 @@ def test_parallel(pools_info,
     async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 1500, pools_info)) for i in
                      range(simulations_count)]
     simulation_results = [ar.get() for ar in async_results]
-    print(simulation_results)
 
-    return estimate_median_absolute_deviation(pools_info, log_name, simulation_results)
+    return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time)
 
 
-def estimate_median_absolute_deviation(pools_info, log_name, simulation_results):
+def estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time):
     by_cycle_time = sorted(simulation_results, key=lambda x: x.mean_process_cycle_time)
     by_duration = sorted(simulation_results, key=lambda x: x.simulation_duration())
+    total_parallel_time = time.time()-parallel_start_time
 
     cycle_t_med = by_cycle_time[int(len(by_cycle_time) / 2)]
     duration_med = by_duration[int(len(by_duration) / 2)]
@@ -88,8 +89,10 @@ def estimate_median_absolute_deviation(pools_info, log_name, simulation_results)
     simulation_info = by_cycle_time[int(len(by_cycle_time) / 2)]
     simulation_info.deviation_info = DeviationInfo(c_times[int(len(c_times) / 2)], duration[int(len(duration) / 2)])
 
+
     print("Simulation Full Time:    %s" % str(datetime.timedelta(seconds=total_time)))
     print("Simulation Average Time: %s" % str(datetime.timedelta(seconds=(total_time / 15))))
+    print("Simulation Parallel Time: %s" % str(datetime.timedelta(seconds=(total_parallel_time))))
     save_simulation_results(log_name, pools_info, simulation_results, simulation_info)
 
     return simulation_info

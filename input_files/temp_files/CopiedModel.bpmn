@@ -25,11 +25,11 @@
           </ns2:timetable>
         </ns2:timetables>
         <ns2:resources>
-          <ns2:resource id="QBP_DEFAULT_RESOURCE" name="Clerk_1" totalAmount="3.194729657959102" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
-          <ns2:resource id="qbp_1ac9c0f4-d0c2-4deb-b3e2-07b278648fb9" name="Credit_Officer_1" totalAmount="1.0388071036270794" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
-          <ns2:resource id="qbp_3463808c-85a2-4af7-898b-c63920ec014c" name="Clerk_2" totalAmount="1.3260996311751716" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
-          <ns2:resource id="qbp_584b6bb1-ea0a-4972-a62e-c2a76fadee9e" name="Credit_Officer_2" totalAmount="2.251458560860189" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
-          <ns2:resource id="qbp_c30ee5c0-c4ee-4fdb-bd5d-ab42490e73a3" name="System" totalAmount="13.040920096775835" costPerHour="0" timetableId="qbp_8f067d38-c126-4aa1-b565-1896729f7540" />
+          <ns2:resource id="QBP_DEFAULT_RESOURCE" name="Clerk_1" totalAmount="6.827310913200769" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
+          <ns2:resource id="qbp_1ac9c0f4-d0c2-4deb-b3e2-07b278648fb9" name="Credit_Officer_1" totalAmount="1.0043213185707465" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
+          <ns2:resource id="qbp_3463808c-85a2-4af7-898b-c63920ec014c" name="Clerk_2" totalAmount="2.305127860506526" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
+          <ns2:resource id="qbp_584b6bb1-ea0a-4972-a62e-c2a76fadee9e" name="Credit_Officer_2" totalAmount="1.0016590527553784" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
+          <ns2:resource id="qbp_c30ee5c0-c4ee-4fdb-bd5d-ab42490e73a3" name="System" totalAmount="3.0423536183417967" costPerHour="0" timetableId="qbp_8f067d38-c126-4aa1-b565-1896729f7540" />
         </ns2:resources>
         <ns2:elements>
           <ns2:element elementId="sid-4B24111F-B305-4608-9E12-744B47C44D0D">
