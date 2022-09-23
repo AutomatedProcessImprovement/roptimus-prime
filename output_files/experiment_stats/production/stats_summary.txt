@@ -1,8 +1,0 @@
-['Joint Pareto Size (without MAD): 395 --------------------------------------------------------']
-Alg_Name                  #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
-joint_pareto(production)  12690   3332   395     395    0    1.0        0.0             0.784629    1.0          0:00:00                  6326.82
-HC_STRICT(production)     1187    1187   15      0      15   0.306476   383633.03       0.959112    0.0          2 days, 10:45:12.594470  312373.66
-HC_FLEX(production)       2751    2751   13      0      13   0.312104   355105.09       0.874729    0.0          2 days, 11:17:15.354225  287598.22
-TS_STRICT(production)     2688    2688   13      0      13   0.312104   355105.09       0.874729    0.0          2 days, 11:17:15.354225  287598.22
-NSGA-II(production)       6064    395    395     395    0    1.0        0.0             0.784629    1.0          0:00:00                  6326.82
-------------------------------------------------------

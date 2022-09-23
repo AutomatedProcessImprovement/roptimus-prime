@@ -1,46 +1,14 @@
-Function Evaluations:  9909
-Solutions Explored:    6242
-Pareto front size:     33
-In Joint Pareto:       28
-Not In Joint Pareto:   5
-Average Cycle Time:    2 days, 18:08:38.105767
-Average Resource Cost: 254829.785269
+Function Evaluations:  28
+Solutions Explored:    28
+Pareto front size:     1
+In Joint Pareto:       0
+Not In Joint Pareto:   1
+Average Cycle Time:    57 days, 19:19:23.408158
+Average Resource Cost: 13946271.548611
 ------------------------- METRICS --------------------------
-# Hyperarea Ratio:     0.999995
-# Hausdorff Distance:  93709.587352
-# Delta Metric:        1.326563
-# Purity Metric:       0.848485
+# Hyperarea Ratio:     0.697922
+# Hausdorff Distance:  14539283.815983
+# Delta Metric:        1.000000
+# Purity Metric:       0.000000
 --------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
-[SYSTEM:  5, Role 1: 21, Role 2: 10, Role 3: 12, Role 4:  3, Role 5: 10] -> [aCost: 742103.90, cTime: 1 day, 17:45:59.431611]
-[SYSTEM:  1, Role 1: 10, Role 2: 10, Role 3:  6, Role 4:  1, Role 5:  4] -> [aCost: 407421.58, cTime: 1 day, 17:53:30.895873]
-[SYSTEM:  1, Role 1:  2, Role 2:  4, Role 3:  2, Role 4:  1, Role 5:  1] -> [aCost: 134628.19, cTime: 4 days, 9:54:54.905917]
-[SYSTEM:  1, Role 1:  1, Role 2:  6, Role 3:  4, Role 4:  1, Role 5:  1] -> [aCost: 182011.06, cTime: 1 day, 21:57:21.641967]
-[SYSTEM:  1, Role 1:  1, Role 2:  4, Role 3:  2, Role 4:  1, Role 5:  1] -> [aCost: 125041.72, cTime: 4 days, 18:05:05.278559]
-[SYSTEM:  1, Role 1:  2, Role 2:  6, Role 3:  3, Role 4:  1, Role 5:  1] -> [aCost: 169383.17, cTime: 1 day, 23:46:21.989844]
-[SYSTEM:  1, Role 1:  1, Role 2:  4, Role 3:  4, Role 4:  1, Role 5:  1] -> [aCost: 148027.87, cTime: 2 days, 15:50:26.774436]
-[SYSTEM:  1, Role 1:  1, Role 2:  3, Role 3:  2, Role 4:  1, Role 5:  1] -> [aCost: 119753.55, cTime: 22 days, 7:41:07.700520]
-[SYSTEM:  1, Role 1:  1, Role 2:  4, Role 3:  3, Role 4:  1, Role 5:  1] -> [aCost: 137412.36, cTime: 3 days, 0:48:32.427318]
-[SYSTEM:  1, Role 1:  2, Role 2:  6, Role 3:  4, Role 4:  1, Role 5:  1] -> [aCost: 188159.55, cTime: 1 day, 20:21:54.296386]
-[SYSTEM:  1, Role 1:  2, Role 2:  6, Role 3:  5, Role 4:  1, Role 5:  1] -> [aCost: 200244.49, cTime: 1 day, 19:28:49.174114]
-[SYSTEM:  1, Role 1:  2, Role 2: 10, Role 3:  6, Role 4:  1, Role 5:  2] -> [aCost: 260456.04, cTime: 1 day, 18:07:33.347910]
-[SYSTEM:  1, Role 1:  2, Role 2:  7, Role 3:  5, Role 4:  1, Role 5:  1] -> [aCost: 210871.60, cTime: 1 day, 19:14:00.213438]
-[SYSTEM:  1, Role 1:  2, Role 2:  8, Role 3:  5, Role 4:  1, Role 5:  1] -> [aCost: 220783.70, cTime: 1 day, 18:46:30.787382]
-[SYSTEM:  1, Role 1:  1, Role 2:  4, Role 3:  3, Role 4:  1, Role 5:  2] -> [aCost: 146671.22, cTime: 2 days, 22:28:57.762909]
-[SYSTEM:  1, Role 1:  3, Role 2:  7, Role 3:  6, Role 4:  1, Role 5:  1] -> [aCost: 235779.19, cTime: 1 day, 18:37:31.662613]
-[SYSTEM:  1, Role 1: 21, Role 2: 10, Role 3: 11, Role 4:  3, Role 5:  4] -> [aCost: 627184.29, cTime: 1 day, 17:48:47.580035]
-[SYSTEM:  1, Role 1:  1, Role 2:  5, Role 3:  3, Role 4:  1, Role 5:  1] -> [aCost: 155921.99, cTime: 2 days, 5:02:43.823322]
-[SYSTEM:  1, Role 1:  3, Role 2: 10, Role 3: 10, Role 4:  6, Role 5:  4] -> [aCost: 452551.69, cTime: 1 day, 17:51:22.785394]
-[SYSTEM:  2, Role 1:  2, Role 2:  4, Role 3:  3, Role 4:  1, Role 5:  1] -> [aCost: 155799.52, cTime: 2 days, 15:41:28.563065]
-[SYSTEM:  2, Role 1:  3, Role 2: 10, Role 3: 10, Role 4:  1, Role 5:  1] -> [aCost: 358898.56, cTime: 1 day, 17:55:10.734301]
-[SYSTEM:  2, Role 1:  1, Role 2:  5, Role 3:  3, Role 4:  1, Role 5:  1] -> [aCost: 161347.50, cTime: 2 days, 4:42:41.340483]
-[SYSTEM:  1, Role 1:  2, Role 2:  8, Role 3:  5, Role 4:  1, Role 5:  2] -> [aCost: 237197.09, cTime: 1 day, 18:25:37.639816]
-[SYSTEM:  1, Role 1:  1, Role 2:  5, Role 3:  3, Role 4:  1, Role 5:  2] -> [aCost: 162268.68, cTime: 2 days, 4:04:54.428959]
-[SYSTEM:  1, Role 1:  2, Role 2:  9, Role 3:  7, Role 4:  3, Role 5:  1] -> [aCost: 281268.83, cTime: 1 day, 17:58:27.339130]
-[SYSTEM:  1, Role 1:  1, Role 2:  6, Role 3:  5, Role 4:  1, Role 5:  1] -> [aCost: 182359.22, cTime: 1 day, 21:32:30.868065]
-[SYSTEM:  1, Role 1:  2, Role 2:  6, Role 3:  4, Role 4:  1, Role 5:  2] -> [aCost: 195868.61, cTime: 1 day, 20:14:09.977146]
-[SYSTEM:  1, Role 1:  1, Role 2:  6, Role 3:  3, Role 4:  1, Role 5:  2] -> [aCost: 167318.40, cTime: 2 days, 1:12:56.253049]
-[SYSTEM:  1, Role 1:  3, Role 2:  8, Role 3:  5, Role 4:  1, Role 5:  1] -> [aCost: 235003.11, cTime: 1 day, 18:38:22.987814]
-[SYSTEM:  2, Role 1:  2, Role 2:  8, Role 3:  6, Role 4:  1, Role 5:  2] -> [aCost: 253987.13, cTime: 1 day, 18:09:24.227891]
-[SYSTEM:  1, Role 1:  2, Role 2:  9, Role 3:  5, Role 4:  1, Role 5:  2] -> [aCost: 244010.46, cTime: 1 day, 18:21:53.476042]
-[SYSTEM:  1, Role 1: 21, Role 2: 10, Role 3: 11, Role 4:  9, Role 5:  4] -> [aCost: 724186.21, cTime: 1 day, 17:48:02.963826]
-[SYSTEM:  1, Role 1:  1, Role 2:  7, Role 3:  4, Role 4:  1, Role 5:  1] -> [aCost: 185462.40, cTime: 1 day, 20:27:44.211185]
+[Clerk_1:  4, Credit_Officer_1:  4, Clerk_2:  5, Credit_Officer_2: 33, System: 112] -> [aCost: 13946271.55, cTime: 57 days, 19:19:23.408158]

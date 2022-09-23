@@ -6,8 +6,8 @@ Not In Joint Pareto:   7
 Average Cycle Time:    3 days, 0:22:08.906837
 Average Resource Cost: 210043.301751
 ------------------------- METRICS --------------------------
-# Hyperarea Ratio:     0.999966
-# Hausdorff Distance:  12093.533744
+# Hyperarea Ratio:     0.999963
+# Hausdorff Distance:  10007.806549
 # Delta Metric:        1.471674
 # Purity Metric:       0.695652
 --------------- OPTIMAL RESOURCE ALLOCATIONS ----------------

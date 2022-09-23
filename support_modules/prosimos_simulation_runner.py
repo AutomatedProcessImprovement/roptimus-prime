@@ -4,6 +4,8 @@ import os
 import re
 import time
 
+import pytz
+
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 from support_modules.file_manager import load_simulation_result
@@ -16,10 +18,8 @@ def perform_prosimos_simulation(pools_info,
                                 simulations_count,
                                 solution_index,
                                 json_path,
-                                bimp_engine_path=".\\bimp_simulation_engine\\qbp-simulator-engine.jar",
                                 model_file_path=temp_bpmn_file,
                                 stat_out_path="./output_files/bimp_temp_files/output.csv",
-                                simulation_log="./output_files/bimp_temp_files/output.txt",
                                 starting_at=None):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
     simulated_info = load_simulation_result(log_name, pools_info)
@@ -27,35 +27,33 @@ def perform_prosimos_simulation(pools_info,
         return simulated_info
     simulation_results = list()
     skipped = 0
-    x = 6
-    # while simulations_count > 0:
-    while x > 0:
+    total_cases = 1000
+    while simulations_count > 0:
         # Executing simulation with PROSIMOS
+        # " --log_out_path ../bpm-r-opt/output_files/bimp_temp_files/log_out.csv "\
         starting_time = time.time()
         executable_string = "python ../Prosimos/diff_res_bpsim.py start-simulation --bpmn_path {model_file_path} " \
-                            "--json_path {json_path} --total_cases {simulations_count} --stat_out_path ../bpm-r-opt/output_files/bimp_temp_files/output.csv"\
-                            " --log_out_path ../bpm-r-opt/output_files/bimp_temp_files/log_out.csv > ./output_files/bimp_temp_files/output.txt"\
+                            "--json_path {json_path} --total_cases {total_cases} --stat_out_path ../bpm-r-opt/output_files/bimp_temp_files/output.csv"\
             .format(
                 model_file_path=model_file_path,
                 json_path=json_path,
-                simulations_count=simulations_count,
+                total_cases=total_cases,
             )
-        if starting_at != None:
-            executable_string += f"--starting_at {starting_time}"
+        if starting_at is not None:
+            executable_string += f"--starting_at {starting_at}"
+
+        # executable_string+="& @type output_files\\bimp_temp_files\\output.csv > output_files\\bimp_temp_files\\output.txt"
         if os.system(executable_string):
             raise RuntimeError('simulation {} failed!')
-        if os.system(
-                "@type output_files\\bimp_temp_files\\output.csv > output_files\\bimp_temp_files\\output.txt"):
-            raise RuntimeError('.csv > .txt {} failed!')
         simulation_info = SimulationInfo(pools_info)
         simulation_info.simulation_time = time.time() - starting_time
-        simulation_start_end = extract_simulation_dates_from_simulation_log(simulation_log)
-        # if simulation_start_end[0] is None:
-        #     skipped += 1
-        #     if skipped > 10:
-        #         print('BIMP-ERROR: Max cycle time for a simulation exceeded.')
-        #         return None
-        #     # continue
+        simulation_start_end = extract_simulation_dates_from_simulation_log(stat_out_path)
+        if simulation_start_end[0] is None:
+            skipped += 1
+            if skipped > 10:
+                print('BIMP-ERROR: Max cycle time for a simulation exceeded.')
+                return None
+            continue
         output_data = csv.reader(open(stat_out_path))
         simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
@@ -87,8 +85,8 @@ def perform_prosimos_simulation(pools_info,
                         simulation_info.mean_process_cycle_time = float(row[3])
 
         simulation_results.append(simulation_info)
-        # simulations_count -= 1
-        x -= 1
+        simulations_count -= 1
+        # x -= 1
 
     return estimate_median_absolute_deviation(pools_info, log_name, simulation_results)
 
