@@ -22,6 +22,7 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
     create_genetic_stats_files(log_name)
     starting_time = time.time()
 
+    # TODO Work away XES
     xes_log_info = extract_data_from_xes_event_log(xes_path)
     initial_pools_info = set_up_cost(cost_type, xes_log_info)
 
@@ -31,14 +32,6 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
                       crossover=SBX(prob=0.9, eta=15),
                       mutation=PolynomialMutation(prob=1.0, eta=20),
                       eliminate_duplicates=True)
-
-    # __DEPRECATED__
-    # algorithm = get_algorithm("nsga2",
-    #                           pop_size=40,
-    #                           sampling=get_sampling("int_random"),
-    #                           crossover=get_crossover("int_sbx", prob=0.9, eta=15),
-    #                           mutation=get_mutation("int_pm", eta=20),
-    #                           eliminate_duplicates=True)
 
     minimize(resource_opt_problem,
              algorithm,

@@ -7,8 +7,8 @@ from pymoo.core.problem import Problem
 from data_structures.pools_info import PoolInfo
 from support_modules.bpmn_parser import update_resource_pools
 from support_modules.prosimos_simulation_runner import perform_prosimos_simulation
-from support_modules.simulation_runner import perform_simulation
 from support_modules.file_manager import update_genetic_stats_file
+from support_modules.test_parallel import test_parallel
 
 
 class NSGA2Problem(Problem):
@@ -47,11 +47,11 @@ class NSGA2Problem(Problem):
             index += 1
         new_pools_info = PoolInfo(new_pools, self.initial_pools_info.task_pools)
 
-        print(new_pools_info.pools['System'])
-
         update_resource_pools(new_pools_info.pools)
-        simulation_info = perform_prosimos_simulation(new_pools_info, self.log_name, self.simulation_count,
+        simulation_info = test_parallel(new_pools_info, self.log_name, self.simulation_count,
                                                       self.it_number, self.json_path)
+        # simulation_info = perform_prosimos_simulation(new_pools_info, self.log_name, self.simulation_count,
+        #                                               self.it_number, self.json_path)
         self.it_number += 1
         print_iteration_info(new_pools_info, self.it_number)
 

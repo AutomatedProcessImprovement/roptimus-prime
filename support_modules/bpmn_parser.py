@@ -53,7 +53,7 @@ def parse_simulation_model():
     task_ids = dict()
     for process in root.findall('xmlns:process', bpmn_element_ns):
         for task in process.findall('xmlns:task', bpmn_element_ns):
-            task_ids[task.attrib["id"]] = task.attrib["name"]
+            task_ids[task.attrib["id"]] = task.attrib["id"]
 
     # Extracting Resource Pools Info from Simulation model (pool_name, pool_id, pool_cost, pool_resource_count)
     resource_pools = dict()

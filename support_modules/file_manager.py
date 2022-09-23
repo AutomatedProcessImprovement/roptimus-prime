@@ -5,7 +5,8 @@ from data_structures.solution_space import SolutionSpace, DeviationInfo
 from data_structures.solution_space import ResourceInfo
 
 date_format = "%Y-%m-%d %H:%M:%S.%f%z"
-date_format_1 = "%Y-%m-%d %H:%M:%S"
+date_format_1 = "%Y-%m-%d %H:%M:%S%z"
+# date_format_1 = "%Y-%m-%d %H:%M:%S"
 
 xes_simodbpmn_file_paths = {
     'purchasing_example': ['./input_files/xes_files/PurchasingExample.xes',
@@ -112,6 +113,7 @@ def duration(start_date, end_date):
 
 
 def parse_date(date_str):
+    print(date_str)
     try:
         return datetime.strptime(date_str, date_format)
     except ValueError:
