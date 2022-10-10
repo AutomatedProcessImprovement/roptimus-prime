@@ -1,5 +1,4 @@
-{
-  "resource_profiles": [
+{"resource_profiles": [
     {
       "id": "sid-4B24111F-B305-4608-9E12-744B47C44D0D",
       "name": "Check credit history",
@@ -391,7 +390,25 @@
           "from": "MONDAY",
           "to": "MONDAY",
           "beginTime": "09:00:00",
-          "endTime": "12:00:00"
+          "endTime": "11:00:00"
+        },
+        {
+          "from": "MONDAY",
+          "to": "MONDAY",
+          "beginTime": "12:00:00",
+          "endTime": "13:00:00"
+        },
+        {
+          "from": "MONDAY",
+          "to": "MONDAY",
+          "beginTime": "14:00:00",
+          "endTime": "17:00:00"
+        },
+        {
+          "from": "TUESDAY",
+          "to": "TUESDAY",
+          "beginTime": "09:00:00",
+          "endTime": "16:00:00"
         },
         {
           "from": "WEDNESDAY",
@@ -402,12 +419,6 @@
         {
           "from": "THURSDAY",
           "to": "THURSDAY",
-          "beginTime": "09:00:00",
-          "endTime": "16:00:00"
-        },
-        {
-          "from": "FRIDAY",
-          "to": "FRIDAY",
           "beginTime": "09:00:00",
           "endTime": "16:00:00"
         }
@@ -440,6 +451,12 @@
           "to": "THURSDAY",
           "beginTime": "09:00:00",
           "endTime": "11:00:00"
+        },
+        {
+          "from": "FRIDAY",
+          "to": "FRIDAY",
+          "beginTime": "13:00:00",
+          "endTime": "17:00:00"
         }
       ]
     },

@@ -8,6 +8,19 @@ date_format = "%Y-%m-%d %H:%M:%S.%f%z"
 date_format_1 = "%Y-%m-%d %H:%M:%S%z"
 # date_format_1 = "%Y-%m-%d %H:%M:%S"
 
+prosimos_file_paths = {
+    'credit_application_diff': [
+        './test_assets/credit_application_diff.bpmn',
+        './test_assets/credit_application_diff.json',
+        './test_assets/log_demo_filtered_opt.xes'
+    ],
+    'credit_application_undiff': [
+        './test_assets/credit_application_undiff.bpmn',
+        './test_assets/credit_application_undiff.json',
+        './test_assets/log_demo_filtered_opt.xes'
+    ]
+}
+
 xes_simodbpmn_file_paths = {
     'purchasing_example': ['./input_files/xes_files/PurchasingExample.xes',
                            './input_files/bpmn_simod_models/PurchasingExample.bpmn'],

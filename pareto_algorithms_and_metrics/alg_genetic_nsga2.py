@@ -3,13 +3,11 @@ import datetime
 from shutil import copyfile
 from data_structures.nsga2_problem import NSGA2Problem
 from pymoo.optimize import minimize
-from pymoo.factory import get_algorithm, get_crossover, get_mutation, get_sampling
 
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.operators.sampling.rnd import IntegerRandomSampling
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PolynomialMutation
-from pymoo.operators.repair.rounding import RoundingRepair
 
 from pareto_algorithms_and_metrics.alg_hill_climb_tabu_search import set_up_cost
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
@@ -22,7 +20,6 @@ def nsga2_genetic(log_name, xes_path, bpmn_path, max_iterations, total_simulatio
     create_genetic_stats_files(log_name)
     starting_time = time.time()
 
-    # TODO Work away XES
     xes_log_info = extract_data_from_xes_event_log(xes_path)
     initial_pools_info = set_up_cost(cost_type, xes_log_info)
 

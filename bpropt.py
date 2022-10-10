@@ -2,17 +2,20 @@ import os
 from multiprocessing import Pool, Process
 
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
-from support_modules.file_manager import xes_simodbpmn_file_paths
+from support_modules.file_manager import prosimos_file_paths
 
 from pareto_algorithms_and_metrics.alg_hill_climb_tabu_search import refined_hill_pareto
 from pareto_algorithms_and_metrics.alg_genetic_nsga2 import nsga2_genetic
 from support_modules.plot_statistics_handler import print_solution_statistics
 
-to_execute = {'HC-STRICT': False,
+to_execute = {'HC-STRICT': True,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
-              'METRICS': True}
+              'METRICS': False}
+
+new_experiment_logs = {0: 'credit_application_diff',
+                       1: 'credit_application_undiff'}
 
 experiment_logs = {0: 'production',
                    1: 'purchasing_example',
@@ -22,19 +25,17 @@ experiment_logs = {0: 'production',
                    5: 'bpi_challenge_2012',
                    6: 'bpi_challenge_2017_filtered',
                    7: 'bpi_challenge_2017',
-                   8: 'baseline_undiff',
-                   9: 'baseline_diff',
-                   10: 'parallel_undiff',
-                   11: 'parallel_diff'}
+                   8: 'credit_application_undiff',
+                   9: 'credit_application_diff'}
 
 
-def execute_algorithm_variants(process_index, xes_path, max_func_ev, non_opt_ratio, tot_simulations, bpmn_path, json_path):
-    log_name = experiment_logs[process_index]
-    # xes_path = xes_simodbpmn_file_paths[log_name][0]
-    # bpmn_path = xes_simodbpmn_file_paths[log_name][1]
-    xes_path = xes_path
-    json_path = json_path
-    bpmn_path = bpmn_path
+def execute_algorithm_variants(process_index, max_func_ev, non_opt_ratio, tot_simulations):
+    # Collect file paths from log name (bpmn, json, xes)
+    log_name = new_experiment_logs[process_index]
+    bpmn_path = prosimos_file_paths[log_name][0]
+    json_path = prosimos_file_paths[log_name][1]
+    xes_path = prosimos_file_paths[log_name][2]
+
     if to_execute['HC-STRICT']:
         # Executing Hill-Climbing without Median Absolute Deviation (HC-STRICT)
         refined_hill_pareto(log_name, xes_path, bpmn_path, max_func_ev, non_opt_ratio, tot_simulations, False, False)
@@ -54,7 +55,6 @@ def execute_algorithm_variants(process_index, xes_path, max_func_ev, non_opt_rat
 
 
 def main():
-    # TODO Once done, rewrite exec_alg_var method with updated parameters
     # Uncomment to execute the algorithms on all the available process  ...
     # for log_index in range(0, len(experiment_logs)):
     #     execute_algorithm_variants(log_index, 10000, 0.08, 15)
@@ -63,9 +63,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(11, './test_assets/log_demo_filtered_opt.xes', 10000, 0.08, 15,
-                               'test_assets/Credit Application Simulation_diff.bpmn',
-                               'test_assets/demo_filtered_opt_diff.json')
+    execute_algorithm_variants(1, 10000, 0.08, 15)
     os._exit(0)
 
 

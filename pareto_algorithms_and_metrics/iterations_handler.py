@@ -1,7 +1,7 @@
 import copy
 
 from data_structures.priority_queue import PriorityQueue
-from support_modules.simulation_runner import perform_simulation
+from support_modules.prosimos_simulation_runner import perform_simulations
 from support_modules.bpmn_parser import update_resource_pools
 from pareto_algorithms_and_metrics.pareto_metrics import try_update_pareto_front, min_dist_from_pareto
 
@@ -19,14 +19,14 @@ def _in_non_optimal_distance_thresold(distance):
 
 
 class IterationHandler:
-    def __init__(self, log_name, pools_info, simulation_count, is_tabu_search, with_mad):
+    def __init__(self, log_name, pools_info, simulation_count, is_tabu_search, with_mad, json_path):
 
         self.log_name = log_name
         self.is_tabu_search = is_tabu_search
         self.with_mad = with_mad
 
         self.simulation_count = simulation_count
-        simulation_info = perform_simulation(pools_info, log_name, simulation_count, 0)
+        simulation_info = perform_simulations(pools_info, log_name, simulation_count, 0, json_path)
 
         self.generated_solutions = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
         self.solution_order = [pools_info.id]
@@ -102,10 +102,10 @@ class IterationHandler:
     def try_new_solution(self, pools_info, distance):
         if pools_info.id not in self.generated_solutions:
             update_resource_pools(pools_info.pools)  # Updating Simulation Model with new pool allocation
-            simulation_info = perform_simulation(pools_info,
+            simulation_info = perform_simulations(pools_info,
                                                  self.log_name,
                                                  self.simulation_count,
-                                                 len(self.generated_solutions))  # Running/retrieving simulation results
+                                                 len(self.generated_solutions),json_path="")  # Running/retrieving simulation results
             if simulation_info is None:
                 return False
             is_valid = self.check_optimals_hill_climbing(pools_info,
