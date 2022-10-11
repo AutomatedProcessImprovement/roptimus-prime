@@ -71,10 +71,9 @@ class Roster:
         return self.roster.to_string()
 
     def to_json(self):
-        json_string = json.dumps([ob.to_dict() for ob in self.resources], indent=4)
-        with open("out.json", "w") as outfile:
-            outfile.write(json_string)
+        # json_string = json.dumps([ob.to_dict() for ob in self.resources], indent=4)
 
+        return [ob.to_dict() for ob in self.resources]
 
 
 class Resource:
@@ -126,44 +125,33 @@ class Resource:
         self.shifts['friday'] = [friday_df]
 
     def enable_shift(self, day, index):
-        self.shifts[day][index] = 1
+        self.shifts[day].values[0][index] = 1
 
     def disable_shift(self, day, index):
-        self.shifts[day][index] = 0
+        self.shifts[day].values[0][index] = 0
 
     def disable_day(self, day):
-        self.shifts[day] = [0 if x == 1 else 0 for x in self.shifts[day]]
+
+        self.shifts[day].values[0] = [0 if x == 1 else 0 for x in self.shifts[day].values[0]]
 
     def enable_day(self, day):
-        self.shifts[day] = [1 if x == 0 else 1 for x in self.shifts[day]]
+        self.shifts[day].values[0] = [1 if x == 0 else 1 for x in self.shifts[day].values[0]]
 
     def __eq__(self, other):
         return self.resource_id == other.resource_id and self.resource_name == other.resource_name
 
     def to_dict(self):
-        resource_calendar = {}
-        resource_calendar['id'] = self.resource_id
-        resource_calendar['name'] = self.resource_name
-        resource_calendar['time_periods'] = []
-
-        print(self.shifts.to_string())
+        resource_calendar = {'id': self.resource_id, 'name': self.resource_name, 'time_periods': []}
 
         roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday']]
 
         for name, data in roster_df.iteritems():
-            print(resource_calendar)
             row = data.values[0]
-            print(name)
-            print(row)
             # Convert list to string values
             start_of_day = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
             current_time = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
-            # shift_start = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
-            # shift_end = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
-            print(start_of_day)
 
             grouped = [(key, len(list(group))) for key, group in groupby(row)]
-            print(grouped)
 
             for block in grouped:
                 key, val = block
@@ -174,8 +162,6 @@ class Resource:
                     }
                     shift_start = current_time
                     shift_end = shift_start + (datetime.timedelta(minutes=self.time_var) * val)
-                    print(shift_start)
-                    print(shift_end)
                     t_block['beginTime'] = shift_start.time().strftime("%H:%M:%S")
                     t_block['endTime'] = shift_end.time().strftime("%H:%M:%S")
                     # Stuff to JSON
@@ -184,8 +170,6 @@ class Resource:
                 if key == 0:
                     block_start = current_time
                     block_end = block_start + (datetime.timedelta(minutes=self.time_var) * val)
-                    print(block_start)
-                    print(block_end)
                     current_time = block_end
 
         return resource_calendar

@@ -44,6 +44,15 @@ with open(json_path, 'r') as f:
 resource_calendars = json_data["resource_calendars"]
 resource_profiles = json_data["resource_profiles"]
 
+rest_of_info = {
+    'resource_profiles': json_data['resource_profiles'],
+    'arrival_time_distribution': json_data['arrival_time_distribution'],
+    'arrival_time_calendar': json_data['arrival_time_calendar'],
+    'gateway_branching_probabilities': json_data['gateway_branching_probabilities'],
+    'task_resource_distribution': json_data['task_resource_distribution'],
+}
+
+
 res_map = []
 
 time_var = 30
@@ -55,7 +64,18 @@ for i in resource_calendars:
 
 # initialize roster with resources.
 roster = Roster("test_roster", res_map, time_var, hours_in_day, 300, 4, 2)
-print(roster.to_json())
+
+roster.resources[0].enable_shift("monday", 5)
+roster.resources[0].disable_shift("monday", 0)
+roster.resources[0].disable_day("tuesday")
+roster.resources[0].enable_day("wednesday")
+
+# print(roster.resources[0].shifts)
+
+rest_of_info['resource_calendars'] = roster.to_json()
+
+with open("test_out.json", 'w') as out:
+    out.write(json.dumps(rest_of_info, indent=4))
 # TODO
 #  Bit flips in individual resource's calendars
 #  All to 0 and all to 1
