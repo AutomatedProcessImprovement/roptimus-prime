@@ -6,15 +6,26 @@ import pandas as pd
 import json
 
 
+# TODO
+#   Additional constraints: start_time_of_day, end_time_of_day | working_hours_in_day, resource_specific_hours_limit
+#   RosterManager with functionalities:
+#       - How much capacity is still available?
+#       - How much capacity is still available on a certain day?
+#       - How much capacity is still available for a certain resource?
+#       - How much capacity is still available for a certain task? -> Requires additional module tracking which resources can perform which tasks
+#   Initial HC algo / NSGA?
+#   Add saturday/sunday to roster + change to 24hr schedules
+
+
 def datetime_range(start, end, delta, df):
     _format = "%H:%M:%S"
-    start_of_day = datetime.datetime.strptime('09:00:00', _format)
-    end_of_day = datetime.datetime.strptime('17:00:00', _format)
+    start_of_day = datetime.datetime.strptime('00:00:00', _format)
+    end_of_day = datetime.datetime.strptime('23:59:59', _format)
     result = df
 
     current = start_of_day
 
-    for j in range(16):
+    for j in range(len(df)):
         if start <= current < end:
             result[j] = 1
         current += delta
@@ -22,6 +33,16 @@ def datetime_range(start, end, delta, df):
 
 
 class Roster:
+
+    """
+    Roster represents the timetables of all resources in a dataframe.
+        :parameter: roster_name -> Name for the roster
+        :parameter: resource_map -> Map containing all resources active in the process
+        :parameter: start_time_of_day -> Time when the business "opens"
+        :parameter: end_time_of_day OR hours_in_day -> Time when business "closes" (Overtime not included)
+        :parameter: time_variable -> Time is divided into blocks of how many minutes
+
+    """
 
     def __init__(self, roster_name, resource_map, time_variable, hours_in_day, max_cap, max_shift_size,
                  max_shift_blocks):
@@ -77,25 +98,54 @@ class Roster:
 
 
 class Resource:
-    def __init__(self, resource_json, time_var, hours_in_day):
+    def __init__(self, resource_json, time_var, hours_in_day, never_work_mask=[], always_work_mask=[],
+                 work_day_start=None, work_day_end=None):
+
+        """
+        Resource represents a participant in the process
+        :parameter never_work_mask -> When is the resource never allowed to work. Ex. [[11111000000], [111100001111], [111111110000], ...]
+        :parameter always_work_mask -> When is the resource always working. Ex. [[0000011100], [00001100110000], [0011000111100], ...]
+        :parameter resource_json:
+        :parameter time_var ->
+        :parameter hours_in_day:
+        :parameter work_day_start
+        :parameter work_day_end
+        """
         self.resource_id = resource_json["id"]
         self.resource_name = resource_json["name"]
-        self.num_slots = int((hours_in_day * 60) / time_var)
+        self.num_slots = int(60 / time_var)
         self.time_var = time_var
+        self.work_day_start = work_day_start
+        self.work_day_end = work_day_end
 
-        self.shifts = pd.DataFrame(columns=["resource_id", "resource_name",
+        self.shifts = pd.DataFrame(columns=["resource_name",
                                             "monday", "tuesday",
-                                            "wednesday", "thursday", "friday"])
+                                            "wednesday", "thursday", "friday", "saturday", "sunday"])
 
         _format = "%H:%M:%S"
         self.shifts['resource_id'] = [resource_json['id']]
         self.shifts['resource_name'] = [resource_json['name']]
 
-        monday_df = [0] * self.num_slots
-        tuesday_df = [0] * self.num_slots
-        wednesday_df = [0] * self.num_slots
-        thursday_df = [0] * self.num_slots
-        friday_df = [0] * self.num_slots
+
+        # TODO Reformat df creation to support 24 hr calendar slots
+        # Default 24hr, 1hr per slot list
+        default_df = [0]*24
+
+        monday_df = default_df * self.num_slots
+        tuesday_df = default_df * self.num_slots
+        wednesday_df = default_df * self.num_slots
+        thursday_df = default_df * self.num_slots
+        friday_df = default_df * self.num_slots
+        saturday_df = default_df * self.num_slots
+        sunday_df = default_df * self.num_slots
+
+
+
+        # monday_df = [0] * self.num_slots
+        # tuesday_df = [0] * self.num_slots
+        # wednesday_df = [0] * self.num_slots
+        # thursday_df = [0] * self.num_slots
+        # friday_df = [0] * self.num_slots
         for timetable in resource_json["time_periods"]:
             match timetable['from']:
                 case "MONDAY":
@@ -118,11 +168,22 @@ class Resource:
                     friday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
                                                datetime.timedelta(minutes=30), friday_df)
+                case "SATURDAY":
+                    saturday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                               datetime.datetime.strptime(timetable['endTime'], _format),
+                                               datetime.timedelta(minutes=30), saturday_df)
+                case "SUNDAY":
+                    sunday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                               datetime.datetime.strptime(timetable['endTime'], _format),
+                                               datetime.timedelta(minutes=30), sunday_df)
+
         self.shifts['monday'] = [monday_df]
         self.shifts['tuesday'] = [tuesday_df]
         self.shifts['wednesday'] = [wednesday_df]
         self.shifts['thursday'] = [thursday_df]
         self.shifts['friday'] = [friday_df]
+        self.shifts['saturday'] = [saturday_df]
+        self.shifts['sunday'] = [sunday_df]
 
     def enable_shift(self, day, index):
         self.shifts[day].values[0][index] = 1

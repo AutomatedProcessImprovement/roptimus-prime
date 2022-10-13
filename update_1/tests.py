@@ -65,14 +65,15 @@ for i in resource_calendars:
 # initialize roster with resources.
 roster = Roster("test_roster", res_map, time_var, hours_in_day, 300, 4, 2)
 
-roster.resources[0].enable_shift("monday", 5)
-roster.resources[0].disable_shift("monday", 0)
-roster.resources[0].disable_day("tuesday")
-roster.resources[0].enable_day("wednesday")
+# roster.resources[0].enable_shift("monday", 5)
+# roster.resources[0].disable_shift("monday", 0)
+# roster.resources[0].disable_day("tuesday")
+# roster.resources[0].enable_day("wednesday")
 
-# print(roster.resources[0].shifts)
+print(roster.resources[0].shifts.to_string())
 
 rest_of_info['resource_calendars'] = roster.to_json()
+
 
 with open("test_out.json", 'w') as out:
     out.write(json.dumps(rest_of_info, indent=4))
