@@ -33,7 +33,6 @@ def datetime_range(start, end, delta, df):
 
 
 class Roster:
-
     """
     Roster represents the timetables of all resources in a dataframe.
         :parameter: roster_name -> Name for the roster
@@ -55,18 +54,21 @@ class Roster:
 
         self.num_slots = int((hours_in_day * 60) / self.shift_block)
 
-        self.roster = pd.DataFrame(columns=["resource_id", "resource_name",
+        self.roster = pd.DataFrame(columns=["resource_id",
                                             "monday", "tuesday",
-                                            "wednesday", "thursday", "friday"])
+                                            "wednesday", "thursday", "friday", 'saturday', 'sunday'])
 
         for resource in self.resources:
             self.roster = pd.concat([self.roster, resource.shifts], ignore_index=True)
 
     def verify_roster(self):
+        for resource in self.resources:
+            print("\nVerifying resource: {}\n--------".format(resource.resource_id))
+            resource.verify_timetable()
         roster = self.roster
         cap_sum = 0
         for idx, row in roster.iterrows():
-            row = row[["monday", "tuesday", "wednesday", "thursday", "friday"]]
+            row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
             for name, df in row.iteritems():
                 cap_sum += df.count(1)
         if cap_sum > self.max_cap:
@@ -74,7 +76,7 @@ class Roster:
         else:
             print("Max_cap ok")
         for idx, row in roster.iterrows():
-            row = row[["monday", "tuesday", "wednesday", "thursday", "friday"]]
+            row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
             for val in row:
                 grouped = [(k, len(list(v))) for k, v in groupby(val)]
                 for _, tup in enumerate(grouped):
@@ -82,7 +84,7 @@ class Roster:
                         print("Err: Max shift size surpassed")
 
         for idx, row in roster.iterrows():
-            row = row[["monday", "tuesday", "wednesday", "thursday", "friday"]]
+            row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
             for val in row:
                 grouped = [(k, len(list(v))) for k, v in groupby(val)]
                 if len(grouped) > self.max_shift_blocks * 2:
@@ -92,44 +94,52 @@ class Roster:
         return self.roster.to_string()
 
     def to_json(self):
-        # json_string = json.dumps([ob.to_dict() for ob in self.resources], indent=4)
-
         return [ob.to_dict() for ob in self.resources]
 
 
 class Resource:
-    def __init__(self, resource_json, time_var, hours_in_day, never_work_mask=[], always_work_mask=[],
-                 work_day_start=None, work_day_end=None):
+    def __init__(self, constraints_json, timetable_json, time_var):
 
-        """
-        Resource represents a participant in the process
-        :parameter never_work_mask -> When is the resource never allowed to work. Ex. [[11111000000], [111100001111], [111111110000], ...]
-        :parameter always_work_mask -> When is the resource always working. Ex. [[0000011100], [00001100110000], [0011000111100], ...]
-        :parameter resource_json:
-        :parameter time_var ->
-        :parameter hours_in_day:
-        :parameter work_day_start
-        :parameter work_day_end
-        """
-        self.resource_id = resource_json["id"]
-        self.resource_name = resource_json["name"]
-        self.num_slots = int(60 / time_var)
+        # Resource general information
+        self.resource_id = constraints_json['id']
         self.time_var = time_var
-        self.work_day_start = work_day_start
-        self.work_day_end = work_day_end
+        self.num_slots = int(60 / self.time_var)
 
-        self.shifts = pd.DataFrame(columns=["resource_name",
+        global_constraints = constraints_json['constraints']['global_constraints']
+        # Resource global constraints
+        self.max_weekly_cap = global_constraints['max_weekly_cap']
+        self.max_daily_cap = global_constraints['max_daily_cap']
+        self.max_consecutive_cap = global_constraints['max_consecutive_cap']
+        self.max_shifts_day = global_constraints['max_shifts_day']
+        self.max_shifts_week = global_constraints['max_shifts_week']
+        self.is_human = global_constraints['is_human']
+
+        # Resource never work mask
+        self.never_work_masks = constraints_json['constraints']['never_work_masks']
+        # Resource always work mask
+        self.always_work_masks = constraints_json['constraints']['always_work_masks']
+
+        # Some stats for easy recall
+        self.day_free_cap = {
+            'monday': self.max_daily_cap,
+            'tuesday': self.max_daily_cap,
+            'wednesday': self.max_daily_cap,
+            'thursday': self.max_daily_cap,
+            'friday': self.max_daily_cap,
+            'saturday': self.max_daily_cap,
+            'sunday': self.max_daily_cap
+        }
+
+        # Define column names for DF
+        self.shifts = pd.DataFrame(columns=["resource_id",
                                             "monday", "tuesday",
                                             "wednesday", "thursday", "friday", "saturday", "sunday"])
 
+        # Format for timestamps
         _format = "%H:%M:%S"
-        self.shifts['resource_id'] = [resource_json['id']]
-        self.shifts['resource_name'] = [resource_json['name']]
 
-
-        # TODO Reformat df creation to support 24 hr calendar slots
         # Default 24hr, 1hr per slot list
-        default_df = [0]*24
+        default_df = [0] * 24
 
         monday_df = default_df * self.num_slots
         tuesday_df = default_df * self.num_slots
@@ -139,14 +149,7 @@ class Resource:
         saturday_df = default_df * self.num_slots
         sunday_df = default_df * self.num_slots
 
-
-
-        # monday_df = [0] * self.num_slots
-        # tuesday_df = [0] * self.num_slots
-        # wednesday_df = [0] * self.num_slots
-        # thursday_df = [0] * self.num_slots
-        # friday_df = [0] * self.num_slots
-        for timetable in resource_json["time_periods"]:
+        for timetable in timetable_json["time_periods"]:
             match timetable['from']:
                 case "MONDAY":
                     monday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
@@ -170,13 +173,23 @@ class Resource:
                                                datetime.timedelta(minutes=30), friday_df)
                 case "SATURDAY":
                     saturday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=30), saturday_df)
+                                                 datetime.datetime.strptime(timetable['endTime'], _format),
+                                                 datetime.timedelta(minutes=30), saturday_df)
                 case "SUNDAY":
                     sunday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
                                                datetime.timedelta(minutes=30), sunday_df)
+        # Set remaining cap of weekdays
+        self.day_free_cap['monday'] -= sum(monday_df)
+        self.day_free_cap['tuesday'] -= sum(tuesday_df)
+        self.day_free_cap['wednesday'] -= sum(wednesday_df)
+        self.day_free_cap['thursday'] -= sum(thursday_df)
+        self.day_free_cap['friday'] -= sum(friday_df)
+        self.day_free_cap['saturday'] -= sum(saturday_df)
+        self.day_free_cap['sunday'] -= sum(sunday_df)
 
+        # Set DF columns to lists.
+        self.shifts['resource_id'] = [self.resource_id]
         self.shifts['monday'] = [monday_df]
         self.shifts['tuesday'] = [tuesday_df]
         self.shifts['wednesday'] = [wednesday_df]
@@ -184,6 +197,45 @@ class Resource:
         self.shifts['friday'] = [friday_df]
         self.shifts['saturday'] = [saturday_df]
         self.shifts['sunday'] = [sunday_df]
+
+    def get_free_cap(self):
+        return self.day_free_cap
+
+    def verify_timetable(self):
+
+        # Verify masks
+        for i in self.always_work_masks:
+            for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
+                if k == j and k == 1:
+                    print("ERR: Overlap in masks: {}".format(i))
+            print("Valid masks: {}".format(i))
+
+        # Verify global constraints
+        shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
+        sum_of_week = 0
+        sum_of_shifts_week = 0
+        for day in shifts:
+            sum_of_day = sum(shifts[day][0])
+
+            sum_of_week += sum_of_day
+            if sum_of_day > self.max_daily_cap:
+                print("ERR: Max daily cap superseded")
+
+            grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
+            # print(grouped)
+            shifts_of_day = int(len(grouped)/2)
+            sum_of_shifts_week += shifts_of_day
+            for _, tup in enumerate(grouped):
+                if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
+                    print("Err: Max daily shift size surpassed")
+
+            if shifts_of_day > self.max_shifts_day:
+                print("Err: Max daily shifts surpassed")
+
+        if sum_of_week > self.max_weekly_cap:
+            print("ERR: Max weekly cap superseded")
+        if sum_of_shifts_week > self.max_shifts_week:
+            print("ERR: Max weekly shifts superseded")
 
     def enable_shift(self, day, index):
         self.shifts[day].values[0][index] = 1
@@ -209,6 +261,7 @@ class Resource:
         for name, data in roster_df.iteritems():
             row = data.values[0]
             # Convert list to string values
+            #  TODO SET TO RULES GIVEN BY USER
             start_of_day = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
             current_time = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
 

@@ -9,6 +9,7 @@ import json
 
 # Initialize Test Resources
 from update_1 import Roster, datetime_range, Resource
+from RosterManager import RosterManager
 
 new_experiment_logs = {0: 'credit_application_diff',
                        1: 'credit_application_undiff'}
@@ -52,6 +53,17 @@ rest_of_info = {
     'task_resource_distribution': json_data['task_resource_distribution'],
 }
 
+test_timetable = './test_timetable.json'
+test_constraints = './constraints.json'
+# ----
+test_timetable = './credit_application_diff.json'
+test_constraints = './constraints.json'
+
+with open(test_constraints, 'r') as c_read:
+    r1_constraints = json.load(c_read)
+
+with open(test_timetable, 'r') as t_read:
+    r1_timetable = json.load(t_read)
 
 res_map = []
 
@@ -59,24 +71,36 @@ time_var = 30
 hours_in_day = 8
 
 # Fill resource map with Resource objects from json.
-for i in resource_calendars:
-    res_map.append(Resource(i, time_var, hours_in_day))
-
-# initialize roster with resources.
-roster = Roster("test_roster", res_map, time_var, hours_in_day, 300, 4, 2)
-
-# roster.resources[0].enable_shift("monday", 5)
-# roster.resources[0].disable_shift("monday", 0)
-# roster.resources[0].disable_day("tuesday")
-# roster.resources[0].enable_day("wednesday")
-
-print(roster.resources[0].shifts.to_string())
-
-rest_of_info['resource_calendars'] = roster.to_json()
+for i in r1_timetable['resource_calendars']:
+    for j in r1_constraints['resources']:
+        if i['id'] == j['id']:
+            res_map.append(Resource(j, i, r1_constraints['time_var']))
 
 
-with open("test_out.json", 'w') as out:
-    out.write(json.dumps(rest_of_info, indent=4))
+
+roster = Roster("test_roster", res_map, r1_constraints['time_var'], hours_in_day, 300, 4, 2)
+roster.verify_roster()
+
+rm = RosterManager(roster)
+
+# for i in resource_calendars:
+#     res_map.append(Resource(i, time_var, hours_in_day))
+#
+# # initialize roster with resources.
+# roster = Roster("test_roster", res_map, time_var, hours_in_day, 300, 4, 2)
+#
+# # roster.resources[0].enable_shift("monday", 5)
+# # roster.resources[0].disable_shift("monday", 0)
+# # roster.resources[0].disable_day("tuesday")
+# # roster.resources[0].enable_day("wednesday")
+#
+# print(roster.resources[0].shifts.to_string())
+#
+# rest_of_info['resource_calendars'] = roster.to_json()
+#
+#
+# with open("test_out.json", 'w') as out:
+#     out.write(json.dumps(rest_of_info, indent=4))
 # TODO
 #  Bit flips in individual resource's calendars
 #  All to 0 and all to 1
@@ -87,3 +111,28 @@ with open("test_out.json", 'w') as out:
 #  MAX CAP -> sum of all slots must be less than a given number (max hours worked in total per week)
 #  MAX Shift size -> Max length of concurrent 1's
 #  MAX Shifts -> Max amount of plateaus -> # of shifts per day per resource
+
+
+"""
+
+roster takes json with calendar and a json with parameters given by the user
+resource json iterates over and creates a list of resources
+param json contains all the constraints given by the user
+if the value is unchanged then result to defaulted values
+
+each resource has some constraints
+- amount of hours the resource can work in one week +
+- never work mask +
+- always work mask +
+- max time the resource may work in one day +
+- max time the resource may work consecutively in one day +
+- max amount of shifts a resource may have in one day +
+- max amount of shifts a resource may have in one week +
+- is the resource a human or a system +
+
+extra params:
+- json containing the current hours
+- minutes in which blocks are split +
+
+
+"""
