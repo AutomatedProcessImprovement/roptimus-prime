@@ -78,10 +78,12 @@ for i in r1_timetable['resource_calendars']:
 
 
 
+
 roster = Roster("test_roster", res_map, r1_constraints['time_var'], hours_in_day, 300, 4, 2)
-roster.verify_roster()
+# roster.verify_roster()
 
 rm = RosterManager(roster)
+print(rm.remaining_cap_resource("RESOURCE1", 'monday'))
 
 # for i in resource_calendars:
 #     res_map.append(Resource(i, time_var, hours_in_day))

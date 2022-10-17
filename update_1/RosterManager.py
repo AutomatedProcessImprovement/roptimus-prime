@@ -9,8 +9,12 @@ class RosterManager:
         RosterManager should be able to give the remaining capacity for a certain resource
         """
 
-    def remaining_cap_resource(self, res):
-        roster = self.roster.roster
-        resource = roster[roster['resource_id'].str.contains(res)]
-        return resource.to_string()
+    def remaining_cap_resource(self, res, day=None):
+        roster = self.roster.resources
+        for i in roster:
+            if i.resource_id == res:
+                if day is not None:
+                    return i.day_free_cap[day]
+                return i.day_free_cap
+
 

@@ -201,14 +201,15 @@ class Resource:
     def get_free_cap(self):
         return self.day_free_cap
 
-    def verify_timetable(self):
-
+    def verify_masks(self):
         # Verify masks
         for i in self.always_work_masks:
             for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
                 if k == j and k == 1:
                     print("ERR: Overlap in masks: {}".format(i))
             print("Valid masks: {}".format(i))
+
+    def verify_global_constraints(self):
 
         # Verify global constraints
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
@@ -223,7 +224,7 @@ class Resource:
 
             grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
             # print(grouped)
-            shifts_of_day = int(len(grouped)/2)
+            shifts_of_day = int(len(grouped) / 2)
             sum_of_shifts_week += shifts_of_day
             for _, tup in enumerate(grouped):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
@@ -237,18 +238,29 @@ class Resource:
         if sum_of_shifts_week > self.max_shifts_week:
             print("ERR: Max weekly shifts superseded")
 
+    def verify_timetable(self):
+        self.verify_masks()
+        self.verify_global_constraints()
+
     def enable_shift(self, day, index):
         self.shifts[day].values[0][index] = 1
+        self.day_free_cap[day] -= 1
+        self.verify_timetable()
 
     def disable_shift(self, day, index):
         self.shifts[day].values[0][index] = 0
+        self.day_free_cap[day] += 1
+        self.verify_timetable()
 
     def disable_day(self, day):
-
         self.shifts[day].values[0] = [0 if x == 1 else 0 for x in self.shifts[day].values[0]]
+        self.day_free_cap[day] = sum(self.shifts[day].values[1])
+        self.verify_timetable()
 
     def enable_day(self, day):
         self.shifts[day].values[0] = [1 if x == 0 else 1 for x in self.shifts[day].values[0]]
+        self.day_free_cap[day] = sum(self.shifts[day].values[1])
+        self.verify_timetable()
 
     def __eq__(self, other):
         return self.resource_id == other.resource_id and self.resource_name == other.resource_name
