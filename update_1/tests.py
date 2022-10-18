@@ -76,16 +76,16 @@ for i in r1_timetable['resource_calendars']:
         if i['id'] == j['id']:
             res_map.append(Resource(j, i, r1_constraints['time_var']))
 
-
-
-
 roster = Roster("test_roster", res_map, r1_constraints['time_var'], hours_in_day, 300, 4, 2)
 # roster.verify_roster()
-
+res_map[0].to_dict()
 
 rm = RosterManager(roster)
 print(rm.get_remaining_cap_resource("RESOURCE1"))
 print(rm.get_accessible_bits("RESOURCE1"))
+
+print(rm.get_remaining_cap_resource("RESOURCE1", 'wednesday'))
+print(rm.get_accessible_bits("RESOURCE1", 'thursday'))
 
 # for i in resource_calendars:
 #     res_map.append(Resource(i, time_var, hours_in_day))
@@ -100,11 +100,10 @@ print(rm.get_accessible_bits("RESOURCE1"))
 #
 # print(roster.resources[0].shifts.to_string())
 #
-# rest_of_info['resource_calendars'] = roster.to_json()
-#
-#
-# with open("test_out.json", 'w') as out:
-#     out.write(json.dumps(rest_of_info, indent=4))
+rest_of_info['resource_calendars'] = roster.to_json()
+
+with open("test_out.json", 'w') as out:
+    out.write(json.dumps(rest_of_info, indent=4))
 # TODO
 #  Bit flips in individual resource's calendars
 #  All to 0 and all to 1

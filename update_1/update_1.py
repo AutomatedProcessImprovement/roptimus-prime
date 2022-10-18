@@ -114,6 +114,9 @@ class Resource:
         self.max_shifts_week = global_constraints['max_shifts_week']
         self.is_human = global_constraints['is_human']
 
+        # Daily start times
+        self.daily_start_times = constraints_json['constraints']['daily_start_times']
+
         # Resource never work mask
         self.never_work_masks = constraints_json['constraints']['never_work_masks']
         # Resource always work mask
@@ -154,31 +157,31 @@ class Resource:
                 case "MONDAY":
                     monday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=30), monday_df)
+                                               datetime.timedelta(minutes=self.time_var), monday_df)
                 case "TUESDAY":
                     tuesday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                 datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=30), tuesday_df)
+                                                datetime.timedelta(minutes=self.time_var), tuesday_df)
                 case "WEDNESDAY":
                     wednesday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                   datetime.datetime.strptime(timetable['endTime'], _format),
-                                                  datetime.timedelta(minutes=30), wednesday_df)
+                                                  datetime.timedelta(minutes=self.time_var), wednesday_df)
                 case "THURSDAY":
                     thursday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                  datetime.datetime.strptime(timetable['endTime'], _format),
-                                                 datetime.timedelta(minutes=30), thursday_df)
+                                                 datetime.timedelta(minutes=self.time_var), thursday_df)
                 case "FRIDAY":
                     friday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=30), friday_df)
+                                               datetime.timedelta(minutes=self.time_var), friday_df)
                 case "SATURDAY":
                     saturday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                  datetime.datetime.strptime(timetable['endTime'], _format),
-                                                 datetime.timedelta(minutes=30), saturday_df)
+                                                 datetime.timedelta(minutes=self.time_var), saturday_df)
                 case "SUNDAY":
                     sunday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=30), sunday_df)
+                                               datetime.timedelta(minutes=self.time_var), sunday_df)
         # Set remaining cap of weekdays
         self.day_free_cap['monday'] -= sum(monday_df)
         self.day_free_cap['tuesday'] -= sum(tuesday_df)
@@ -197,6 +200,7 @@ class Resource:
         self.shifts['friday'] = [friday_df]
         self.shifts['saturday'] = [saturday_df]
         self.shifts['sunday'] = [sunday_df]
+
 
     def get_free_cap(self, day=None):
         if day is not None:
@@ -297,17 +301,16 @@ class Resource:
         return self.resource_id == other.resource_id and self.resource_name == other.resource_name
 
     def to_dict(self):
-        resource_calendar = {'id': self.resource_id, 'name': self.resource_name, 'time_periods': []}
+        resource_calendar = {'id': self.resource_id, 'name': self.resource_id, 'time_periods': []}
 
-        roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday']]
+        roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
 
         for name, data in roster_df.iteritems():
             row = data.values[0]
-            # Convert list to string values
-            #  TODO SET TO RULES GIVEN BY USER
-            start_of_day = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
-            current_time = datetime.datetime(hour=9, minute=0, year=1900, day=1, month=1)
+            start_of_day = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
 
+            # Convert list to string values
+            current_time = start_of_day
             grouped = [(key, len(list(group))) for key, group in groupby(row)]
 
             for block in grouped:
@@ -319,6 +322,7 @@ class Resource:
                     }
                     shift_start = current_time
                     shift_end = shift_start + (datetime.timedelta(minutes=self.time_var) * val)
+
                     t_block['beginTime'] = shift_start.time().strftime("%H:%M:%S")
                     t_block['endTime'] = shift_end.time().strftime("%H:%M:%S")
                     # Stuff to JSON

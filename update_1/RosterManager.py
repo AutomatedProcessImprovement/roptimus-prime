@@ -24,6 +24,3 @@ class RosterManager:
                 if day is not None:
                     return i.get_changeable_bits()[day]
                 return i.get_changeable_bits()
-
-
-
