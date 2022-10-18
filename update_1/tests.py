@@ -84,8 +84,12 @@ rm = RosterManager(roster)
 print(rm.get_remaining_cap_resource("RESOURCE1"))
 print(rm.get_accessible_bits("RESOURCE1"))
 
+print(rm.get_remaining_cap_resource("RESOURCE1", ['wednesday', 'thursday']))
 print(rm.get_remaining_cap_resource("RESOURCE1", 'wednesday'))
 print(rm.get_accessible_bits("RESOURCE1", 'thursday'))
+print(rm.get_accessible_bits("RESOURCE1", ['wednesday', 'thursday']))
+
+print(rm.get_total_remaining_cap_resource("RESOURCE1"))
 
 # for i in resource_calendars:
 #     res_map.append(Resource(i, time_var, hours_in_day))

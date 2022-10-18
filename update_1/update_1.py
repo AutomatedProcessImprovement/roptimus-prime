@@ -9,9 +9,9 @@ import json
 # TODO
 #   Additional constraints: start_time_of_day, end_time_of_day | working_hours_in_day, resource_specific_hours_limit
 #   RosterManager with functionalities:
-#       - How much capacity is still available?
-#       - How much capacity is still available on a certain day?
-#       - How much capacity is still available for a certain resource?
+#       - How much capacity is still available? OK
+#       - How much capacity is still available on a certain day? OK
+#       - How much capacity is still available for a certain resource? OK
 #       - How much capacity is still available for a certain task? -> Requires additional module tracking which resources can perform which tasks
 #   Initial HC algo / NSGA?
 #   Add saturday/sunday to roster + change to 24hr schedules
@@ -99,7 +99,6 @@ class Roster:
 
 class Resource:
     def __init__(self, constraints_json, timetable_json, time_var):
-
         # Resource general information
         self.resource_id = constraints_json['id']
         self.time_var = time_var
@@ -114,7 +113,7 @@ class Resource:
         self.max_shifts_week = global_constraints['max_shifts_week']
         self.is_human = global_constraints['is_human']
 
-        # Daily start times
+        # Daily start times (NOT IN USE YET)
         self.daily_start_times = constraints_json['constraints']['daily_start_times']
 
         # Resource never work mask
@@ -122,8 +121,9 @@ class Resource:
         # Resource always work mask
         self.always_work_masks = constraints_json['constraints']['always_work_masks']
 
-        # Some stats for easy recall
+        # Remaining bits that can be enabled for each day
         self.day_free_cap = {
+            'total': self.max_weekly_cap,
             'monday': self.max_daily_cap,
             'tuesday': self.max_daily_cap,
             'wednesday': self.max_daily_cap,
@@ -144,6 +144,7 @@ class Resource:
         # Default 24hr, 1hr per slot list
         default_df = [0] * 24
 
+        # Initialize lists
         monday_df = default_df * self.num_slots
         tuesday_df = default_df * self.num_slots
         wednesday_df = default_df * self.num_slots
@@ -152,6 +153,7 @@ class Resource:
         saturday_df = default_df * self.num_slots
         sunday_df = default_df * self.num_slots
 
+        # Translate time intervals to bitmaps
         for timetable in timetable_json["time_periods"]:
             match timetable['from']:
                 case "MONDAY":
@@ -183,6 +185,7 @@ class Resource:
                                                datetime.datetime.strptime(timetable['endTime'], _format),
                                                datetime.timedelta(minutes=self.time_var), sunday_df)
         # Set remaining cap of weekdays
+        # TODO What is never mask doesnt allow work on that day? -> return 0?
         self.day_free_cap['monday'] -= sum(monday_df)
         self.day_free_cap['tuesday'] -= sum(tuesday_df)
         self.day_free_cap['wednesday'] -= sum(wednesday_df)
@@ -190,6 +193,7 @@ class Resource:
         self.day_free_cap['friday'] -= sum(friday_df)
         self.day_free_cap['saturday'] -= sum(saturday_df)
         self.day_free_cap['sunday'] -= sum(sunday_df)
+        self.day_free_cap['total'] -= sum(monday_df)+sum(tuesday_df)+sum(wednesday_df)+sum(thursday_df)+sum(friday_df)+sum(saturday_df)+sum(sunday_df)
 
         # Set DF columns to lists.
         self.shifts['resource_id'] = [self.resource_id]
@@ -201,23 +205,34 @@ class Resource:
         self.shifts['saturday'] = [saturday_df]
         self.shifts['sunday'] = [sunday_df]
 
-
+    # Getter for remaining cap of each day OR for one single day
     def get_free_cap(self, day=None):
         if day is not None:
+            if type(day) == list:
+                res = {}
+                for d in day:
+                    print(d)
+                    res[d] = self.day_free_cap[d]
+                return res
             return self.day_free_cap[day]
         return self.day_free_cap
 
+    # Getter for bits that can be changed in bitmap
     def get_changeable_bits(self, day=None):
         res_dict = {}
-        if day is None:
-            for mask in self.always_work_masks:
-                result = self._make_changeable_bits(mask)
-                res_dict[mask] = result
-        else:
-            mask = self.always_work_masks[day]
-            return self._make_changeable_bits(mask)
+        if day is not None:
+            if type(day) == list:
+                res = {}
+                for d in day:
+                    res[d] = self._make_changeable_bits(d)
+                return res
+            return self._make_changeable_bits(day)
+        for mask in self.always_work_masks:
+            result = self._make_changeable_bits(mask)
+            res_dict[mask] = result
         return res_dict
 
+    # Helper method, translating always_work_mask and never_work_mask into changeable_bits
     def _make_changeable_bits(self, mask):
         changeable = []
         for j, k in zip(self.never_work_masks[mask], self.always_work_masks[mask]):
@@ -229,31 +244,30 @@ class Resource:
                 changeable.append(1)
         return changeable
 
+    # Verify always_work_mask and never_work_mask
     def verify_masks(self):
-        # Verify masks
         for i in self.always_work_masks:
             for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
                 if k == j and k == 1:
                     print("ERR: Overlap in masks: {}".format(i))
             print("Valid masks: {}".format(i))
 
+    # Verify global constraints
     def verify_global_constraints(self):
-
-        # Verify global constraints
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         sum_of_week = 0
         sum_of_shifts_week = 0
         for day in shifts:
             sum_of_day = sum(shifts[day][0])
-
             sum_of_week += sum_of_day
+
             if sum_of_day > self.max_daily_cap:
                 print("ERR: Max daily cap superseded")
 
             grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
-            # print(grouped)
             shifts_of_day = int(len(grouped) / 2)
             sum_of_shifts_week += shifts_of_day
+
             for _, tup in enumerate(grouped):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
                     print("Err: Max daily shift size surpassed")
@@ -270,6 +284,9 @@ class Resource:
         self.verify_masks()
         self.verify_global_constraints()
 
+    # --------------------START OF UPDATE METHODS--------------------------
+    # The following methods all update / replace the shifts of a resource.
+    # After updating the roster, the verify_timetable() method is called
     def set_shifts(self, shifts, day=None):
         if day is not None:
             self.shifts[day] = shifts
@@ -297,9 +314,13 @@ class Resource:
         self.day_free_cap[day] = sum(self.shifts[day].values[1])
         self.verify_timetable()
 
-    def __eq__(self, other):
-        return self.resource_id == other.resource_id and self.resource_name == other.resource_name
+    # --------------------END OF UPDATE METHODS--------------------------
 
+    # Compare two resources with each other
+    def __eq__(self, other):
+        return self.resource_id == other.resource_id  #and self.resource_name == other.resource_name
+
+    # Write Resource object to a dict for easy conversion to JSON
     def to_dict(self):
         resource_calendar = {'id': self.resource_id, 'name': self.resource_id, 'time_periods': []}
 
@@ -307,6 +328,7 @@ class Resource:
 
         for name, data in roster_df.iteritems():
             row = data.values[0]
+            # Since 24hr blocks, a day always starts at 00:00:00
             start_of_day = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
 
             # Convert list to string values
@@ -325,9 +347,10 @@ class Resource:
 
                     t_block['beginTime'] = shift_start.time().strftime("%H:%M:%S")
                     t_block['endTime'] = shift_end.time().strftime("%H:%M:%S")
-                    # Stuff to JSON
+
                     current_time = shift_end
                     resource_calendar['time_periods'].append(t_block)
+
                 if key == 0:
                     block_start = current_time
                     block_end = block_start + (datetime.timedelta(minutes=self.time_var) * val)
