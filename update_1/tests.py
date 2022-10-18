@@ -1,16 +1,11 @@
-from datetime import *
 from shutil import copyfile
-from pprint import pprint
-
-import pandas as pd
-
 from support_modules.log_parser import extract_data_from_xes_event_log
 import json
 
 # Initialize Test Resources
 from RosterManager import RosterManager
-from update_1.ResourceInfo import Resource
-from update_1.RosterInfo import Roster
+from ResourceInfo import Resource
+from RosterInfo import Roster
 
 new_experiment_logs = {0: 'credit_application_diff',
                        1: 'credit_application_undiff'}
@@ -53,9 +48,6 @@ rest_of_info = {
     'gateway_branching_probabilities': json_data['gateway_branching_probabilities'],
     'task_resource_distribution': json_data['task_resource_distribution'],
 }
-
-test_timetable = './test_timetable.json'
-test_constraints = './constraints.json'
 # ----
 test_timetable = './credit_application_diff.json'
 test_constraints = './constraints.json'
@@ -109,17 +101,6 @@ rest_of_info['resource_calendars'] = roster.to_json()
 
 with open("test_out.json", 'w') as out:
     out.write(json.dumps(rest_of_info, indent=4))
-# TODO
-#  Bit flips in individual resource's calendars +
-#  All to 0 and all to 1 +
-#  Is any working on certain time of shifts? +
-#  Is resource working on that day? +
-#  If resource is updated, is df roster also updated? +
-#  Validation function for all criteria +
-#  MAX CAP -> sum of all slots must be less than a given number (max hours worked in total per week) +
-#  MAX Shift size -> Max length of concurrent 1's +
-#  MAX Shifts -> Max amount of plateaus -> # of shifts per day per resource +
-
 
 """
 

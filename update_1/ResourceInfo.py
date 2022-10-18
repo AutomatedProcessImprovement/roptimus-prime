@@ -3,7 +3,7 @@ from itertools import groupby
 
 import pandas as pd
 
-from update_1.helpers import datetime_range
+from helpers import datetime_range
 
 
 class Resource:
