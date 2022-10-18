@@ -198,8 +198,32 @@ class Resource:
         self.shifts['saturday'] = [saturday_df]
         self.shifts['sunday'] = [sunday_df]
 
-    def get_free_cap(self):
+    def get_free_cap(self, day=None):
+        if day is not None:
+            return self.day_free_cap[day]
         return self.day_free_cap
+
+    def get_changeable_bits(self, day=None):
+        res_dict = {}
+        if day is None:
+            for mask in self.always_work_masks:
+                result = self._make_changeable_bits(mask)
+                res_dict[mask] = result
+        else:
+            mask = self.always_work_masks[day]
+            return self._make_changeable_bits(mask)
+        return res_dict
+
+    def _make_changeable_bits(self, mask):
+        changeable = []
+        for j, k in zip(self.never_work_masks[mask], self.always_work_masks[mask]):
+            if j == 1:
+                changeable.append(0)
+            if k == 1:
+                changeable.append(0)
+            if j == 0 and k == 0:
+                changeable.append(1)
+        return changeable
 
     def verify_masks(self):
         # Verify masks
@@ -241,6 +265,13 @@ class Resource:
     def verify_timetable(self):
         self.verify_masks()
         self.verify_global_constraints()
+
+    def set_shifts(self, shifts, day=None):
+        if day is not None:
+            self.shifts[day] = shifts
+        else:
+            self.shifts = shifts
+        self.verify_timetable()
 
     def enable_shift(self, day, index):
         self.shifts[day].values[0][index] = 1
