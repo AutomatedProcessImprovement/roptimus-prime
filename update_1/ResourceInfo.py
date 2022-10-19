@@ -193,6 +193,7 @@ class Resource:
     # Verify global constraints
     # TODO when throw errors are implemented, remove else statements and write guardian statements
     def verify_global_constraints(self):
+        print(self.shifts)
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         sum_of_week = 0
         sum_of_shifts_week = 0
@@ -205,11 +206,9 @@ class Resource:
             else:
                 self.set_free_cap(day, self.max_daily_cap - sum_of_day)
 
-
             grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
             shifts_of_day = int(len(grouped) / 2)
             sum_of_shifts_week += shifts_of_day
-
 
             for _, tup in enumerate(grouped):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
@@ -218,7 +217,7 @@ class Resource:
             if shifts_of_day > self.max_shifts_day:
                 print("Err: Max daily shifts surpassed")
             else:
-                self.set_weekly_shifts_remaining(day, self.max_shifts_day-shifts_of_day)
+                self.set_weekly_shifts_remaining(day, self.max_shifts_day - shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
             print("ERR: Max weekly cap superseded")
@@ -237,9 +236,10 @@ class Resource:
     # After updating the roster, the verify_timetable() method is called
     def set_shifts(self, shifts, day=None):
         if day is not None:
-            self.shifts[day] = shifts
+            self.shifts[day][0] = shifts
         else:
-            self.shifts = shifts
+            for i in shifts:
+                self.set_shifts(shifts[i], day=i)
         self.verify_timetable()
 
     def enable_shift(self, day, index):

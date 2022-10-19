@@ -75,14 +75,28 @@ res_map[0].to_dict()
 
 rm = RosterManager(roster)
 print(rm.get_remaining_cap_resource("RESOURCE1"))
-print(rm.get_accessible_bits("RESOURCE1"))
-
-print(rm.get_remaining_cap_resource("RESOURCE1", ['wednesday', 'thursday']))
 print(rm.get_remaining_cap_resource("RESOURCE1", 'wednesday'))
+print(rm.get_remaining_cap_resource("RESOURCE1", ['wednesday', 'thursday']))
+
+print(rm.get_accessible_bits("RESOURCE1"))
 print(rm.get_accessible_bits("RESOURCE1", 'thursday'))
 print(rm.get_accessible_bits("RESOURCE1", ['wednesday', 'thursday']))
 
 print(rm.get_total_remaining_cap_resource("RESOURCE1"))
+
+
+test_new_shifts = {
+            'monday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            'tuesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            'wednesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            'thursday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            'friday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            'saturday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            'sunday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+rm.set_new_shifts_on_resource("RESOURCE2", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], "monday")
+rm.set_new_shifts_on_resource("RESOURCE1", test_new_shifts)
+
 
 rest_of_info['resource_calendars'] = roster.to_json()
 
