@@ -32,3 +32,11 @@ class RosterManager:
                 if day is not None:
                     return i.get_changeable_bits(day)
                 return i.get_changeable_bits()
+
+    def set_new_shifts_on_resource(self, resource, shifts, day=None):
+        roster = self.roster.resources
+        for i in roster:
+            if i.resource_id == resource:
+                return i.set_shifts(shifts, day)
+
+

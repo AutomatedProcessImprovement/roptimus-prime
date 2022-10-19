@@ -30,7 +30,7 @@ class Resource:
         # Resource always work mask
         self.always_work_masks = constraints_json['constraints']['always_work_masks']
 
-        # Remaining bits that can be enabled for each day
+        # Remaining bits that can be enabled for each day and total
         self.day_free_cap = {
             'total': self.max_weekly_cap,
             'monday': self.max_daily_cap,
@@ -40,6 +40,17 @@ class Resource:
             'friday': self.max_daily_cap,
             'saturday': self.max_daily_cap,
             'sunday': self.max_daily_cap
+        }
+        # Remaining shifts that can be created for each day and total
+        self.remaining_shifts = {
+            'total': self.max_shifts_week,
+            'monday': self.max_shifts_day,
+            'tuesday': self.max_shifts_day,
+            'wednesday': self.max_shifts_day,
+            'thursday': self.max_shifts_day,
+            'friday': self.max_shifts_day,
+            'saturday': self.max_shifts_day,
+            'sunday': self.max_shifts_day
         }
 
         # Define column names for DF
@@ -127,6 +138,23 @@ class Resource:
             return self.day_free_cap[day]
         return self.day_free_cap
 
+    def set_free_cap(self, day, cap):
+        self.day_free_cap[day] = cap
+
+    # Getter for remaining shifts of each day OR for one single day
+    def get_weekly_shifts_remaining(self, day=None):
+        if day is not None:
+            if type(day) == list:
+                res = {}
+                for d in day:
+                    res[d] = self.remaining_shifts[d]
+                return res
+            return self.remaining_shifts[day]
+        return self.remaining_shifts
+
+    def set_weekly_shifts_remaining(self, day, cap):
+        self.remaining_shifts[day] = cap
+
     # Getter for bits that can be changed in bitmap
     def get_changeable_bits(self, day=None):
         res_dict = {}
@@ -163,6 +191,7 @@ class Resource:
             print("Valid masks: {}".format(i))
 
     # Verify global constraints
+    # TODO when throw errors are implemented, remove else statements and write guardian statements
     def verify_global_constraints(self):
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         sum_of_week = 0
@@ -173,10 +202,14 @@ class Resource:
 
             if sum_of_day > self.max_daily_cap:
                 print("ERR: Max daily cap superseded")
+            else:
+                self.set_free_cap(day, self.max_daily_cap - sum_of_day)
+
 
             grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
             shifts_of_day = int(len(grouped) / 2)
             sum_of_shifts_week += shifts_of_day
+
 
             for _, tup in enumerate(grouped):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
@@ -184,9 +217,14 @@ class Resource:
 
             if shifts_of_day > self.max_shifts_day:
                 print("Err: Max daily shifts surpassed")
+            else:
+                self.set_weekly_shifts_remaining(day, self.max_shifts_day-shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
             print("ERR: Max weekly cap superseded")
+        else:
+            self.set_free_cap('total', self.max_weekly_cap - sum_of_week)
+
         if sum_of_shifts_week > self.max_shifts_week:
             print("ERR: Max weekly shifts superseded")
 

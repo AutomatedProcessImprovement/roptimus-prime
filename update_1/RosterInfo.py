@@ -11,7 +11,7 @@ class Roster:
         :parameter: start_time_of_day -> Time when the business "opens"
         :parameter: end_time_of_day OR hours_in_day -> Time when business "closes" (Overtime not included)
         :parameter: time_variable -> Time is divided into blocks of how many minutes
-
+        TODO: Replace print(ERR) lines with Error throws
     """
 
     def __init__(self, roster_name, resource_map, time_variable, hours_in_day, max_cap, max_shift_size,
