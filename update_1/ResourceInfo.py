@@ -65,66 +65,76 @@ class Resource:
         default_df = [0] * 24
 
         # Initialize lists
-        monday_df = default_df * self.num_slots
-        tuesday_df = default_df * self.num_slots
-        wednesday_df = default_df * self.num_slots
-        thursday_df = default_df * self.num_slots
-        friday_df = default_df * self.num_slots
-        saturday_df = default_df * self.num_slots
-        sunday_df = default_df * self.num_slots
+        monday_df = 0
+        tuesday_df = 0
+        wednesday_df = 0
+        thursday_df = 0
+        friday_df = 0
+        saturday_df = 0
+        sunday_df = 0
 
         # Translate time intervals to bitmaps
         for timetable in timetable_json["time_periods"]:
+            print(timetable['from'])
             match timetable['from']:
                 case "MONDAY":
-                    monday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=self.time_var), monday_df)
-                case "TUESDAY":
-                    tuesday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                    monday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                 datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=self.time_var), tuesday_df)
+                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                case "TUESDAY":
+                    tuesday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                 datetime.datetime.strptime(timetable['endTime'], _format),
+                                                 datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "WEDNESDAY":
-                    wednesday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                  datetime.datetime.strptime(timetable['endTime'], _format),
-                                                  datetime.timedelta(minutes=self.time_var), wednesday_df)
+                    wednesday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                   datetime.datetime.strptime(timetable['endTime'], _format),
+                                                   datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "THURSDAY":
-                    thursday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                 datetime.datetime.strptime(timetable['endTime'], _format),
-                                                 datetime.timedelta(minutes=self.time_var), thursday_df)
+                    thursday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                  datetime.datetime.strptime(timetable['endTime'], _format),
+                                                  datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "FRIDAY":
-                    friday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=self.time_var), friday_df)
+                    friday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                datetime.datetime.strptime(timetable['endTime'], _format),
+                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "SATURDAY":
-                    saturday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                 datetime.datetime.strptime(timetable['endTime'], _format),
-                                                 datetime.timedelta(minutes=self.time_var), saturday_df)
+                    saturday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                  datetime.datetime.strptime(timetable['endTime'], _format),
+                                                  datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "SUNDAY":
-                    sunday_df = datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=self.time_var), sunday_df)
+                    sunday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                datetime.datetime.strptime(timetable['endTime'], _format),
+                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+
         # Set remaining cap of weekdays
-        # TODO What is never mask doesnt allow work on that day? -> return 0?
-        self.day_free_cap['monday'] -= sum(monday_df)
-        self.day_free_cap['tuesday'] -= sum(tuesday_df)
-        self.day_free_cap['wednesday'] -= sum(wednesday_df)
-        self.day_free_cap['thursday'] -= sum(thursday_df)
-        self.day_free_cap['friday'] -= sum(friday_df)
-        self.day_free_cap['saturday'] -= sum(saturday_df)
-        self.day_free_cap['sunday'] -= sum(sunday_df)
-        self.day_free_cap['total'] -= sum(monday_df) + sum(tuesday_df) + sum(wednesday_df) + sum(thursday_df) + sum(
-            friday_df) + sum(saturday_df) + sum(sunday_df)
+        # TODO REDO
+        # self.day_free_cap['monday'] -= sum(monday_df)
+        # self.day_free_cap['tuesday'] -= sum(tuesday_df)
+        # self.day_free_cap['wednesday'] -= sum(wednesday_df)
+        # self.day_free_cap['thursday'] -= sum(thursday_df)
+        # self.day_free_cap['friday'] -= sum(friday_df)
+        # self.day_free_cap['saturday'] -= sum(saturday_df)
+        # self.day_free_cap['sunday'] -= sum(sunday_df)
+        # self.day_free_cap['total'] -= sum(monday_df) + sum(tuesday_df) + sum(wednesday_df) + sum(thursday_df) + sum(
+        #     friday_df) + sum(saturday_df) + sum(sunday_df)
+
+        print(monday_df)
+        print(tuesday_df)
+        print(wednesday_df)
+        print(thursday_df)
+        print(friday_df)
+        print(saturday_df)
+        print(sunday_df)
 
         # Set DF columns to lists.
         self.shifts['resource_id'] = [self.resource_id]
-        self.shifts['monday'] = [monday_df]
-        self.shifts['tuesday'] = [tuesday_df]
-        self.shifts['wednesday'] = [wednesday_df]
-        self.shifts['thursday'] = [thursday_df]
-        self.shifts['friday'] = [friday_df]
-        self.shifts['saturday'] = [saturday_df]
-        self.shifts['sunday'] = [sunday_df]
+        self.shifts['monday'] = monday_df
+        self.shifts['tuesday'] = tuesday_df
+        self.shifts['wednesday'] = wednesday_df
+        self.shifts['thursday'] = thursday_df
+        self.shifts['friday'] = friday_df
+        self.shifts['saturday'] = saturday_df
+        self.shifts['sunday'] = sunday_df
 
     # Getter for remaining cap of each day OR for one single day
     def get_free_cap(self, day=None):
@@ -172,15 +182,16 @@ class Resource:
 
     # Helper method, translating always_work_mask and never_work_mask into changeable_bits
     def _make_changeable_bits(self, mask):
-        changeable = []
-        for j, k in zip(self.never_work_masks[mask], self.always_work_masks[mask]):
-            if j == 1:
-                changeable.append(0)
-            if k == 1:
-                changeable.append(0)
-            if j == 0 and k == 0:
-                changeable.append(1)
+        changeable = self.never_work_masks[mask] ^ self.always_work_masks[mask]
+
         return changeable
+        # for j, k in zip(self.never_work_masks[mask], self.always_work_masks[mask]):
+        #     if j == 1:
+        #         changeable.append(0)
+        #     if k == 1:
+        #         changeable.append(0)
+        #     if j == 0 and k == 0:
+        #         changeable.append(1)
 
     # Verify always_work_mask and never_work_mask
     def verify_masks(self):
@@ -192,6 +203,7 @@ class Resource:
 
     # Verify global constraints
     # TODO when throw errors are implemented, remove else statements and write guardian statements
+    # TODO rewrite to do with binary
     def verify_global_constraints(self):
         print(self.shifts)
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
@@ -234,6 +246,7 @@ class Resource:
     # --------------------START OF UPDATE METHODS--------------------------
     # The following methods all update / replace the shifts of a resource.
     # After updating the roster, the verify_timetable() method is called
+    # TODO rewrite to update bin num
     def set_shifts(self, shifts, day=None):
         if day is not None:
             self.shifts[day][0] = shifts
@@ -269,6 +282,7 @@ class Resource:
         return self.resource_id == other.resource_id  # and self.resource_name == other.resource_name
 
     # Write Resource object to a dict for easy conversion to JSON
+    # TODO Rewrite bits instead of lists
     def to_dict(self):
         resource_calendar = {'id': self.resource_id, 'name': self.resource_id, 'time_periods': []}
 
