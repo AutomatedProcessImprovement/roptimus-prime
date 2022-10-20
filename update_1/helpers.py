@@ -32,3 +32,10 @@ def _calculate_shifts(num):
 def _get_consecutive_shift_lengths(num):
     shifts = [(int(k), len(list(v))) for k, v in itertools.groupby(str(bin(num)[2:]))]
     return shifts
+
+
+def _bitmap_to_valid_structure(bitmap, num_slots):
+    bit_str = bin(bitmap)[2:]
+    blank_out = (num_slots * 24) * '0'
+    out = blank_out[:len(blank_out) - len(bit_str)] + bit_str
+    return [int(x) for x in out]

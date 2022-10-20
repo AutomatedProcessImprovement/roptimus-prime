@@ -5,7 +5,8 @@ from itertools import groupby
 import numpy as np
 import pandas as pd
 
-from helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, _get_consecutive_shift_lengths
+from helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, _get_consecutive_shift_lengths, \
+    _bitmap_to_valid_structure
 
 
 class Resource:
@@ -255,11 +256,12 @@ class Resource:
     # After updating the roster, the verify_timetable() method is called
     def set_shifts(self, shifts, day=None):
         if day is not None:
-            self.shifts[day][0] = shifts
+            self.shifts[day] = shifts
         else:
             for i in shifts:
                 self.set_shifts(shifts[i], day=i)
         self.verify_timetable()
+        return self.shifts
 
     # def enable_shift(self, day, index):
     #     self.shifts[day].values[0][index] = 1
@@ -296,15 +298,14 @@ class Resource:
 
         for name, data in roster_df.iteritems():
             row = data.values[0]
-            print(bin(row)[2:])
-            bit_str = (self.num_slots*24) * '0'
-            print(bit_str)
+
             # Since 24hr blocks, a day always starts at 00:00:00
             start_of_day = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
 
-            # Convert list to string values
+            # Convert binary number to bitmap
             current_time = start_of_day
-            grouped = [(key, len(list(group))) for key, group in groupby(row)]
+            bitmap = _bitmap_to_valid_structure(row, self.num_slots)
+            grouped = [(key, len(list(group))) for key, group in groupby(bitmap)]
 
             for block in grouped:
                 key, val = block

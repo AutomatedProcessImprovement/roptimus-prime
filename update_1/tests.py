@@ -76,6 +76,7 @@ for i in r1_timetable['resource_calendars']:
 
 roster = Roster("test_roster", res_map, r1_constraints['time_var'], hours_in_day, 300, 4, 2)
 # roster.verify_roster()
+print("---- RESOURCE TESTS---")
 print(res_map[0].get_changeable_bits())
 print(res_map[0].get_free_cap())
 print(res_map[0].get_weekly_shifts_remaining())
@@ -87,35 +88,40 @@ print(res_map[0].get_weekly_shifts_remaining(['monday', 'tuesday']))
 res_map[0].verify_global_constraints()
 print(res_map[0].to_dict())
 
+print("---- ROSTER TESTS---")
+print(roster.verify_roster())
+
+print("---- ROSTER MANAGER TESTS ----")
 rm = RosterManager(roster)
-# print(rm.get_remaining_cap_resource("RESOURCE1"))
-# print(rm.get_remaining_cap_resource("RESOURCE1", 'wednesday'))
-# print(rm.get_remaining_cap_resource("RESOURCE1", ['wednesday', 'thursday']))
-#
-# print(rm.get_accessible_bits("RESOURCE1"))
-# print(rm.get_accessible_bits("RESOURCE1", 'thursday'))
-# print(rm.get_accessible_bits("RESOURCE1", ['wednesday', 'thursday']))
-#
-# print(rm.get_total_remaining_cap_resource("RESOURCE1"))
+print(rm.get_remaining_cap_resource("RESOURCE1"))
+print(rm.get_remaining_cap_resource("RESOURCE1", 'wednesday'))
+print(rm.get_remaining_cap_resource("RESOURCE1", ['wednesday', 'thursday']))
+print("")
+print(rm.get_accessible_bits("RESOURCE1"))
+print(rm.get_accessible_bits("RESOURCE1", 'thursday'))
+print(rm.get_accessible_bits("RESOURCE1", ['wednesday', 'thursday']))
+
+print("")
+print(rm.get_total_remaining_cap_resource("RESOURCE1"))
 
 
-# test_new_shifts = {
-#             'monday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'tuesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'wednesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'thursday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'friday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'saturday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             'sunday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-# }
-# rm.set_new_shifts_on_resource("RESOURCE2", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], "monday")
-# rm.set_new_shifts_on_resource("RESOURCE1", test_new_shifts)
+test_new_shifts = {
+            'monday': 27520,
+            'tuesday': 0,
+            'wednesday': 27520,
+            'thursday': 0,
+            'friday': 27520,
+            'saturday': 0,
+            'sunday': 0
+}
+rm.set_new_shifts_on_resource("RESOURCE2", 27520, "monday")
+rm.set_new_shifts_on_resource("RESOURCE3", test_new_shifts)
 
 
-# rest_of_info['resource_calendars'] = roster.to_json()
-#
-# with open("test_out.json", 'w') as out:
-#     out.write(json.dumps(rest_of_info, indent=4))
+rest_of_info['resource_calendars'] = roster.to_json()
+
+with open("test_out.json", 'w') as out:
+    out.write(json.dumps(rest_of_info, indent=4))
 
 """
 

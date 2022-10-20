@@ -2,6 +2,8 @@ from itertools import groupby
 
 import pandas as pd
 
+from helpers import sum_of_binary_ones
+
 
 class Roster:
     """
@@ -38,28 +40,30 @@ class Roster:
             resource.verify_timetable()
         roster = self.roster
         cap_sum = 0
+        print("---- Resources validated----")
         for idx, row in roster.iterrows():
             row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
             for name, df in row.iteritems():
-                cap_sum += df.count(1)
+                cap_sum += sum_of_binary_ones(df)
+        print(cap_sum)
         if cap_sum > self.max_cap:
-            print("Err: Max capacity surpassed")
+            print("Err: Global resource max capacity surpassed")
         else:
             print("Max_cap ok")
-        for idx, row in roster.iterrows():
-            row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
-            for val in row:
-                grouped = [(k, len(list(v))) for k, v in groupby(val)]
-                for _, tup in enumerate(grouped):
-                    if tup[0] == 1 and tup[1] > self.max_shift_size:
-                        print("Err: Max shift size surpassed")
+        # for idx, row in roster.iterrows():
+        #     row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
+        #     for val in row:
+        #         grouped = [(k, len(list(v))) for k, v in groupby(val)]
+        #         for _, tup in enumerate(grouped):
+        #             if tup[0] == 1 and tup[1] > self.max_shift_size:
+        #                 print("Err: Max shift size surpassed")
 
-        for idx, row in roster.iterrows():
-            row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
-            for val in row:
-                grouped = [(k, len(list(v))) for k, v in groupby(val)]
-                if len(grouped) > self.max_shift_blocks * 2:
-                    print("Err: Max amount of shifts per day surpassed")
+        # for idx, row in roster.iterrows():
+        #     row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
+        #     for val in row:
+        #         grouped = [(k, len(list(v))) for k, v in groupby(val)]
+        #         if len(grouped) > self.max_shift_blocks * 2:
+        #             print("Err: Max amount of shifts per day surpassed")
 
     def print_roster(self):
         return self.roster.to_string()
