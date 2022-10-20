@@ -1,9 +1,11 @@
 import datetime
+import itertools
 from itertools import groupby
 
+import numpy as np
 import pandas as pd
 
-from helpers import datetime_range
+from helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, _get_consecutive_shift_lengths
 
 
 class Resource:
@@ -61,80 +63,85 @@ class Resource:
         # Format for timestamps
         _format = "%H:%M:%S"
 
-        # Default 24hr, 1hr per slot list
-        default_df = [0] * 24
+        # Default 24hr, 1hr per slot list (NOT IN USE)
+        # default_df = [0] * 24
 
-        # Initialize lists
-        monday_df = 0
-        tuesday_df = 0
-        wednesday_df = 0
-        thursday_df = 0
-        friday_df = 0
-        saturday_df = 0
-        sunday_df = 0
+        # Initialize numbers
+        monday = 0
+        tuesday = 0
+        wednesday = 0
+        thursday = 0
+        friday = 0
+        saturday = 0
+        sunday = 0
 
         # Translate time intervals to bitmaps
         for timetable in timetable_json["time_periods"]:
-            print(timetable['from'])
             match timetable['from']:
                 case "MONDAY":
-                    monday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    monday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                             datetime.datetime.strptime(timetable['endTime'], _format),
+                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "TUESDAY":
-                    tuesday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                 datetime.datetime.strptime(timetable['endTime'], _format),
-                                                 datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    tuesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                              datetime.datetime.strptime(timetable['endTime'], _format),
+                                              datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "WEDNESDAY":
-                    wednesday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                   datetime.datetime.strptime(timetable['endTime'], _format),
-                                                   datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    wednesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                                datetime.datetime.strptime(timetable['endTime'], _format),
+                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "THURSDAY":
-                    thursday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                  datetime.datetime.strptime(timetable['endTime'], _format),
-                                                  datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    thursday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                               datetime.datetime.strptime(timetable['endTime'], _format),
+                                               datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "FRIDAY":
-                    friday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    friday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                             datetime.datetime.strptime(timetable['endTime'], _format),
+                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "SATURDAY":
-                    saturday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                  datetime.datetime.strptime(timetable['endTime'], _format),
-                                                  datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    saturday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                               datetime.datetime.strptime(timetable['endTime'], _format),
+                                               datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
                 case "SUNDAY":
-                    sunday_df += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+                    sunday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                             datetime.datetime.strptime(timetable['endTime'], _format),
+                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
 
         # Set remaining cap of weekdays
-        # TODO REDO
-        # self.day_free_cap['monday'] -= sum(monday_df)
-        # self.day_free_cap['tuesday'] -= sum(tuesday_df)
-        # self.day_free_cap['wednesday'] -= sum(wednesday_df)
-        # self.day_free_cap['thursday'] -= sum(thursday_df)
-        # self.day_free_cap['friday'] -= sum(friday_df)
-        # self.day_free_cap['saturday'] -= sum(saturday_df)
-        # self.day_free_cap['sunday'] -= sum(sunday_df)
-        # self.day_free_cap['total'] -= sum(monday_df) + sum(tuesday_df) + sum(wednesday_df) + sum(thursday_df) + sum(
-        #     friday_df) + sum(saturday_df) + sum(sunday_df)
+        self.day_free_cap['monday'] -= sum_of_binary_ones(monday)
+        self.day_free_cap['tuesday'] -= sum_of_binary_ones(tuesday)
+        self.day_free_cap['wednesday'] -= sum_of_binary_ones(wednesday)
+        self.day_free_cap['thursday'] -= sum_of_binary_ones(thursday)
+        self.day_free_cap['friday'] -= sum_of_binary_ones(friday)
+        self.day_free_cap['saturday'] -= sum_of_binary_ones(saturday)
+        self.day_free_cap['sunday'] -= sum_of_binary_ones(sunday)
+        self.day_free_cap['total'] -= sum_of_binary_ones(monday) + sum_of_binary_ones(tuesday) \
+                                     + sum_of_binary_ones(wednesday) + sum_of_binary_ones(thursday) \
+                                     + sum_of_binary_ones(friday) + sum_of_binary_ones(saturday) \
+                                     + sum_of_binary_ones(sunday)
 
-        print(monday_df)
-        print(tuesday_df)
-        print(wednesday_df)
-        print(thursday_df)
-        print(friday_df)
-        print(saturday_df)
-        print(sunday_df)
+        # Set remaining shifts of weekdays
+        self.remaining_shifts['monday'] -= _calculate_shifts(monday)
+        self.remaining_shifts['tuesday'] -= _calculate_shifts(tuesday)
+        self.remaining_shifts['wednesday'] -= _calculate_shifts(wednesday)
+        self.remaining_shifts['thursday'] -= _calculate_shifts(thursday)
+        self.remaining_shifts['friday'] -= _calculate_shifts(friday)
+        self.remaining_shifts['saturday'] -= _calculate_shifts(saturday)
+        self.remaining_shifts['sunday'] -= _calculate_shifts(sunday)
+        self.remaining_shifts['total'] -= _calculate_shifts(monday) + _calculate_shifts(tuesday) \
+                                          + _calculate_shifts(wednesday) + _calculate_shifts(thursday) \
+                                          + _calculate_shifts(friday) + _calculate_shifts(saturday) \
+                                          + _calculate_shifts(sunday)
 
-        # Set DF columns to lists.
+        # Set DF columns values.
         self.shifts['resource_id'] = [self.resource_id]
-        self.shifts['monday'] = monday_df
-        self.shifts['tuesday'] = tuesday_df
-        self.shifts['wednesday'] = wednesday_df
-        self.shifts['thursday'] = thursday_df
-        self.shifts['friday'] = friday_df
-        self.shifts['saturday'] = saturday_df
-        self.shifts['sunday'] = sunday_df
+        self.shifts['monday'] = monday
+        self.shifts['tuesday'] = tuesday
+        self.shifts['wednesday'] = wednesday
+        self.shifts['thursday'] = thursday
+        self.shifts['friday'] = friday
+        self.shifts['saturday'] = saturday
+        self.shifts['sunday'] = sunday
 
     # Getter for remaining cap of each day OR for one single day
     def get_free_cap(self, day=None):
@@ -142,7 +149,6 @@ class Resource:
             if type(day) == list:
                 res = {}
                 for d in day:
-                    print(d)
                     res[d] = self.day_free_cap[d]
                 return res
             return self.day_free_cap[day]
@@ -183,7 +189,6 @@ class Resource:
     # Helper method, translating always_work_mask and never_work_mask into changeable_bits
     def _make_changeable_bits(self, mask):
         changeable = self.never_work_masks[mask] ^ self.always_work_masks[mask]
-
         return changeable
         # for j, k in zip(self.never_work_masks[mask], self.always_work_masks[mask]):
         #     if j == 1:
@@ -196,43 +201,45 @@ class Resource:
     # Verify always_work_mask and never_work_mask
     def verify_masks(self):
         for i in self.always_work_masks:
-            for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
-                if k == j and k == 1:
-                    print("ERR: Overlap in masks: {}".format(i))
-            print("Valid masks: {}".format(i))
+            if not self.never_work_masks[i] | self.always_work_masks[i] == self.never_work_masks[i] ^ self.always_work_masks[i]:
+                print("ERR: Overlap in masks: {}".format(i))
+            else:
+                print("Valid masks: {}".format(i))
+            # for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
+            #     if k == j and k == 1:
+            #         print("ERR: Overlap in masks: {}".format(i))
+            # print("Valid masks: {}".format(i))
 
     # Verify global constraints
     # TODO when throw errors are implemented, remove else statements and write guardian statements
     # TODO rewrite to do with binary
     def verify_global_constraints(self):
-        print(self.shifts)
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         sum_of_week = 0
         sum_of_shifts_week = 0
         for day in shifts:
-            sum_of_day = sum(shifts[day][0])
+            sum_of_day = sum_of_binary_ones(self.shifts[day][0])
             sum_of_week += sum_of_day
 
             if sum_of_day > self.max_daily_cap:
-                print("ERR: Max daily cap superseded")
+                print("ERR: Max daily cap superseded on {}".format(day))
             else:
                 self.set_free_cap(day, self.max_daily_cap - sum_of_day)
 
-            grouped = [(k, len(list(v))) for k, v in groupby(shifts[day][0])]
-            shifts_of_day = int(len(grouped) / 2)
+            shifts_of_day = _calculate_shifts(self.shifts[day][0])
             sum_of_shifts_week += shifts_of_day
 
-            for _, tup in enumerate(grouped):
+            for _, tup in enumerate(_get_consecutive_shift_lengths(self.shifts[day][0])):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
-                    print("Err: Max daily shift size surpassed")
+                    print("Err: Max daily shift size surpassed on {}".format(day))
 
             if shifts_of_day > self.max_shifts_day:
-                print("Err: Max daily shifts surpassed")
+                print("Err: Max daily shifts surpassed on {}".format(day))
             else:
                 self.set_weekly_shifts_remaining(day, self.max_shifts_day - shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
-            print("ERR: Max weekly cap superseded")
+            print("ERR: Max weekly cap superseded for {}".format(self.resource_id))
         else:
             self.set_free_cap('total', self.max_weekly_cap - sum_of_week)
 
@@ -246,7 +253,6 @@ class Resource:
     # --------------------START OF UPDATE METHODS--------------------------
     # The following methods all update / replace the shifts of a resource.
     # After updating the roster, the verify_timetable() method is called
-    # TODO rewrite to update bin num
     def set_shifts(self, shifts, day=None):
         if day is not None:
             self.shifts[day][0] = shifts
@@ -255,25 +261,25 @@ class Resource:
                 self.set_shifts(shifts[i], day=i)
         self.verify_timetable()
 
-    def enable_shift(self, day, index):
-        self.shifts[day].values[0][index] = 1
-        self.day_free_cap[day] -= 1
-        self.verify_timetable()
+    # def enable_shift(self, day, index):
+    #     self.shifts[day].values[0][index] = 1
+    #     self.day_free_cap[day] -= 1
+    #     self.verify_timetable()
+    #
+    # def disable_shift(self, day, index):
+    #     self.shifts[day].values[0][index] = 0
+    #     self.day_free_cap[day] += 1
+    #     self.verify_timetable()
 
-    def disable_shift(self, day, index):
-        self.shifts[day].values[0][index] = 0
-        self.day_free_cap[day] += 1
-        self.verify_timetable()
-
-    def disable_day(self, day):
-        self.shifts[day].values[0] = [0 if x == 1 else 0 for x in self.shifts[day].values[0]]
-        self.day_free_cap[day] = sum(self.shifts[day].values[1])
-        self.verify_timetable()
-
-    def enable_day(self, day):
-        self.shifts[day].values[0] = [1 if x == 0 else 1 for x in self.shifts[day].values[0]]
-        self.day_free_cap[day] = sum(self.shifts[day].values[1])
-        self.verify_timetable()
+    # def disable_day(self, day):
+    #     self.shifts[day].values[0] = [0 if x == 1 else 0 for x in self.shifts[day].values[0]]
+    #     self.day_free_cap[day] = sum(self.shifts[day].values[1])
+    #     self.verify_timetable()
+    #
+    # def enable_day(self, day):
+    #     self.shifts[day].values[0] = [1 if x == 0 else 1 for x in self.shifts[day].values[0]]
+    #     self.day_free_cap[day] = sum(self.shifts[day].values[1])
+    #     self.verify_timetable()
 
     # --------------------END OF UPDATE METHODS--------------------------
 
@@ -290,6 +296,9 @@ class Resource:
 
         for name, data in roster_df.iteritems():
             row = data.values[0]
+            print(bin(row)[2:])
+            bit_str = (self.num_slots*24) * '0'
+            print(bit_str)
             # Since 24hr blocks, a day always starts at 00:00:00
             start_of_day = datetime.datetime(hour=0, minute=0, year=1900, day=1, month=1)
 

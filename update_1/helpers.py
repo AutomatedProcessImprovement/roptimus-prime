@@ -1,4 +1,5 @@
 import datetime
+import itertools
 
 
 def datetime_range(start, end, delta, slots):
@@ -16,3 +17,18 @@ def datetime_range(start, end, delta, slots):
             res += '0'
         current += delta
     return int(res, 2)
+
+
+def sum_of_binary_ones(num):
+    return sum(map(int, "{0:b}".format(num)))
+
+
+def _calculate_shifts(num):
+    shifts = [(k, len(list(v))) for k, v in itertools.groupby(str(bin(num)[2:]))]
+    shifts_of_day = int(len(shifts) / 2)
+    return shifts_of_day
+
+
+def _get_consecutive_shift_lengths(num):
+    shifts = [(int(k), len(list(v))) for k, v in itertools.groupby(str(bin(num)[2:]))]
+    return shifts
