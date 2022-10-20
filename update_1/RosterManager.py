@@ -39,6 +39,5 @@ class RosterManager:
             if i.resource_id == resource:
                 return i.set_shifts(shifts, day)
 
-
-
-
+    def to_json(self):
+        return self.roster.to_json()

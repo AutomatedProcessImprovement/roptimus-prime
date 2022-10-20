@@ -117,8 +117,7 @@ test_new_shifts = {
 rm.set_new_shifts_on_resource("RESOURCE2", 27520, "monday")
 rm.set_new_shifts_on_resource("RESOURCE3", test_new_shifts)
 
-
-rest_of_info['resource_calendars'] = roster.to_json()
+rest_of_info['resource_calendars'] = rm.to_json()
 
 with open("test_out.json", 'w') as out:
     out.write(json.dumps(rest_of_info, indent=4))

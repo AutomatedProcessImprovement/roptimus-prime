@@ -200,12 +200,20 @@ class Resource:
         #         changeable.append(1)
 
     # Verify always_work_mask and never_work_mask
-    def verify_masks(self):
-        for i in self.always_work_masks:
-            if not self.never_work_masks[i] | self.always_work_masks[i] == self.never_work_masks[i] ^ self.always_work_masks[i]:
-                print("ERR: Overlap in masks: {}".format(i))
+    def verify_masks(self, day=None):
+        if day is None:
+            for i in self.always_work_masks:
+                self.verify_masks(i)
+        else:
+            if not self.never_work_masks[day] | self.always_work_masks[day] == self.never_work_masks[day] ^ self.always_work_masks[day]:
+                print("ERR: Overlap in masks: {}".format(day))
             else:
-                print("Valid masks: {}".format(i))
+                # Verify that the shifts are also conform the masks
+                if self.never_work_masks[day] & self.shifts[day][0] == 0 and self.always_work_masks[day] & self.shifts[day][0] == self.always_work_masks[day]:
+                    print("Valid masks: {} & timetable valid under masks".format(day))
+                else:
+                    print("Conflict between masks and timetables.")
+
             # for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
             #     if k == j and k == 1:
             #         print("ERR: Overlap in masks: {}".format(i))
@@ -213,7 +221,6 @@ class Resource:
 
     # Verify global constraints
     # TODO when throw errors are implemented, remove else statements and write guardian statements
-    # TODO rewrite to do with binary
     def verify_global_constraints(self):
         shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         sum_of_week = 0
@@ -254,13 +261,14 @@ class Resource:
     # --------------------START OF UPDATE METHODS--------------------------
     # The following methods all update / replace the shifts of a resource.
     # After updating the roster, the verify_timetable() method is called
+    # TODO Check masks
     def set_shifts(self, shifts, day=None):
         if day is not None:
             self.shifts[day] = shifts
         else:
             for i in shifts:
                 self.set_shifts(shifts[i], day=i)
-        self.verify_timetable()
+        # self.verify_timetable()
         return self.shifts
 
     # def enable_shift(self, day, index):
@@ -295,7 +303,6 @@ class Resource:
         resource_calendar = {'id': self.resource_id, 'name': self.resource_id, 'time_periods': []}
 
         roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
-
         for name, data in roster_df.iteritems():
             row = data.values[0]
 
