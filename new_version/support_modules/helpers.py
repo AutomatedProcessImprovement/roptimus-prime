@@ -1,7 +1,6 @@
 import datetime
 import itertools
 
-
 def datetime_range(start, end, delta, slots):
     _format = "%H:%M:%S"
     start_of_day = datetime.datetime.strptime('00:00:00', _format)
@@ -39,3 +38,10 @@ def _bitmap_to_valid_structure(bitmap, num_slots):
     blank_out = (num_slots * 24) * '0'
     out = blank_out[:len(blank_out) - len(bit_str)] + bit_str
     return [int(x) for x in out]
+
+
+def _list_to_binary(bitlist):
+    out = 0
+    for bit in bitlist:
+        out = (out << 1) | bit
+    return out

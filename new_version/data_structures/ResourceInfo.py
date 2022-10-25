@@ -11,8 +11,13 @@ class Resource:
     def __init__(self, constraints_json, timetable_json, time_var):
         # Resource general information
         self.resource_id = constraints_json['id']
+        self.bpm_resource_id = ""
+        self.bpm_resource_name = ""
+        self.resource_name = constraints_json['id'].replace('timetable', '')
         self.time_var = time_var
         self.num_slots = int(60 / self.time_var)
+
+        self.cost = 1
 
         global_constraints = constraints_json['constraints']['global_constraints']
         # Resource global constraints
@@ -142,6 +147,21 @@ class Resource:
         self.shifts['saturday'] = saturday
         self.shifts['sunday'] = sunday
 
+    def get_total_cost(self):
+        return self.cost / 3600
+
+    def set_bpm_resource_name(self, name):
+        self.bpm_resource_name = name
+
+    def get_bpm_resource_name(self):
+        return self.bpm_resource_name
+
+    def set_bpm_resource_id(self, id):
+        self.bpm_resource_id = id
+
+    def get_bpm_resource_id(self):
+        return self.bpm_resource_id
+
     # Getter for remaining cap of each day OR for one single day
     def get_free_cap(self, day=None):
         if day is not None:
@@ -205,12 +225,15 @@ class Resource:
         else:
             if not self.never_work_masks[day] | self.always_work_masks[day] == self.never_work_masks[day] ^ self.always_work_masks[day]:
                 print("ERR: Overlap in masks: {}".format(day))
+                return False
             else:
                 # Verify that the shifts are also conform the masks
                 if self.never_work_masks[day] & self.shifts[day][0] == 0 and self.always_work_masks[day] & self.shifts[day][0] == self.always_work_masks[day]:
                     print("Valid masks: {} & timetable valid under masks".format(day))
+                    return True
                 else:
                     print("Conflict between masks and timetables.")
+                    return False
 
             # for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
             #     if k == j and k == 1:
@@ -229,6 +252,7 @@ class Resource:
 
             if sum_of_day > self.max_daily_cap:
                 print("ERR: Max daily cap superseded on {}".format(day))
+                return False
             else:
                 self.set_free_cap(day, self.max_daily_cap - sum_of_day)
 
@@ -238,23 +262,27 @@ class Resource:
             for _, tup in enumerate(_get_consecutive_shift_lengths(self.shifts[day][0])):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
                     print("Err: Max daily shift size surpassed on {}".format(day))
+                    return False
 
             if shifts_of_day > self.max_shifts_day:
                 print("Err: Max daily shifts surpassed on {}".format(day))
+                return False
             else:
                 self.set_weekly_shifts_remaining(day, self.max_shifts_day - shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
             print("ERR: Max weekly cap superseded for {}".format(self.resource_id))
+            return False
         else:
             self.set_free_cap('total', self.max_weekly_cap - sum_of_week)
 
         if sum_of_shifts_week > self.max_shifts_week:
             print("ERR: Max weekly shifts superseded")
+            return False
+        return True
 
     def verify_timetable(self):
-        self.verify_masks()
-        self.verify_global_constraints()
+        return self.verify_masks() & self.verify_global_constraints()
 
     # --------------------START OF UPDATE METHODS--------------------------
     # The following methods all update / replace the shifts of a resource.

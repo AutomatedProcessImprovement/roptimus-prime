@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
 
 from new_version.data_structures.pools_info import PoolInfo
-from new_version.data_structures.pools_info import Resource
 from new_version.support_modules.file_manager import temp_bpmn_file
 
 bpmn_schema_url = 'http://www.omg.org/spec/BPMN/20100524/MODEL'
@@ -42,7 +41,7 @@ def update_resource_cost(resource_costs={}):
     tree.write(temp_bpmn_file)
 
 
-def parse_simulation_model():
+def parse_simulation_model(resource_manager):
     tree = ET.parse(temp_bpmn_file)
     root = tree.getroot()
     # descendants = list(root.iter())
@@ -59,12 +58,21 @@ def parse_simulation_model():
     resource_pools = dict()
     resource_ids = dict()
     bpmn_resources = simod_root.find("qbp:resources", simod_ns)
+
+    json_resources = resource_manager.get_all_resources()
+
     for resource in bpmn_resources:
-        pool = Resource(resource.attrib["id"], resource.attrib["name"])
-        pool.set_total_amount(int(resource.attrib["totalAmount"]))
-        pool.set_cost(int(resource.attrib["costPerHour"]))
-        resource_pools[pool.name] = pool
-        resource_ids[pool.id] = pool.name
+        for json_resource in json_resources:
+            if resource.attrib["name"] == json_resource.resource_name:
+                json_resource.set_bpm_resource_id(resource.attrib["id"])
+                json_resource.set_bpm_resource_name(resource.attrib["name"])
+                resource_pools[json_resource.bpm_resource_name] = json_resource
+                resource_ids[json_resource.bpm_resource_id] = json_resource.bpm_resource_name
+        # pool = Resource(resource.attrib["id"], resource.attrib["name"]) # resource_manager.getResources().get("resource.attrib["id"]")
+        # pool.set_total_amount(int(resource.attrib["totalAmount"]))
+        # pool.set_cost(int(resource.attrib["costPerHour"]))
+        # resource_pools[pool.name] = pool
+        # resource_ids[pool.id] = pool.name
 
     # Extracting relation task - resource pool
     simod_elements = simod_root.find("qbp:elements", simod_ns)

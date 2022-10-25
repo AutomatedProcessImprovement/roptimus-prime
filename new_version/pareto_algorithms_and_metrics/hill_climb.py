@@ -2,11 +2,12 @@ import copy
 from shutil import copyfile
 import time
 import datetime
-
+import random
 from new_version.data_structures.pools_info import PoolInfo
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 from new_version.support_modules.bpmn_parser import parse_simulation_model, update_resource_cost
 from new_version.support_modules.file_manager import save_stats_file, read_stats_file
+from new_version.support_modules.helpers import _list_to_binary
 from new_version.support_modules.log_parser import extract_data_from_xes_event_log
 from new_version.pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from new_version.data_structures.RosterManager import RosterManager
@@ -20,18 +21,18 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
     copyfile(bpmn_path, temp_bpmn_file)
     rm = RosterManager("DEFAULT_ROSTER", time_table, constraints)
     # Collect stuff from RosterManager
-
-
+    all_res = rm.get_all_res_accessible_bits()
+    print(all_res)
 
 
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
 
     xes_log_info = extract_data_from_xes_event_log(xes_path)
-    initial_pools_info = set_up_cost(cost_type, xes_log_info)
+    initial_pools_info = set_up_cost(cost_type, xes_log_info, rm)
     it_handler = IterationHandler(log_name, initial_pools_info, tot_simulations, is_tabu, False, rm)
     max_iterations_reached = True
-    max_resources = initial_pools_info.total_resoures
+    # max_resources = initial_pools_info.total_resoures
 
     iterations_count = [0]
     while it_handler.solutions_count() < max_func_ev:
@@ -40,8 +41,8 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
             break
         iteration_info = it_handler.next()
 
-        solution_sorting_by_resource_utilization(iteration_info, it_handler, iterations_count, max_resources)
-        solution_sorting_by_pool_outturn(iteration_info, it_handler, iterations_count, max_resources)
+        solution_sorting_by_resource_utilization(iteration_info, it_handler, iterations_count, rm.get_all_res_accessible_bits(), rm.get_all_res_masks())
+        solution_sorting_by_pool_outturn(iteration_info, it_handler, iterations_count, rm.get_all_res_accessible_bits())
 
     save_stats_file(log_name,
                     algorithm_name + '_without_mad',
@@ -107,7 +108,7 @@ def fix_pool_outturn(pool_name, pools_info, iterations_handler, distance, by_tim
         _generate_solutions(iterations_handler, amounts, pools_info, pool_name, distance, max_resources)
 
 
-def solution_sorting_by_resource_utilization(iteration_info, iterations_handler, iterations_count, max_resources):
+def solution_sorting_by_resource_utilization(iteration_info, iterations_handler, iterations_count, accessible_bits, resource_masks):
     # Retrieving info of solution closer to the optimal which has not been processed yet
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
@@ -118,21 +119,21 @@ def solution_sorting_by_resource_utilization(iteration_info, iterations_handler,
     pool_utilization = simulation_info.pool_utilization
 
     is_fixed = [
-        fix_busiest_pool(sorted_pools, pool_utilization, pools_info, iterations_handler, distance, max_resources),
-        fix_laziest_pool(sorted_pools, pool_utilization, pools_info, iterations_handler, distance, max_resources),
+        fix_busiest_pool(sorted_pools, pool_utilization, accessible_bits, pools_info, iterations_handler, distance, resource_masks),
+        fix_laziest_pool(sorted_pools, pool_utilization, pools_info, iterations_handler, distance, accessible_bits),
         exchange_between_busiest_laziest(sorted_pools, pool_utilization, pools_info, iterations_handler, distance)
     ]
 
     return is_fixed[0] or is_fixed[1] or is_fixed[2]
 
 
-def fix_busiest_pool(sorted_pools, pool_utilization, pools_info, iterations_handler, distance, max_resources):
+def fix_busiest_pool(sorted_pools, pool_utilization, accessible_bits, pools_info, iterations_handler, distance, resource_masks):
     # Adding a resource to pool with highest resource utilization
     busiest_pools = _find_busiest_pools(sorted_pools, pool_utilization)
     is_improved = False
     for pool_name in busiest_pools:
-        amounts = [_amount(pool_utilization[pool_name], pools_info.pools[pool_name].total_amount), 1]
-        if _generate_solutions(iterations_handler, amounts, pools_info, pool_name, distance, max_resources):
+        accessible_bits_resource = accessible_bits[pool_name]
+        if _generate_solutions(iterations_handler, accessible_bits_resource, pools_info, pool_name, distance, resource_masks):
             is_improved = True
     return is_improved
 
@@ -203,21 +204,49 @@ def _find_busiest_pools(sorted_pools, pool_utilization, proximity_index=0.1, low
         break
     return busiest_pools
 
+def random_shift(shifts, allowed_indexes):
+    for idx in allowed_indexes:
+        shifts[idx] = random.randint(0, 1)
+    return shifts
 
-def _generate_solutions(iterations_handler, amounts, pools_info, pool_name, distance, max_resources):
+
+def _generate_solutions(iterations_handler, accessible_bits, pools_info, pool_name, distance, resource_masks):
     pools = pools_info.pools
     solution_found = False
-    for amount in amounts:
-        if pools[pool_name].total_amount + amount > max_resources:
-            amount = max_resources - pools[pool_name].total_amount
-        if 0 > amount and pools[pool_name].total_amount <= abs(amount):
-            continue
+    print(accessible_bits)
+    # TODO instead of changing amount of resources, change schedule of resource. Then verify
+    _valid = False
+    # TODO verify shifts with mask, then verify with constraints, then set as new shifts
+    while not _valid:
         new_pools = copy.deepcopy(pools)
-        new_pools[pool_name].set_total_amount(amount)
+        for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']:
+
+            new_shifts = [0] * 24 * 1
+            new_shifts = random_shift(new_shifts, accessible_bits[day])
+            print(new_pools[pool_name].shifts[day][0])
+            new_shifts = _list_to_binary(new_shifts) | new_pools[pool_name].shifts[day][0]
+            new_pools[pool_name].set_shifts(new_shifts, day)
+            print(new_shifts)
+            _valid = new_pools[pool_name].verify_timetable()
         if iterations_handler.try_new_solution(PoolInfo(new_pools, pools_info.task_pools), distance):
             solution_found = True
         pools = new_pools
     return solution_found
+
+
+
+
+    # for amount in accessible_bits:
+    #     if pools[pool_name].total_amount + amount > accessible_bits:
+    #         amount = accessible_bits - pools[pool_name].total_amount
+    #     if 0 > amount and pools[pool_name].total_amount <= abs(amount):
+    #         continue
+    #     new_pools = copy.deepcopy(pools)
+    #     new_pools[pool_name].set_total_amount(amount)
+    #     if iterations_handler.try_new_solution(PoolInfo(new_pools, pools_info.task_pools), distance):
+    #         solution_found = True
+    #     pools = new_pools
+    # return solution_found
 
 
 def _amount(resource_utilization, current_amount):
@@ -233,8 +262,8 @@ def _sort_pools_by_quality(simulation_info, pools_info):
     return sorted(pools_info.pools.items(), key=lambda x: simulation_info.pool_quality(x[1].name), reverse=True)
 
 
-def set_up_cost(cost_model, xes_log_info):
-    initial_pools_info = parse_simulation_model()
+def set_up_cost(cost_model, xes_log_info, rm):
+    initial_pools_info = parse_simulation_model(rm)
     if cost_model == 1:
         resource_costs = dict()
     elif cost_model == 2:
@@ -242,4 +271,4 @@ def set_up_cost(cost_model, xes_log_info):
     else:
         resource_costs = xes_log_info.calculate_resource_utilization(initial_pools_info.task_pools, True)
     update_resource_cost(resource_costs)
-    return parse_simulation_model()
+    return parse_simulation_model(rm)
