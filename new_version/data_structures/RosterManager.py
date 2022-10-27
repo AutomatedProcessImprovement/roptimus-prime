@@ -21,14 +21,13 @@ class RosterManager:
     def get_all_res_masks(self):
         all_res = {}
         for resource in self.roster.resources:
-            all_res[resource.bpm_resource_name] = self.get_res_mask(resource)
-        print(all_res)
+            all_res[resource.resource_name] = self.get_res_mask(resource)
         return all_res
 
     def get_all_res_accessible_bits(self):
         all_res = {}
         for resource in self.roster.resources:
-            all_res[resource.bpm_resource_name] = self.get_accessible_bits(resource.resource_id)
+            all_res[resource.resource_name] = self.get_accessible_bits(resource.id)
         return all_res
 
     def get_res_mask(self, resource):
@@ -37,6 +36,16 @@ class RosterManager:
 
     def get_all_resources(self):
         return self.roster.resources
+
+    def get_all_resources_in_dict(self):
+        res_dict = dict()
+        for res in self.get_all_resources():
+            res_dict[res.id] = res
+        return res_dict
+
+    def get_task_pools(self):
+        return self.roster.get_task_pools()
+
 
     def turn_bin_list_into_proper_length_array(self, value):
         new_arr = [0] * 24 * self.blocks
@@ -71,7 +80,7 @@ class RosterManager:
         roster = self.roster.resources
         res = res+"timetable"
         for i in roster:
-            if i.resource_id == res:
+            if i.id == res:
                 if day is not None:
                     if type(day) == list:
                         return i.get_free_cap(day)
@@ -82,7 +91,7 @@ class RosterManager:
         roster = self.roster.resources
         res = res + "timetable"
         for i in roster:
-            if i.resource_id == res:
+            if i.id == res:
                 return i.get_free_cap()['total']
 
     def get_accessible_bits(self, resource, day=None, as_list=True):
@@ -90,13 +99,13 @@ class RosterManager:
         resource = resource
         if as_list:
             for i in roster:
-                if i.resource_id == resource:
+                if i.id == resource:
                     if day is not None:
                         return self.turn_bit_into_list_for_accessible(i.get_changeable_bits(day))
                     return self.turn_bit_into_list_for_accessible(i.get_changeable_bits())
         else:
             for i in roster:
-                if i.resource_id == resource:
+                if i.id == resource:
                     if day is not None:
                         return i.get_changeable_bits(day)
                     return i.get_changeable_bits()
@@ -105,13 +114,19 @@ class RosterManager:
         roster = self.roster.resources
         resource = resource + "timetable"
         for i in roster:
-            if i.resource_id == resource:
+            if i.id == resource:
                 return i.set_shifts(shifts, day)
 
 
 
     def to_json(self):
         return self.roster.to_json()
+
+    def update_roster(self, pool_info):
+        for resource in pool_info.pools.values():
+            r = self.roster.find_resource(resource.id)
+            r.set_shifts(resource.shifts)
+        self.write_to_file()
 
     def write_to_file(self):
         out_path = "./test_assets/timetable.json"

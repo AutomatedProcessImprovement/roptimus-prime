@@ -19,6 +19,7 @@ class Roster:
 
     def __init__(self, name, time_table, constraints):
         self.roster_name = name
+        self.task_pools = dict()
 
         with open(time_table, 'r') as t_read:
             ttb = json.load(t_read)
@@ -48,6 +49,19 @@ class Roster:
         for resource in self.resources:
             self.roster = pd.concat([self.roster, resource.shifts], ignore_index=True)
 
+        for task in ttb['resource_profiles']:
+
+            self.task_pools[task['id']] = \
+                [resource for resource in task['resource_list']]
+
+    def get_task_pools(self):
+        return self.task_pools
+
+    def find_resource(self, r_id):
+        for resource in self.resources:
+            if resource.id == r_id:
+                return resource
+
     # def __init__(self, roster_name, resource_map, time_variable, hours_in_day, max_cap, max_shift_size,
     #              max_shift_blocks):
     #     self.roster_name = roster_name
@@ -68,7 +82,7 @@ class Roster:
 
     def verify_roster(self):
         for resource in self.resources:
-            print("\nVerifying resource: {}\n--------".format(resource.resource_id))
+            print("\nVerifying resource: {}\n--------".format(resource.id))
             resource.verify_timetable()
         roster = self.roster
         cap_sum = 0
@@ -77,7 +91,6 @@ class Roster:
             row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
             for name, df in row.iteritems():
                 cap_sum += sum_of_binary_ones(df)
-        print(cap_sum)
         if cap_sum > self.max_cap:
             print("Err: Global resource max capacity surpassed")
         else:

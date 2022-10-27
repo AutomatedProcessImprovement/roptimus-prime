@@ -24,13 +24,16 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     simulation_start_end = extract_simulation_dates_from_simulation_log(result)
     simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
-
     for i in result[2].keys():
         simulation_info.update_resource_utilization(result[2][i].r_profile.resource_id, result[2][i].utilization)
     for i in result[1].keys():
+        total_cost = 0
+        for resource in pools_info.task_pools[i]:
+            total_cost += resource['cost_per_hour']
+        total_cost = total_cost / len(pools_info.task_pools[i])
         simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].idle_time.avg),
                                             float(result[1][i].duration.avg),
-                                            pools_info.pools[pools_info.task_pools[i]].get_total_cost())
+                                            total_cost)
     simulation_info.mean_process_cycle_time = float(result[0].cycle_time.avg)
 
     return simulation_info

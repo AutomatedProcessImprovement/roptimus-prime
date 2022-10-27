@@ -25,11 +25,11 @@
           </ns2:timetable>
         </ns2:timetables>
         <ns2:resources>
-          <ns2:resource id="QBP_DEFAULT_RESOURCE" name="RESOURCE1" totalAmount="3" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
-          <ns2:resource id="qbp_3463808c-85a2-4af7-898b-c63920ec014c" name="RESOURCE2" totalAmount="3" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
-          <ns2:resource id="qbp_1ac9c0f4-d0c2-4deb-b3e2-07b278648fb9" name="RESOURCE3" totalAmount="2" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
-          <ns2:resource id="qbp_584b6bb1-ea0a-4972-a62e-c2a76fadee9e" name="RESOURCE4" totalAmount="2" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
-          <ns2:resource id="qbp_c30ee5c0-c4ee-4fdb-bd5d-ab42490e73a3" name="RESOURCE5" totalAmount="5" costPerHour="0" timetableId="qbp_8f067d38-c126-4aa1-b565-1896729f7540" />
+          <ns2:resource id="QBP_DEFAULT_RESOURCE" name="RESOURCE1" totalAmount="1" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
+          <ns2:resource id="qbp_3463808c-85a2-4af7-898b-c63920ec014c" name="RESOURCE2" totalAmount="1" costPerHour="25" timetableId="DEFAULT_TIMETABLE" />
+          <ns2:resource id="qbp_1ac9c0f4-d0c2-4deb-b3e2-07b278648fb9" name="RESOURCE3" totalAmount="1" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
+          <ns2:resource id="qbp_584b6bb1-ea0a-4972-a62e-c2a76fadee9e" name="RESOURCE4" totalAmount="1" costPerHour="50" timetableId="qbp_9123be03-380e-4e7b-bd9a-6758e9397009" />
+          <ns2:resource id="qbp_c30ee5c0-c4ee-4fdb-bd5d-ab42490e73a3" name="RESOURCE5" totalAmount="1" costPerHour="0" timetableId="qbp_8f067d38-c126-4aa1-b565-1896729f7540" />
         </ns2:resources>
         <ns2:elements>
           <ns2:element elementId="sid-4B24111F-B305-4608-9E12-744B47C44D0D">

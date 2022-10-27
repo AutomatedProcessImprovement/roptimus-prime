@@ -53,14 +53,16 @@ class SimulationInfo:
                       reverse=True)
 
     def add_task_statistics(self, task_pools, task_name, total_waiting_time, total_processing_time, total_cost):
-        pool_name = task_pools[task_name]
-        if pool_name not in self.pool_cost:
-            self.pool_cost[pool_name] = total_cost * self.simulation_duration()
-            self.total_pool_cost += self.pool_cost[pool_name]
-        if pool_name not in self.pool_time:
-            self.pool_time[pool_name] = 0
-        self.pool_time[pool_name] += total_waiting_time + total_processing_time
-        self.total_pool_time += total_waiting_time + total_processing_time
+        pool_names = task_pools[task_name]
+        for r_pool in pool_names:
+            pool_name = r_pool['id']
+            if pool_name not in self.pool_cost:
+                self.pool_cost[pool_name] = total_cost * self.simulation_duration()
+                self.total_pool_cost += self.pool_cost[pool_name]
+            if pool_name not in self.pool_time:
+                self.pool_time[pool_name] = 0
+            self.pool_time[pool_name] += total_waiting_time + total_processing_time
+            self.total_pool_time += total_waiting_time + total_processing_time
 
     def resource_utilization_for(self, pool_name):
         return self.pool_utilization[pool_name] if pool_name in self.pool_utilization[pool_name] else 0

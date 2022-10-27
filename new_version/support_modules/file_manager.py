@@ -212,9 +212,9 @@ def write_pools_info_stats(csv_writer, it_number, simulation_info, pools_info):
         csv_writer.writerow([str(it_number),
                              str(pools_info.id),
                              str(resource_name),
-                             str(pool.total_amount),
+                             str(1),
                              str(simulation_info.pool_utilization[resource_name]),
-                             str(pool.cost_per_hour)])
+                             str(1)])
 
 
 def read_genetic_stats_file(log_name):

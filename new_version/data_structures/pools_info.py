@@ -4,13 +4,13 @@ class PoolInfo:
         self.pools = resource_map
         self.task_pools = task_pools
         # TODO new way to represent pools
-        self.id = '_'.join(str(v.bpm_resource_name) for v in self.pools.values())
+        self.id = '_'.join(str(v.custom_id) for v in self.pools.values())
         # TODO pool cost and ho to work with "total resources????"
         self.pools_total_cost = 1
         self.total_resoures = 1
-        # for pool in self.pools:
-        #     self.total_resoures += self.pools[pool].total_amount
-        #     self.pools_total_cost += self.pools[pool].get_total_cost()
+        for pool in self.pools:
+            self.total_resoures += self.pools[pool].total_amount
+            self.pools_total_cost += self.pools[pool].get_total_cost()
 
     def get_pool_for(self, task_name):
         if task_name in self.task_pools:

@@ -103,6 +103,7 @@ class IterationHandler:
         return sol_id in self.generated_solutions
 
     def try_new_solution(self, pools_info, distance):
+        self.resource_manager.update_roster(pools_info)
         if pools_info.id not in self.generated_solutions:
             update_resource_pools(pools_info.pools)  # Updating Simulation Model with new pool allocation
             simulation_info = perform_simulations(pools_info,
@@ -115,7 +116,6 @@ class IterationHandler:
             is_valid = self.check_optimals_hill_climbing(pools_info,
                                                          simulation_info,
                                                          distance)  # Verifying optimality of solution
-
             self.print_iteration_info(is_valid, pools_info, distance)
 
             if (not is_valid) and self.is_tabu_search:

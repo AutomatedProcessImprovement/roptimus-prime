@@ -26,7 +26,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
 
 
     for i in result[2].keys():
-        simulation_info.update_resource_utilization(result[2][i].r_profile.resource_id, result[2][i].utilization)
+        simulation_info.update_resource_utilization(result[2][i].r_profile.id, result[2][i].utilization)
     for i in result[1].keys():
         simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].idle_time.avg),
                                             float(result[1][i].duration.avg),

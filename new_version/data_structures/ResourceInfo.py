@@ -3,21 +3,21 @@ from itertools import groupby
 
 import pandas as pd
 
-from new_version.support_modules.helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, _get_consecutive_shift_lengths, \
+from new_version.support_modules.helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, \
+    _get_consecutive_shift_lengths, \
     _bitmap_to_valid_structure
 
 
 class Resource:
     def __init__(self, constraints_json, timetable_json, time_var):
         # Resource general information
-        self.resource_id = constraints_json['id']
-        self.bpm_resource_id = ""
-        self.bpm_resource_name = ""
+        self.id = constraints_json['id'].replace('timetable', '')
         self.resource_name = constraints_json['id'].replace('timetable', '')
         self.time_var = time_var
         self.num_slots = int(60 / self.time_var)
-
-        self.cost = 1
+        self.total_amount = 1
+        self.cost_per_hour = 1
+        self.custom_id = ""
 
         global_constraints = constraints_json['constraints']['global_constraints']
         # Resource global constraints
@@ -120,9 +120,9 @@ class Resource:
         self.day_free_cap['saturday'] -= sum_of_binary_ones(saturday)
         self.day_free_cap['sunday'] -= sum_of_binary_ones(sunday)
         self.day_free_cap['total'] -= sum_of_binary_ones(monday) + sum_of_binary_ones(tuesday) \
-                                     + sum_of_binary_ones(wednesday) + sum_of_binary_ones(thursday) \
-                                     + sum_of_binary_ones(friday) + sum_of_binary_ones(saturday) \
-                                     + sum_of_binary_ones(sunday)
+                                      + sum_of_binary_ones(wednesday) + sum_of_binary_ones(thursday) \
+                                      + sum_of_binary_ones(friday) + sum_of_binary_ones(saturday) \
+                                      + sum_of_binary_ones(sunday)
 
         # Set remaining shifts of weekdays
         self.remaining_shifts['monday'] -= _calculate_shifts(monday)
@@ -138,7 +138,7 @@ class Resource:
                                           + _calculate_shifts(sunday)
 
         # Set DF columns values.
-        self.shifts['resource_id'] = [self.resource_id]
+        self.shifts['resource_id'] = [self.id]
         self.shifts['monday'] = monday
         self.shifts['tuesday'] = tuesday
         self.shifts['wednesday'] = wednesday
@@ -147,8 +147,10 @@ class Resource:
         self.shifts['saturday'] = saturday
         self.shifts['sunday'] = sunday
 
+        self.custom_id = str([monday, tuesday, wednesday, thursday, friday, saturday, sunday])
+
     def get_total_cost(self):
-        return self.cost / 3600
+        return self.cost_per_hour / 3600
 
     def set_bpm_resource_name(self, name):
         self.bpm_resource_name = name
@@ -221,18 +223,20 @@ class Resource:
     def verify_masks(self, day=None):
         if day is None:
             for i in self.always_work_masks:
-                self.verify_masks(i)
+                return self.verify_masks(i)
         else:
-            if not self.never_work_masks[day] | self.always_work_masks[day] == self.never_work_masks[day] ^ self.always_work_masks[day]:
-                print("ERR: Overlap in masks: {}".format(day))
+            if not self.never_work_masks[day] | self.always_work_masks[day] == self.never_work_masks[day] ^ \
+                   self.always_work_masks[day]:
+                # print("ERR: Overlap in masks: {}".format(day))
                 return False
             else:
                 # Verify that the shifts are also conform the masks
-                if self.never_work_masks[day] & self.shifts[day][0] == 0 and self.always_work_masks[day] & self.shifts[day][0] == self.always_work_masks[day]:
-                    print("Valid masks: {} & timetable valid under masks".format(day))
+                if self.never_work_masks[day] & self.shifts[day][0] == 0 and self.always_work_masks[day] & \
+                        self.shifts[day][0] == self.always_work_masks[day]:
+                    # print("Valid masks: {} & timetable valid under masks".format(day))
                     return True
                 else:
-                    print("Conflict between masks and timetables.")
+                    # print("Conflict between masks and timetables.")
                     return False
 
             # for j, k in zip(self.never_work_masks[i], self.always_work_masks[i]):
@@ -271,7 +275,7 @@ class Resource:
                 self.set_weekly_shifts_remaining(day, self.max_shifts_day - shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
-            print("ERR: Max weekly cap superseded for {}".format(self.resource_id))
+            print("ERR: Max weekly cap superseded for {}".format(self.id))
             return False
         else:
             self.set_free_cap('total', self.max_weekly_cap - sum_of_week)
@@ -281,10 +285,13 @@ class Resource:
             return False
         return True
 
-    def verify_timetable(self):
-        return self.verify_masks() & self.verify_global_constraints()
+    def verify_timetable(self, day=None):
+        if day is not None:
+            return self.verify_masks() & self.verify_global_constraints()
+        else:
+            return self.verify_masks(day) & self.verify_global_constraints()
 
-    # --------------------START OF UPDATE METHODS--------------------------
+    # --------------------START OF UPDATE METHODS-------------------------
     # The following methods all update / replace the shifts of a resource.
     # After updating the roster, the verify_timetable() method is called
     # TODO Check masks
@@ -296,6 +303,12 @@ class Resource:
                 self.set_shifts(shifts[i], day=i)
         # self.verify_timetable()
         return self.shifts
+
+    def set_custom_id(self):
+        shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']].values.tolist()[0]
+        self.custom_id = str(shifts)
+
+        # self.custom_id = str(sum(shifts))
 
     # def enable_shift(self, day, index):
     #     self.shifts[day].values[0][index] = 1
@@ -321,12 +334,12 @@ class Resource:
 
     # Compare two resources with each other
     def __eq__(self, other):
-        return self.resource_id == other.resource_id  # and self.resource_name == other.resource_name
+        return self.id == other.id  # and self.resource_name == other.resource_name
 
     # Write Resource object to a dict for easy conversion to JSON
     # TODO Rewrite bits instead of lists
     def to_dict(self):
-        resource_calendar = {'id': self.resource_id, 'name': self.resource_id, 'time_periods': []}
+        resource_calendar = {'id': self.id + "timetable", 'name': self.id + "timetable", 'time_periods': []}
 
         roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         for name, data in roster_df.iteritems():
