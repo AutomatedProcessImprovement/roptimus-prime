@@ -181,7 +181,7 @@
 					"max_consecutive_cap": 4,
 					"max_shifts_day": 3,
 					"max_shifts_week": 16,
-					"is_human": true
+					"is_human": false
 				},
 				"daily_start_times": {
 					"monday": "9:00:00",

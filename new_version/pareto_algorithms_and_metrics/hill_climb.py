@@ -21,7 +21,7 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
 
     # SETUP
     copyfile(bpmn_path, temp_bpmn_file)
-    rm = RosterManager("DEFAULT_ROSTER", time_table, constraints)
+    rm = RosterManager("DEFAULT_ROSTER2", time_table, constraints)
 
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
@@ -35,8 +35,6 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
     iterations_count = [0]
 
     while it_handler.solutions_count() < max_func_ev:
-        print("--------")
-        print(it_handler.solutions_count())
         if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
             max_iterations_reached = False
             break
@@ -135,10 +133,11 @@ def fix_busiest_pool(sorted_pools, pool_utilization, accessible_bits, pools_info
     # Adding a resource to pool with highest resource utilization
     busiest_pools = _find_busiest_pools(sorted_pools, pool_utilization)
     is_improved = False
+    # pool_name = random.choice(busiest_pools)
     for pool_name in busiest_pools:
         accessible_bits_resource = accessible_bits[pool_name]
         if _generate_solutions(iterations_handler, accessible_bits_resource, pools_info, pool_name, distance,
-                               10):
+                               15):
             is_improved = True
     return is_improved
 
@@ -147,9 +146,13 @@ def fix_laziest_pool(sorted_pools, pool_utilization, pools_info, accessible_bits
     # Removing a resource to pool with lowest resource utilization
     laziest_pools = _find_laziest_pools(sorted_pools, pool_utilization, pools_info)
     is_improved = False
+    # pool_name = random.choice(laziest_pools)
+
     for pool_name in laziest_pools:
-        amounts = [-1 * _amount(pool_utilization[pool_name], pools_info.pools[pool_name].total_amount), -1]
-        if _generate_solutions(iterations_handler, accessible_bits, pools_info, pool_name, distance, 10):
+        accessible_bits_resource = accessible_bits[pool_name]
+    # amounts = [-1 * _amount(pool_utilization[pool_name], pools_info.pools[pool_name].total_amount), -1]
+        if _generate_solutions(iterations_handler, accessible_bits_resource, pools_info, pool_name, distance,
+                               15):
             is_improved = True
     return is_improved
 
@@ -161,18 +164,18 @@ def exchange_between_busiest_laziest(sorted_pools, pool_utilization, pools_info,
     busiest_pools = _find_busiest_pools(sorted_pools, pool_utilization)
     # Exchanging resources between busiest and lasiest pools
     is_improved = False
-    for busiest in busiest_pools:
-        for laziest in laziest_pools:
-            if busiest == laziest:
-                continue
-            new_pools = copy.deepcopy(pools_info.pools)
-            amount = min(_amount(pool_utilization[busiest], pools_info.pools[busiest].total_amount),
-                         _amount(pool_utilization[laziest], pools_info.pools[laziest].total_amount))
-            new_pools[busiest].set_total_amount(amount)
-            new_pools[laziest].set_total_amount(-1 * amount)
-
-            if iterations_handler.try_new_solution(PoolInfo(new_pools, pools_info.task_pools), distance):
-                is_improved = True
+    # for busiest in busiest_pools:
+    #     for laziest in laziest_pools:
+    #         if busiest == laziest:
+    #             continue
+    #         new_pools = copy.deepcopy(pools_info.pools)
+    #         amount = min(_amount(pool_utilization[busiest], pools_info.pools[busiest].remaining_shifts['total']),
+    #                      _amount(pool_utilization[laziest], pools_info.pools[laziest].remaining_shifts['total']))
+    #         new_pools[busiest].set_total_amount(amount)
+    #         new_pools[laziest].set_total_amount(-1 * amount)
+    #
+    #         if iterations_handler.try_new_solution(PoolInfo(new_pools, pools_info.task_pools), distance):
+    #             is_improved = True
     return is_improved
 
 
@@ -180,24 +183,23 @@ def _find_laziest_pools(sorted_pools, pool_utilization, pools_info, proximity_in
     i = len(sorted_pools) - 1
     laziest_pools = []
     min_r_utilization = 0
-    # while i >= 0:
-    #     if pools_info.pools[sorted_pools[i]].total_amount > 1:
-    #         laziest_pools.append(sorted_pools[i])
-    #         min_r_utilization = pool_utilization[sorted_pools[i]]
-    #         break
-    #     i -= 1
-    # if len(laziest_pools) == 0:
-    #     return laziest_pools
-    # while i - 1 >= 0:
-    #     i -= 1
-    #     r_utilization = pool_utilization[sorted_pools[i]]
-    #     if r_utilization <= upper_bound or r_utilization - min_r_utilization < proximity_index:
-    #         if pools_info.pools[sorted_pools[i]].total_amount > 1:
-    #             laziest_pools.append(sorted_pools[i])
-    #     else:
-    #         break
+    while i >= 0:
+        if pools_info.pools[sorted_pools[i]].is_human:
+            laziest_pools.append(sorted_pools[i])
+            min_r_utilization = pool_utilization[sorted_pools[i]]
+            break
+        i -= 1
+    if len(laziest_pools) == 0:
+        return laziest_pools
+    while i - 1 >= 0:
+        i -= 1
+        r_utilization = pool_utilization[sorted_pools[i]]
+        if r_utilization <= upper_bound or r_utilization - min_r_utilization < proximity_index:
+            if pools_info.pools[sorted_pools[i]].is_human:
+                laziest_pools.append(sorted_pools[i])
+        else:
+            break
     return laziest_pools
-
 
 def _find_busiest_pools(sorted_pools, pool_utilization, proximity_index=0.1, lower_bound=0.7):
     busiest_pools = [sorted_pools[0]]
