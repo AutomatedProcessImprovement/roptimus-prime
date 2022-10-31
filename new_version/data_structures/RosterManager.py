@@ -139,6 +139,7 @@ class RosterManager:
                         'arrival_time_calendar': ttb['arrival_time_calendar'],
                         'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
                         'task_resource_distribution': ttb['task_resource_distribution'],
+                        'event_distribution': ttb['event_distribution'],
                         'resource_calendars': self.to_json()}
 
         with open(out_path, 'w') as out:

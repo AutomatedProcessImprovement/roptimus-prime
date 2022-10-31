@@ -2,7 +2,7 @@ from new_version.pareto_algorithms_and_metrics.hill_climb import hill_climb
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from new_version.support_modules.plot_statistics_handler import print_solution_statistics
 
-to_execute = {'HC-STRICT': False,
+to_execute = {'HC-STRICT': True,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,

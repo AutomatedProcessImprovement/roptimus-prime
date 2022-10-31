@@ -382,6 +382,7 @@
             ]
         }
     ],
+    "event_distribution": {},
     "resource_calendars": [
         {
             "id": "RESOURCE1timetable",
@@ -394,18 +395,6 @@
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "16:00:00"
-                },
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "17:00:00",
-                    "endTime": "18:00:00"
-                },
-                {
                     "from": "TUESDAY",
                     "to": "TUESDAY",
                     "beginTime": "09:00:00",
@@ -418,40 +407,16 @@
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "WEDNESDAY",
-                    "to": "WEDNESDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
                     "from": "THURSDAY",
                     "to": "THURSDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "13:00:00"
-                },
-                {
-                    "from": "THURSDAY",
-                    "to": "THURSDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
                 },
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "14:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "15:00:00",
-                    "endTime": "16:00:00"
+                    "beginTime": "09:00:00",
+                    "endTime": "12:00:00"
                 }
             ]
         },
@@ -463,31 +428,13 @@
                     "from": "MONDAY",
                     "to": "MONDAY",
                     "beginTime": "09:00:00",
-                    "endTime": "13:00:00"
-                },
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "15:00:00",
-                    "endTime": "18:00:00"
+                    "endTime": "12:00:00"
                 },
                 {
                     "from": "TUESDAY",
                     "to": "TUESDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
-                },
-                {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "16:00:00"
-                },
-                {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "17:00:00",
-                    "endTime": "18:00:00"
                 },
                 {
                     "from": "WEDNESDAY",
@@ -506,18 +453,6 @@
                     "to": "FRIDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "14:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "16:00:00",
-                    "endTime": "18:00:00"
                 }
             ]
         },
@@ -532,40 +467,16 @@
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "14:00:00"
-                },
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "15:00:00",
-                    "endTime": "18:00:00"
-                },
-                {
                     "from": "TUESDAY",
                     "to": "TUESDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
-                },
-                {
-                    "from": "WEDNESDAY",
-                    "to": "WEDNESDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "17:00:00"
                 },
                 {
                     "from": "THURSDAY",
@@ -576,20 +487,14 @@
                 {
                     "from": "THURSDAY",
                     "to": "THURSDAY",
-                    "beginTime": "14:00:00",
+                    "beginTime": "17:00:00",
                     "endTime": "18:00:00"
                 },
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
                     "beginTime": "09:00:00",
-                    "endTime": "13:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "18:00:00"
+                    "endTime": "12:00:00"
                 }
             ]
         },
@@ -601,13 +506,7 @@
                     "from": "MONDAY",
                     "to": "MONDAY",
                     "beginTime": "09:00:00",
-                    "endTime": "13:00:00"
-                },
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "18:00:00"
+                    "endTime": "12:00:00"
                 },
                 {
                     "from": "TUESDAY",
@@ -616,28 +515,10 @@
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "14:00:00"
-                },
-                {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "15:00:00",
-                    "endTime": "18:00:00"
-                },
-                {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
                     "beginTime": "09:00:00",
-                    "endTime": "13:00:00"
-                },
-                {
-                    "from": "WEDNESDAY",
-                    "to": "WEDNESDAY",
-                    "beginTime": "14:00:00",
-                    "endTime": "18:00:00"
+                    "endTime": "12:00:00"
                 },
                 {
                     "from": "THURSDAY",
@@ -646,28 +527,10 @@
                     "endTime": "12:00:00"
                 },
                 {
-                    "from": "THURSDAY",
-                    "to": "THURSDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
                     "beginTime": "09:00:00",
                     "endTime": "12:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "13:00:00",
-                    "endTime": "16:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "17:00:00",
-                    "endTime": "18:00:00"
                 }
             ]
         },

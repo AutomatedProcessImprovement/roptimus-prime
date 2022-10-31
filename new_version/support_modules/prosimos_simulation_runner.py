@@ -1,7 +1,6 @@
 import multiprocessing
 
 from diff_res_bpsim import run_simulation
-
 import datetime
 import re
 import time
@@ -17,11 +16,12 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    result = run_simulation(model_file_path, json_path, total_cases)
+    (result, traces) = run_simulation(model_file_path, json_path, total_cases)
 
     simulation_info = SimulationInfo(pools_info)
     simulation_info.simulation_time = time.time() - starting_time
     simulation_start_end = extract_simulation_dates_from_simulation_log(result)
+    print(traces)
     simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
     for i in result[2].keys():

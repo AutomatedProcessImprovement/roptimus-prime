@@ -81,32 +81,31 @@ class Resource:
 
         # Translate time intervals to bitmaps
         for timetable in timetable_json["time_periods"]:
-            match timetable['from']:
-                case "MONDAY":
+              if (timetable['from']) == 'MONDAY':
                     monday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                              datetime.datetime.strptime(timetable['endTime'], _format),
                                              datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "TUESDAY":
+              elif (timetable['from']) == "TUESDAY":
                     tuesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                               datetime.datetime.strptime(timetable['endTime'], _format),
                                               datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "WEDNESDAY":
+              elif (timetable['from']) == "WEDNESDAY":
                     wednesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                 datetime.datetime.strptime(timetable['endTime'], _format),
                                                 datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "THURSDAY":
+              elif (timetable['from']) == "THURSDAY":
                     thursday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "FRIDAY":
+              elif (timetable['from']) == "FRIDAY":
                     friday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                              datetime.datetime.strptime(timetable['endTime'], _format),
                                              datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "SATURDAY":
+              elif (timetable['from']) == "SATURDAY":
                     saturday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                                datetime.datetime.strptime(timetable['endTime'], _format),
                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-                case "SUNDAY":
+              elif (timetable['from']) == "SUNDAY":
                     sunday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
                                              datetime.datetime.strptime(timetable['endTime'], _format),
                                              datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)

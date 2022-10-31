@@ -5,7 +5,6 @@ import datetime
 import random
 from new_version.data_structures.pools_info import PoolInfo
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
-from new_version.support_modules.bpmn_parser import parse_simulation_model, update_resource_cost
 from new_version.support_modules.file_manager import save_stats_file, read_stats_file
 from new_version.support_modules.helpers import _list_to_binary
 from new_version.support_modules.log_parser import extract_data_from_xes_event_log
