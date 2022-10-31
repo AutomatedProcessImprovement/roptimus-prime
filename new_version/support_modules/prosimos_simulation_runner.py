@@ -21,7 +21,6 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     simulation_info = SimulationInfo(pools_info)
     simulation_info.simulation_time = time.time() - starting_time
     simulation_start_end = extract_simulation_dates_from_simulation_log(result)
-    print(traces)
     simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
     for i in result[2].keys():
@@ -36,7 +35,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
                                             total_cost)
     simulation_info.mean_process_cycle_time = float(result[0].cycle_time.avg)
 
-    return simulation_info
+    return simulation_info, traces
 
 
 def perform_simulations(pools_info,
@@ -57,9 +56,10 @@ def perform_simulations(pools_info,
     pool = multiprocessing.Pool(5)
     async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 1500, pools_info)) for i in
                      range(simulations_count)]
-    simulation_results = [ar.get() for ar in async_results]
+    simulation_results = [ar.get()[0] for ar in async_results]
+    traces = [ar.get()[1] for ar in async_results]
 
-    return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time)
+    return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time), traces
 
 
 def estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time):

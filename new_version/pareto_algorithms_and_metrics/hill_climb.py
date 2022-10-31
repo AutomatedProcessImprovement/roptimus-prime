@@ -25,7 +25,6 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
 
-    xes_log_info = extract_data_from_xes_event_log(xes_path)
     initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
     it_handler = IterationHandler(log_name, initial_pools_info, tot_simulations, is_tabu, False, rm)
     max_iterations_reached = True
