@@ -29,7 +29,10 @@ class IterationHandler:
         self.time_table_path = self.resource_manager.write_to_file()
 
         self.simulation_count = simulation_count
-        simulation_info = perform_simulations(pools_info, log_name, simulation_count, 0, self.time_table_path)
+        simulation = perform_simulations(pools_info, log_name, simulation_count, 0,
+                                                           self.time_table_path)
+        simulation_info = simulation[0]
+        self.traces = simulation[1]
 
         self.generated_solutions = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
         self.solution_order = [pools_info.id]
@@ -44,8 +47,6 @@ class IterationHandler:
         self.execution_queue = PriorityQueue()
         self.execution_queue.add_task(pools_info.id,
                                       self._solution_quality(simulation_info))
-
-        self.traces = []
 
     def update_priorities(self):
         for in_discarded in [True, False]:
@@ -104,15 +105,17 @@ class IterationHandler:
     def is_solution_tried(self, sol_id):
         return sol_id in self.generated_solutions
 
+
+
     def try_new_solution(self, pools_info, distance):
         self.resource_manager.update_roster(pools_info)
         if pools_info.id not in self.generated_solutions:
             update_resource_pools(pools_info.pools)  # Updating Simulation Model with new pool allocation
             (simulation_info, traces) = perform_simulations(pools_info,
-                                                  self.log_name,
-                                                  self.simulation_count,
-                                                  len(self.generated_solutions),
-                                                  json_path=self.time_table_path)  # Running/retrieving simulation results
+                                                            self.log_name,
+                                                            self.simulation_count,
+                                                            len(self.generated_solutions),
+                                                            json_path=self.time_table_path)  # Running/retrieving simulation results
             self.traces = traces
             if simulation_info is None:
                 return False

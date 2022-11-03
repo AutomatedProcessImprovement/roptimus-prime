@@ -6,7 +6,7 @@ to_execute = {'HC-STRICT': True,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
-              'METRICS': True}
+              'METRICS': False}
 
 if __name__ == "__main__":
     log_name = "DEFAULT"

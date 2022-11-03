@@ -47,10 +47,11 @@ def perform_simulations(pools_info,
                         stat_out_path="./output_files/bimp_temp_files/output.csv",
                         starting_at=None):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
-    simulated_info = load_simulation_result(log_name, pools_info)
+    # simulated_info = load_simulation_result(log_name, pools_info)
     parallel_start_time = time.time()
-    if simulated_info is not None:
-        return simulated_info
+    # TODO Where to find traces if sim_info is not None
+    # if simulated_info is not None:
+    #     return simulated_info
 
     # Multiprocessing used to reduce total processing time, dependent on # cores in system
     pool = multiprocessing.Pool(5)

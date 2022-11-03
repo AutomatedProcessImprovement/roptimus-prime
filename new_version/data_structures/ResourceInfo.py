@@ -254,7 +254,7 @@ class Resource:
             sum_of_week += sum_of_day
 
             if sum_of_day > self.max_daily_cap:
-                print("ERR: Max daily cap superseded on {}".format(day))
+                # print("ERR: Max daily cap superseded on {}".format(day))
                 return False
             else:
                 self.set_free_cap(day, self.max_daily_cap - sum_of_day)
@@ -264,28 +264,28 @@ class Resource:
 
             for _, tup in enumerate(_get_consecutive_shift_lengths(self.shifts[day][0])):
                 if tup[0] == 1 and tup[1] > self.max_consecutive_cap:
-                    print("Err: Max daily shift size surpassed on {}".format(day))
+                    # print("Err: Max daily shift size surpassed on {}".format(day))
                     return False
 
             if shifts_of_day > self.max_shifts_day:
-                print("Err: Max daily shifts surpassed on {}".format(day))
+                # print("Err: Max daily shifts surpassed on {}".format(day))
                 return False
             else:
                 self.set_weekly_shifts_remaining(day, self.max_shifts_day - shifts_of_day)
 
         if sum_of_week > self.max_weekly_cap:
-            print("ERR: Max weekly cap superseded for {}".format(self.id))
+            # print("ERR: Max weekly cap superseded for {}".format(self.id))
             return False
         else:
             self.set_free_cap('total', self.max_weekly_cap - sum_of_week)
 
         if sum_of_shifts_week > self.max_shifts_week:
-            print("ERR: Max weekly shifts superseded")
+            # print("ERR: Max weekly shifts superseded")
             return False
         return True
 
     def verify_timetable(self, day=None):
-        if day is not None:
+        if day is None:
             return self.verify_masks() & self.verify_global_constraints()
         else:
             return self.verify_masks(day) & self.verify_global_constraints()
