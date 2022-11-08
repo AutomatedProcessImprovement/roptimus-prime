@@ -219,12 +219,13 @@ def save_allocation_statistics(file_path, algorithm_result, funct_eval, general_
 def print_allocation_info(f_writer, algorithm_result, sol_id, max_len):
     to_print = '['
     is_first = True
-    for resource_info in algorithm_result.resource_pools[sol_id]:
-        if not is_first:
-            to_print += ', '
-        to_print += ("%s:" % resource_info.resource_name)
-        to_print += ("  " if resource_info.resource_count < 10 else " ") + ("%d" % resource_info.resource_count)
-        is_first = False
+    to_print += str(sol_id)
+    # for resource_info in algorithm_result.resource_pools[sol_id]:
+    #     if not is_first:
+    #         to_print += ', '
+    #     to_print += ("%s:" % resource_info.resource_name)
+    #     to_print += ("  " if resource_info.resource_count < 10 else " ") + ("%d" % resource_info.resource_count)
+    #     is_first = False
     a_cost = ("%.2f" % round(algorithm_result.pareto_front[sol_id].execution_cost(), 2))
     space = ' ' * (max_len - len(a_cost))
     to_print += ('] -> [aCost: %s, cTime: %s]\n'

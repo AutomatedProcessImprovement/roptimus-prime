@@ -59,6 +59,8 @@ def perform_simulations(pools_info,
                      range(simulations_count)]
     simulation_results = [ar.get()[0] for ar in async_results]
     traces = [ar.get()[1] for ar in async_results]
+    pool.close()
+    pool.join()
 
     return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time), traces
 
