@@ -9,9 +9,9 @@
 			"constraints": {
 				"global_constraints": {
 					"max_weekly_cap": 40,
-					"max_daily_cap": 8,
-					"max_consecutive_cap": 8,
-					"max_shifts_day": 8,
+					"max_daily_cap": 9,
+					"max_consecutive_cap": 3,
+					"max_shifts_day": 3,
 					"max_shifts_week": 20,
 					"is_human": true
 				},
@@ -51,9 +51,9 @@
 			"constraints": {
 				"global_constraints": {
 					"max_weekly_cap": 40,
-					"max_daily_cap": 8,
-					"max_consecutive_cap": 8,
-					"max_shifts_day": 8,
+					"max_daily_cap": 9,
+					"max_consecutive_cap": 3,
+					"max_shifts_day": 3,
 					"max_shifts_week": 20,
 					"is_human": true
 				},
@@ -93,9 +93,9 @@
 			"constraints": {
 				"global_constraints": {
 					"max_weekly_cap": 40,
-					"max_daily_cap": 8,
-					"max_consecutive_cap": 8,
-					"max_shifts_day": 8,
+					"max_daily_cap": 9,
+					"max_consecutive_cap": 3,
+					"max_shifts_day": 3,
 					"max_shifts_week": 20,
 					"is_human": true
 				},
@@ -135,9 +135,9 @@
 			"constraints": {
 				"global_constraints": {
 					"max_weekly_cap": 40,
-					"max_daily_cap": 8,
-					"max_consecutive_cap": 8,
-					"max_shifts_day": 8,
+					"max_daily_cap": 9,
+					"max_consecutive_cap": 3,
+					"max_shifts_day": 3,
 					"max_shifts_week": 20,
 					"is_human": true
 				},
@@ -177,9 +177,9 @@
 			"constraints": {
 				"global_constraints": {
 					"max_weekly_cap": 40,
-					"max_daily_cap": 8,
-					"max_consecutive_cap": 8,
-					"max_shifts_day": 8,
+					"max_daily_cap": 9,
+					"max_consecutive_cap": 3,
+					"max_shifts_day": 3,
 					"max_shifts_week": 20,
 					"is_human": false
 				},

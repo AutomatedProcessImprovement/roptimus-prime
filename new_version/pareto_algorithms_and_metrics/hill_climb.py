@@ -7,7 +7,6 @@ from new_version.data_structures.pools_info import PoolInfo
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 from new_version.support_modules.file_manager import save_stats_file, read_stats_file
 from new_version.support_modules.helpers import _list_to_binary, _bitmap_to_valid_structure
-from new_version.support_modules.log_parser import extract_data_from_xes_event_log
 from new_version.pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from new_version.data_structures.RosterManager import RosterManager
 
@@ -15,7 +14,7 @@ temp_bpmn_file = './test_assets/CopiedModel.bpmn'
 
 
 def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, tot_simulations,
-               is_tabu):
+               is_tabu, only_calendar):
     cost_type = 1
 
     # SETUP
@@ -38,31 +37,38 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
             break
         iteration_info = it_handler.next()
         # TODO
-        # SORT TRACES BY LONGEST WAITING TIME, GENERATE SOLUTIONS FROM THIS
-        # SORT TRACES BY LONGEST IDLE TIME, GENERATE SOLUTIONS FROM THIS
-        # FRAGMENTATION INDEX OF CALENDARS
-        #
-        wt_finished = True
+        #   FRAGMENTATION INDEX OF CALENDARS
+
+        wt_finished = False
+        cost_finished = False
         idle_finished = False
         while wt_finished:
-            print("in wt")
             wt_finished = solution_traces_sorting_by_waiting_times(iteration_info, it_handler, iterations_count,
                                                                    rm.get_all_res_accessible_bits(),
                                                                    rm.get_all_res_masks())
             if not wt_finished:
-                print(wt_finished)
+                cost_finished = True
+
+        while cost_finished:
+            cost_finished = solution_traces_optimize_cost(iteration_info, it_handler, iterations_count,
+                                                          rm.get_all_res_accessible_bits(),
+                                                          rm.get_all_res_masks())
+            if not cost_finished:
                 idle_finished = True
 
         while idle_finished:
-            print("in idle")
             idle_finished = solution_traces_sorting_by_idle_times(iteration_info, it_handler, iterations_count,
                                                                   rm.get_all_res_accessible_bits(),
                                                                   rm.get_all_res_masks())
 
-        # solution_sorting_by_resource_utilization(iteration_info, it_handler, iterations_count,
-        #                                          rm.get_all_res_accessible_bits(), rm.get_all_res_masks())
-        # solution_sorting_by_pool_outturn(iteration_info, it_handler, iterations_count, rm.get_all_res_accessible_bits(),
-        #                                  rm.get_all_res_masks())
+        if not idle_finished and not wt_finished:
+            # wt_finished = solution_traces_add_new_shift(iteration_info, it_handler, iterations_count,
+            #                                             rm.get_all_res_accessible_bits(),
+            #                                             rm.get_all_res_masks())
+            if not wt_finished and not only_calendar:
+                wt_finished = resolve_resources_in_process(iteration_info, it_handler, iterations_count)
+
+
 
     save_stats_file(log_name,
                     algorithm_name + '_without_mad',
@@ -82,6 +88,156 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
     alg_info = AlgorithmResults(execution_info, False)
     print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
     print("---------------------------------------------------")
+
+
+def resolve_resources_in_process(iteration_info, iterations_handler, iterations_count):
+    pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
+    if pools_info is None:
+        return None
+    iterations_count[0] += 1
+    # TODO
+    #   First try to remove resource. if that does not work then try adding resource.
+    events = {}
+    if len(iterations_handler.traces) > 0:
+        for trace_list in iterations_handler.traces:
+            for trace in trace_list.trace_list:
+                for event in trace.event_list:
+
+                    if event.waiting_time > 0.0:
+                        if event.task_id in events.keys():
+                            events[event.task_id] += 1
+                        else:
+                            events[event.task_id] = 1
+                    if event.idle_time > 0.0:
+                        if event.task_id in events.keys():
+                            events[event.task_id] += 1
+                        else:
+                            events[event.task_id] = 1
+    print(events)
+    task_to_improve = sort_tasks_by_most_wt_idle_occurences(events)
+    print(task_to_improve)
+    resources_who_can_perform_task = []
+    task_info = pools_info.task_pools[task_to_improve[0]]
+    print(task_info)
+
+    # TODO, if only 1 resource able to do task -> add new resource?
+    # TODO, if more than 1 resource available, look for resource with more than 1 task, try remove from that task
+    # TODO, if the above are not viable, take resource with smallest calendar and deepcopy. add to that task
+    # if 1 == 2:
+    #     print("ohoh")
+    if len(task_info) == 1:
+        # Only 1 resource able to do this task, make copy of existing resource and add to pool.
+        resource = task_info[0]
+        if len(resource.assigned_tasks) == 1:
+            # Copy resource
+            new_resource = pools_info.pools[resource.id]
+            # Change resource ID and copy distributions to JSON.
+        else:
+            # Try to remove other tasks from resource
+            print("e")
+
+
+    elif len(task_info) >= 1:
+        # count the occurences of which a resource performed said task
+        # Take the one with the lowest # and check its tasks, try remove one of its tasks from the list
+        resources_and_occurences = {}
+        for trace_list in iterations_handler.traces:
+            for trace in trace_list.trace_list:
+                for event in trace.event_list:
+                    if event.task_id == task_to_improve[0]:
+                        if event.waiting_time > 0.0 or event.idle_time > 0.0:
+                            if event.resource_id in resources_and_occurences.keys():
+                                resources_and_occurences[event.resource_id] += 1
+                            else:
+                                resources_and_occurences[event.resource_id] = 1
+        print(resources_and_occurences)
+
+
+    else:
+        # Take resource with smallest calendar, and deepcopy
+        print("ok")
+
+    return True
+
+def sort_tasks_by_most_wt_idle_occurences(dict):
+    res = []
+    for k, li in dict.items():
+        r = [k, li]
+        res.append(r)
+
+    return [out[0] for out in sorted(res, key=lambda x: x[1], reverse=True)]
+
+def sort_resources_by_utilization(dict):
+    res = []
+    for k, util in dict.items():
+        r = [k, util]
+        res.append(r)
+    print(res)
+    out_list = sorted(res, key=lambda x: x[1], reverse=True)
+    out_list = [out[0] for out in out_list]
+    return out_list
+
+
+def solution_traces_add_new_shift(iteration_info, iterations_handler, iterations_count, accessible_bits,
+                                  resource_masks):
+    pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
+    if pools_info is None:
+        return None
+    iterations_count[0] += 1
+
+    resources = sort_resources_by_utilization(simulation_info.pool_utilization)
+
+    actual_resource_info = []
+    resource_works_when = {}
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    for pool in resources:
+        if len(iterations_handler.traces) > 0:
+            for trace_list in iterations_handler.traces:
+                for trace in trace_list.trace_list:
+                    for event in trace.event_list:
+                        if event.resource_id == pool:
+                            if event.started_datetime.weekday() in resource_works_when.keys():
+                                r = resource_works_when[event.started_datetime.weekday()]
+                                r += 1
+                            else:
+                                resource_works_when[event.started_datetime.weekday()] = 1
+
+        actual_resource_info.append(pools_info.pools[pool])
+        resource_copy = copy.deepcopy(actual_resource_info)
+        most_occurring_day = sort_by_most_occuring_day(resource_works_when)
+
+        for resource in resource_copy:
+            day = days[most_occurring_day[0]]
+            shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
+            indexes = []
+            i_idx = 0
+            for idx in range(len(shift_arr)):
+                # Collect all shift blocks outer indexes
+                if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
+                    indexes.append([0, 0])
+                    indexes[i_idx][0] = idx
+                if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
+                    indexes[i_idx][1] = idx
+                    i_idx += 1
+
+            for block in range(len(indexes)):
+                l_idx = indexes[block][0]
+                r_idx = indexes[block][1]
+
+                shift_arr[r_idx + 2] = 1
+                resource.set_shifts(_list_to_binary(shift_arr), day)
+                if resource.verify_timetable(day):
+                    break
+
+                # No valid move, reset and go next
+                shift_arr[r_idx + 2] = 0
+                resource.set_shifts(_list_to_binary(shift_arr), day)
+
+            # Options have been tested, try simulate
+            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                return True
+
+    return True
 
 
 def solution_sorting_by_pool_outturn(iteration_info, iterations_handler, iterations_count, accessible_bits,
@@ -230,6 +386,90 @@ def solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, it
     return False
 
 
+def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, accessible_bits,
+                                  resource_masks):
+    # Retrieving info of solution closer to the optimal which has not been processed yet
+    pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
+    if pools_info is None:
+        return None
+    iterations_count[0] += 1
+
+    resources_to_optimize = {}
+    # the first resource in pool_cost is the most expensive
+    for pool in simulation_info.pools_info.pools:
+        pool_cost = simulation_info.pools_info.pools[pool].cost_per_hour * simulation_info.pool_time[pool]
+        resources_to_optimize[pool] = pool_cost
+
+    print(resources_to_optimize)
+
+    print(sort_resource_by_cost(resources_to_optimize))
+    resource_to_optimize = [sort_resource_by_cost(resources_to_optimize)]
+
+    # Collect for each trace, the information of which task was executed on which day
+    tasks_of_resource = []
+    for task in pools_info.task_pools:
+        for resource in pools_info.task_pools[task]:
+            if resource['id'] == resource_to_optimize:
+                tasks_of_resource.append(task)
+
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    for task in tasks_of_resource:
+        for res in resource_to_optimize:
+            actual_resource_info = [pools_info.pools[res]]
+
+            resource_copy = copy.deepcopy(actual_resource_info)
+            for resource in resource_copy:
+                for day in days:
+                    shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
+                    indexes = []
+                    i_idx = 0
+                    for idx in range(len(shift_arr)):
+                        # Collect all shift blocks outer indexes
+                        if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
+                            indexes.append([0, 0])
+                            indexes[i_idx][0] = idx
+                        if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
+                            indexes[i_idx][1] = idx
+                            i_idx += 1
+                    # Try reduce size both sides, try reduce left, try reduce right
+                    for block in range(len(indexes)):
+                        l_idx = indexes[block][0]
+                        r_idx = indexes[block][1]
+
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            # print("valid add r")
+                            break
+
+                        shift_arr[r_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Moving left is valid, run sim
+                            # print("valid move r")
+                            break
+
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            # print("valid add r")
+                            break
+
+                        # No valid move, reset and go next
+                        shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+
+                        # Options have been tested, try simulate
+                    if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                        return True
+    return False
+
+
 def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count, accessible_bits,
                                              resource_masks):
     # Retrieving info of solution closer to the optimal which has not been processed yet
@@ -301,7 +541,6 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
                     if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
                         indexes[i_idx][1] = idx
                         i_idx += 1
-                # TODO after finishing loop, try adding left, else try moving whole shift left
                 for block in range(len(indexes)):
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
@@ -359,6 +598,16 @@ def sort_tasks_by_idle_time(dict):
         avg = li[0] / li[1]
         r = [k, avg]
         res.append(r)
+    print(res)
+    out_list = sorted(res, key=lambda x: x[1], reverse=True)
+    out_list = [out[0] for out in out_list]
+    return out_list
+
+
+def sort_resource_by_cost(dict):
+    res = []
+    for k, cost in dict.items():
+        res.append([k, cost])
     print(res)
     out_list = sorted(res, key=lambda x: x[1], reverse=True)
     out_list = [out[0] for out in out_list]
