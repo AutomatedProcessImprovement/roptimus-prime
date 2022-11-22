@@ -1,4 +1,5 @@
 import copy
+import json
 from shutil import copyfile
 import time
 import datetime
@@ -66,9 +67,7 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
             #                                             rm.get_all_res_accessible_bits(),
             #                                             rm.get_all_res_masks())
             if not wt_finished and not only_calendar:
-                wt_finished = resolve_resources_in_process(iteration_info, it_handler, iterations_count)
-
-
+                wt_finished = resolve_resources_in_process(iteration_info, it_handler, iterations_count, rm)
 
     save_stats_file(log_name,
                     algorithm_name + '_without_mad',
@@ -90,7 +89,99 @@ def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_
     print("---------------------------------------------------")
 
 
-def resolve_resources_in_process(iteration_info, iterations_handler, iterations_count):
+def resolve_resource_json_information(resource, roster_manager, task_to_improve):
+
+    with open(roster_manager.time_table, 'r') as t_read:
+        ttb = json.load(t_read)
+    resource_profiles = ttb['resource_profiles']
+    task_resource_distribution = ttb['task_resource_distribution']
+    resource_calendars = ttb['resource_calendars']
+
+    # 1. make changes to resource_profiles
+    resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
+    resource_profiles_list = resource_task_profile['resource_list']
+    resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource), None)
+    new_profile = copy.deepcopy(resource_to_be_copied)
+
+    # 1.1 Make changes to resource_to_be_copied
+    new_profile['id'] += "_COPY"
+    new_profile['name'] += "_COPY"
+    new_profile['calendar'] = resource + "_COPYtimetable"
+    new_profile['assigned_tasks'] = [task_to_improve]
+
+    resource_profiles_list.append(new_profile)
+    resource_task_profile['resource_list'] = resource_profiles_list
+    # 1.2 Replace entire resource_profile with new profile
+    for index, item in enumerate(resource_profiles):
+        if item['id'] == task_to_improve:
+            resource_profiles[index] = resource_task_profile
+
+
+    # 2. make changes to task_resource_distributions
+    task_resource_distro = next((x for x in task_resource_distribution if x['task_id'] == task_to_improve), None)
+    task_profile_resource_list = task_resource_distro['resources']
+    resource_to_be_copied = next((y for y in task_profile_resource_list if y['resource_id'] == resource), None)
+    new_distribution = copy.deepcopy(resource_to_be_copied)
+    new_distribution['resource_id'] += "_COPY"
+    task_profile_resource_list.append(new_distribution)
+
+    task_resource_distro['resources'] = task_profile_resource_list
+
+    for index, item in enumerate(task_resource_distribution):
+        if item['task_id'] == task_to_improve:
+            task_resource_distribution[index] = task_resource_distro
+
+    # 3. Make changes to resource calendar
+    resource_to_be_copied = next((x for x in resource_calendars if x['id'] == resource + "timetable"), None)
+    new_resource = copy.deepcopy(resource_to_be_copied)
+    new_resource['id'] = resource + "_COPYtimetable"
+    new_resource['name'] = new_resource['id']
+
+    resource_calendars.append(new_resource)
+
+
+    # 4. Make changes to constraints json
+    with open(roster_manager.constraints_json, 'r') as c_read:
+        cons = json.load(c_read)
+    constraint_profiles = cons['resources']
+    constraints_to_be_copied = next((x for x in constraint_profiles if x['id'] == resource + "timetable"), None)
+    new_constraints = copy.deepcopy(constraints_to_be_copied)
+    new_constraints['id'] = resource + "_COPYtimetable"
+
+    constraint_profiles.append(new_constraints)
+    # 5. After all changes have been made, overwrite to JSON.
+
+    cons_out = './test_assets/constraintstest.json'
+
+    constraints_info = {'time_var': cons['time_var'],
+                        'max_cap': cons['max_cap'],
+                        'max_shift_size': cons['max_shift_size'],
+                        'max_shift_blocks': cons['max_shift_blocks'],
+                        'hours_in_day': cons['hours_in_day'],
+                        'resources': constraint_profiles}
+
+    with open(cons_out, 'w') as t_write:
+        t_write.write(json.dumps(constraints_info, indent=4))
+    t_write.close()
+
+    ttb_out = './test_assets/timetablestest.json'
+
+    rest_of_info = {'resource_profiles': resource_profiles,
+                    'arrival_time_distribution': ttb['arrival_time_distribution'],
+                    'arrival_time_calendar': ttb['arrival_time_calendar'],
+                    'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
+                    'task_resource_distribution': task_resource_distribution,
+                    'event_distribution': ttb['event_distribution'],
+                    'resource_calendars': resource_calendars}
+
+    with open(ttb_out, 'w') as out:
+        out.write(json.dumps(rest_of_info, indent=4))
+    out.close()
+
+    print("ok")
+
+
+def resolve_resources_in_process(iteration_info, iterations_handler, iterations_count, roster_manager):
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
         return None
@@ -128,10 +219,13 @@ def resolve_resources_in_process(iteration_info, iterations_handler, iterations_
     if len(task_info) == 1:
         # Only 1 resource able to do this task, make copy of existing resource and add to pool.
         resource = task_info[0]
-        if len(resource.assigned_tasks) == 1:
+        if len(resource['assigned_tasks']) == 1:
             # Copy resource
-            new_resource = pools_info.pools[resource.id]
-            # Change resource ID and copy distributions to JSON.
+            new_resource = pools_info.pools[resource['id']]
+            # Change resource ID.
+            new_resource.id += "_COPY"
+            # Find info in JSON and copy it
+            resolve_resource_json_information(resource['id'], roster_manager, task_to_improve[0])
         else:
             # Try to remove other tasks from resource
             print("e")
@@ -159,6 +253,7 @@ def resolve_resources_in_process(iteration_info, iterations_handler, iterations_
 
     return True
 
+
 def sort_tasks_by_most_wt_idle_occurences(dict):
     res = []
     for k, li in dict.items():
@@ -166,6 +261,7 @@ def sort_tasks_by_most_wt_idle_occurences(dict):
         res.append(r)
 
     return [out[0] for out in sorted(res, key=lambda x: x[1], reverse=True)]
+
 
 def sort_resources_by_utilization(dict):
     res = []

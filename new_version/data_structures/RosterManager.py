@@ -9,6 +9,7 @@ class RosterManager:
         self.roster = Roster(name, time_table, constraints)
         self.time_table = time_table
         self.blocks = int(self.roster.shift_block / 60)
+        self.constraints_json = constraints
 
 
         """
