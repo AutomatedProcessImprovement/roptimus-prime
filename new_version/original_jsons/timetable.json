@@ -527,8 +527,8 @@
                 {
                     "from": "MONDAY",
                     "to": "MONDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "12:00:00"
+                    "beginTime": "10:00:00",
+                    "endTime": "13:00:00"
                 },
                 {
                     "from": "TUESDAY",
@@ -539,8 +539,8 @@
                 {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "12:00:00"
+                    "beginTime": "10:00:00",
+                    "endTime": "13:00:00"
                 },
                 {
                     "from": "THURSDAY",

@@ -11,6 +11,9 @@ class RosterManager:
         self.blocks = int(self.roster.shift_block / 60)
         self.constraints_json = constraints
 
+        self.temp_timetable = "./test_assets/temp_timetable.json"
+        self.temp_constraints = "./test_assets/temp_constraints.json"
+
 
         """
         TODOS:
