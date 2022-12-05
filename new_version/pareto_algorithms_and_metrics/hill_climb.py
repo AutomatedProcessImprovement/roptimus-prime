@@ -300,7 +300,6 @@ def resolve_resources_in_process(iteration_info, iterations_handler, iterations_
     resources_who_can_perform_task = []
     task_info = pools_info.task_pools[task_to_improve[0]]
 
-    # TODO Simulate after changes are made.
     if len(task_info) == 1:
         # Only 1 resource able to do this task, make copy of existing resource and add to pool.
         resource = task_info[0]
