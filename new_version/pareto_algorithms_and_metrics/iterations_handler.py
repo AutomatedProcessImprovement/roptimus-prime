@@ -30,7 +30,7 @@ class IterationHandler:
 
         self.simulation_count = simulation_count
         simulation = perform_simulations(pools_info, log_name, simulation_count, 0,
-                                                           self.time_table_path)
+                                         self.time_table_path)
         simulation_info = simulation[0]
         self.traces = simulation[1]
 
@@ -104,8 +104,6 @@ class IterationHandler:
 
     def is_solution_tried(self, sol_id):
         return sol_id in self.generated_solutions
-
-
 
     def try_new_solution(self, pools_info, distance):
         self.resource_manager.update_roster(pools_info)

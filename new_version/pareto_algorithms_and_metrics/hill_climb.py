@@ -15,7 +15,7 @@ from new_version.data_structures.RosterManager import RosterManager
 temp_bpmn_file = './test_assets/CopiedModel.bpmn'
 
 
-def hill_climb(log_name, xes_path, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, tot_simulations,
+def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, tot_simulations,
                is_tabu, only_calendar):
     cost_type = 1
 
