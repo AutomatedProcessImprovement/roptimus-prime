@@ -18,6 +18,11 @@ class SimulationInfo:
         self.total_pool_cost = 0
         self.total_pool_time = 0
 
+        self.available_time = dict()
+
+    def available_time(self):
+        return self.available_time
+
     def cycle_time(self):
         return self.mean_process_cycle_time
 
@@ -48,6 +53,9 @@ class SimulationInfo:
     def update_resource_utilization(self, pool_name, utilization_ratio):
         self.pool_utilization[pool_name] = utilization_ratio
 
+    def update_resource_available_time(self, pool_name, available_time):
+        self.available_time[pool_name] = available_time / 3600
+
     def sort_pool_by_utilization(self):
         return sorted(self.pool_utilization.keys(), key=lambda pool_name: self.pool_utilization[pool_name],
                       reverse=True)
@@ -61,6 +69,8 @@ class SimulationInfo:
                 self.total_pool_cost += self.pool_cost[pool_name]
             if pool_name not in self.pool_time:
                 self.pool_time[pool_name] = 0
+                self.available_time[pool_name] = 0
+
             self.pool_time[pool_name] += total_waiting_time + total_processing_time
             self.total_pool_time += total_waiting_time + total_processing_time
 

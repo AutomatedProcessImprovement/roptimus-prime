@@ -24,8 +24,8 @@ def update_resource_pools(resource_pools={}, task_pools={}, task_ids={}):
 
     if len(resource_pools) > 0:
         bpmn_resources = root.find('xmlns:process', bpmn_element_ns).find('xmlns:extensionElements', bpmn_element_ns).find("qbp:processSimulationInfo", simod_ns).find("qbp:resources", simod_ns)
-        for resource in bpmn_resources:
-            resource.attrib["totalAmount"] = str(resource_pools[resource.attrib["name"]].total_amount)
+        # for resource in bpmn_resources:
+        #     resource.attrib["totalAmount"] = str(resource_pools[resource.attrib["name"]].total_amount)
         tree.write(temp_bpmn_file)
 
 

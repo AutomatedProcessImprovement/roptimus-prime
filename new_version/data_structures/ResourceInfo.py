@@ -65,7 +65,8 @@ class Resource:
                                             "wednesday", "thursday", "friday", "saturday", "sunday"])
 
         # Format for timestamps
-        _format = "%H:%M:%S"
+        _format = "%H:%M:%S.%f"
+        # _format = "%H:%M:%S"
 
         # Default 24hr, 1hr per slot list (NOT IN USE)
         # default_df = [0] * 24
@@ -285,6 +286,8 @@ class Resource:
         return True
 
     def verify_timetable(self, day=None):
+        if not self.is_human:
+            return False
         if day is None:
             return self.verify_masks() & self.verify_global_constraints()
         else:

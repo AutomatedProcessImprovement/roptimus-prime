@@ -8,28 +8,39 @@ to_execute = {'HC-STRICT': True,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
-              'METRICS': True}
+              'METRICS': False}
 
+
+# log_name = "PRODUCTION"
+# bpmn_path = "./test_assets/production/Production.bpmn"
+# timetable_path = "./test_assets/production/sim_json.json"
+# constraints_path = "./test_assets/production/constraints.json"
 
 def execute_algorithm_variants(only_calendar):
-    log_name = "DEFAULT"
-    xes_path = "./test_assets/log_demo_filtered_opt.xes"
-    bpmn_path = "./test_assets/credit_application_diff.bpmn"
-    timetable_path = "./test_assets/credit_application_diff.json"
-    constraints_path = "./test_assets/constraints.json"
-    max_func_ev = 10000
+    # log_name = "DEFAULT"
+    # xes_path = "./test_assets/log_demo_filtered_opt.xes"
+    # bpmn_path = "./test_assets/credit_application_diff.bpmn"
+    # timetable_path = "./test_assets/credit_application_diff.json"
+    # constraints_path = "./test_assets/constraints.json"
+    log_name = "PRODUCTION"
+    # log_name = "PRODUCTION_ONLY_CALENDAR"
+    bpmn_path = "./test_assets/production/Production.bpmn"
+    timetable_path = "./test_assets/production/sim_json.json"
+    constraints_path = "./test_assets/production/constraints.json"
+
+    max_func_ev = 150
     non_opt_ratio = 0.08
-    tot_simulations = 15
+    tot_simulations = 5
 
     if to_execute['HC-STRICT']:
-        hill_climb(log_name, xes_path, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                   tot_simulations, False, only_calendar)
+        hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+                   tot_simulations, False, False,  only_calendar)
     if to_execute['HC-FLEX']:
-        hill_climb(log_name, xes_path, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                   tot_simulations, False, only_calendar)
+        hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+                   tot_simulations, False, True, only_calendar)
     if to_execute['TS-STRICT']:
-        hill_climb(log_name, xes_path, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                   tot_simulations, True, only_calendar)
+        hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+                   tot_simulations, True, False, only_calendar)
     if to_execute['METRICS']:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad',
                                                  'nsga2'])

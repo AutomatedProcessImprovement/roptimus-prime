@@ -16,7 +16,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    (result, traces) = run_simulation(model_file_path, json_path, total_cases)
+    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2022-09-01T08:00:00.000+02:00")
 
     simulation_info = SimulationInfo(pools_info)
     simulation_info.simulation_time = time.time() - starting_time
@@ -25,6 +25,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
 
     for i in result[2].keys():
         simulation_info.update_resource_utilization(result[2][i].r_profile.resource_id, result[2][i].utilization)
+        simulation_info.update_resource_available_time(result[2][i].r_profile.resource_id, result[2][i].available_time)
     for i in result[1].keys():
         total_cost = 0
         for resource in pools_info.task_pools[i]:
@@ -51,7 +52,14 @@ def perform_simulations(pools_info,
     parallel_start_time = time.time()
     # TODO Where to find traces if sim_info is not None
     # if simulated_info is not None:
-    #     return simulated_info
+    #     pool = multiprocessing.Pool(10)
+    #     async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 1500, pools_info)) for i in
+    #                      range(simulations_count)]
+    #     traces = [ar.get()[1] for ar in async_results]
+    #     pool.close()
+    #     pool.join()
+    #
+    #     return simulated_info, traces
 
     # Multiprocessing used to reduce total processing time, dependent on # cores in system
     pool = multiprocessing.Pool(5)

@@ -16,7 +16,7 @@ temp_bpmn_file = './test_assets/CopiedModel.bpmn'
 
 
 def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, tot_simulations,
-               is_tabu, only_calendar):
+               is_tabu, with_mad, only_calendar):
     cost_type = 1
 
     # SETUP
@@ -27,7 +27,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
 
     initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
-    it_handler = IterationHandler(log_name, initial_pools_info, tot_simulations, is_tabu, False, rm)
+    it_handler = IterationHandler(log_name, initial_pools_info, tot_simulations, is_tabu, with_mad, rm)
     max_iterations_reached = True
     # max_resources = initial_pools_info.total_resoures
 
@@ -71,9 +71,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 wt_finished = resolve_resources_in_process(iteration_info, it_handler, iterations_count, rm)
 
     save_stats_file(log_name,
-                    algorithm_name + '_without_mad',
-                    # TODO With MAD?
-                    # algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
+                    algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
                     it_handler.generated_solutions,
                     it_handler.solution_order,
                     iterations_count[0])
@@ -109,7 +107,7 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
         if task_to_remove is not None:
             print(task_to_remove)
 
-            new_assigned_tasks = resource['assigned_tasks'].remove(task_to_remove)
+            resource['assigned_tasks'].remove(task_to_remove)
 
             resource_id = resource['id']
             with open(roster_manager.time_table, 'r') as t_read:
@@ -122,10 +120,10 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
             resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_remove), None)
             resource_profiles_list = resource_task_profile['resource_list']
             resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
-            index = next((i for i, item in enumerate(resource_profiles_list) if i['id'] == resource_id), -1)
+            index = next((i for i, item in enumerate(resource_profiles_list) if item['id'] == resource_id), -1)
 
             new_profile = copy.deepcopy(resource_to_be_copied)
-            new_profile['assigned_tasks'] = new_assigned_tasks
+            new_profile['assigned_tasks'] = resource['assigned_tasks']
 
             # 1. Remove task from resource profile
             del resource_task_profile['resource_list'][index]
@@ -165,7 +163,7 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
             return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
                                        roster_manager.constraints_json)
     except Exception as n:
-        print(n)
+
         return False, None
 
 
@@ -298,14 +296,149 @@ def resolve_resources_in_process(iteration_info, iterations_handler, iterations_
                             events[event.task_id] = 1
     task_to_improve = sort_tasks_by_most_occurences(events)
     resources_who_can_perform_task = []
-    task_info = pools_info.task_pools[task_to_improve[0]]
+    for task in task_to_improve:
+        task_info = pools_info.task_pools[task]
 
-    if len(task_info) == 1:
-        # Only 1 resource able to do this task, make copy of existing resource and add to pool.
-        resource = task_info[0]
-        if len(resource['assigned_tasks']) == 1:
-            # Find info in JSON, then replace constraints and timetable
-            ready_to_sim = resolve_add_resource_json_information(resource, roster_manager, task_to_improve[0])
+        if len(task_info) == 1:
+            # Only 1 resource able to do this task, make copy of existing resource and add to pool.
+            resource = task_info[0]
+            if len(resource['assigned_tasks']) == 1:
+                # Find info in JSON, then replace constraints and timetable
+                ready_to_sim = resolve_add_resource_json_information(resource, roster_manager, task_to_improve[0])
+                if ready_to_sim[0]:
+                    # TODO SIM
+                    print("Simulating")
+                    new_res_manager = ready_to_sim[1]
+                    iterations_handler.resource_manager = new_res_manager
+                    iterations_handler.time_table_path = new_res_manager.time_table
+                    new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(), new_res_manager.get_task_pools())
+
+                    if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                        return True
+                    else:
+                        # SIM NOT OK, reset ttb and cons with backups -> temps
+                        # Replace timetable and constraints with updated jsons.
+                        with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
+                                                                                              "w") as _new_timetable:
+                            _new_timetable.write(_old_timetable.read())
+                        with open(roster_manager.temp_constraints, "r") as _old_constraints, open(roster_manager.constraints_json,
+                                                                                              "w") as _new_constraints:
+                            _new_constraints.write(_old_constraints.read())
+                        return False
+
+            else:
+                # Try to remove other task(s) from resource
+                ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve[0],
+                                                                            task_resource_occurences)
+                if ready_to_sim[0]:
+                    # TODO SIM
+                    print("Simulating")
+                    new_res_manager = ready_to_sim[1]
+                    iterations_handler.resource_manager = new_res_manager
+                    iterations_handler.time_table_path = new_res_manager.time_table
+                    new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(), new_res_manager.get_task_pools())
+
+                    if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                        return True
+                    else:
+                        # SIM NOT OK, reset ttb and cons with backups -> temps
+                        # Replace timetable and constraints with updated jsons.
+                        with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
+                                                                                              "w") as _new_timetable:
+                            _new_timetable.write(_old_timetable.read())
+                        return False
+
+        elif len(task_info) >= 1:
+            # count the occurences of which a resource performed said task
+            # Take the one with the lowest # and check its tasks, try remove one of its tasks from the list
+            resources_and_occurences = {}
+            for trace_list in iterations_handler.traces:
+                for trace in trace_list.trace_list:
+                    for event in trace.event_list:
+                        if event.task_id == task_to_improve[0]:
+                            if event.waiting_time > 0.0 or event.idle_time > 0.0:
+                                if event.resource_id in resources_and_occurences.keys():
+                                    resources_and_occurences[event.resource_id] += 1
+                                else:
+                                    resources_and_occurences[event.resource_id] = 1
+            print(resources_and_occurences)
+            # Sort by resource with highest impact on WT/IT
+            sorted_resources = sort_tasks_by_most_occurences(resources_and_occurences)
+            task_info_sorted_by_occurences = []
+            for resource in sorted_resources:
+                for tir in task_info:
+                    if tir['id'] == resource:
+                        task_info_sorted_by_occurences.append(tir)
+
+            for resource in task_info_sorted_by_occurences:
+                if len(resource['assigned_tasks']) > 1:
+                    # Only try reschedule on resources with more than 1 task -> IF THIS DOES NOT IMPROVE THEN WE NEED TO RESET.
+                    ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager,
+                                                                                task_to_improve[0],
+                                                                                task_resource_occurences)
+                    if ready_to_sim[0]:
+                        # TODO SIM
+                        print("Simulating")
+                        new_res_manager = ready_to_sim[1]
+                        iterations_handler.resource_manager = new_res_manager
+                        iterations_handler.time_table_path = new_res_manager.time_table
+                        new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
+                                                  new_res_manager.get_task_pools())
+
+                        if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                            return True
+                        else:
+                            # SIM NOT OK, reset ttb and cons with backups -> temps
+                            # Replace timetable and constraints with updated jsons.
+                            with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
+                                                                                                  "w") as _new_timetable:
+                                _new_timetable.write(_old_timetable.read())
+                            # Dont return false, try to add new resource.
+                            ready_to_sim = resolve_add_resource_json_information(resource, roster_manager,
+                                                                                 task_to_improve[0])
+
+                            if ready_to_sim[0]:
+                                # TODO SIM
+                                print("Simulating")
+                                new_res_manager = ready_to_sim[1]
+                                iterations_handler.resource_manager = new_res_manager
+                                iterations_handler.time_table_path = new_res_manager.time_table
+                                new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
+                                                          new_res_manager.get_task_pools())
+
+                                if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                                    return True
+                                else:
+                                    # SIM NOT OK, reset ttb and cons with backups -> temps
+                                    # Replace timetable and constraints with updated jsons.
+                                    with open(roster_manager.temp_timetable, "r") as _old_timetable, open(
+                                            roster_manager.time_table,
+                                            "w") as _new_timetable:
+                                        _new_timetable.write(_old_timetable.read())
+                                    with open(roster_manager.temp_constraints, "r") as _old_constraints, open(
+                                            roster_manager.constraints_json,
+                                            "w") as _new_constraints:
+                                        _new_constraints.write(_old_constraints.read())
+                                    return False
+
+                            return False
+
+            # Only get here when no improvements are found
+            # Find resource with the smallest schedule in task, use as copy
+            resources_just_occurrences = {}
+            for trace_list in iterations_handler.traces:
+                for trace in trace_list.trace_list:
+                    for event in trace.event_list:
+                        if event.task_id == task_to_improve[0]:
+                            if event.resource_id in resources_just_occurrences.keys():
+                                resources_just_occurrences[event.resource_id] += 1
+                            else:
+                                resources_just_occurrences[event.resource_id] = 1
+            sorted_resources = sort_tasks_by_most_occurences(resources_just_occurrences)
+            sorted_resources.reverse()
+
+            resource_to_resolve = sorted_resources[0]
+            ready_to_sim = resolve_add_resource_json_information(resource_to_resolve, roster_manager, task_to_improve[0])
             if ready_to_sim[0]:
                 # TODO SIM
                 print("Simulating")
@@ -326,111 +459,12 @@ def resolve_resources_in_process(iteration_info, iterations_handler, iterations_
                                                                                           "w") as _new_constraints:
                         _new_constraints.write(_old_constraints.read())
                     return False
-
-        else:
-            # Try to remove other task(s) from resource
-            ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve[0],
-                                                                        task_resource_occurences)
-            if ready_to_sim[0]:
-                # TODO SIM
-                print("Simulating")
-                new_res_manager = ready_to_sim[1]
-                iterations_handler.resource_manager = new_res_manager
-                iterations_handler.time_table_path = new_res_manager.time_table
-                new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(), new_res_manager.get_task_pools())
-
-                if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                    return True
-                else:
-                    # SIM NOT OK, reset ttb and cons with backups -> temps
-                    # Replace timetable and constraints with updated jsons.
-                    with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
-                                                                                          "w") as _new_timetable:
-                        _new_timetable.write(_old_timetable.read())
-                    return False
-
-    elif len(task_info) >= 1:
-        # count the occurences of which a resource performed said task
-        # Take the one with the lowest # and check its tasks, try remove one of its tasks from the list
-        resources_and_occurences = {}
-        for trace_list in iterations_handler.traces:
-            for trace in trace_list.trace_list:
-                for event in trace.event_list:
-                    if event.task_id == task_to_improve[0]:
-                        if event.waiting_time > 0.0 or event.idle_time > 0.0:
-                            if event.resource_id in resources_and_occurences.keys():
-                                resources_and_occurences[event.resource_id] += 1
-                            else:
-                                resources_and_occurences[event.resource_id] = 1
-        print(resources_and_occurences)
-        # Sort by resource with highest impact on WT/IT
-        sorted_resources = sort_tasks_by_most_occurences(resources_and_occurences)
-        for resource in sorted_resources:
-            if len(resource['assigned_tasks']) > 1:
-                # Only try reschedule on resources with more than 1 task -> IF THIS DOES NOT IMPROVE THEN WE NEED TO RESET.
-                ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager,
-                                                                            task_to_improve[0],
-                                                                            task_resource_occurences)
-                if ready_to_sim[0]:
-                    # TODO SIM
-                    print("Simulating")
-                    new_res_manager = ready_to_sim[1]
-                    iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
-                    new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
-                                              new_res_manager.get_task_pools())
-
-                    if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                        return True
-                    else:
-                        # SIM NOT OK, reset ttb and cons with backups -> temps
-                        # Replace timetable and constraints with updated jsons.
-                        with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
-                                                                                              "w") as _new_timetable:
-                            _new_timetable.write(_old_timetable.read())
-                        return False
-
-        # Only get here when no improvements are found
-        # Find resource with the smallest schedule in task, use as copy
-        resources_just_occurrences = {}
-        for trace_list in iterations_handler.traces:
-            for trace in trace_list.trace_list:
-                for event in trace.event_list:
-                    if event.task_id == task_to_improve[0]:
-                        if event.resource_id in resources_just_occurrences.keys():
-                            resources_just_occurrences[event.resource_id] += 1
-                        else:
-                            resources_just_occurrences[event.resource_id] = 1
-        sorted_resources = reversed(sort_tasks_by_most_occurences(resources_and_occurences))
-
-        resource_to_resolve = sorted_resources[0]
-        ready_to_sim = resolve_add_resource_json_information(resource_to_resolve, roster_manager, task_to_improve[0])
-        if ready_to_sim[0]:
-            # TODO SIM
-            print("Simulating")
-            new_res_manager = ready_to_sim[1]
-            iterations_handler.resource_manager = new_res_manager
-            iterations_handler.time_table_path = new_res_manager.time_table
-            new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(), new_res_manager.get_task_pools())
-
-            if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                return True
-            else:
-                # SIM NOT OK, reset ttb and cons with backups -> temps
-                # Replace timetable and constraints with updated jsons.
-                with open(roster_manager.temp_timetable, "r") as _old_timetable, open(roster_manager.time_table,
-                                                                                      "w") as _new_timetable:
-                    _new_timetable.write(_old_timetable.read())
-                with open(roster_manager.temp_constraints, "r") as _old_constraints, open(roster_manager.constraints_json,
-                                                                                      "w") as _new_constraints:
-                    _new_constraints.write(_old_constraints.read())
-                return False
     return False
 
 
-def sort_tasks_by_most_occurences(dict):
+def sort_tasks_by_most_occurences(dictionary):
     res = []
-    for k, li in dict.items():
+    for k, li in dictionary.items():
         r = [k, li]
         res.append(r)
 
@@ -477,6 +511,8 @@ def solution_traces_add_new_shift(iteration_info, iterations_handler, iterations
         most_occurring_day = sort_by_most_occuring_day(resource_works_when)
 
         for resource in resource_copy:
+            if not resource.is_human:
+               continue
             day = days[most_occurring_day[0]]
             shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
             indexes = []
@@ -667,7 +703,7 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
     resources_to_optimize = {}
     # the first resource in pool_cost is the most expensive
     for pool in simulation_info.pools_info.pools:
-        pool_cost = simulation_info.pools_info.pools[pool].cost_per_hour * simulation_info.pool_time[pool]
+        pool_cost = simulation_info.pools_info.pools[pool].cost_per_hour * simulation_info.available_time[pool]
         resources_to_optimize[pool] = pool_cost
 
     print(resources_to_optimize)
