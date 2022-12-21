@@ -129,11 +129,12 @@ class RosterManager:
     def update_roster(self, pool_info):
         for resource in pool_info.pools.values():
             r = self.roster.find_resource(resource.id)
-            r.set_shifts(resource.shifts)
+            if r is not None:
+                r.set_shifts(resource.shifts)
         self.write_to_file()
 
     def write_to_file(self):
-        out_path = "./test_assets/timetable.json"
+        out_path = "./test_assets/production/sim_json.json"
 
         with open(self.time_table, 'r') as t_read:
             ttb = json.load(t_read)

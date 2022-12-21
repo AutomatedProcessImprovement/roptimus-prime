@@ -31,7 +31,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
         for resource in pools_info.task_pools[i]:
             total_cost += resource['cost_per_hour']
         total_cost = total_cost / len(pools_info.task_pools[i])
-        simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].idle_time.avg),
+        simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].waiting_time.avg),
                                             float(result[1][i].duration.avg),
                                             total_cost)
     simulation_info.mean_process_cycle_time = float(result[0].cycle_time.avg)

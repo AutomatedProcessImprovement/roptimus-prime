@@ -74,6 +74,9 @@ class IterationHandler:
             return not self.execution_queue.is_empty()
         return (not self.execution_queue.is_empty()) or (not self.discarded_queue.is_empty())
 
+    def pq_size_print(self):
+        return len(self.execution_queue.pq)
+
     def next(self):
         to_return = self._move_next()
         if self.is_tabu_search and to_return[0] is None:
@@ -109,6 +112,8 @@ class IterationHandler:
         self.resource_manager.update_roster(pools_info)
         if pools_info.id not in self.generated_solutions:
             update_resource_pools(pools_info.pools)  # Updating Simulation Model with new pool allocation
+            # Update simulation info with new pools info
+
             (simulation_info, traces) = perform_simulations(pools_info,
                                                             self.log_name,
                                                             self.simulation_count,

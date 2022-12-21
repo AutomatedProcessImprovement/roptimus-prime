@@ -65,8 +65,8 @@ class Resource:
                                             "wednesday", "thursday", "friday", "saturday", "sunday"])
 
         # Format for timestamps
-        _format = "%H:%M:%S.%f"
-        # _format = "%H:%M:%S"
+        # _format = "%H:%M:%S.%f"
+        _format = "%H:%M:%S"
 
         # Default 24hr, 1hr per slot list (NOT IN USE)
         # default_df = [0] * 24
@@ -82,34 +82,34 @@ class Resource:
 
         # Translate time intervals to bitmaps
         for timetable in timetable_json["time_periods"]:
-              if (timetable['from']) == 'MONDAY':
-                    monday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                             datetime.datetime.strptime(timetable['endTime'], _format),
-                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "TUESDAY":
-                    tuesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                              datetime.datetime.strptime(timetable['endTime'], _format),
-                                              datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "WEDNESDAY":
-                    wednesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                                datetime.datetime.strptime(timetable['endTime'], _format),
-                                                datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "THURSDAY":
-                    thursday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "FRIDAY":
-                    friday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                             datetime.datetime.strptime(timetable['endTime'], _format),
-                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "SATURDAY":
-                    saturday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                               datetime.datetime.strptime(timetable['endTime'], _format),
-                                               datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
-              elif (timetable['from']) == "SUNDAY":
-                    sunday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
-                                             datetime.datetime.strptime(timetable['endTime'], _format),
-                                             datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            if (timetable['from']) == 'MONDAY':
+                monday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                         datetime.datetime.strptime(timetable['endTime'], _format),
+                                         datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "TUESDAY":
+                tuesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                          datetime.datetime.strptime(timetable['endTime'], _format),
+                                          datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "WEDNESDAY":
+                wednesday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                            datetime.datetime.strptime(timetable['endTime'], _format),
+                                            datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "THURSDAY":
+                thursday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                           datetime.datetime.strptime(timetable['endTime'], _format),
+                                           datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "FRIDAY":
+                friday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                         datetime.datetime.strptime(timetable['endTime'], _format),
+                                         datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "SATURDAY":
+                saturday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                           datetime.datetime.strptime(timetable['endTime'], _format),
+                                           datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
+            elif (timetable['from']) == "SUNDAY":
+                sunday += datetime_range(datetime.datetime.strptime(timetable['beginTime'], _format),
+                                         datetime.datetime.strptime(timetable['endTime'], _format),
+                                         datetime.timedelta(minutes=self.time_var), 24 * self.num_slots)
 
         # Set remaining cap of weekdays
         self.day_free_cap['monday'] -= sum_of_binary_ones(monday)
@@ -150,6 +150,7 @@ class Resource:
         self.custom_id = str([monday, tuesday, wednesday, thursday, friday, saturday, sunday])
 
     def get_total_cost(self):
+        # Reduced to cost per second.
         return self.cost_per_hour / 3600
 
     def set_bpm_resource_name(self, name):
@@ -307,7 +308,8 @@ class Resource:
         return self.shifts
 
     def set_custom_id(self):
-        shifts = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']].values.tolist()[0]
+        shifts = \
+        self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']].values.tolist()[0]
         self.custom_id = str(shifts)
 
         # self.custom_id = str(sum(shifts))

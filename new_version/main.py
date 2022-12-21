@@ -28,7 +28,7 @@ def execute_algorithm_variants(only_calendar):
     timetable_path = "./test_assets/production/sim_json.json"
     constraints_path = "./test_assets/production/constraints.json"
 
-    max_func_ev = 150
+    max_func_ev = 10000
     non_opt_ratio = 0.08
     tot_simulations = 5
 
@@ -42,7 +42,7 @@ def execute_algorithm_variants(only_calendar):
         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
                    tot_simulations, True, False, only_calendar)
     if to_execute['METRICS']:
-        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad',
+        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad', 'hill_clmb_without_mad_orlenys',
                                                  'nsga2'])
         print_solution_statistics(metrics, log_name)
 

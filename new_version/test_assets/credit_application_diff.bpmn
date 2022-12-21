@@ -215,7 +215,7 @@
         <ap:img src="" />
         <ap:icon elIconName="" />
         <ap:icons />
-      </extensionElements>
+    </extensionElements>
       <incoming>sid-789335C6-205C-4A03-9AD6-9655893C1FFB</incoming>
       <outgoing>sid-E27B9A7A-4414-4BFC-83F5-4BC438B77E37</outgoing>
     </task>

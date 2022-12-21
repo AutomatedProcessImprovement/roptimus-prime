@@ -69,7 +69,6 @@ class SimulationInfo:
                 self.total_pool_cost += self.pool_cost[pool_name]
             if pool_name not in self.pool_time:
                 self.pool_time[pool_name] = 0
-                self.available_time[pool_name] = 0
 
             self.pool_time[pool_name] += total_waiting_time + total_processing_time
             self.total_pool_time += total_waiting_time + total_processing_time
