@@ -4,6 +4,7 @@ from new_version.data_structures.priority_queue import PriorityQueue
 from new_version.support_modules.prosimos_simulation_runner import perform_simulations
 from new_version.support_modules.bpmn_parser import update_resource_pools
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import try_update_pareto_front, min_dist_from_pareto
+from new_version.support_modules.json_manager import JsonManager
 
 
 class IterationInfo:
@@ -47,6 +48,9 @@ class IterationHandler:
         self.execution_queue = PriorityQueue()
         self.execution_queue.add_task(pools_info.id,
                                       self._solution_quality(simulation_info))
+        self.jsonManager = JsonManager()
+        self.jsonManager.read_accepted_solution_timetable_to_json_files(
+            self.time_table_path, "./test_assets/production/constraints.json", pools_info.id)
 
     def update_priorities(self):
         for in_discarded in [True, False]:
@@ -90,10 +94,13 @@ class IterationHandler:
     def _move_next(self):
         if not self.execution_queue.is_empty():
             current_solution = self.execution_queue.pop_task()
+
             while current_solution is not None:
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
+                    JsonManager.retrieve_json_from_id(self.jsonManager, pools_info.id)
+                    JsonManager.remove_id_from_list(self.jsonManager, pools_info.id)
                     return [pools_info,
                             simulation_info,
                             self.generated_solutions[current_solution].non_optimal_distance]
@@ -163,7 +170,10 @@ class IterationHandler:
         [is_optimal_candidate, self.pareto_front] = try_update_pareto_front(pools_info.id, simulation_info,
                                                                             self.pareto_front, self.with_mad)
         if is_optimal_candidate:
+            print("Updating priorities")
             self.update_priorities()
+            print("Retaining information about solution")
+            JsonManager.read_accepted_solution_timetable_to_json_files(self.jsonManager, "", "", pools_info.id)
 
         is_optimal_candidate = self.check_last_pareto_update_distance(pools_info, simulation_info, is_optimal_candidate)
 

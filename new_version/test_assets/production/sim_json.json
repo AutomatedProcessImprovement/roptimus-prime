@@ -5795,16 +5795,6 @@
                         "node_20f64365-6158-45bd-9e4c-7630cecd4098",
                         "node_50e87df6-6102-4cd8-8d2b-a28edf1cc82a"
                     ]
-                },
-                {
-                    "id": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057",
-                    "name": "SYSTEM_16_COPY0ed9fea057",
-                    "cost_per_hour": 1,
-                    "amount": 1,
-                    "calendar": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057timetable",
-                    "assigned_tasks": [
-                        "node_50e87df6-6102-4cd8-8d2b-a28edf1cc82a"
-                    ]
                 }
             ]
         },
@@ -6055,18 +6045,6 @@
             "name": "Role 3",
             "resource_list": [
                 {
-                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
-                    "name": "Role 3_1",
-                    "cost_per_hour": 1,
-                    "amount": 1,
-                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
-                    "assigned_tasks": [
-                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
-                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
-                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
-                    ]
-                },
-                {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
                     "cost_per_hour": 1,
@@ -6103,13 +6081,14 @@
                     ]
                 },
                 {
-                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26",
-                    "name": "Role 3_2_COPYaa7ab5cf26",
+                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
+                    "name": "Role 3_1",
                     "cost_per_hour": 1,
                     "amount": 1,
-                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26timetable",
+                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
                     "assigned_tasks": [
-                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920"
+                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
+                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
                     ]
                 }
             ]
@@ -6118,18 +6097,6 @@
             "id": "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
             "name": "Role 3",
             "resource_list": [
-                {
-                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
-                    "name": "Role 3_1",
-                    "cost_per_hour": 1,
-                    "amount": 1,
-                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
-                    "assigned_tasks": [
-                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
-                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
-                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
-                    ]
-                },
                 {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
@@ -6173,18 +6140,6 @@
             "name": "Role 3",
             "resource_list": [
                 {
-                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
-                    "name": "Role 3_1",
-                    "cost_per_hour": 1,
-                    "amount": 1,
-                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
-                    "assigned_tasks": [
-                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
-                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
-                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
-                    ]
-                },
-                {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
                     "cost_per_hour": 1,
@@ -6217,6 +6172,17 @@
                     "assigned_tasks": [
                         "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
                         "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
+                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
+                    ]
+                },
+                {
+                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
+                    "name": "Role 3_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
+                    "assigned_tasks": [
+                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
                         "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
                     ]
                 }
@@ -6261,17 +6227,92 @@
         {
             "id": "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
             "name": "Role 6",
-            "resource_list": []
+            "resource_list": [
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "name": "Role 6_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                },
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "name": "Role 6_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                }
+            ]
         },
         {
             "id": "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
             "name": "Role 6",
-            "resource_list": []
+            "resource_list": [
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "name": "Role 6_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                },
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "name": "Role 6_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                }
+            ]
         },
         {
             "id": "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6",
             "name": "Role 6",
-            "resource_list": []
+            "resource_list": [
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "name": "Role 6_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                },
+                {
+                    "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "name": "Role 6_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+                    "assigned_tasks": [
+                        "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
+                        "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
+                        "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6"
+                    ]
+                }
+            ]
         },
         {
             "id": "node_48bd8395-eb09-4970-8d50-0e284a92015d",
@@ -12173,27 +12214,6 @@
                             "value": 1.7976931348623157e+308
                         }
                     ]
-                },
-                {
-                    "resource_id": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057",
-                    "distribution_name": "fix",
-                    "distribution_params": [
-                        {
-                            "value": 0.0
-                        },
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 1
-                        },
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 1.7976931348623157e+308
-                        }
-                    ]
                 }
             ]
         },
@@ -12695,51 +12715,12 @@
                             "value": 1.7976931348623157e+308
                         }
                     ]
-                },
-                {
-                    "resource_id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26",
-                    "distribution_name": "expon",
-                    "distribution_params": [
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 6440.6
-                        },
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 1.7976931348623157e+308
-                        }
-                    ]
                 }
             ]
         },
         {
             "task_id": "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
             "resources": [
-                {
-                    "resource_id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
-                    "distribution_name": "fix",
-                    "distribution_params": [
-                        {
-                            "value": 180.0
-                        },
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 1
-                        },
-                        {
-                            "value": 0
-                        },
-                        {
-                            "value": 1.7976931348623157e+308
-                        }
-                    ]
-                },
                 {
                     "resource_id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "distribution_name": "fix",
@@ -12952,15 +12933,126 @@
         },
         {
             "task_id": "node_5cdffd25-0295-47c8-9eb3-c1f10110db1a",
-            "resources": []
+            "resources": [
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1320.0
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1320.0
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                }
+            ]
         },
         {
             "task_id": "node_8ca9d1e9-2ce7-46b3-982a-7e87a7529435",
-            "resources": []
+            "resources": [
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 4812.5
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 4812.5
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                }
+            ]
         },
         {
             "task_id": "node_3851af33-ffd7-4e57-a44f-d1e9f91f14a6",
-            "resources": []
+            "resources": [
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 2171.2
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 2171.2
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                }
+            ]
         },
         {
             "task_id": "node_48bd8395-eb09-4970-8d50-0e284a92015d",
@@ -14807,20 +14899,92 @@
             ]
         },
         {
+            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+            "name": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                }
+            ]
+        },
+        {
+            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+            "name": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                }
+            ]
+        },
+        {
             "id": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_1timetable",
             "name": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_1timetable",
             "time_periods": [
                 {
                     "from": "MONDAY",
                     "to": "MONDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
                 },
                 {
                     "from": "TUESDAY",
                     "to": "TUESDAY",
-                    "beginTime": "10:00:00",
-                    "endTime": "16:00:00"
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
                 },
                 {
                     "from": "WEDNESDAY",
@@ -14837,86 +15001,14 @@
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
-                    "beginTime": "08:00:00",
-                    "endTime": "16:00:00"
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
                 }
             ]
         },
         {
             "id": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_2timetable",
             "name": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_2timetable",
-            "time_periods": [
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "WEDNESDAY",
-                    "to": "WEDNESDAY",
-                    "beginTime": "10:00:00",
-                    "endTime": "18:00:00"
-                },
-                {
-                    "from": "THURSDAY",
-                    "to": "THURSDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                }
-            ]
-        },
-        {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26timetable",
-            "name": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26timetable",
-            "time_periods": [
-                {
-                    "from": "MONDAY",
-                    "to": "MONDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "TUESDAY",
-                    "to": "TUESDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "WEDNESDAY",
-                    "to": "WEDNESDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "THURSDAY",
-                    "to": "THURSDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                },
-                {
-                    "from": "FRIDAY",
-                    "to": "FRIDAY",
-                    "beginTime": "09:00:00",
-                    "endTime": "17:00:00"
-                }
-            ]
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057timetable",
-            "name": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057timetable",
             "time_periods": [
                 {
                     "from": "MONDAY",

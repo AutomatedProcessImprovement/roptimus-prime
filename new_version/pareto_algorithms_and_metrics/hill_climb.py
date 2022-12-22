@@ -44,43 +44,8 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
 
         iteration_info = it_handler.next()
 
-        last_optimal_info = solution_resolve_optimization(iteration_info, it_handler, iterations_count, rm,
-                                                                   only_calendar)
-
-        # if not only_calendar:
-        #     resource_optim = solution_resolve_resource_optimization(iteration_info, it_handler, iterations_count, rm)
-        # print(resource_optim)
-        # solution_resolve_schedule(iteration_info, it_handler, iterations_count, rm, only_calendar)
-        # solution_resolve_it_add_res(iteration_info, it_handler, iterations_count, rm, only_calendar)
-
-        # while wt_finished:
-        #     wt_finished = solution_traces_sorting_by_waiting_times(iteration_info, it_handler, iterations_count,
-        #                                                            rm.get_all_res_accessible_bits(),
-        #                                                            rm.get_all_res_masks())
-        #     wt_finished = False
-        #     # if not wt_finished:
-        #     #     cost_finished = True
-        #
-        # while cost_finished:
-        #     cost_finished = solution_traces_optimize_cost(iteration_info, it_handler, iterations_count,
-        #                                                   rm.get_all_res_accessible_bits(),
-        #                                                   rm.get_all_res_masks())
-        #     # if not cost_finished:
-        #     #     idle_finished = True
-        #
-        # while idle_finished:
-        #     idle_finished = solution_traces_sorting_by_idle_times(iteration_info, it_handler, iterations_count,
-        #                                                           rm.get_all_res_accessible_bits(),
-        #                                                           rm.get_all_res_masks())
-        #
-        # if not idle_finished and not wt_finished:
-        #     # wt_finished = solution_traces_add_new_shift(iteration_info, it_handler, iterations_count,
-        #     #                                             rm.get_all_res_accessible_bits(),
-        #     #                                             rm.get_all_res_masks())
-        #     if not wt_finished and not only_calendar:
-        #         wt_finished = resolve_resources_in_process(iteration_info, it_handler, iterations_count, rm)
-        #         if wt_finished:
-        #             print("NEW RESOURCE ADDED - Starting over again")
+        solution_resolve_optimization(iteration_info, it_handler, iterations_count, rm,
+                                      only_calendar)
 
     save_stats_file(log_name,
                     algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
@@ -158,70 +123,22 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
 
 
 def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count, resource_manager,
-                                           only_calendar):
-    results = [None, None, None, None, None]
-
-    print("Before WT schedule")
-    print(iterations_handler.pq_size_print())
-    print("WT Optim")
+                                  only_calendar):
+    print("WT")
     s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
                                                   resource_manager)
-    print(iterations_handler.pq_size_print())
-    if s1 and iterations_handler.has_next():
-        iteration_info = iterations_handler.next()
-        results[0] = iteration_info
-
-    print("Before cost schedule")
-    print(iterations_handler.pq_size_print())
-    print("Cost Optim")
+    print("Cost")
     s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, resource_manager)
-    print(iterations_handler.pq_size_print())
-    if s2 and iterations_handler.has_next():
-        iteration_info = iterations_handler.next()
-        results[1] = iteration_info
-
-    print("Before IT schedule")
-    print(iterations_handler.pq_size_print())
-    print("IT Optim")
+    print("IT")
     s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, resource_manager)
-    print(iterations_handler.pq_size_print())
-    if s3 and iterations_handler.has_next():
-        iterations_handler.next()
-        results[2] = iteration_info
 
     if not only_calendar:
-        print("Before add resource")
-        print(iterations_handler.pq_size_print())
-        print("WT Optim | Add resource")
+        print("WT | Add")
         s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, resource_manager)
-        print(iterations_handler.pq_size_print())
-        if s4 and iterations_handler.has_next():
-            iteration_info = iterations_handler.next()
-            results[3] = iteration_info
-
-        print("Before remove resource")
-        print(iterations_handler.pq_size_print())
-        print("Cost Optim | Remove resource")
+        print("Cost | Remove")
         s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, resource_manager)
-        print(iterations_handler.pq_size_print())
-        if s5 and iterations_handler.has_next():
-            iteration_info = iterations_handler.next()
-            results[4] = iteration_info
-
-    # The information returned is the last change that added to the pareto.
-    last_improvement = None
-    for i in results:
-        if i is not None:
-            last_improvement = i
-
-    if last_improvement is not None and not iterations_handler.has_next():
-        # A solution has been found but the last function evaluation has failed, resulting in the PQ being empty.
-        # Ensure that the last possible solution is in the PQ by manually it.
-        iterations_handler.execution_queue.add_task(last_improvement[0].id,
-                                                    iterations_handler._solution_quality(
-                                                        last_improvement[1]))
-        print(last_improvement[0].id)
-    return last_improvement
+        return s1 or s2 or s3 or s4 or s5
+    return s1 or s2 or s3
 
 
 def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):

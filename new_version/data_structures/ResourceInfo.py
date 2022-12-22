@@ -308,9 +308,11 @@ class Resource:
         return self.shifts
 
     def set_custom_id(self):
+        # new_uuid = str(uuid.uuid4())
         shifts = \
         self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']].values.tolist()[0]
-        self.custom_id = str(shifts)
+        self.custom_id = shifts
+        # self.custom_id = new_uuid
 
         # self.custom_id = str(sum(shifts))
 
