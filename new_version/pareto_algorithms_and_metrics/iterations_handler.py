@@ -48,9 +48,11 @@ class IterationHandler:
         self.execution_queue = PriorityQueue()
         self.execution_queue.add_task(pools_info.id,
                                       self._solution_quality(simulation_info))
+
         self.jsonManager = JsonManager()
         self.jsonManager.read_accepted_solution_timetable_to_json_files(
             self.time_table_path, "./test_assets/production/constraints.json", pools_info.id)
+        self.current_starting_id = pools_info.id
 
     def update_priorities(self):
         for in_discarded in [True, False]:
@@ -91,6 +93,11 @@ class IterationHandler:
                       self.generated_solutions[current_solution].non_optimal_distance]
         return to_return
 
+    def clean_up_json(self):
+        print("Reset the timetable and constraints for next function eval.")
+        self.jsonManager.retrieve_json_from_id(self.current_starting_id)
+        print(self.current_starting_id)
+
     def _move_next(self):
         if not self.execution_queue.is_empty():
             current_solution = self.execution_queue.pop_task()
@@ -99,8 +106,12 @@ class IterationHandler:
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
-                    JsonManager.retrieve_json_from_id(self.jsonManager, pools_info.id)
-                    JsonManager.remove_id_from_list(self.jsonManager, pools_info.id)
+                    print("==============")
+                    print("NEXT ITERATION STARTING ALLOCATION")
+                    print(pools_info.id)
+                    print("==============")
+                    self.jsonManager.retrieve_json_from_id(current_solution)
+                    self.current_starting_id = current_solution
                     return [pools_info,
                             simulation_info,
                             self.generated_solutions[current_solution].non_optimal_distance]
@@ -118,7 +129,7 @@ class IterationHandler:
     def try_new_solution(self, pools_info, distance):
         self.resource_manager.update_roster(pools_info)
         if pools_info.id not in self.generated_solutions:
-            update_resource_pools(pools_info.pools)  # Updating Simulation Model with new pool allocation
+            # update_resource_pools(pools_info.pools, pools_info.task_pools)  # Updating Simulation Model with new pool allocation
             # Update simulation info with new pools info
 
             (simulation_info, traces) = perform_simulations(pools_info,
@@ -136,6 +147,8 @@ class IterationHandler:
 
             if (not is_valid) and self.is_tabu_search:
                 self.check_optimals_tabu_search(pools_info, simulation_info)
+            # Regardless of if it's a valid pareto or not, reset the jsons
+            self.clean_up_json()
             return is_valid
         return False
 
@@ -172,8 +185,6 @@ class IterationHandler:
         if is_optimal_candidate:
             print("Updating priorities")
             self.update_priorities()
-            print("Retaining information about solution")
-            JsonManager.read_accepted_solution_timetable_to_json_files(self.jsonManager, "", "", pools_info.id)
 
         is_optimal_candidate = self.check_last_pareto_update_distance(pools_info, simulation_info, is_optimal_candidate)
 
@@ -181,6 +192,8 @@ class IterationHandler:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
+            print("Retaining information about solution")
+            self.jsonManager.read_accepted_solution_timetable_to_json_files("", "", pools_info.id)
             return True
         return False
 

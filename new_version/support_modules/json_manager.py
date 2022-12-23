@@ -6,8 +6,9 @@ Files will be stored in a separate directory, that can be configured by the user
 import json
 import os.path
 
-
 # ! Always read IDS file first before performing any operation.
+import shutil
+
 
 class JsonManager:
     def __init__(self):
@@ -44,20 +45,17 @@ class JsonManager:
 
         out_ttb_path = self.base_path_folders + str(solution_id) + "/timetable.json"
         out_cons_path = self.base_path_folders + str(solution_id) + "/constraints.json"
+        out_model_path = self.base_path_folders + str(solution_id) + "/model.bpmn"
 
         self.try_create_dir(str(solution_id))
 
         if solution_id is not None:
-            with open(new_ttb_path, "r") as f:
-                info = json.load(f)
-                with open(out_ttb_path, "w") as o:
-                    o.write(json.dumps(info, indent=4))
-            with open(new_cons_path, "r") as f:
-                info = json.load(f)
-                with open(out_cons_path, "w") as o:
-                    o.write(json.dumps(info, indent=4))
-                    return self.write_new_id_to_file(solution_id)
-        print("Err: Solution ID is of type None.")
+            shutil.copyfile(new_ttb_path, out_ttb_path)
+            shutil.copyfile(new_cons_path, out_cons_path)
+            shutil.copyfile("./test_assets/CopiedModel.bpmn", out_model_path)
+            return self.write_new_id_to_file(solution_id)
+        else:
+            print("Err: Solution ID is of type None.")
 
     def write_new_id_to_file(self, solution_id):
         ids = self.read_file_with_ids()
@@ -79,18 +77,16 @@ class JsonManager:
                 f.write(str(sol) + "\n")
         return True
 
-    def retrieve_json_from_id(self, solution_id):
+    def retrieve_json_from_id(self, solution_id, ttb_path="./test_assets/production/sim_json.json",
+                              cons_path="./test_assets/production/constraints.json"):
         ids = self.read_file_with_ids()
         if solution_id in ids:
-            with open(self.base_path_folders + solution_id + "/timetable.json", "r") as f:
-                info = json.load(f)
-                # After finding info from json, write to timetable.json
-                with open("./test_assets/production/sim_json.json", "w") as o:
-                    o.write(json.dumps(info, indent=4))
-            with open(self.base_path_folders + solution_id + "/constraints.json", "r") as f:
-                info = json.load(f)
-                # After finding info from json, write to timetable.json
-                with open("./test_assets/production/constraints.json", "w") as o:
-                    o.write(json.dumps(info, indent=4))
-                    return self.remove_id_from_list(solution_id)
-        print("Err: Solution ID not found.")
+            print(self.base_path_folders + str(solution_id) + "/constraints.json")
+            print(self.base_path_folders + str(solution_id) + "/timetable.json")
+            shutil.copyfile(self.base_path_folders + str(solution_id) + "/constraints.json", cons_path)
+            shutil.copyfile(self.base_path_folders + str(solution_id) + "/timetable.json", ttb_path)
+            shutil.copyfile(self.base_path_folders + str(solution_id) + "/model.bpmn",
+                               "./test_assets/CopiedModel.bpmn")
+
+        else:
+            print("Err: Solution ID not found.")
