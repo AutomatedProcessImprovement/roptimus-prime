@@ -1,5 +1,6 @@
 import copy
 
+from new_version.data_structures.RosterManager import RosterManager
 from new_version.data_structures.priority_queue import PriorityQueue
 from new_version.support_modules.prosimos_simulation_runner import perform_simulations
 from new_version.support_modules.bpmn_parser import update_resource_pools
@@ -96,6 +97,7 @@ class IterationHandler:
     def clean_up_json(self):
         print("Reset the timetable and constraints for next function eval.")
         self.jsonManager.retrieve_json_from_id(self.current_starting_id)
+        self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
         print(self.current_starting_id)
 
     def _move_next(self):
@@ -103,6 +105,7 @@ class IterationHandler:
             current_solution = self.execution_queue.pop_task()
 
             while current_solution is not None:
+                self.generated_solutions
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
@@ -112,11 +115,9 @@ class IterationHandler:
                     print("==============")
                     # print("Instead of copying the files, reassign paths to new allocation json")
                     self.jsonManager.retrieve_json_from_id(current_solution)
+                    self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
-
-                    print(self.resource_manager.constraints_json)
-                    print(self.resource_manager.time_table)
                     self.current_starting_id = current_solution
                     return [pools_info,
                             simulation_info,

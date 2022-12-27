@@ -40,12 +40,9 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
             max_iterations_reached = False
             break
-        # TODO
-        #   FRAGMENTATION INDEX OF CALENDARS
 
         iteration_info = it_handler.next()
-
-        solution_resolve_optimization(iteration_info, it_handler, iterations_count, rm,
+        solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                       only_calendar)
 
     save_stats_file(log_name,
@@ -91,54 +88,62 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
 
         for task in tasks_of_resource:
             # for res in resource_to_optimize:
-            actual_resource_info = [pools_info.pools[resource_to_optimize]]
+            actual_resource_info = pools_info.task_pools[task]
             resource_copy = copy.deepcopy(actual_resource_info)
-
-            for res in resource_copy:
-                ready_to_sim = resolve_remove_resource_json_information(res, res_manager, task)
-                if ready_to_sim[0]:
-                    print("Tried Removing Resource " + str(res.id))
-                    new_res_manager = ready_to_sim[1]
-                    iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
-                    new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
-                                              new_res_manager.get_task_pools())
-
-                    if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                        return True
-                    else:
-                        # Replace timetable and constraints with updated jsons.
-                        with open(res_manager.temp_timetable, "r") as _backup_ttb, open(res_manager.time_table,
-                                                                                        "w") as _changed_ttb:
-                            _changed_ttb.write(_backup_ttb.read())
-                        with open(res_manager.temp_constraints, "r") as _backup_cons, open(
-                                res_manager.constraints_json,
-                                "w") as _changed_cons:
-                            _changed_cons.write(_backup_cons.read())
-                        new_res_manager = RosterManager(res_manager.roster.roster_name, res_manager.time_table,
-                                                        res_manager.constraints_json)
+            if len(actual_resource_info) == 1:
+                # Only 1 resource exists, cannot remove this one.
+                print("only 1 resource")
+                continue
+            elif len(actual_resource_info) > 1:
+                # More than 1 resource can do task, try remove
+                print("more than 1resource")
+                for res in resource_copy:
+                    ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
+                    if ready_to_sim[0]:
+                        print("Tried Removing Resource " + str(res['id']))
+                        new_res_manager = ready_to_sim[1]
                         iterations_handler.resource_manager = new_res_manager
                         iterations_handler.time_table_path = new_res_manager.time_table
+                        new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
+                                                  new_res_manager.get_task_pools())
+
+                        if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                            return True
+                        else:
+                            # Replace timetable and constraints with updated jsons.
+                            shutil.copyfile(res_manager.temp_timetable, res_manager.time_table)
+                            shutil.copyfile(res_manager.temp_constraints, res_manager.constraints_json)
+
+                            new_res_manager = RosterManager(res_manager.roster.roster_name, res_manager.time_table,
+                                                            res_manager.constraints_json)
+                            iterations_handler.resource_manager = new_res_manager
+                            iterations_handler.time_table_path = new_res_manager.time_table
+                    else:
+                        # Replace timetable and constraints with updated jsons.
+                        shutil.copyfile(res_manager.temp_timetable, res_manager.time_table)
+                        shutil.copyfile(res_manager.temp_constraints, res_manager.constraints_json)
     return False
 
 
-def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count, resource_manager,
+def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count,
                                   only_calendar):
     print("WT")
     s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
-                                                  resource_manager)
-    print("Cost")
-    s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, resource_manager)
-    print("IT")
-    s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, resource_manager)
+                                                  iterations_handler.resource_manager)
+    # print("Cost")
+    # s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, resource_manager)
+    # print("IT")
+    # s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, resource_manager)
 
     if not only_calendar:
-        print("WT | Add")
-        s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, resource_manager)
-        print("Cost | Remove")
-        s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, resource_manager)
-        return s1 or s2 or s3 or s4 or s5
-    return s1 or s2 or s3
+        # print("WT | Add")
+        # s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, resource_manager)
+        # print("Cost | Remove")
+        # s4 = True
+        s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+        # return s1 or s2 or s3 or s4 or s5
+        return s1 or s5
+    # return s1 or s2 or s3
 
 
 def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):
@@ -170,36 +175,40 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
         task_resource_distribution = ttb['task_resource_distribution']
         resource_calendars = ttb['resource_calendars']
 
-        # 0. Find first occurrence of resource and rewrite assigned_tasks
-        resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_remove), None)
-        resource_profiles_list = resource_task_profile['resource_list']
-        resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
-        index = next((i for i, item in enumerate(resource_profiles_list) if item['id'] == resource_id), -1)
-
-        new_profile = copy.deepcopy(resource_to_be_copied)
-        new_profile['assigned_tasks'] = resource['assigned_tasks']
-
-        # 1. Remove task from resource profile
-        del resource_task_profile['resource_list'][index]
-        for index, item in enumerate(resource_profiles):
-            if item['id'] == task_to_remove:
-                resource_profiles[index] = resource_task_profile
-
-        # 2. For each task where resource performs, replace with new profile
+        # A. Enumerate resource_profiles and replace each occurrence with updated resource_profile
         for profile in resource_profiles:
-            for res in profile['resource_list']:
-                if res['id'] == resource['id']:
-                    profile['resource_list'].remove(res)
-                    profile['resource_list'].append(new_profile)
+            # If task_id == task that got removed from resource -> Remove resource from resource_list
+            if profile['id'] == task_to_remove:
+                for r_in_list in profile['resource_list']:
+                    if r_in_list['id'] == resource_id:
+                        profile['resource_list'].remove(r_in_list)
+                        to_copy = copy.deepcopy(profile)
+                        resource_profiles.remove(profile)
+                        resource_profiles.append(to_copy)
 
-        # 3. For each task where resource no longer performs, remove task_resource_distribution
+            # For each task where resource also performs, update that resource_list entry with updated resource_profile
+            for task_id in resource['assigned_tasks']:
+                if profile['id'] == task_id:
+                    for r_in_list in profile['resource_list']:
+                        if r_in_list['id'] == resource_id:
+                            profile['resource_list'].remove(r_in_list)
+                            profile['resource_list'].append(resource)
+                            to_copy = copy.deepcopy(profile)
+                            resource_profiles.remove(profile)
+                            resource_profiles.append(to_copy)
+
+        # B. Enumerate task_resource_distributions and remove distro from task_to_remove
         for t_r_dis in task_resource_distribution:
             if t_r_dis['task_id'] == task_to_remove:
                 for res in t_r_dis['resources']:
                     if res['resource_id'] == resource['id']:
                         t_r_dis['resources'].remove(res)
+                        to_copy = copy.deepcopy(t_r_dis)
+                        task_resource_distribution.remove(t_r_dis)
+                        task_resource_distribution.append(to_copy)
 
-        # 4. Overwrite timetable JSON.
+        # C. Write updated information to JSON.
+
         rest_of_info = {'resource_profiles': resource_profiles,
                         'arrival_time_distribution': ttb['arrival_time_distribution'],
                         'arrival_time_calendar': ttb['arrival_time_calendar'],
@@ -215,56 +224,125 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
     return False, None
 
 
-def resolve_remove_resource_json_information(resource, roster_manager, task_to_improve):
+# 0. Find first occurrence of resource and rewrite assigned_tasks
+# resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_remove), None)
+# resource_profiles_list = resource_task_profile['resource_list']
+# resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
+# index = next((i for i, item in enumerate(resource_profiles_list) if item['id'] == resource_id), -1)
+
+# new_profile = copy.deepcopy(resource_to_be_copied)
+# new_profile['assigned_tasks'] = resource['assigned_tasks']
+
+# 1. Remove task from resource profile
+# del resource_task_profile['resource_list'][index]
+# for index, item in enumerate(resource_profiles):
+#     if item['id'] == task_to_remove:
+#         resource_profiles[index] = resource_task_profile
+
+# 2. For each task where resource performs, replace with new profile
+# for profile in resource_profiles:
+#     for res in profile['resource_list']:
+#         if res['id'] == resource['id']:
+#             profile['resource_list'].remove(res)
+#             profile['resource_list'].append(new_profile)
+
+# 3. For each task where resource no longer performs, remove task_resource_distribution
+
+
+def resolve_remove_resource_json_information(resource, roster_manager):
     # 1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
-    with open(roster_manager.time_table, "r") as _old_timetable, open(roster_manager.temp_timetable,
-                                                                      "w") as _new_timetable:
-        _new_timetable.write(_old_timetable.read())
-    with open(roster_manager.constraints_json, "r") as _old_constraints, open(roster_manager.temp_constraints,
-                                                                              "w") as _new_constraints:
-        _new_constraints.write(_old_constraints.read())
+    shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
+    shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
+
     try:
-        resource_id = resource.id
+        resource_id = resource['id']
+        print("Try to remove " + resource_id)
         with open(roster_manager.time_table, 'r') as t_read:
             ttb = json.load(t_read)
         resource_profiles = ttb['resource_profiles']
         task_resource_distribution = ttb['task_resource_distribution']
         resource_calendars = ttb['resource_calendars']
 
-        # 1. make changes to resource_profiles
-        resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
-        resource_profiles_list = resource_task_profile['resource_list']
-        resource_to_be_removed = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
+        # A.
+        print(resource['assigned_tasks'])
+        for task_id in resource['assigned_tasks']:
+            for profile in resource_profiles:
+                if profile['id'] == task_id:
+                    for r_in_list in profile['resource_list']:
+                        if r_in_list['id'] == resource_id:
+                            profile['resource_list'].remove(r_in_list)
+                            to_copy = copy.deepcopy(profile)
+                            resource_profiles.remove(profile)
+                            resource_profiles.append(to_copy)
 
-        resource_profiles_list.remove(resource_to_be_removed)
-        resource_task_profile['resource_list'] = resource_profiles_list
+        # for profile in resource_profiles:
+        #     # For each task where resource also performs, update that resource_list entry
+        #     for task_id in resource['assigned_tasks']:
+        #         if profile['id'] == task_id:
+        #             for r_in_list in profile['resource_list']:
+        #                 if r_in_list['id'] == resource_id:
+        #                     profile['resource_list'].remove(r_in_list)
+        #                     to_copy = copy.deepcopy(profile)
+        #                     resource_profiles.remove(profile)
+        #                     resource_profiles.append(to_copy)
+        # B. Enumerate task_resource_distributions and remove distro from task_to_remove
+        for task_id in resource['assigned_tasks']:
+            for t_r_dis in task_resource_distribution:
+                if t_r_dis['task_id'] == task_id:
+                    for res in t_r_dis['resources']:
+                        if res['resource_id'] == resource_id:
+                            t_r_dis['resources'].remove(res)
+                            to_copy = copy.deepcopy(t_r_dis)
+                            task_resource_distribution.remove(t_r_dis)
+                            task_resource_distribution.append(to_copy)
+
+        resource_to_be_removed = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
+        resource_calendars.remove(resource_to_be_removed)
+
+        # 5.2 After all changes have been made, overwrite JSON with timetable.
+        rest_of_info = {'resource_profiles': resource_profiles,
+                        'arrival_time_distribution': ttb['arrival_time_distribution'],
+                        'arrival_time_calendar': ttb['arrival_time_calendar'],
+                        'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
+                        'task_resource_distribution': task_resource_distribution,
+                        'event_distribution': ttb['event_distribution'],
+                        'resource_calendars': resource_calendars}
+
+        with open(roster_manager.time_table, 'w') as out:
+            out.write(json.dumps(rest_of_info, indent=4))
+
+        # 1. make changes to resource_profiles
+        # resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
+        # resource_profiles_list = resource_task_profile['resource_list']
+        # resource_to_be_removed = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
+
+        # resource_profiles_list.remove(resource_to_be_removed)
+        # resource_task_profile['resource_list'] = resource_profiles_list
         # 1.2 Replace entire resource_profile with new profile
-        for index, item in enumerate(resource_profiles):
-            for item_resource in item['resource_list']:
-                if item_resource['id'] == resource_id:
-                    item['resource_list'].remove(item_resource)
-            # if item['id'] == task_to_improve:
-            #     del resource_profiles[index]
+        # for index, item in enumerate(resource_profiles):
+        #     for item_resource in item['resource_list']:
+        #         if item_resource['id'] == resource_id:
+        #             item['resource_list'].remove(item_resource)
 
         # 2. make changes to task_resource_distributions
-        task_resource_distro = next((x for x in task_resource_distribution if x['task_id'] == task_to_improve), None)
-        task_profile_resource_list = task_resource_distro['resources']
-        resource_to_be_removed = next((y for y in task_profile_resource_list if y['resource_id'] == resource_id), None)
-
-        task_profile_resource_list.remove(resource_to_be_removed)
-
-        task_resource_distro['resources'] = task_profile_resource_list
-
-        for index, item in enumerate(task_resource_distribution):
-            for item_resource in item['resources']:
-                if item_resource['resource_id'] == resource_id:
-                    item['resources'].remove(item_resource)
+        # task_resource_distro = next((x for x in task_resource_distribution if x['task_id'] == task_to_improve), None)
+        # task_profile_resource_list = task_resource_distro['resources']
+        # resource_to_be_removed = next((y for y in task_profile_resource_list if y['resource_id'] == resource_id), None)
+        #
+        # task_profile_resource_list.remove(resource_to_be_removed)
+        #
+        # task_resource_distro['resources'] = task_profile_resource_list
+        #
+        # for index, item in enumerate(task_resource_distribution):
+        #     for item_resource in item['resources']:
+        #         if item_resource['resource_id'] == resource_id:
+        #             item['resources'].remove(item_resource)
             # if item['task_id'] == task_to_improve:
             #     del task_resource_distribution[index]
 
         # 3. Make changes to resource calendar
-        resource_to_be_removed = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
-        resource_calendars.remove(resource_to_be_removed)
+        # resource_to_be_removed = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
+        # resource_calendars.remove(resource_to_be_removed)
 
         # 4. Make changes to constraints json
         with open(roster_manager.constraints_json, 'r') as c_read:
@@ -284,23 +362,15 @@ def resolve_remove_resource_json_information(resource, roster_manager, task_to_i
 
         with open(roster_manager.constraints_json, 'w') as c_write:
             c_write.write(json.dumps(constraints_info, indent=4))
-        # 5.2 After all changes have been made, overwrite JSON with timetable.
-        rest_of_info = {'resource_profiles': resource_profiles,
-                        'arrival_time_distribution': ttb['arrival_time_distribution'],
-                        'arrival_time_calendar': ttb['arrival_time_calendar'],
-                        'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
-                        'task_resource_distribution': task_resource_distribution,
-                        'event_distribution': ttb['event_distribution'],
-                        'resource_calendars': resource_calendars}
 
-        with open(roster_manager.time_table, 'w') as out:
-            out.write(json.dumps(rest_of_info, indent=4))
 
+        print("JUST BEFORE RETURN TRUE")
         return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
                                    roster_manager.constraints_json)
     except Exception as n:
         print(n)
         return False, None
+
 
 def resolve_add_resource_json_information(resource, roster_manager, task_to_improve):
     shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
@@ -315,74 +385,45 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         task_resource_distribution = ttb['task_resource_distribution']
         resource_calendars = ttb['resource_calendars']
 
-        # 1. Get resource_profile to copy
-        resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
-        resource_profiles_list = resource_task_profile['resource_list']
-        resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
-        new_profile = copy.deepcopy(resource_to_be_copied)
-
-        # 1.1 Make changes to new_profile
+        to_be_added = copy.deepcopy(resource)
         k = str(time.time()).encode('utf-8')
         h = hashlib.blake2b(key=k, digest_size=16)
 
         # Add hex digests to create unique id's for new copies
         # Add only task_to_improve as assigned_tasks
-        new_profile['id'] += "_COPY" + h.hexdigest()[:10]
-        new_profile['name'] += "_COPY" + h.hexdigest()[:10]
-        new_profile['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
-        new_profile['assigned_tasks'] = [task_to_improve]
+        # 1.1 Make changes to new_profile
+        to_be_added['id'] += "_COPY" + h.hexdigest()[:10]
+        to_be_added['name'] += "_COPY" + h.hexdigest()[:10]
+        to_be_added['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+        to_be_added['assigned_tasks'] = [task_to_improve]
 
-        # Add new profile to resource_profiles_list
-        resource_profiles_list.append(new_profile)
-        resource_task_profile['resource_list'] = resource_profiles_list
+        for profile in resource_profiles:
+            if profile['id'] == task_to_improve:
+                profile['resource_list'].append(to_be_added)
+                profile_copy = copy.deepcopy(profile)
+                resource_profiles.remove(profile)
+                resource_profiles.append(profile_copy)
 
-        # 1.2 Replace entire resource_profile with new profile
-        for index, item in enumerate(resource_profiles):
-            if item['id'] == task_to_improve:
-                resource_profiles[index] = resource_task_profile
 
-        # 2. make changes to task_resource_distributions
-        task_resource_distro = next((x for x in task_resource_distribution if x['task_id'] == task_to_improve), None)
-        task_profile_resource_list = task_resource_distro['resources']
-        resource_to_be_copied = next((y for y in task_profile_resource_list if y['resource_id'] == resource_id), None)
-        new_distribution = copy.deepcopy(resource_to_be_copied)
-        new_distribution['resource_id'] += "_COPY" + h.hexdigest()[:10]
-        task_profile_resource_list.append(new_distribution)
+        for task_distr in task_resource_distribution:
+            if task_distr['task_id'] == task_to_improve:
+                for t_d_r in task_distr['resources']:
+                    if t_d_r['resource_id'] == resource_id:
+                        t_d_r_to_add = copy.deepcopy(t_d_r)
+                        t_d_r_to_add['resource_id'] += "_COPY" + h.hexdigest()[:10]
+                        task_distr['resources'].append(t_d_r_to_add)
 
-        task_resource_distro['resources'] = task_profile_resource_list
+                        task_distr_copy = copy.deepcopy(task_distr)
+                        task_resource_distribution.remove(task_distr)
+                        task_resource_distribution.append(task_distr_copy)
 
-        for index, item in enumerate(task_resource_distribution):
-            if item['task_id'] == task_to_improve:
-                task_resource_distribution[index] = task_resource_distro
+        for r_calendar in resource_calendars:
+            if r_calendar['id'] == resource_id+"timetable":
+                calendar_to_be_added = copy.deepcopy(r_calendar)
+                calendar_to_be_added['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+                calendar_to_be_added['name'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+                resource_calendars.append(calendar_to_be_added)
 
-        # 3. Make changes to resource calendar
-        resource_to_be_copied = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
-        new_resource = copy.deepcopy(resource_to_be_copied)
-        new_resource['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
-        new_resource['name'] = new_resource['id']
-
-        resource_calendars.append(new_resource)
-
-        # 4. Make changes to constraints json
-        with open(roster_manager.constraints_json, 'r') as c_read:
-            cons = json.load(c_read)
-        constraint_profiles = cons['resources']
-        constraints_to_be_copied = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"), None)
-        new_constraints = copy.deepcopy(constraints_to_be_copied)
-        new_constraints['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
-
-        constraint_profiles.append(new_constraints)
-        # 5.1 After all changes have been made, overwrite JSON with constraints.
-        constraints_info = {'time_var': cons['time_var'],
-                            'max_cap': cons['max_cap'],
-                            'max_shift_size': cons['max_shift_size'],
-                            'max_shift_blocks': cons['max_shift_blocks'],
-                            'hours_in_day': cons['hours_in_day'],
-                            'resources': constraint_profiles}
-
-        with open(roster_manager.constraints_json, 'w') as t_write:
-            t_write.write(json.dumps(constraints_info, indent=4))
-        # 5.2 After all changes have been made, overwrite JSON with timetable.
         rest_of_info = {'resource_profiles': resource_profiles,
                         'arrival_time_distribution': ttb['arrival_time_distribution'],
                         'arrival_time_calendar': ttb['arrival_time_calendar'],
@@ -394,10 +435,84 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         with open(roster_manager.time_table, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
 
+
+        with open(roster_manager.constraints_json, 'r') as c_read:
+            cons = json.load(c_read)
+        constraint_profiles = cons['resources']
+
+        for c_profile in constraint_profiles:
+            if c_profile['id'] == resource_id+"timetable":
+                cons_to_be_added = copy.deepcopy(c_profile)
+                cons_to_be_added['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+                cons['resources'].append(cons_to_be_added)
+
+        constraints_info = {'time_var': cons['time_var'],
+                            'max_cap': cons['max_cap'],
+                            'max_shift_size': cons['max_shift_size'],
+                            'max_shift_blocks': cons['max_shift_blocks'],
+                            'hours_in_day': cons['hours_in_day'],
+                            'resources': constraint_profiles}
+
+        with open(roster_manager.constraints_json, 'w') as t_write:
+            t_write.write(json.dumps(constraints_info, indent=4))
+
         return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
                                    roster_manager.constraints_json)
+
+        # 1. Get resource_profile to copy
+        # resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
+        # resource_profiles_list = resource_task_profile['resource_list']
+        # resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
+        # new_profile = copy.deepcopy(resource_to_be_copied)
+
+
+
+        # Add new profile to resource_profiles_list
+        # resource_profiles_list.append(new_profile)
+        # resource_task_profile['resource_list'] = resource_profiles_list
+
+        # 1.2 Replace entire resource_profile with new profile
+        # for index, item in enumerate(resource_profiles):
+        #     if item['id'] == task_to_improve:
+        #         resource_profiles[index] = resource_task_profile
+
+        # 2. make changes to task_resource_distributions
+        # task_resource_distro = next((x for x in task_resource_distribution if x['task_id'] == task_to_improve), None)
+        # task_profile_resource_list = task_resource_distro['resources']
+        # resource_to_be_copied = next((y for y in task_profile_resource_list if y['resource_id'] == resource_id), None)
+        # new_distribution = copy.deepcopy(resource_to_be_copied)
+        # new_distribution['resource_id'] += "_COPY" + h.hexdigest()[:10]
+        # task_profile_resource_list.append(new_distribution)
+        #
+        # task_resource_distro['resources'] = task_profile_resource_list
+        #
+        # for index, item in enumerate(task_resource_distribution):
+        #     if item['task_id'] == task_to_improve:
+        #         task_resource_distribution[index] = task_resource_distro
+        #
+        # # 3. Make changes to resource calendar
+        # resource_to_be_copied = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
+        # new_resource = copy.deepcopy(resource_to_be_copied)
+        # new_resource['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+        # new_resource['name'] = new_resource['id']
+
+        # resource_calendars.append(new_resource)
+
+        # 4. Make changes to constraints json
+        # with open(roster_manager.constraints_json, 'r') as c_read:
+        #     cons = json.load(c_read)
+        # constraint_profiles = cons['resources']
+        # constraints_to_be_copied = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"), None)
+        # new_constraints = copy.deepcopy(constraints_to_be_copied)
+        # new_constraints['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
+        #
+        # constraint_profiles.append(new_constraints)
+        # 5.1 After all changes have been made, overwrite JSON with constraints.
+
+        # 5.2 After all changes have been made, overwrite JSON with timetable.
+
     except Exception as n:
-        print(n)
+        raise Exception(n)
         return False, None
 
 

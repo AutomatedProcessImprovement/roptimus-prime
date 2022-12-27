@@ -63,7 +63,7 @@ def perform_simulations(pools_info,
     s_res_list = []
     traces_list = []
     for i in range(5):
-        s_res, traces = process_simulations(model_file_path, json_path, 1500, pools_info)
+        s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
         s_res_list.append(s_res)
         traces_list.append(traces)
 
@@ -102,7 +102,7 @@ def estimate_median_absolute_deviation(pools_info, log_name, simulation_results,
     simulation_info.deviation_info = DeviationInfo(c_times[int(len(c_times) / 2)], duration[int(len(duration) / 2)])
 
     print("Simulation Full Time:    %s" % str(datetime.timedelta(seconds=total_time)))
-    print("Simulation Average Time: %s" % str(datetime.timedelta(seconds=(total_time / 15))))
+    print("Simulation Average Time: %s" % str(datetime.timedelta(seconds=(total_time / 5))))
     print("Simulation Parallel Time: %s" % str(datetime.timedelta(seconds=total_parallel_time)))
     save_simulation_results(log_name, pools_info, simulation_results, simulation_info)
 
