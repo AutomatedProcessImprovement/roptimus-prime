@@ -85,8 +85,8 @@ class JsonManager:
             print(self.base_path_folders + str(solution_id) + "/timetable.json")
             shutil.copyfile(self.base_path_folders + str(solution_id) + "/constraints.json", cons_path)
             shutil.copyfile(self.base_path_folders + str(solution_id) + "/timetable.json", ttb_path)
-            shutil.copyfile(self.base_path_folders + str(solution_id) + "/model.bpmn",
-                               "./test_assets/CopiedModel.bpmn")
+            # shutil.copyfile(self.base_path_folders + str(solution_id) + "/model.bpmn",
+            #                    "./test_assets/CopiedModel.bpmn")
 
         else:
             print("Err: Solution ID not found.")

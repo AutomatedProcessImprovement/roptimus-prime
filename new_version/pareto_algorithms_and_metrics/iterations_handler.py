@@ -110,7 +110,13 @@ class IterationHandler:
                     print("NEXT ITERATION STARTING ALLOCATION")
                     print(pools_info.id)
                     print("==============")
+                    # print("Instead of copying the files, reassign paths to new allocation json")
                     self.jsonManager.retrieve_json_from_id(current_solution)
+                    # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
+                    # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
+
+                    print(self.resource_manager.constraints_json)
+                    print(self.resource_manager.time_table)
                     self.current_starting_id = current_solution
                     return [pools_info,
                             simulation_info,
