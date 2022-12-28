@@ -69,7 +69,7 @@ def perform_simulations(pools_info,
 
     # Multiprocessing used to reduce total processing time, dependent on # cores in system
     # pool = multiprocessing.Pool(5)
-    # async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 1500, pools_info)) for i in
+    # async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 550, pools_info)) for i in
     #                  range(simulations_count)]
     # simulation_results = [ar.get()[0] for ar in async_results]
     # traces = [ar.get()[1] for ar in async_results]
