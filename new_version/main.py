@@ -5,7 +5,7 @@ from new_version.pareto_algorithms_and_metrics.pareto_metrics import GlobalParet
 from new_version.support_modules.plot_statistics_handler import print_solution_statistics
 
 to_execute = {'HC-STRICT': True,
-              'HC-FLEX': True,
+              'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}

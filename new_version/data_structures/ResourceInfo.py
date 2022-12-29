@@ -150,8 +150,7 @@ class Resource:
 
 
     def get_total_cost(self):
-        # Reduced to cost per second.
-        return self.cost_per_hour / 3600
+        return self.cost_per_hour
 
     def set_bpm_resource_name(self, name):
         self.bpm_resource_name = name

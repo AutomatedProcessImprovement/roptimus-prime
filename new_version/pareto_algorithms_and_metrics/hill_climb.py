@@ -127,21 +127,21 @@ def solution_resolve_optimization(iteration_info, iterations_handler, iterations
     print("WT")
     s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
                                                   iterations_handler.resource_manager)
-    # print("Cost")
-    # s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
-    # print("IT")
-    # s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+    print("Cost")
+    s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+    print("IT")
+    s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
 
     if not only_calendar:
-        print("WT | Add")
-        s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
-        print("Cost | Remove")
+        # print("WT | Add")
+        # s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+        # print("Cost | Remove")
         # s4 = True
-        s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+        # s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
         # return s1 or s2 or s3 or s4 or s5
-        return s1 or s4 or s5
-    return s1
-    # return s1 or s2 or s3
+        return s1 or s2 or s3
+    # return s1
+    return s1 or s2 or s3
 
 
 def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):

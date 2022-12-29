@@ -27,7 +27,7 @@ class SimulationInfo:
         return self.mean_process_cycle_time
 
     def execution_cost(self):
-        return self.pools_info.pools_total_cost * self.simulation_duration()
+        return self.pools_info.pools_total_cost * self.simulation_duration() / 3600
 
     def simulation_duration(self):
         return (self.simulation_end_date - self.simulation_start_date).total_seconds()
@@ -65,7 +65,7 @@ class SimulationInfo:
         for r_pool in pool_names:
             pool_name = r_pool['id']
             if pool_name not in self.pool_cost:
-                self.pool_cost[pool_name] = total_cost * self.simulation_duration()
+                self.pool_cost[pool_name] = (total_cost * self.simulation_duration() / 3600)
                 self.total_pool_cost += self.pool_cost[pool_name]
             if pool_name not in self.pool_time:
                 self.pool_time[pool_name] = 0
