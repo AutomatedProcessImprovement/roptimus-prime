@@ -3,7 +3,7 @@
 
   <process id="proc_25548982">
     <extensionElements>
-      <qbp:processSimulationInfo id="qbp_c592be50-72c7-4bd8-829d-6dca98311e4e" processInstances="" currency="EUR" startDateTime="2022-12-07T09:00:00.000Z">
+      <qbp:processSimulationInfo id="qbp_c592be50-72c7-4bd8-829d-6dca98311e4e" processInstances="550" currency="EUR" startDateTime="2022-12-07T09:00:00.000Z">
         <qbp:errors>
           <qbp:error id="processInstances" elementId="Total number of cases" message="Total number of cases must not be empty" />
           <qbp:error id="qbp_c592be50-72c7-4bd8-829d-6dca98311e4eFIXED-mean" elementId="Inter arrival time" message="Value must not be empty" />

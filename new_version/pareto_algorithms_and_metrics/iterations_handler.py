@@ -98,7 +98,11 @@ class IterationHandler:
         print("Reset the timetable and constraints for next function eval.")
         self.jsonManager.retrieve_json_from_id(self.current_starting_id)
         self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
+        print("==============")
+        print("CLEANED UP JSON TO STARTING ALLOCATION")
         print(self.current_starting_id)
+        print("==============")
+
 
     def _move_next(self):
         if not self.execution_queue.is_empty():
@@ -113,7 +117,6 @@ class IterationHandler:
                     print("NEXT ITERATION STARTING ALLOCATION")
                     print(pools_info.id)
                     print("==============")
-                    # print("Instead of copying the files, reassign paths to new allocation json")
                     self.jsonManager.retrieve_json_from_id(current_solution)
                     self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
@@ -134,11 +137,15 @@ class IterationHandler:
         return sol_id in self.generated_solutions
 
     def try_new_solution(self, pools_info, distance):
-        self.resource_manager.update_roster(pools_info)
+        print("try solition")
+        print(pools_info)
+        # self.resource_manager.update_roster(pools_info)
+
+        print("Pools info id in generated solutions? " + str(pools_info.id in self.generated_solutions))
         if pools_info.id not in self.generated_solutions:
             # update_resource_pools(pools_info.pools, pools_info.task_pools)  # Updating Simulation Model with new pool allocation
             # Update simulation info with new pools info
-
+            # raise Exception("CRASH ON PURPOSE")
             (simulation_info, traces) = perform_simulations(pools_info,
                                                             self.log_name,
                                                             self.simulation_count,
@@ -156,7 +163,9 @@ class IterationHandler:
                 self.check_optimals_tabu_search(pools_info, simulation_info)
             # Regardless of if it's a valid pareto or not, reset the jsons
             self.clean_up_json()
+            print("after cleanup, returning valid")
             return is_valid
+        self.clean_up_json()
         return False
 
     def check_last_pareto_update_distance(self, pools_info, simulation_info, is_valid):

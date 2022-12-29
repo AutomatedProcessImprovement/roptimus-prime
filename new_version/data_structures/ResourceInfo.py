@@ -2,7 +2,6 @@ import datetime
 from itertools import groupby
 
 import pandas as pd
-
 from new_version.support_modules.helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, \
     _get_consecutive_shift_lengths, \
     _bitmap_to_valid_structure
@@ -148,6 +147,7 @@ class Resource:
         self.shifts['sunday'] = sunday
 
         self.custom_id = str([monday, tuesday, wednesday, thursday, friday, saturday, sunday])
+
 
     def get_total_cost(self):
         # Reduced to cost per second.

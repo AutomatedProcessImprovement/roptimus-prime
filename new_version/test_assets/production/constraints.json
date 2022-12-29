@@ -2006,6 +2006,86 @@
             }
         },
         {
+            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 8,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 2,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 16711695,
+                    "tuesday": 16711695,
+                    "wednesday": 16711695,
+                    "thursday": 16711695,
+                    "friday": 16711695,
+                    "saturday": 16777215,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 8,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 2,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 16711695,
+                    "tuesday": 16711695,
+                    "wednesday": 16711695,
+                    "thursday": 16711695,
+                    "friday": 16711695,
+                    "saturday": 16777215,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
             "id": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_1timetable",
             "constraints": {
                 "global_constraints": {
@@ -2073,86 +2153,6 @@
                     "friday": 16711695,
                     "saturday": 16777215,
                     "sunday": 16777215
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2_COPYaa7ab5cf26timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_16_COPY0ed9fea057timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,

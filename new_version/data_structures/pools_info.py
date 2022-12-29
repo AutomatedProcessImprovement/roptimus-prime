@@ -1,5 +1,5 @@
 import uuid
-
+from new_version.support_modules.key_generator import generate_custom_resource_id, generate_pools_info_id
 
 class PoolInfo:
     def __init__(self, resource_map, task_pools):
@@ -19,8 +19,13 @@ class PoolInfo:
                         else:
                             self.task_allocations[res].append(self._task_list.index(task))
         # print(self.task_allocations)
-        self.id = str(uuid.uuid4())
-        # self.id = '_'.join(str(v.custom_id) + str(self.task_allocations[v.id]) for v in self.pools.values())
+        # self.id = str(uuid.uuid4())
+        ids_list = []
+        for v in self.pools.values():
+            ids_list.append(generate_custom_resource_id(str(v.custom_id) + str(self.task_allocations[v.id]), v.id))
+        self.id = generate_pools_info_id(ids_list)
+
+        # self.id = '_'.join() for v in self.pools.values())
         # print(self.id)
         # TODO pool cost and ho to work with "total resources????"
         self.pools_total_cost = 1

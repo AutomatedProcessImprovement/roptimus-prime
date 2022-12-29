@@ -6045,6 +6045,18 @@
             "name": "Role 3",
             "resource_list": [
                 {
+                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
+                    "name": "Role 3_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
+                    "assigned_tasks": [
+                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
+                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
+                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
+                    ]
+                },
+                {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
                     "cost_per_hour": 1,
@@ -6079,7 +6091,13 @@
                         "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
                         "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "id": "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
+            "name": "Role 3",
+            "resource_list": [
                 {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
                     "name": "Role 3_1",
@@ -6088,15 +6106,10 @@
                     "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
                     "assigned_tasks": [
                         "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
+                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
                         "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
                     ]
-                }
-            ]
-        },
-        {
-            "id": "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
-            "name": "Role 3",
-            "resource_list": [
+                },
                 {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
@@ -6140,6 +6153,18 @@
             "name": "Role 3",
             "resource_list": [
                 {
+                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
+                    "name": "Role 3_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
+                    "assigned_tasks": [
+                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
+                        "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
+                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
+                    ]
+                },
+                {
                     "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "name": "Role 3_2",
                     "cost_per_hour": 1,
@@ -6172,17 +6197,6 @@
                     "assigned_tasks": [
                         "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
                         "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
-                        "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
-                    ]
-                },
-                {
-                    "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
-                    "name": "Role 3_1",
-                    "cost_per_hour": 1,
-                    "amount": 1,
-                    "calendar": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
-                    "assigned_tasks": [
-                        "node_c9b2a72f-e36a-40d4-afd2-76dc35744920",
                         "node_8acf8b46-0c68-44e2-8ea6-493c42e5d716"
                     ]
                 }
@@ -12722,6 +12736,27 @@
             "task_id": "node_8fcf6ead-f5cf-4164-9680-41b464d80efb",
             "resources": [
                 {
+                    "resource_id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1",
+                    "distribution_name": "fix",
+                    "distribution_params": [
+                        {
+                            "value": 180.0
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 1.7976931348623157e+308
+                        }
+                    ]
+                },
+                {
                     "resource_id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2",
                     "distribution_name": "fix",
                     "distribution_params": [
@@ -14737,8 +14772,8 @@
                 {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
-                    "beginTime": "10:00:00",
-                    "endTime": "18:00:00"
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
                 },
                 {
                     "from": "THURSDAY",
@@ -14977,8 +15012,8 @@
                 {
                     "from": "MONDAY",
                     "to": "MONDAY",
-                    "beginTime": "08:00:00",
-                    "endTime": "16:00:00"
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
                 },
                 {
                     "from": "TUESDAY",
