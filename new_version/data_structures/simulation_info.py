@@ -14,11 +14,16 @@ class SimulationInfo:
         self.pool_utilization = dict()
 
         self.pool_time = dict()
+
         self.pool_cost = dict()
         self.total_pool_cost = 0
         self.total_pool_time = 0
 
         self.available_time = dict()
+
+    # TODO -> Add resources that did not participate in the process, put pool_time = 0 and pool_cost = duration * cost_hour
+    def init_pool_time_cost(self):
+        return
 
     def available_time(self):
         return self.available_time

@@ -62,7 +62,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(1, 10000, 0.08, 15)
+    execute_algorithm_variants(0, 10000, 0.08, 15)
     os._exit(0)
 
 

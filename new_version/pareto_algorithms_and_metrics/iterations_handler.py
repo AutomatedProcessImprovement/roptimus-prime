@@ -21,7 +21,7 @@ def _in_non_optimal_distance_thresold(distance):
 
 
 class IterationHandler:
-    def __init__(self, log_name, pools_info, simulation_count, is_tabu_search, with_mad, resource_manager):
+    def __init__(self, log_name, pools_info, is_tabu_search, with_mad, resource_manager):
 
         self.log_name = log_name
         self.is_tabu_search = is_tabu_search
@@ -30,8 +30,7 @@ class IterationHandler:
         self.resource_manager = resource_manager
         self.time_table_path = self.resource_manager.write_to_file()
 
-        self.simulation_count = simulation_count
-        simulation = perform_simulations(pools_info, log_name, simulation_count, 0,
+        simulation = perform_simulations(pools_info, log_name, 0,
                                          self.time_table_path)
         simulation_info = simulation[0]
         self.traces = simulation[1]
@@ -52,7 +51,7 @@ class IterationHandler:
 
         self.jsonManager = JsonManager()
         self.jsonManager.read_accepted_solution_timetable_to_json_files(
-            self.time_table_path, "./test_assets/production/constraints.json", pools_info.id)
+            self.time_table_path, self.resource_manager.constraints_json, pools_info.id)
         self.current_starting_id = pools_info.id
 
     def update_priorities(self):
@@ -97,7 +96,7 @@ class IterationHandler:
     def clean_up_json(self):
         print("Reset the timetable and constraints for next function eval.")
         self.jsonManager.retrieve_json_from_id(self.current_starting_id)
-        self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
+        self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/experiments/production/timetable.json", "./test_assets/experiments/production/constraints.json")
         print("==============")
         print("CLEANED UP JSON TO STARTING ALLOCATION")
         print(self.current_starting_id)
@@ -118,7 +117,7 @@ class IterationHandler:
                     print(pools_info.id)
                     print("==============")
                     self.jsonManager.retrieve_json_from_id(current_solution)
-                    self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/production/sim_json.json", "./test_assets/production/constraints.json")
+                    self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/experiments/production/timetable.json", "./test_assets/experiments/production/constraints.json")
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
@@ -148,7 +147,6 @@ class IterationHandler:
             # raise Exception("CRASH ON PURPOSE")
             (simulation_info, traces) = perform_simulations(pools_info,
                                                             self.log_name,
-                                                            self.simulation_count,
                                                             len(self.generated_solutions),
                                                             json_path=self.time_table_path)  # Running/retrieving simulation results
             self.traces = traces

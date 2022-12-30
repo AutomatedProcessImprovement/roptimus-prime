@@ -39,9 +39,9 @@ class JsonManager:
     def read_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
         ids = self.read_file_with_ids()
         if new_ttb_path == "":
-            new_ttb_path = "./test_assets/production/sim_json.json"
+            new_ttb_path = "./test_assets/experiments/production/timetable.json"
         if new_cons_path == "":
-            new_cons_path = "./test_assets/production/constraints.json"
+            new_cons_path = "./test_assets/experiments/production/constraints.json"
 
         out_ttb_path = self.base_path_folders + str(solution_id) + "/timetable.json"
         out_cons_path = self.base_path_folders + str(solution_id) + "/constraints.json"
@@ -77,8 +77,8 @@ class JsonManager:
                 f.write(str(sol) + "\n")
         return True
 
-    def retrieve_json_from_id(self, solution_id, ttb_path="./test_assets/production/sim_json.json",
-                              cons_path="./test_assets/production/constraints.json"):
+    def retrieve_json_from_id(self, solution_id, ttb_path="./test_assets/experiments/production/timetable.json",
+                              cons_path="./test_assets/experiments/production/constraints.json"):
         ids = self.read_file_with_ids()
         if solution_id in ids:
             print(self.base_path_folders + str(solution_id) + "/constraints.json")

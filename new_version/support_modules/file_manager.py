@@ -25,7 +25,7 @@ xes_simodbpmn_file_paths = {
     'purchasing_example': ['./input_files/xes_files/PurchasingExample.xes',
                            './input_files/bpmn_simod_models/PurchasingExample.bpmn'],
     'production': ['./input_files/xes_files/production.xes',
-                   './input_files/bpmn_simod_models/Production.bpmn'],
+                   './input_files/bpmn_simod_models/model.bpmn'],
     'insurance': ['./input_files/xes_files/insurance.xes',
                   './input_files/bpmn_simod_models/insurance.bpmn'],
     'call_centre': ['./input_files/xes_files/callcentre.xes',

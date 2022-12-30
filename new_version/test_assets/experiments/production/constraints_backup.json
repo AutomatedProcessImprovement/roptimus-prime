@@ -1,0 +1,1689 @@
+{
+    "time_var": 60,
+    "max_cap": 9999999999,
+    "max_shift_size": 24,
+    "max_shift_blocks": 24,
+    "hours_in_day": 24,
+    "resources": [
+        {
+            "id": "Starttimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling_2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling_3timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling_4timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling Q.C._1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning & Milling Q.C._2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID0998timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Laser Marking_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Lapping_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Lapping_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Round Grinding_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Round Grinding_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Round Grinding_2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Final Inspection Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Final Inspection Q.C._1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Final Inspection Q.C._2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID4820timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Packing_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Endtimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Flat Grinding_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Grinding Rework_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Setup_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_SETUP     Turning & Milling_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Final Inspection_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID3641timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Milling Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID4326timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Milling_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Fix_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Round  Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID3998timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Stress Relief_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turning Rework_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID4890timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "ID4851timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Turn & Mill. & Screw Assem_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Nitration Q.C._0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 40,
+                    "max_daily_cap": 24,
+                    "max_consecutive_cap": 8,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 20,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "None",
+                    "sunday": "None"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        }
+    ]
+}

@@ -10,38 +10,70 @@ from new_version.data_structures.solution_space import DeviationInfo
 from new_version.support_modules.file_manager import load_simulation_result
 from new_version.support_modules.file_manager import save_simulation_results
 from new_version.support_modules.file_manager import temp_bpmn_file
-
+from new_version.PROSIMOS_LOCAL.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
+from new_version.PROSIMOS_LOCAL.bpdfr_simulation_engine.resource_calendar import RCalendar
 
 def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2022-09-01T08:00:00.000+02:00")
+    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2012-03-13T00:00:00.000000+00:00")
+
+    _, cal_map, _, _, _, _ = parse_json_sim_parameters(json_path)
 
     simulation_info = SimulationInfo(pools_info)
     simulation_info.simulation_time = time.time() - starting_time
     simulation_start_end = extract_simulation_dates_from_simulation_log(result)
     simulation_info.update_simulation_period(simulation_start_end[0], simulation_start_end[1])
 
-    for i in result[2].keys():
-        simulation_info.update_resource_utilization(result[2][i].r_profile.resource_id, result[2][i].utilization)
-        simulation_info.update_resource_available_time(result[2][i].r_profile.resource_id, result[2][i].available_time)
-    for i in result[1].keys():
-        total_cost = 0
-        for resource in pools_info.task_pools[i]:
-            total_cost += resource['cost_per_hour']
-        total_cost = total_cost / len(pools_info.task_pools[i])
-        simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].waiting_time.avg),
-                                            float(result[1][i].duration.avg),
-                                            total_cost)
+    for pool in pools_info.pools:
+        if pool in result[2].keys():
+            simulation_info.update_resource_utilization(result[2][pool].r_profile.resource_id, result[2][pool].utilization)
+            simulation_info.update_resource_available_time(result[2][pool].r_profile.resource_id,
+                                                           result[2][pool].available_time)
+        else:
+            simulation_info.update_resource_utilization(pool, 0)
+            simulation_info.update_resource_available_time(pool, cal_map[pool].find_working_time(simulation_start_end[0],
+                                                                                         simulation_start_end[1]))
+
+    for i in pools_info.task_pools:
+        if i in result[1].keys():
+            total_cost = 0
+            for resource in pools_info.task_pools[i]:
+                total_cost += resource['cost_per_hour']
+            total_cost = total_cost / len(pools_info.task_pools[i])
+            simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].waiting_time.avg),
+                                                float(result[1][i].duration.avg),
+                                                total_cost)
+        else:
+            total_cost = 0
+            for resource in pools_info.task_pools[i]:
+                total_cost += resource['cost_per_hour']
+            total_cost = total_cost / len(pools_info.task_pools[i])
+            simulation_info.add_task_statistics(pools_info.task_pools, i,
+                                                float(0.0),
+                                                float(0.0),
+                                                total_cost)
     simulation_info.mean_process_cycle_time = float(result[0].cycle_time.avg)
+
+    # for i in result[2].keys():
+    #     simulation_info.update_resource_utilization(result[2][i].r_profile.resource_id, result[2][i].utilization)
+    #     simulation_info.update_resource_available_time(result[2][i].r_profile.resource_id, result[2][i].available_time)
+    # for i in result[1].keys():
+    #     total_cost = 0
+    #     for resource in pools_info.task_pools[i]:
+    #         total_cost += resource['cost_per_hour']
+    #     total_cost = total_cost / len(pools_info.task_pools[i])
+    #     simulation_info.add_task_statistics(pools_info.task_pools, i, float(result[1][i].waiting_time.avg),
+    #                                         float(result[1][i].duration.avg),
+    #                                         total_cost)
+    # simulation_info.mean_process_cycle_time = float(result[0].cycle_time.avg)
 
     return simulation_info, traces
 
 
 def perform_simulations(pools_info,
                         log_name,
-                        simulations_count,
                         solution_index,
                         json_path,
                         model_file_path=temp_bpmn_file,
@@ -62,7 +94,7 @@ def perform_simulations(pools_info,
     #     return simulated_info, traces
     s_res_list = []
     traces_list = []
-    for i in range(5):
+    for i in range(2):
         s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
         s_res_list.append(s_res)
         traces_list.append(traces)

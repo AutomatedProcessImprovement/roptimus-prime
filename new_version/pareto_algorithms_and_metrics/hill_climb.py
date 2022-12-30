@@ -17,33 +17,35 @@ import hashlib
 temp_bpmn_file = './test_assets/CopiedModel.bpmn'
 
 
-def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, tot_simulations,
-               is_tabu, with_mad, only_calendar):
+def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):
     cost_type = 1
 
     # SETUP
     copyfile(bpmn_path, temp_bpmn_file)
-    rm = RosterManager("DEFAULT_ROSTER2", time_table, constraints)
+    rm = RosterManager(approach, time_table, constraints)
 
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
+    algorithm_name += "_" + approach
 
     initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
-    it_handler = IterationHandler(log_name, initial_pools_info, tot_simulations, is_tabu, with_mad, rm)
+    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rm)
     max_iterations_reached = True
-    # max_resources = initial_pools_info.total_resoures
 
     iterations_count = [0]
-    # Setup start clause
-
     while it_handler.solutions_count() < max_func_ev:
         if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
             max_iterations_reached = False
             break
 
         iteration_info = it_handler.next()
-        solution_resolve_optimization(iteration_info, it_handler, iterations_count,
-                                      only_calendar)
+        if approach == 'only_calendar' or approach == 'only_add_remove' or approach == 'combined':
+            solution_resolve_optimization(iteration_info, it_handler, iterations_count,
+                                          approach)
+        if approach == 'first_calendar_then_add_remove':
+            pass
+        if approach == 'first_add_remove_then_calendar':
+            pass
 
     save_stats_file(log_name,
                     algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
@@ -68,6 +70,46 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
     if pools_info is None:
         return None
     iterations_count[0] += 1
+
+    # Try removing the resource with lowest util % first, if that doesnt work, then try by highest cost
+    resources_to_optimize = {}
+    # the first resource in pool_cost is the most expensive
+    resources_to_optimize = simulation_info.pool_utilization
+
+    resources_to_optimize = sort_resource_by_utilization(resources_to_optimize)
+    print("UTIL OPTIM -> REMOVE")
+    for resource in resources_to_optimize:
+        resource_to_optimize = resource
+        # Collect for each trace, the information of which task was executed on which day
+        tasks_of_resource = []
+        for task in pools_info.task_pools:
+            for res in pools_info.task_pools[task]:
+                if res['id'] == resource_to_optimize:
+                    tasks_of_resource.append(task)
+        just_a_task_to_get_resource_info = tasks_of_resource[0]
+
+        actual_resource_info = pools_info.task_pools[just_a_task_to_get_resource_info]
+        resource_copy = copy.deepcopy(actual_resource_info)
+        if len(actual_resource_info) > 1:
+            for res in resource_copy:
+                ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
+                if ready_to_sim[0]:
+                    new_res_manager = ready_to_sim[1]
+                    iterations_handler.resource_manager = new_res_manager
+                    iterations_handler.time_table_path = new_res_manager.time_table
+                    new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
+                                              new_res_manager.get_task_pools())
+
+                    print(iterations_handler.resource_manager.get_all_resources())
+
+                    if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                        return True
+                    else:
+                        _reset_jsons_rm_ith(res_manager,iterations_handler)
+
+                else:
+                    _reset_jsons(res_manager)
+    print("AFTER UTIL REMOVE")
 
     resources_to_optimize = {}
     # the first resource in pool_cost is the most expensive
@@ -123,103 +165,128 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
 
 
 def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count,
-                                  only_calendar):
-    print("WT")
-    s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
-                                                  iterations_handler.resource_manager)
-    print("Cost")
-    s2 = solution_traces_optimize_cost(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
-    print("IT")
-    s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
+                                  approach):
+    s1 = False
+    s2 = False
+    s3 = False
+    s4 = False
+    s5 = False
+    if approach == 'only_calendar' or approach == 'combined':
+        print("WT")
+        s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
+                                                      iterations_handler.resource_manager)
+        print("Cost")
+        s2 = solution_traces_optimize_cost(iteration_info, iterations_handler,
+                                           iterations_count, iterations_handler.resource_manager)
+        print("IT")
+        s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler,
+                                                   iterations_count, iterations_handler.resource_manager)
 
-    if not only_calendar:
-        # print("WT | Add")
-        # s4 = resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
-        # print("Cost | Remove")
-        # s4 = True
-        # s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, iterations_handler.resource_manager)
-        # return s1 or s2 or s3 or s4 or s5
-        return s1 or s2 or s3
-    # return s1
-    return s1 or s2 or s3
+    if approach == 'only_add_remove' or approach == 'combined':
+        print("WT | Add")
+        s4 = resolve_add_resources_in_process(iteration_info, iterations_handler,
+                                              iterations_count, iterations_handler.resource_manager)
+        print("Cost | Remove")
+        s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler,
+                                                 iterations_count, iterations_handler.resource_manager)
+
+    return s1 or s2 or s3 or s4 or s5
 
 
 def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):
     # 0.1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
     shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
     shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
+    try:
+        # 1. Find resource and check his tasks
+        tasks_resource_can_perform = resource['assigned_tasks']
+        potential_to_be_removed = [task for task in tasks_resource_can_perform if task != task_to_improve]
+        # 2. Count times resource performs certain task vs. total times task occurred.
+        lowest_number = sys.maxsize
+        task_to_remove = None
+        for task in potential_to_be_removed:
+            if task in task_resource_occurences.keys():
+                task_occ = task_resource_occurences[task]
+                # 3. If resource is not the only one performing that task, try remove task where resource influences the least.
+                if len(task_occ) > 1:
+                    print(task_occ.keys())
+                    if resource['id'] in task_occ.keys():
+                        if task_occ[resource['id']] <= lowest_number:
+                            lowest_number = task_occ[resource['id']]
+                            task_to_remove = task
 
-    # 1. Find resource and check his tasks
-    tasks_resource_can_perform = resource['assigned_tasks']
-    potential_to_be_removed = [task for task in tasks_resource_can_perform if task != task_to_improve]
-    # 2. Count times resource performs certain task vs. total times task occurred.
-    lowest_number = sys.maxsize
-    task_to_remove = None
-    for task in potential_to_be_removed:
-        task_occ = task_resource_occurences[task]
-        # 3. If resource is not the only one performing that task, try remove task where resource influences the least.
-        if len(task_occ) > 1:
-            if task_occ[resource['id']] < lowest_number:
-                lowest_number = task_occ[resource['id']]
-                task_to_remove = task
-    if task_to_remove is not None:
+        if task_to_remove is not None:
 
-        resource['assigned_tasks'].remove(task_to_remove)
+            resource['assigned_tasks'].remove(task_to_remove)
 
-        resource_id = resource['id']
-        with open(roster_manager.time_table, 'r') as t_read:
-            ttb = json.load(t_read)
-        resource_profiles = ttb['resource_profiles']
-        task_resource_distribution = ttb['task_resource_distribution']
-        resource_calendars = ttb['resource_calendars']
+            resource_id = resource['id']
+            with open(roster_manager.time_table, 'r') as t_read:
+                ttb = json.load(t_read)
+            resource_profiles = ttb['resource_profiles']
+            task_resource_distribution = ttb['task_resource_distribution']
+            resource_calendars = ttb['resource_calendars']
 
-        # A. Enumerate resource_profiles and replace each occurrence with updated resource_profile
-        for profile in resource_profiles:
-            # If task_id == task that got removed from resource -> Remove resource from resource_list
-            if profile['id'] == task_to_remove:
-                for r_in_list in profile['resource_list']:
-                    if r_in_list['id'] == resource_id:
-                        profile['resource_list'].remove(r_in_list)
-                        to_copy = copy.deepcopy(profile)
-                        resource_profiles.remove(profile)
-                        resource_profiles.append(to_copy)
-
-            # For each task where resource also performs, update that resource_list entry with updated resource_profile
-            for task_id in resource['assigned_tasks']:
-                if profile['id'] == task_id:
+            # A. Enumerate resource_profiles and replace each occurrence with updated resource_profile
+            to_add = []
+            for profile in resource_profiles:
+                # If task_id == task that got removed from resource -> Remove resource from resource_list
+                if profile['id'] == task_to_remove:
                     for r_in_list in profile['resource_list']:
                         if r_in_list['id'] == resource_id:
                             profile['resource_list'].remove(r_in_list)
-                            profile['resource_list'].append(resource)
                             to_copy = copy.deepcopy(profile)
                             resource_profiles.remove(profile)
-                            resource_profiles.append(to_copy)
+                            to_add.append(to_copy)
+                            break
+            resource_profiles += to_add
 
-        # B. Enumerate task_resource_distributions and remove distro from task_to_remove
-        for t_r_dis in task_resource_distribution:
-            if t_r_dis['task_id'] == task_to_remove:
-                for res in t_r_dis['resources']:
-                    if res['resource_id'] == resource['id']:
-                        t_r_dis['resources'].remove(res)
-                        to_copy = copy.deepcopy(t_r_dis)
-                        task_resource_distribution.remove(t_r_dis)
-                        task_resource_distribution.append(to_copy)
+            to_add = []
+            for profile in resource_profiles:
+                # For each task where resource also performs, update that resource_list entry with updated resource_profile
+                for task_id in resource['assigned_tasks']:
+                    if task_id != task_to_remove:
+                        if profile['id'] == task_id:
+                            for r_in_list in profile['resource_list']:
+                                if r_in_list['id'] == resource_id:
+                                    profile['resource_list'].remove(r_in_list)
+                                    profile['resource_list'].append(resource)
+                                    to_copy = copy.deepcopy(profile)
+                                    resource_profiles.remove(profile)
+                                    to_add.append(to_copy)
+                                    break
+            resource_profiles += to_add
 
-        # C. Write updated information to JSON.
+            # B. Enumerate task_resource_distributions and remove distro from task_to_remove
+            to_add = []
+            for t_r_dis in task_resource_distribution:
+                if t_r_dis['task_id'] == task_to_remove:
+                    for res in t_r_dis['resources']:
+                        if res['resource_id'] == resource['id']:
+                            t_r_dis['resources'].remove(res)
+                            to_copy = copy.deepcopy(t_r_dis)
+                            task_resource_distribution.remove(t_r_dis)
+                            to_add.append(to_copy)
+                            break
+            task_resource_distribution += to_add
 
-        rest_of_info = {'resource_profiles': resource_profiles,
-                        'arrival_time_distribution': ttb['arrival_time_distribution'],
-                        'arrival_time_calendar': ttb['arrival_time_calendar'],
-                        'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
-                        'task_resource_distribution': task_resource_distribution,
-                        'event_distribution': ttb['event_distribution'],
-                        'resource_calendars': resource_calendars}
+            # C. Write updated information to JSON.
 
-        with open(roster_manager.time_table, 'w') as out:
-            out.write(json.dumps(rest_of_info, indent=4))
-        return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                   roster_manager.constraints_json)
-    return False, None
+            rest_of_info = {'resource_profiles': resource_profiles,
+                            'arrival_time_distribution': ttb['arrival_time_distribution'],
+                            'arrival_time_calendar': ttb['arrival_time_calendar'],
+                            'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
+                            'task_resource_distribution': task_resource_distribution,
+                            'event_distribution': ttb['event_distribution'],
+                            'resource_calendars': resource_calendars}
+
+            with open(roster_manager.time_table, 'w') as out:
+                out.write(json.dumps(rest_of_info, indent=4))
+            print("Just before out")
+            return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
+                                       roster_manager.constraints_json)
+        return False, None
+    except Exception as n:
+        raise Exception(n)
 
 
 # 0. Find first occurrence of resource and rewrite assigned_tasks
@@ -262,6 +329,7 @@ def resolve_remove_resource_json_information(resource, roster_manager):
         resource_calendars = ttb['resource_calendars']
 
         # A.
+        to_add = []
         for task_id in resource['assigned_tasks']:
             for profile in resource_profiles:
                 if profile['id'] == task_id:
@@ -270,7 +338,9 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                             profile['resource_list'].remove(r_in_list)
                             to_copy = copy.deepcopy(profile)
                             resource_profiles.remove(profile)
-                            resource_profiles.append(to_copy)
+                            to_add.append(to_copy)
+                            break
+        resource_profiles += to_add
 
         # for profile in resource_profiles:
         #     # For each task where resource also performs, update that resource_list entry
@@ -283,6 +353,7 @@ def resolve_remove_resource_json_information(resource, roster_manager):
         #                     resource_profiles.remove(profile)
         #                     resource_profiles.append(to_copy)
         # B. Enumerate task_resource_distributions and remove distro from task_to_remove
+        to_add = []
         for task_id in resource['assigned_tasks']:
             for t_r_dis in task_resource_distribution:
                 if t_r_dis['task_id'] == task_id:
@@ -291,7 +362,9 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                             t_r_dis['resources'].remove(res)
                             to_copy = copy.deepcopy(t_r_dis)
                             task_resource_distribution.remove(t_r_dis)
-                            task_resource_distribution.append(to_copy)
+                            to_add.append(to_copy)
+                            break
+        task_resource_distribution += to_add
 
         resource_to_be_removed = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
         resource_calendars.remove(resource_to_be_removed)
@@ -305,9 +378,10 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                         'event_distribution': ttb['event_distribution'],
                         'resource_calendars': resource_calendars}
 
+        print(resource_calendars)
+
         with open(roster_manager.time_table, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
-
 
         # 1. make changes to resource_profiles
         # resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
@@ -335,8 +409,8 @@ def resolve_remove_resource_json_information(resource, roster_manager):
         #     for item_resource in item['resources']:
         #         if item_resource['resource_id'] == resource_id:
         #             item['resources'].remove(item_resource)
-            # if item['task_id'] == task_to_improve:
-            #     del task_resource_distribution[index]
+        # if item['task_id'] == task_to_improve:
+        #     del task_resource_distribution[index]
 
         # 3. Make changes to resource calendar
         # resource_to_be_removed = next((x for x in resource_calendars if x['id'] == resource_id + "timetable"), None)
@@ -394,14 +468,16 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         to_be_added['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
         to_be_added['assigned_tasks'] = [task_to_improve]
 
+        to_add = []
         for profile in resource_profiles:
             if profile['id'] == task_to_improve:
                 profile['resource_list'].append(to_be_added)
                 profile_copy = copy.deepcopy(profile)
                 resource_profiles.remove(profile)
-                resource_profiles.append(profile_copy)
+                to_add.append(profile_copy)
+        resource_profiles += to_add
 
-
+        to_add = []
         for task_distr in task_resource_distribution:
             if task_distr['task_id'] == task_to_improve:
                 for t_d_r in task_distr['resources']:
@@ -409,13 +485,15 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
                         t_d_r_to_add = copy.deepcopy(t_d_r)
                         t_d_r_to_add['resource_id'] += "_COPY" + h.hexdigest()[:10]
                         task_distr['resources'].append(t_d_r_to_add)
-
                         task_distr_copy = copy.deepcopy(task_distr)
                         task_resource_distribution.remove(task_distr)
-                        task_resource_distribution.append(task_distr_copy)
+                        to_add.append(task_distr_copy)
+                        break
+        task_resource_distribution += to_add
+
 
         for r_calendar in resource_calendars:
-            if r_calendar['id'] == resource_id+"timetable":
+            if r_calendar['id'] == resource_id + "timetable":
                 calendar_to_be_added = copy.deepcopy(r_calendar)
                 calendar_to_be_added['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
                 calendar_to_be_added['name'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
@@ -432,13 +510,12 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         with open(roster_manager.time_table, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
 
-
         with open(roster_manager.constraints_json, 'r') as c_read:
             cons = json.load(c_read)
         constraint_profiles = cons['resources']
 
         for c_profile in constraint_profiles:
-            if c_profile['id'] == resource_id+"timetable":
+            if c_profile['id'] == resource_id + "timetable":
                 cons_to_be_added = copy.deepcopy(c_profile)
                 cons_to_be_added['id'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
                 constraint_profiles.append(cons_to_be_added)
@@ -461,8 +538,6 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         # resource_profiles_list = resource_task_profile['resource_list']
         # resource_to_be_copied = next((y for y in resource_profiles_list if y['id'] == resource_id), None)
         # new_profile = copy.deepcopy(resource_to_be_copied)
-
-
 
         # Add new profile to resource_profiles_list
         # resource_profiles_list.append(new_profile)
@@ -513,12 +588,29 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         return False, None
 
 
+def _reset_jsons_rm_ith(roster_manager, iterations_handler):
+    # Simulation did not return a good solution, reset all changed objects
+    # Timetable, Constraints, RosterManager() + update it_handler
+    _reset_jsons(roster_manager)
+
+    new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
+                                    roster_manager.constraints_json)
+    iterations_handler.resource_manager = new_res_manager
+    iterations_handler.time_table_path = new_res_manager.time_table
+
+
+def _reset_jsons(roster_manager):
+    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
+    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+
+
 def resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, roster_manager):
+    # Default information setup
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
         return None
     iterations_count[0] += 1
-    # Collection of information for function
+    # Collection occurences and other relevant information
     events = {}
     task_resource_occurrences = {}
     if len(iterations_handler.traces) > 0:
@@ -543,44 +635,43 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                             events[event.task_id] += 1
                         else:
                             events[event.task_id] = 1
+
+    # Sort tasks by # of occurrences
     tasks_to_improve = sort_tasks_by_most_occurrences(events)
 
     # For each task, sorted by most impactful.
     for task in tasks_to_improve:
         task_info = pools_info.task_pools[task]
-        # Only 1 resource is assigned to this task
+        # STEP A: Is there only 1 resource able to perform assigned task?
         if len(task_info) == 1:
+            print("hillclimb:625 - task_info == 1")
             resource = task_info[0]
-            print("WT - ADD " + resource['id'])
-            # Resource has only this task assigned.
+            # STEP A.1: Does the resource have more than 1 task assigned?
             if len(resource['assigned_tasks']) == 1:
-                # Only solution here is to make a copy and add
+                # Returns (Boolean, RosterManager())
                 ready_to_sim = resolve_add_resource_json_information(resource, roster_manager, task)
+
+                # Making the changes to the JSON was valid and is ready to be simulated
                 if ready_to_sim[0]:
+                    # Update it_handler RosterManaer() with new RosterManager()
                     new_res_manager = ready_to_sim[1]
                     iterations_handler.resource_manager = new_res_manager
                     iterations_handler.time_table_path = new_res_manager.time_table
+
+                    # Generate new PoolInfo from new RosterManager()
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
                                               new_res_manager.get_task_pools())
 
+                    # Simulate new allocation
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
+                        # Valid solution found.
                         return True
                     else:
-                        print("sim w/ removed resource discarded - resetting timetables")
-                        shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                        shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-
-                        new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                                        roster_manager.constraints_json)
-                        iterations_handler.resource_manager = new_res_manager
-                        iterations_handler.time_table_path = new_res_manager.time_table
+                        _reset_jsons_rm_ith(roster_manager, iterations_handler)
                 else:
-                    # Replace timetable and constraints with updated jsons.
-                    print("Ready sim failed - resetting timetables")
-                    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+                    _reset_jsons(roster_manager)
 
-            else:
+            elif len(resource['assigned_tasks']) > 1:
                 # Try to remove other task(s) from resource
                 ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager,
                                                                             task,
@@ -595,45 +686,15 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                         return True
                     else:
-                        shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                        shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+                        _reset_jsons_rm_ith(roster_manager, iterations_handler)
 
-                        new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                                        roster_manager.constraints_json)
-                        iterations_handler.resource_manager = new_res_manager
-                        iterations_handler.time_table_path = new_res_manager.time_table
-
-                        # Don't return false, try to add new resource.
-                        # ready_to_sim = resolve_add_resource_json_information(resource, roster_manager,
-                        #                                                      task)
-
-                        # if ready_to_sim[0]:
-                        #     # TODO SIM
-                        #     new_res_manager = ready_to_sim[1]
-                        #     iterations_handler.resource_manager = new_res_manager
-                        #     iterations_handler.time_table_path = new_res_manager.time_table
-                        #     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
-                        #                               new_res_manager.get_task_pools())
-                        #
-                        #     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                        #         return True
-                        #     else:
-                        #         shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                        #         shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-                        #         new_res_manager = RosterManager(roster_manager.roster.roster_name,
-                        #                                         roster_manager.time_table,
-                        #                                         roster_manager.constraints_json)
-                        #         iterations_handler.resource_manager = new_res_manager
-                        #         iterations_handler.time_table_path = new_res_manager.time_table
                 else:
-                    # Replace timetable and constraints with updated jsons.
-                    print("sim w/ removed resource discarded - resetting timetables")
-                    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+                    _reset_jsons(roster_manager)
 
+        # STEP B. More than 1 resource is assigned to the task
         elif len(task_info) > 1:
-            # count the occurences of which a resource performed said task
-            # Take the one with the lowest # and check its tasks, try remove one of its tasks from the list
+            print("hillclimb:674 - task_info > 1")
+            # Calculate impact of each resource
             resources_and_occurences = {}
             for trace_list in iterations_handler.traces:
                 for trace in trace_list.trace_list:
@@ -658,6 +719,7 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     ready_to_sim = resolve_reschedule_resource_json_information(resource, roster_manager,
                                                                                 task,
                                                                                 task_resource_occurrences)
+                    print(ready_to_sim)
                     if ready_to_sim[0]:
                         new_res_manager = ready_to_sim[1]
                         iterations_handler.resource_manager = new_res_manager
@@ -668,60 +730,35 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                         if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                             return True
                         else:
-                            shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                            shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-                            new_res_manager = RosterManager(roster_manager.roster.roster_name,
-                                                            roster_manager.time_table,
-                                                            roster_manager.constraints_json)
-                            iterations_handler.resource_manager = new_res_manager
-                            iterations_handler.time_table_path = new_res_manager.time_table
+                            _reset_jsons_rm_ith(roster_manager, iterations_handler)
 
-
-                            # Dont return false, try to add new resource.
-                            # ready_to_sim = resolve_add_resource_json_information(resource, roster_manager,
-                            #                                                      task)
-
-                            # if ready_to_sim[0]:
-                            #     # TODO SIM
-                            #     new_res_manager = ready_to_sim[1]
-                            #     iterations_handler.resource_manager = new_res_manager
-                            #     iterations_handler.time_table_path = new_res_manager.time_table
-                            #     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
-                            #                               new_res_manager.get_task_pools())
-                            #
-                            #     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
-                            #         return True
-                            #     else:
-                            #         shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                            #         shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-                            #         new_res_manager = RosterManager(roster_manager.roster.roster_name,
-                            #                                         roster_manager.time_table,
-                            #                                         roster_manager.constraints_json)
-                            #         iterations_handler.resource_manager = new_res_manager
-                            #         iterations_handler.time_table_path = new_res_manager.time_table
                     else:
-                        # Replace timetable and constraints with updated jsons.
-                        shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                        shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-            # Only get here when no improvements are found
-            # Find resource with the smallest schedule in task, use as copy
-            print("*"*10)
-            print("A and B step offered no result added to pareto, try last options before moving on.")
-            resources_just_occurrences = {}
-            for trace_list in iterations_handler.traces:
-                for trace in trace_list.trace_list:
-                    for event in trace.event_list:
-                        if event.task_id == task:
-                            if event.resource_id in resources_just_occurrences.keys():
-                                resources_just_occurrences[event.resource_id] += 1
-                            else:
-                                resources_just_occurrences[event.resource_id] = 1
-            sorted_resources = sort_tasks_by_most_occurrences(resources_just_occurrences)
-            sorted_resources.reverse()
+                        _reset_jsons(roster_manager)
 
-            for t in task_info:
-                if t['id'] == sorted_resources[0]:
-                    resource_to_resolve = t
+    for task in tasks_to_improve:
+        task_info = pools_info.task_pools[task]
+        # Only get here when no improvements are found
+        # Find resource with the smallest schedule in task, use as copy
+        print("*" * 10)
+        print("hillclimb:721 - A + B Exhausted, just try add new resource on task")
+        resources_just_occurrences = {}
+        for trace_list in iterations_handler.traces:
+            for trace in trace_list.trace_list:
+                for event in trace.event_list:
+                    if event.task_id == task:
+                        if event.resource_id in resources_just_occurrences.keys():
+                            resources_just_occurrences[event.resource_id] += 1
+                        else:
+                            resources_just_occurrences[event.resource_id] = 1
+        sorted_resources = sort_tasks_by_most_occurrences(resources_just_occurrences)
+        sorted_resources.reverse()
+        print(sorted_resources)
+        resource_to_resolve = None
+        for t in task_info:
+            if t['id'] == sorted_resources[0]:
+                resource_to_resolve = t
+
+        if resource_to_resolve is not None:
             ready_to_sim = resolve_add_resource_json_information(resource_to_resolve, roster_manager,
                                                                  task)
             if ready_to_sim[0]:
@@ -733,17 +770,9 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                 if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                     return True
                 else:
-                    # Replace timetable and constraints with updated jsons.
-                    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
-                    new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                                    roster_manager.constraints_json)
-                    iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
+                    _reset_jsons_rm_ith(roster_manager, iterations_handler)
             else:
-                # Replace timetable and constraints with updated jsons.
-                shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-                shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+                _reset_jsons(roster_manager)
 
     return False
 
@@ -1200,6 +1229,15 @@ def sort_tasks_by_idle_time(dict):
         r = [k, avg]
         res.append(r)
     out_list = sorted(res, key=lambda x: x[1], reverse=True)
+    out_list = [out[0] for out in out_list]
+    return out_list
+
+
+def sort_resource_by_utilization(dict):
+    res = []
+    for k, cost in dict.items():
+        res.append([k, cost])
+    out_list = sorted(res, key=lambda x: x[1])
     out_list = [out[0] for out in out_list]
     return out_list
 

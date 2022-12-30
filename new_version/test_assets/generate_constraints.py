@@ -161,8 +161,8 @@ def generate(timetable_path, constraints_path):
 
 
 logs = {
-    "production": {"bpmn": "./production/Production.bpmn",
-                   "timetable": "./production/sim_json.json",
+    "production": {"bpmn": "./production/model.bpmn",
+                   "timetable": "./production/timetable.json",
                    "constraints_out": "./production/constraints.json"},
     "purchasing_example": {"bpmn": "./purchasing_example/PurchasingExample.bpmn",
                            "timetable": "./purchasing_example/purchasing_example.json",
