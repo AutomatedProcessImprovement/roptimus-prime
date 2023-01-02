@@ -105,7 +105,8 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                         return True
                     else:
-                        _reset_jsons_rm_ith(res_manager,iterations_handler)
+                        iterations_handler = _reset_jsons_rm_ith(res_manager, iterations_handler)
+                        res_manager = iterations_handler.resource_manager
 
                 else:
                     _reset_jsons(res_manager)
@@ -146,21 +147,11 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                         return True
                     else:
-                        # Replace timetable and constraints with updated jsons. + reset resource_manager
-                        print("sim w/ removed resource discarded - resetting timetables")
-                        shutil.copyfile(res_manager.temp_timetable, res_manager.time_table)
-                        shutil.copyfile(res_manager.temp_constraints, res_manager.constraints_json)
-
-                        new_res_manager = RosterManager(res_manager.roster.roster_name, res_manager.time_table,
-                                                        res_manager.constraints_json)
-                        iterations_handler.resource_manager = new_res_manager
-                        iterations_handler.time_table_path = new_res_manager.time_table
+                        iterations_handler = _reset_jsons_rm_ith(res_manager, iterations_handler)
+                        res_manager = iterations_handler.resource_manager
 
                 else:
-                    # Replace timetable and constraints with updated jsons.
-                    print("Ready sim failed - resetting timetables")
-                    shutil.copyfile(res_manager.temp_timetable, res_manager.time_table)
-                    shutil.copyfile(res_manager.temp_constraints, res_manager.constraints_json)
+                    _reset_jsons(res_manager)
     return False
 
 
@@ -331,6 +322,7 @@ def resolve_remove_resource_json_information(resource, roster_manager):
         # A.
         to_add = []
         for task_id in resource['assigned_tasks']:
+            print(task_id)
             for profile in resource_profiles:
                 if profile['id'] == task_id:
                     for r_in_list in profile['resource_list']:
@@ -340,6 +332,7 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                             resource_profiles.remove(profile)
                             to_add.append(to_copy)
                             break
+        print(to_add)
         resource_profiles += to_add
 
         # for profile in resource_profiles:
@@ -598,6 +591,8 @@ def _reset_jsons_rm_ith(roster_manager, iterations_handler):
     iterations_handler.resource_manager = new_res_manager
     iterations_handler.time_table_path = new_res_manager.time_table
 
+    return iterations_handler
+
 
 def _reset_jsons(roster_manager):
     shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
@@ -667,7 +662,8 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                         # Valid solution found.
                         return True
                     else:
-                        _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                        iterations_handler = _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                        roster_manager = iterations_handler.resource_manager
                 else:
                     _reset_jsons(roster_manager)
 
@@ -686,7 +682,8 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                         return True
                     else:
-                        _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                        iterations_handler = _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                        roster_manager = iterations_handler.resource_manager
 
                 else:
                     _reset_jsons(roster_manager)
@@ -730,7 +727,8 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                         if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                             return True
                         else:
-                            _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                            iterations_handler = _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                            roster_manager = iterations_handler.resource_manager
 
                     else:
                         _reset_jsons(roster_manager)
@@ -770,7 +768,8 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                 if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                     return True
                 else:
-                    _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                    iterations_handler = _reset_jsons_rm_ith(roster_manager, iterations_handler)
+                    roster_manager = iterations_handler.resource_manager
             else:
                 _reset_jsons(roster_manager)
 
@@ -1024,7 +1023,7 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
             resources_to_optimize[pool] = pool_cost
 
     resource_to_optimize = sort_resource_by_cost(resources_to_optimize)
-    resource_to_optimize = resource_to_optimize[0]
+    # resource_to_optimize = resource_to_optimize[0]
     # Collect for each trace, the information of which task was executed on which day
     tasks_of_resource = []
     for task in pools_info.task_pools:
@@ -1034,58 +1033,57 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
 
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     for task in tasks_of_resource:
-        # for res in resource_to_optimize:
-        actual_resource_info = [pools_info.pools[resource_to_optimize]]
-        resource_copy = copy.deepcopy(actual_resource_info)
-        for resource in resource_copy:
-            print("Cost - Resource " + resource.id)
-            for day in days:
-                shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
-                indexes = []
-                i_idx = 0
-                for idx in range(len(shift_arr)):
-                    # Collect all shift blocks outer indexes
-                    if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
-                        indexes.append([0, 0])
-                        indexes[i_idx][0] = idx
-                    if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
-                        indexes[i_idx][1] = idx
-                        i_idx += 1
-                # Try reduce size both sides, try reduce left, try reduce right
+        for res in resource_to_optimize:
+            actual_resource_info = [pools_info.pools[res]]
+            resource_copy = copy.deepcopy(actual_resource_info)
+            for resource in resource_copy:
+                print("Cost - Resource " + resource.id)
+                for day in days:
+                    shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
+                    indexes = []
+                    i_idx = 0
+                    for idx in range(len(shift_arr)):
+                        # Collect all shift blocks outer indexes
+                        if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
+                            indexes.append([0, 0])
+                            indexes[i_idx][0] = idx
+                        if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
+                            indexes[i_idx][1] = idx
+                            i_idx += 1
+                    # Try reduce size both sides, try reduce left, try reduce right
 
-                for block in range(len(indexes)):
-                    l_idx = indexes[block][0]
-                    r_idx = indexes[block][1]
+                    for block in range(len(indexes)):
+                        l_idx = indexes[block][0]
+                        r_idx = indexes[block][1]
 
-                    shift_arr[r_idx] = 0
-                    shift_arr[l_idx] = 0
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Adding left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
-                    shift_arr[r_idx] = 1
-                    shift_arr[l_idx] = 0
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Moving left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
+                        shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Moving left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                    shift_arr[r_idx] = 0
-                    shift_arr[l_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Adding left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                    # No valid move, reset and go next
-                    shift_arr[r_idx] = 1
-                    shift_arr[l_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-        # All moves and resources on this task have been tried, stop.
-        return False
+                        # No valid move, reset and go next
+                        shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+            # All moves and resources on this task have been tried, stop.
     return False
 
 

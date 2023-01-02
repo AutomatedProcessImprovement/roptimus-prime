@@ -138,6 +138,7 @@ def plot_data_profiles(file_path, algorithm_results, log_name, data_type=0):
 def plot_pareto_front(file_path, algorithm_results, joint_pareto_info):
     colors = ['r', 'b', 'g']
     for alg_name in algorithm_results:
+        print(alg_name)
         [log_name, alg_name_1] = extract_log_alg_name(alg_name)
         pareto_front = algorithm_results[alg_name].pareto_front
         color_taken = [False, False, False]
@@ -172,8 +173,13 @@ def extract_log_alg_name(full_alg_name):
     name_list = full_alg_name.split("_")
     log_name = name_list[0]
     algs = ['hill', 'tabu', 'nsga2', 'with', 'without']
+    approaches = ['combined', 'only', 'calendar', 'add']
     for i in range(1, len(name_list)):
         if name_list[i] in algs:
+            break
+        log_name += '_' + name_list[i]
+    for i in range(1, len(name_list)):
+        if name_list[i] in approaches:
             break
         log_name += '_' + name_list[i]
     alg_name = ''
@@ -187,6 +193,14 @@ def extract_log_alg_name(full_alg_name):
         alg_name += 'FLEX'
     if 'without' in name_list:
         alg_name += 'STRICT'
+    if 'combined' in name_list:
+        alg_name += '_COMBINED'
+    if 'only' in name_list:
+        alg_name += '_ONLY'
+    if 'calendar' in name_list:
+        alg_name += '_CALENDAR'
+    if 'add' in name_list:
+        alg_name += '_ADD_REMOVE'
     return [log_name, alg_name]
 
 

@@ -7,14 +7,14 @@ from new_version.test_assets.experiments.experiment_setup import experiments_fil
     reset_after_each_execution
 
 to_execute = {'HC-STRICT': True,
-              'HC-FLEX': False,
+              'HC-FLEX': True,
               'TS-STRICT': False,
               'NSGA-II': False,
-              'METRICS': False}
+              'METRICS': True}
 
-APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
+APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
               "only_add_remove": False,  # Only perform optimization on resource level
-              "combined": True,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
+              "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
               "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
               "first_add_remove_then_calendar": False  # Only add/remove until No_improvement found, then calendar
               }
@@ -26,7 +26,7 @@ def execute_algorithm_variants(log_index):
     constraints_path = experiments_file_paths[log_name][1]
     bpmn_path = experiments_file_paths[log_name][2]
 
-    max_func_ev = 100
+    max_func_ev = 2500
     non_opt_ratio = 0.08
     tot_simulations = 5
 
@@ -80,9 +80,11 @@ def execute_algorithm_variants(log_index):
             reset_after_each_execution(log_name)
 
     if to_execute['METRICS']:
-        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad',
-                                                 'hill_clmb_without_mad_orlenys',
-                                                 'nsga2'])
+        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad', 'hill_clmb_combined_with_mad',
+                                                 'hill_clmb_only_calendar_without_mad', 'hill_clmb_only_calendar_with_mad',
+                                                 'hill_clmb_only_add_remove_without_mad', 'hill_clmb_only_add_remove_with_mad',
+                                                 # 'hill_clmb_without_mad_orlenys'
+                                                 ])
         print_solution_statistics(metrics, log_name)
 
     # if to_execute['HC-STRICT']:
