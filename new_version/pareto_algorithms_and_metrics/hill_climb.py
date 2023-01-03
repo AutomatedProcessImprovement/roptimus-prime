@@ -217,13 +217,16 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
             resource_profiles = ttb['resource_profiles']
             task_resource_distribution = ttb['task_resource_distribution']
 
+            can_remove_rest = []
             for profile in resource_profiles:
                 if profile['id'] == task_to_remove:
                     for r in profile['resource_list']:
-                        if r['id'] == resource_id and len(profile['resource_list']) > 1:
+                        if r['id'] == resource_id:
+                            if len(profile['resource_list']) > 1:
+                                can_remove_rest.append(True)
                             profile['resource_list'].remove(r)
                         else:
-                            return False, None
+                            can_remove_rest.append(False)
                 if profile['id'] != task_to_remove:
                     for r in profile['resource_list']:
                         if r['id'] == resource_id:
@@ -234,27 +237,30 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
                                 profile['resource_list'].append(r_copy)
                             else:
                                 return False, None
+            if all(can_remove_rest):
+                for trd in task_resource_distribution:
+                    if trd['task_id'] == task_to_remove:
+                        for r in trd['resources']:
+                            if r['resource_id'] == resource_id:
+                                trd['resources'].remove(r)
 
-            for trd in task_resource_distribution:
-                if trd['task_id'] == task_to_remove:
-                    for r in trd['resources']:
-                        if r['resource_id'] == resource_id:
-                            trd['resources'].remove(r)
-
-            rest_of_info = {'resource_profiles': resource_profiles,
-                            'arrival_time_distribution': ttb['arrival_time_distribution'],
-                            'arrival_time_calendar': ttb['arrival_time_calendar'],
-                            'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
-                            'task_resource_distribution': task_resource_distribution,
-                            'event_distribution': ttb['event_distribution'],
-                            'resource_calendars': ttb['resource_calendars']}
+                rest_of_info = {'resource_profiles': resource_profiles,
+                                'arrival_time_distribution': ttb['arrival_time_distribution'],
+                                'arrival_time_calendar': ttb['arrival_time_calendar'],
+                                'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
+                                'task_resource_distribution': task_resource_distribution,
+                                'event_distribution': ttb['event_distribution'],
+                                'resource_calendars': ttb['resource_calendars']}
 
 
-            with open(roster_manager.time_table, 'w') as out:
-                out.write(json.dumps(rest_of_info, indent=4))
-            return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                       roster_manager.constraints_json)
-        return False, None
+                with open(roster_manager.time_table, 'w') as out:
+                    out.write(json.dumps(rest_of_info, indent=4))
+                return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
+                                           roster_manager.constraints_json)
+            else:
+                return False, None
+        else:
+            return False, None
     except Exception as n:
         raise Exception(n)
 
@@ -315,7 +321,6 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                 for r in trd['resources']:
                     if r['resource_id'] == resource_id:
                         trd['resources'].remove(r)
-                        can_remove_calendar = True
 
             for cal in resource_calendars:
                 if cal['id'] == resource_id + 'timetable':
@@ -384,6 +389,8 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         to_be_added['name'] += "_COPY" + h.hexdigest()[:10]
         to_be_added['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
         to_be_added['assigned_tasks'] = [task_to_improve]
+
+        print("Adding new resource " + to_be_added['id'])
 
         to_add = []
         for profile in resource_profiles:

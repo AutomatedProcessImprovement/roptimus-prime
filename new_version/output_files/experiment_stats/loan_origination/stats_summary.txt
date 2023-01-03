@@ -1,0 +1,7 @@
+['Joint Pareto Size (without MAD): 29 --------------------------------------------------------']
+Alg_Name                        #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
+joint_pareto(loan_origination)  2410    2407   29      29     0    1.0        0.0             1.507882    1.0          17:32:06.068252          19097.79
+HC_STRICT_COMBINED(loan_origination_origination_hill_clmb)  1763    1763   30      26     4    0.999829   492.41          1.502929    0.866667     17:13:05.721557          19187.62
+HC_STRICT_ONLY_CALENDAR(loan_origination_origination_hill_clmb)  485     485    10      2      8    0.46175    75365.85        0.988652    0.2          7:20:14.955422           22246.34
+HC_STRICT_ONLY_ADD_REMOVE(loan_origination_origination_hill_clmb)  162     162    10      1      9    0.959145   17865.64        0.479771    0.1          1 day, 19:23:37.363281   16728.74
+------------------------------------------------------

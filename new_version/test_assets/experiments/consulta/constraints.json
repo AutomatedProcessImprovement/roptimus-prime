@@ -1,818 +1,18 @@
 {
     "time_var": 60,
     "max_cap": 9999999999,
-    "max_shift_size": 8,
-    "max_shift_blocks": 2,
-    "hours_in_day": 2,
+    "max_shift_size": 24,
+    "max_shift_blocks": 24,
+    "hours_in_day": 24,
     "resources": [
         {
-            "id": "QBP_DEFAULT_RESOURCE_1timetable",
+            "id": "Starttimetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_2timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_3timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_4timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_5timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_6timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_7timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_8timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_9timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_10timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_11timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_12timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_13timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_14timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_15timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_16timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_17timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_18timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_19timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "QBP_DEFAULT_RESOURCE_20timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
-                    "max_shifts_week": 20,
-                    "is_human": false
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_1timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -826,13 +26,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -846,13 +46,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_2timetable",
+            "id": "8824timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -866,13 +66,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -886,13 +86,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_3timetable",
+            "id": "19019timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -906,13 +106,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -926,13 +126,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_4timetable",
+            "id": "Joint_Traer informacion estudiante - banner_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -946,13 +146,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -966,13 +166,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_5timetable",
+            "id": "Joint_Radicar Solicitud Homologacion_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -986,13 +186,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1006,13 +206,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_6timetable",
+            "id": "Joint_Radicar Solicitud Homologacion_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1026,13 +226,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1046,13 +246,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_7timetable",
+            "id": "22475timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1066,13 +266,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1086,13 +286,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_8timetable",
+            "id": "677timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1106,13 +306,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1126,13 +326,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_9timetable",
+            "id": "Joint_Validar solicitud_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1146,13 +346,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1166,13 +366,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_10timetable",
+            "id": "Joint_Validar solicitud_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1186,13 +386,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1206,13 +406,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_11timetable",
+            "id": "1007timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1226,13 +426,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1246,13 +446,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_12timetable",
+            "id": "15930timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1266,13 +466,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1286,13 +486,13 @@
             }
         },
         {
-            "id": "qbp_d237c3e4-817f-4c59-81b7-e794aef2de58_13timetable",
+            "id": "3445timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1306,13 +506,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1326,13 +526,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_1timetable",
+            "id": "Joint_Homologacion por grupo de cursos_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1346,13 +546,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1366,13 +566,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_2timetable",
+            "id": "Joint_Homologacion por grupo de cursos_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1386,13 +586,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1406,13 +606,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_3timetable",
+            "id": "Endtimetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1426,13 +626,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1446,13 +646,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_4timetable",
+            "id": "Joint_Notificacion estudiante cancelacion soli_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1466,13 +666,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1486,13 +686,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_5timetable",
+            "id": "Joint_Cancelar Solicitud_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1506,13 +706,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1526,13 +726,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_6timetable",
+            "id": "Joint_Cancelar Solicitud_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1546,13 +746,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1566,13 +766,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_7timetable",
+            "id": "26789timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1586,13 +786,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1606,13 +806,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_8timetable",
+            "id": "Joint_Recepcion de documentos_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1626,13 +826,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1646,13 +846,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_9timetable",
+            "id": "Joint_Revisar curso_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1666,13 +866,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1686,13 +886,13 @@
             }
         },
         {
-            "id": "qbp_b174e71d-3078-4a6a-adda-c1aad311a72f_10timetable",
+            "id": "Joint_Revisar curso_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1706,13 +906,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1726,13 +926,13 @@
             }
         },
         {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_1timetable",
+            "id": "Joint_Revisar curso_2timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1746,13 +946,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1766,13 +966,13 @@
             }
         },
         {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_2timetable",
+            "id": "Joint_Evaluacion curso_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1786,13 +986,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1806,13 +1006,13 @@
             }
         },
         {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_3timetable",
+            "id": "Joint_Evaluacion curso_1timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1826,13 +1026,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1846,13 +1046,13 @@
             }
         },
         {
-            "id": "qbp_5c7c6ce3-6e65-41fe-a28d-93be233ecd59_4timetable",
+            "id": "Joint_Evaluacion curso_2timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1866,13 +1066,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1886,13 +1086,13 @@
             }
         },
         {
-            "id": "qbp_f836b175-4521-409c-a0f6-a30ee06962fe_1timetable",
+            "id": "Joint_Validacion final_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1906,13 +1106,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1926,13 +1126,13 @@
             }
         },
         {
-            "id": "qbp_f836b175-4521-409c-a0f6-a30ee06962fe_2timetable",
+            "id": "Joint_Visto Bueno Cierre Proceso_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1946,13 +1146,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1966,13 +1166,13 @@
             }
         },
         {
-            "id": "qbp_f836b175-4521-409c-a0f6-a30ee06962fe_3timetable",
+            "id": "Joint_Transferir Creditos_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -1986,13 +1186,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -2006,13 +1206,13 @@
             }
         },
         {
-            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_1timetable",
+            "id": "Joint_Transferir creditos homologables_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -2026,13 +1226,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -2046,13 +1246,13 @@
             }
         },
         {
-            "id": "qbp_75b36817-f46d-4187-9324-8ba43ef7ce84_2timetable",
+            "id": "Joint_Cancelar curso_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -2066,13 +1266,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -2086,13 +1286,13 @@
             }
         },
         {
-            "id": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_1timetable",
+            "id": "Joint_Avanzar recepcion documentos_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -2106,13 +1306,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -2126,13 +1326,13 @@
             }
         },
         {
-            "id": "qbp_f2d934ff-8107-492a-bf0b-6783dbf4d87c_2timetable",
+            "id": "Joint_Validar solicitud / pre-homologacion_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
+                    "max_daily_cap": 24,
                     "max_consecutive_cap": 8,
-                    "max_shifts_day": 2,
+                    "max_shifts_day": 24,
                     "max_shifts_week": 20,
                     "is_human": true
                 },
@@ -2146,13 +1346,13 @@
                     "sunday": "None"
                 },
                 "never_work_masks": {
-                    "monday": 16711695,
-                    "tuesday": 16711695,
-                    "wednesday": 16711695,
-                    "thursday": 16711695,
-                    "friday": 16711695,
-                    "saturday": 16777215,
-                    "sunday": 16777215
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
                 },
                 "always_work_masks": {
                     "monday": 0,

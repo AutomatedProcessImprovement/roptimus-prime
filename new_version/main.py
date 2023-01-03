@@ -10,10 +10,10 @@ to_execute = {'HC-STRICT': True,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
-              'METRICS': True}
+              'METRICS': False}
 
-APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
-              "only_add_remove": True,  # Only perform optimization on resource level
+APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
+              "only_add_remove": False,  # Only perform optimization on resource level
               "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
               "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
               "first_add_remove_then_calendar": False  # Only add/remove until No_improvement found, then calendar
@@ -112,7 +112,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(0)
+    execute_algorithm_variants(9)
     os._exit(0)
 
 
