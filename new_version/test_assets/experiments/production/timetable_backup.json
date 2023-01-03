@@ -686,7 +686,7 @@
             "from": "MONDAY",
             "to": "MONDAY",
             "beginTime": "21:00:00",
-            "endTime": "23:59:59"
+            "endTime": "23:00:00"
         },
         {
             "from": "TUESDAY",
@@ -710,7 +710,7 @@
             "from": "TUESDAY",
             "to": "TUESDAY",
             "beginTime": "22:00:00",
-            "endTime": "23:59:59"
+            "endTime": "23:00:00"
         },
         {
             "from": "WEDNESDAY",
@@ -740,13 +740,7 @@
             "from": "WEDNESDAY",
             "to": "WEDNESDAY",
             "beginTime": "20:00:00",
-            "endTime": "21:00:00"
-        },
-        {
-            "from": "WEDNESDAY",
-            "to": "WEDNESDAY",
-            "beginTime": "23:00:00",
-            "endTime": "23:59:59"
+            "endTime": "23:00:00"
         },
         {
             "from": "THURSDAY",
@@ -824,14 +818,8 @@
             "from": "SUNDAY",
             "to": "SUNDAY",
             "beginTime": "12:00:00",
-            "endTime": "22:00:00"
+            "endTime": "23:00:00"
         },
-        {
-            "from": "SUNDAY",
-            "to": "SUNDAY",
-            "beginTime": "23:00:00",
-            "endTime": "23:59:59"
-        }
     ],
     "gateway_branching_probabilities": [
         {
