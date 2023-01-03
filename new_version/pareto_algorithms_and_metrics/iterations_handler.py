@@ -94,7 +94,6 @@ class IterationHandler:
         return to_return
 
     def clean_up_json(self):
-        print("Reset the timetable and constraints for next function eval.")
         self.jsonManager.retrieve_json_from_id(self.current_starting_id)
         self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/experiments/production/timetable.json", "./test_assets/experiments/production/constraints.json")
         print("==============")
@@ -136,8 +135,6 @@ class IterationHandler:
         return sol_id in self.generated_solutions
 
     def try_new_solution(self, pools_info, distance):
-        print("try solition")
-        print(pools_info)
         # self.resource_manager.update_roster(pools_info)
 
         print("Pools info id in generated solutions? " + str(pools_info.id in self.generated_solutions))
@@ -151,6 +148,7 @@ class IterationHandler:
                                                             json_path=self.time_table_path)  # Running/retrieving simulation results
             self.traces = traces
             if simulation_info is None:
+                self.clean_up_json()
                 return False
             is_valid = self.check_optimals_hill_climbing(pools_info,
                                                          simulation_info,
@@ -161,7 +159,6 @@ class IterationHandler:
                 self.check_optimals_tabu_search(pools_info, simulation_info)
             # Regardless of if it's a valid pareto or not, reset the jsons
             self.clean_up_json()
-            print("after cleanup, returning valid")
             return is_valid
         self.clean_up_json()
         return False

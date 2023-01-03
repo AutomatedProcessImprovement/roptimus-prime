@@ -5,8 +5,6 @@ from new_version.data_structures.RosterInfo import Roster
 
 class RosterManager:
     def __init__(self, name, time_table, constraints):
-        print("Creating new Roster Manager")
-
         self.roster = Roster(name, time_table, constraints)
         self.time_table = time_table
         self.blocks = int(self.roster.shift_block / 60)

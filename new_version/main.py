@@ -7,13 +7,13 @@ from new_version.test_assets.experiments.experiment_setup import experiments_fil
     reset_after_each_execution
 
 to_execute = {'HC-STRICT': True,
-              'HC-FLEX': True,
+              'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}
 
-APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
-              "only_add_remove": False,  # Only perform optimization on resource level
+APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
+              "only_add_remove": True,  # Only perform optimization on resource level
               "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
               "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
               "first_add_remove_then_calendar": False  # Only add/remove until No_improvement found, then calendar
@@ -26,7 +26,7 @@ def execute_algorithm_variants(log_index):
     constraints_path = experiments_file_paths[log_name][1]
     bpmn_path = experiments_file_paths[log_name][2]
 
-    max_func_ev = 2500
+    max_func_ev = 5000
     non_opt_ratio = 0.08
     tot_simulations = 5
 

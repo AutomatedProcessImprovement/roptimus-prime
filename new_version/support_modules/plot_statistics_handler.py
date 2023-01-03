@@ -51,7 +51,7 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
     [hyperarea_diff, hausdorff_dist, delta, purity] = p_metric.compute_metrics(pareto_front)
     [in_pareto, ave_time, ave_cost] = find_common_elements(pareto_front, p_metric.joint_pareto_info)
     [l_name, a_name] = extract_log_alg_name(full_name)
-    file_path = "%s%s/stats_allocation_%s.txt" % (experiments_plots, l_name, a_name)
+    file_path = "%s%s_%s.txt" % (experiments_plots, l_name, a_name)
     if 'joint_pareto' not in alg_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])
