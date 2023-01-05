@@ -77,8 +77,8 @@ class JsonManager:
                 f.write(str(sol) + "\n")
         return True
 
-    def retrieve_json_from_id(self, solution_id, ttb_path="./test_assets/experiments/production/timetable.json",
-                              cons_path="./test_assets/experiments/production/constraints.json"):
+    def retrieve_json_from_id(self, solution_id, ttb_path,
+                              cons_path):
         ids = self.read_file_with_ids()
         if solution_id in ids:
             print(self.base_path_folders + str(solution_id) + "/constraints.json")

@@ -6,9 +6,9 @@ def generate(timetable_path, constraints_path):
     output = {
         "time_var": 60,
         "max_cap": 9999999999,
-        "max_shift_size": 8,
-        "max_shift_blocks": 2,
-        "hours_in_day": 2,
+        "max_shift_size": 24,
+        "max_shift_blocks": 24,
+        "hours_in_day": 24,
         "resources": []
     }
 
@@ -16,11 +16,11 @@ def generate(timetable_path, constraints_path):
         "id": "",
         "constraints": {
             "global_constraints": {
-                "max_weekly_cap": 40,
-                "max_daily_cap": 8,
-                "max_consecutive_cap": 8,
-                "max_shifts_day": 2,
-                "max_shifts_week": 20,
+                "max_weekly_cap": 100,
+                "max_daily_cap": 24,
+                "max_consecutive_cap": 24,
+                "max_shifts_day": 24,
+                "max_shifts_week": 24,
                 "is_human": True
             },
             "daily_start_times": {
@@ -33,13 +33,13 @@ def generate(timetable_path, constraints_path):
                 "sunday": "None"
             },
             "never_work_masks": {
-                "monday": 16711695,
-                "tuesday": 16711695,
-                "wednesday": 16711695,
-                "thursday": 16711695,
-                "friday": 16711695,
-                "saturday": 16777215,
-                "sunday": 16777215
+                "monday": 0,
+                "tuesday": 0,
+                "wednesday": 0,
+                "thursday": 0,
+                "friday": 0,
+                "saturday": 0,
+                "sunday": 0
             },
             "always_work_masks": {
                 "monday": 0,

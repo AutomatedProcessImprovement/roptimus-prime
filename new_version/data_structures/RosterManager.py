@@ -133,7 +133,7 @@ class RosterManager:
         self.write_to_file()
 
     def write_to_file(self):
-        out_path = "./test_assets/experiments/production/timetable.json"
+        out_path = self.time_table
 
         with open(self.time_table, 'r') as t_read:
             ttb = json.load(t_read)

@@ -7,6 +7,7 @@ import time
 import datetime
 import random
 from new_version.data_structures.pools_info import PoolInfo
+from new_version.data_structures.priority_queue import PriorityQueue
 from new_version.pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 from new_version.support_modules.file_manager import save_stats_file, read_stats_file
 from new_version.support_modules.helpers import _list_to_binary, _bitmap_to_valid_structure
@@ -33,25 +34,99 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     max_iterations_reached = True
 
     iterations_count = [0]
-    while it_handler.solutions_count() < max_func_ev:
-        if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
-            max_iterations_reached = False
-            break
+    if approach == 'only_calendar' or approach == 'only_add_remove' or approach == 'combined':
+        while it_handler.solutions_count() < max_func_ev:
+            if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
+                max_iterations_reached = False
+                break
 
-        iteration_info = it_handler.next()
-        if approach == 'only_calendar' or approach == 'only_add_remove' or approach == 'combined':
+            iteration_info = it_handler.next()
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           approach)
-        if approach == 'first_calendar_then_add_remove':
-            pass
-        if approach == 'first_add_remove_then_calendar':
-            pass
 
-    save_stats_file(log_name,
-                    algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
-                    it_handler.generated_solutions,
-                    it_handler.solution_order,
-                    iterations_count[0])
+        save_stats_file(log_name,
+                        algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
+                        it_handler.generated_solutions,
+                        it_handler.solution_order,
+                        iterations_count[0])
+
+    if approach == 'first_calendar_then_add_remove':
+        # Collect solutions that are in Pareto, add them to the queue and run optim again.
+        while it_handler.solutions_count() < max_func_ev / 2:
+            if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
+                max_iterations_reached = False
+                break
+
+            iteration_info = it_handler.next()
+            solution_resolve_optimization(iteration_info, it_handler, iterations_count,
+                                          'only_calendar')
+
+        save_stats_file(log_name,
+                        'hill_clmb_only_calendar' + ('_with_mad' if with_mad else '_without_mad'),
+                        it_handler.generated_solutions,
+                        it_handler.solution_order,
+                        iterations_count[0])
+
+        # Reset the execution queue
+        it_handler.execution_queue = PriorityQueue()
+        for sol_id, sim_info in it_handler.pareto_front.items():
+            it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
+
+        while it_handler.solutions_count() < max_func_ev:
+            if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
+                max_iterations_reached = False
+                break
+
+            iteration_info = it_handler.next()
+            solution_resolve_optimization(iteration_info, it_handler, iterations_count,
+                                          'only_add_remove')
+
+        save_stats_file(log_name,
+                        algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
+                        it_handler.generated_solutions,
+                        it_handler.solution_order,
+                        iterations_count[0])
+
+    if approach == 'first_add_remove_then_calendar':
+        # Collect solutions that are in Pareto, add them to the queue and run optim again.
+        while it_handler.solutions_count() < max_func_ev / 2:
+            if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
+                max_iterations_reached = False
+                break
+
+            iteration_info = it_handler.next()
+            solution_resolve_optimization(iteration_info, it_handler, iterations_count,
+                                          'only_add_remove')
+        save_stats_file(log_name,
+                        'hill_clmb_only_add_remove' + ('_with_mad' if with_mad else '_without_mad'),
+                        it_handler.generated_solutions,
+                        it_handler.solution_order,
+                        iterations_count[0])
+
+        # Reset the execution queue
+        it_handler.execution_queue = PriorityQueue()
+        for sol_id, sim_info in it_handler.pareto_front.items():
+            it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
+
+        while it_handler.solutions_count() < max_func_ev:
+            if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
+                max_iterations_reached = False
+                break
+
+            iteration_info = it_handler.next()
+            solution_resolve_optimization(iteration_info, it_handler, iterations_count,
+                                          'only_calendar')
+        save_stats_file(log_name,
+                        algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
+                        it_handler.generated_solutions,
+                        it_handler.solution_order,
+                        iterations_count[0])
+
+    # save_stats_file(log_name,
+    #                 algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
+    #                 it_handler.generated_solutions,
+    #                 it_handler.solution_order,
+    #                 iterations_count[0])
 
     print("MAX Number of Iterations Reached") if max_iterations_reached else print("NO Improvement Found")
     print("Algortithm %s Completed" % algorithm_name)
@@ -111,7 +186,6 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
         # res_manager = iterations_handler.resource_manager
 
     print("REMOVE COST")
-
 
     resources_to_optimize = {}
     # the first resource in pool_cost is the most expensive
@@ -252,7 +326,6 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
                                 'event_distribution': ttb['event_distribution'],
                                 'resource_calendars': ttb['resource_calendars']}
 
-
                 with open(roster_manager.time_table, 'w') as out:
                     out.write(json.dumps(rest_of_info, indent=4))
                 return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
@@ -343,7 +416,8 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                 cons = json.load(c_read)
 
             constraint_profiles = cons['resources']
-            constraints_to_be_removed = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"), None)
+            constraints_to_be_removed = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"),
+                                             None)
             constraint_profiles.remove(constraints_to_be_removed)
 
             # 5.1 After all changes have been made, overwrite JSON with constraints.
@@ -414,7 +488,6 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
                         to_add.append(task_distr_copy)
                         break
         task_resource_distribution += to_add
-
 
         for r_calendar in resource_calendars:
             if r_calendar['id'] == resource_id + "timetable":

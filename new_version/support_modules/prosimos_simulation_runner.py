@@ -17,7 +17,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2012-03-13T00:00:00.000000+00:00")
+    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2023-01-01T00:00:00.000000+00:00") # ,
 
     _, cal_map, _, _, _, _ = parse_json_sim_parameters(json_path)
 
@@ -92,23 +92,29 @@ def perform_simulations(pools_info,
     #     pool.join()
     #
     #     return simulated_info, traces
+
+    # SEQUENTIAL RUN -
+
     s_res_list = []
     traces_list = []
-    for i in range(2):
+    for i in range(4):
         s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
         s_res_list.append(s_res)
         traces_list.append(traces)
 
+    return estimate_median_absolute_deviation(pools_info, log_name, s_res_list, parallel_start_time), traces_list
+
+    # MULTIPROCESSING RUN -
     # Multiprocessing used to reduce total processing time, dependent on # cores in system
-    # pool = multiprocessing.Pool(5)
+    # pool = multiprocessing.Pool(4)
     # async_results = [pool.apply_async(process_simulations, (model_file_path, json_path, 550, pools_info)) for i in
-    #                  range(simulations_count)]
+    #                  range(5)]
     # simulation_results = [ar.get()[0] for ar in async_results]
     # traces = [ar.get()[1] for ar in async_results]
     # pool.close()
     # pool.join()
 
-    return estimate_median_absolute_deviation(pools_info, log_name, s_res_list, parallel_start_time), traces_list
+    # return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time), traces
 
 
 def estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time):

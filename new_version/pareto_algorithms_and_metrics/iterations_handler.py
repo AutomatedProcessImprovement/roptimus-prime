@@ -94,8 +94,12 @@ class IterationHandler:
         return to_return
 
     def clean_up_json(self):
-        self.jsonManager.retrieve_json_from_id(self.current_starting_id)
-        self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/experiments/production/timetable.json", "./test_assets/experiments/production/constraints.json")
+        self.jsonManager.retrieve_json_from_id(self.current_starting_id,
+                                               self.resource_manager.time_table,
+                                               self.resource_manager.constraints_json)
+        self.resource_manager = RosterManager(self.log_name,
+                                              self.resource_manager.time_table,
+                                              self.resource_manager.constraints_json)
         print("==============")
         print("CLEANED UP JSON TO STARTING ALLOCATION")
         print(self.current_starting_id)
@@ -115,8 +119,10 @@ class IterationHandler:
                     print("NEXT ITERATION STARTING ALLOCATION")
                     print(pools_info.id)
                     print("==============")
-                    self.jsonManager.retrieve_json_from_id(current_solution)
-                    self.resource_manager = RosterManager("DEFAULT_ROSTER2", "./test_assets/experiments/production/timetable.json", "./test_assets/experiments/production/constraints.json")
+                    self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table,
+                                                          self.resource_manager.constraints_json)
+                    self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table,
+                                                          self.resource_manager.constraints_json)
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
@@ -204,7 +210,9 @@ class IterationHandler:
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
             print("Retaining information about solution")
-            self.jsonManager.read_accepted_solution_timetable_to_json_files("", "", pools_info.id)
+            self.jsonManager.read_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
+                                                                            self.resource_manager.constraints_json,
+                                                                            pools_info.id)
             return True
         return False
 

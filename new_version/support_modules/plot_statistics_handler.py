@@ -29,46 +29,79 @@ def print_solution_statistics(p_metrics, log_name):
     f_eval = plot_data_profiles(dir_path, p_metrics.algorithm_results, log_name, 0)
     plot_data_profiles(dir_path, p_metrics.algorithm_results, log_name, 1)
     t_f_eval = 0
+    initial_metrics = None
+    for v in p_metrics.algorithm_results.values():
+        initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
+        break
+    i_mct = initial_metrics.median_cycle_time
+    i_mec = initial_metrics.median_execution_cost
+
+    print(i_mct)
+    print(i_mec)
+    i_mct_mec = (i_mct, i_mec)
     for a_name in f_eval:
         t_f_eval += f_eval[a_name]
     print_line(file_writer, fill_str('Alg_Name', max_leng) + '  #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  '
                                                              'Hausdorff-Dist  Delta-Sprd  Purity-Rate  '
-                                                             'Ave_Time                 Ave_cost')
+                                                             'Ave_Time                 Ave_cost                  Metric')
+    print_pareto_info(file_writer, p_metrics, 'initial (' + log_name + ')', 'initial', t_f_eval, max_leng,
+                      p_metrics.joint_pareto_info, p_metrics.total_explored_solution, i_mct_mec)
     print_pareto_info(file_writer, p_metrics, 'joint_pareto(' + log_name + ')', 'joint', t_f_eval, max_leng,
-                      p_metrics.joint_pareto_info, p_metrics.total_explored_solution)
+                      p_metrics.joint_pareto_info, p_metrics.total_explored_solution, i_mct_mec)
     for alg_name in p_metrics.algorithm_results:
         [l_name, a_name] = extract_log_alg_name(alg_name)
-        a_name = a_name + '(' + l_name + ')'
+        a_name = a_name
         print_pareto_info(file_writer, p_metrics, a_name, alg_name, f_eval[alg_name], max_leng,
                           p_metrics.algorithm_results[alg_name].pareto_front,
-                          len(p_metrics.algorithm_results[alg_name].explored_solutions))
+                          len(p_metrics.algorithm_results[alg_name].explored_solutions), i_mct_mec)
     print_line(file_writer, '------------------------------------------------------')
 
     plot_pareto_front(dir_path, p_metrics.algorithm_results, p_metrics.joint_pareto_info)
 
 
-def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len, pareto_front, total_explored):
+def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len, pareto_front, total_explored, i_mct_mec):
     [hyperarea_diff, hausdorff_dist, delta, purity] = p_metric.compute_metrics(pareto_front)
     [in_pareto, ave_time, ave_cost] = find_common_elements(pareto_front, p_metric.joint_pareto_info)
     [l_name, a_name] = extract_log_alg_name(full_name)
+
+    metric_baseline = (i_mct_mec[1] / i_mct_mec[0])
+    metric = ave_cost/ave_time / metric_baseline
     file_path = "%s%s_%s.txt" % (experiments_plots, l_name, a_name)
-    if 'joint_pareto' not in alg_name:
+    if 'joint_pareto' not in alg_name and 'initial' not in full_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])
-    print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %.2f'
-               % (fill_str(alg_name, max_len),
-                  fill_str(str(funct_ev), 6),
-                  fill_str(str(total_explored), 5),
-                  fill_str(str(len(pareto_front)), 6),
-                  fill_str(str(in_pareto), 5),
-                  fill_str(str(len(pareto_front) - in_pareto), 3),
-                  fill_str(str(round(hyperarea_diff, 6)), 9),
-                  fill_str(str(round(hausdorff_dist, 2)), 14),
-                  fill_str(str(round(delta, 6)), 10),
-                  fill_str(str(round(purity, 6)), 11),
-                  fill_str(str(str(datetime.timedelta(seconds=ave_time))), 23),
-                  ave_cost
-                  ))
+    if 'initial' in full_name:
+        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
+                   % (fill_str(alg_name, max_len),
+                      fill_str(str("-"), 6),
+                      fill_str(str("-"), 5),
+                      fill_str(str("-"), 6),
+                      fill_str(str("-"), 5),
+                      fill_str(str("-"), 3),
+                      fill_str(str("-"), 9),
+                      fill_str(str("-"), 14),
+                      fill_str(str("-"), 10),
+                      fill_str(str("-"), 11),
+                      fill_str(str(str(datetime.timedelta(seconds=i_mct_mec[0]))), 23),
+                      fill_str(str(round(i_mct_mec[1], 2)), 23),
+                      fill_str(str(round((i_mct_mec[1] / i_mct_mec[0]) / (i_mct_mec[1] / i_mct_mec[0]), 6)), 9)
+                      ))
+    else:
+        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
+                   % (fill_str(alg_name, max_len),
+                      fill_str(str(funct_ev), 6),
+                      fill_str(str(total_explored), 5),
+                      fill_str(str(len(pareto_front)), 6),
+                      fill_str(str(in_pareto), 5),
+                      fill_str(str(len(pareto_front) - in_pareto), 3),
+                      fill_str(str(round(hyperarea_diff, 6)), 9),
+                      fill_str(str(round(hausdorff_dist, 2)), 14),
+                      fill_str(str(round(delta, 6)), 10),
+                      fill_str(str(round(purity, 6)), 11),
+                      fill_str(str(str(datetime.timedelta(seconds=ave_time))), 23),
+                      fill_str(str(round(ave_cost, 2)), 23),
+                      fill_str(str(round(metric, 6)), 9)
+                      ))
 
 
 def find_common_elements(pareto_front, joint_pareto_info):
@@ -138,7 +171,6 @@ def plot_data_profiles(file_path, algorithm_results, log_name, data_type=0):
 def plot_pareto_front(file_path, algorithm_results, joint_pareto_info):
     colors = ['r', 'b', 'g']
     for alg_name in algorithm_results:
-        print(alg_name)
         [log_name, alg_name_1] = extract_log_alg_name(alg_name)
         pareto_front = algorithm_results[alg_name].pareto_front
         color_taken = [False, False, False]
@@ -173,7 +205,7 @@ def extract_log_alg_name(full_alg_name):
     name_list = full_alg_name.split("_")
     log_name = name_list[0]
     algs = ['hill', 'tabu', 'nsga2', 'with', 'without']
-    approaches = ['combined', 'only', 'calendar', 'add']
+    approaches = ['combined', 'only', 'calendar', 'add', 'first']
     for i in range(1, len(name_list)):
         if name_list[i] in algs:
             break
@@ -194,13 +226,20 @@ def extract_log_alg_name(full_alg_name):
     if 'without' in name_list:
         alg_name += 'STRICT'
     if 'combined' in name_list:
-        alg_name += '_COMBINED'
+        alg_name += '_CO'
+    if 'first' in name_list:
+        alg_name += '_F'
+        next_idx = name_list.index('first') + 1
+        if name_list[next_idx] == 'calendar':
+            alg_name += '_CA_T_A_R'
+        else:
+            alg_name += '_A_R_T_CA'
     if 'only' in name_list:
-        alg_name += '_ONLY'
-    if 'calendar' in name_list:
-        alg_name += '_CALENDAR'
-    if 'add' in name_list:
-        alg_name += '_ADD_REMOVE'
+        alg_name += '_O'
+        if 'calendar' in name_list:
+            alg_name += '_C'
+        if 'add' in name_list:
+            alg_name += '_A_R'
     return [log_name, alg_name]
 
 
