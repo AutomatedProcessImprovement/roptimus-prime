@@ -6,64 +6,24 @@
     "hours_in_day": 24,
     "resources": [
         {
-            "id": "Anne Olwadatimetable",
+            "id": "Joint_W_Complete application_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 125.0,
-                    "max_daily_cap": 19.0,
-                    "max_consecutive_cap": 11.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 125.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Joint_Create Purchase Requisition_0timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 140.0,
-                    "max_daily_cap": 22.0,
+                    "max_weekly_cap": 89.0,
+                    "max_daily_cap": 16.0,
                     "max_consecutive_cap": 16.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 140.0,
+                    "max_shifts_week": 89.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -86,64 +46,64 @@
             }
         },
         {
-            "id": "Joint_Create Purchase Requisition_1timetable",
+            "id": "Joint_W_Complete application_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 45.0,
+                    "max_weekly_cap": 79.0,
+                    "max_daily_cap": 14.0,
+                    "max_consecutive_cap": 14.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 79.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "06:00:00",
+                    "tuesday": "06:00:00",
+                    "wednesday": "06:00:00",
+                    "thursday": "06:00:00",
+                    "friday": "06:00:00",
+                    "saturday": "06:00:00",
+                    "sunday": "06:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Complete application_2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 78.0,
                     "max_daily_cap": 13.0,
-                    "max_consecutive_cap": 6.0,
+                    "max_consecutive_cap": 13.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 45.0,
+                    "max_shifts_week": 78.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": null,
-                    "friday": null,
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 16777215,
-                    "friday": 16777215,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Francis Odelltimetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 97.0,
-                    "max_daily_cap": 17.0,
-                    "max_consecutive_cap": 6.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 97.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
+                    "sunday": "07:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -166,24 +126,24 @@
             }
         },
         {
-            "id": "Heinz Gutschmidttimetable",
+            "id": "Joint_W_Complete application_3timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 96.0,
-                    "max_daily_cap": 17.0,
-                    "max_consecutive_cap": 10.0,
+                    "max_weekly_cap": 77.0,
+                    "max_daily_cap": 13.0,
+                    "max_consecutive_cap": 13.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 96.0,
+                    "max_shifts_week": 77.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
+                    "sunday": "07:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -206,24 +166,24 @@
             }
         },
         {
-            "id": "Maris Freemantimetable",
+            "id": "Joint_W_Call after offers_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 95.0,
-                    "max_daily_cap": 17.0,
-                    "max_consecutive_cap": 6.0,
+                    "max_weekly_cap": 89.0,
+                    "max_daily_cap": 15.0,
+                    "max_consecutive_cap": 15.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 95.0,
+                    "max_shifts_week": 89.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "06:00:00",
+                    "tuesday": "06:00:00",
+                    "wednesday": "06:00:00",
+                    "thursday": "06:00:00",
+                    "friday": "06:00:00",
+                    "saturday": "06:00:00",
+                    "sunday": "06:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -246,24 +206,24 @@
             }
         },
         {
-            "id": "Joint_Create Request for Quotation_0timetable",
+            "id": "Joint_W_Call after offers_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 106.0,
-                    "max_daily_cap": 18.0,
-                    "max_consecutive_cap": 8.0,
+                    "max_weekly_cap": 81.0,
+                    "max_daily_cap": 15.0,
+                    "max_consecutive_cap": 15.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 106.0,
+                    "max_shifts_week": 81.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "06:00:00",
+                    "tuesday": "06:00:00",
+                    "wednesday": "06:00:00",
+                    "thursday": "06:00:00",
+                    "friday": "06:00:00",
+                    "saturday": "06:00:00",
+                    "sunday": "06:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -286,24 +246,24 @@
             }
         },
         {
-            "id": "Karel de Groottimetable",
+            "id": "Joint_W_Call after offers_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 151.0,
-                    "max_daily_cap": 23.0,
-                    "max_consecutive_cap": 23.0,
+                    "max_weekly_cap": 78.0,
+                    "max_daily_cap": 13.0,
+                    "max_consecutive_cap": 13.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 151.0,
+                    "max_shifts_week": 78.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
+                    "sunday": "07:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -326,24 +286,24 @@
             }
         },
         {
-            "id": "Magdalena Preduttatimetable",
+            "id": "Joint_W_Validate application_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 143.0,
-                    "max_daily_cap": 22.0,
-                    "max_consecutive_cap": 20.0,
+                    "max_weekly_cap": 101.0,
+                    "max_daily_cap": 16.0,
+                    "max_consecutive_cap": 16.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 143.0,
+                    "max_shifts_week": 101.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "04:00:00",
+                    "tuesday": "04:00:00",
+                    "wednesday": "04:00:00",
+                    "thursday": "04:00:00",
+                    "friday": "04:00:00",
+                    "saturday": "04:00:00",
+                    "sunday": "04:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -366,24 +326,24 @@
             }
         },
         {
-            "id": "Francois de Perriertimetable",
+            "id": "Joint_W_Validate application_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 149.0,
-                    "max_daily_cap": 23.0,
-                    "max_consecutive_cap": 23.0,
+                    "max_weekly_cap": 75.0,
+                    "max_daily_cap": 14.0,
+                    "max_consecutive_cap": 14.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 149.0,
+                    "max_shifts_week": 75.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -406,24 +366,144 @@
             }
         },
         {
-            "id": "Joint_Analyze Quotation Comparison Map_0timetable",
+            "id": "Joint_W_Validate application_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 115.0,
-                    "max_daily_cap": 20.0,
+                    "max_weekly_cap": 65.0,
+                    "max_daily_cap": 12.0,
+                    "max_consecutive_cap": 12.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 65.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Validate application_3timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 54.0,
+                    "max_daily_cap": 11.0,
                     "max_consecutive_cap": 11.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 115.0,
+                    "max_shifts_week": 54.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": null,
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Validate application_4timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 63.0,
+                    "max_daily_cap": 14.0,
+                    "max_consecutive_cap": 14.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 63.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": null,
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Call incomplete files_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 102.0,
+                    "max_daily_cap": 16.0,
+                    "max_consecutive_cap": 16.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 102.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -446,23 +526,63 @@
             }
         },
         {
-            "id": "Joint_Analyze Quotation Comparison Map_1timetable",
+            "id": "Joint_W_Call incomplete files_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 14.0,
-                    "max_daily_cap": 4.0,
-                    "max_consecutive_cap": 2.0,
+                    "max_weekly_cap": 78.0,
+                    "max_daily_cap": 14.0,
+                    "max_consecutive_cap": 14.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 14.0,
+                    "max_shifts_week": 78.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "02:00:00",
-                    "tuesday": "02:00:00",
-                    "wednesday": "02:00:00",
-                    "thursday": "02:00:00",
-                    "friday": "02:00:00",
-                    "saturday": "02:00:00",
+                    "monday": "06:00:00",
+                    "tuesday": "06:00:00",
+                    "wednesday": "06:00:00",
+                    "thursday": "06:00:00",
+                    "friday": "06:00:00",
+                    "saturday": "06:00:00",
+                    "sunday": "06:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Call incomplete files_2timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 69.0,
+                    "max_daily_cap": 13.0,
+                    "max_consecutive_cap": 13.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 69.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
                     "sunday": null
                 },
                 "never_work_masks": {
@@ -486,144 +606,24 @@
             }
         },
         {
-            "id": "Joint_Choose best option_0timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 111.0,
-                    "max_daily_cap": 20.0,
-                    "max_consecutive_cap": 11.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 111.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Sean Manneytimetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 91.0,
-                    "max_daily_cap": 14.0,
-                    "max_consecutive_cap": 8.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 91.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Esmeralda Claytimetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 76.0,
-                    "max_daily_cap": 12.0,
-                    "max_consecutive_cap": 7.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 76.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Karen Clarenstimetable",
+            "id": "Joint_W_Handle leads_0timetable",
             "constraints": {
                 "global_constraints": {
                     "max_weekly_cap": 84.0,
                     "max_daily_cap": 15.0,
-                    "max_consecutive_cap": 6.0,
+                    "max_consecutive_cap": 15.0,
                     "max_shifts_day": 24,
                     "max_shifts_week": 84.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -646,24 +646,24 @@
             }
         },
         {
-            "id": "Carmen Finacsetimetable",
+            "id": "Joint_W_Assess potential fraud_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 89.0,
-                    "max_daily_cap": 15.0,
-                    "max_consecutive_cap": 8.0,
+                    "max_weekly_cap": 56.0,
+                    "max_daily_cap": 11.0,
+                    "max_consecutive_cap": 11.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 89.0,
+                    "max_shifts_week": 56.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": "05:00:00",
+                    "sunday": "05:00:00"
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -686,254 +686,14 @@
             }
         },
         {
-            "id": "Kiu Kantimetable",
+            "id": "Joint_W_Assess potential fraud_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 98.0,
-                    "max_daily_cap": 17.0,
-                    "max_consecutive_cap": 6.0,
+                    "max_weekly_cap": 46.0,
+                    "max_daily_cap": 11.0,
+                    "max_consecutive_cap": 11.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 98.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Joint_Release Purchase Order_0timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 108.0,
-                    "max_daily_cap": 17.0,
-                    "max_consecutive_cap": 9.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 108.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Karalda Nimwadatimetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 108.0,
-                    "max_daily_cap": 20.0,
-                    "max_consecutive_cap": 15.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 108.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Pedro Alvarestimetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 112.0,
-                    "max_daily_cap": 19.0,
-                    "max_consecutive_cap": 15.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 112.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Joint_Amend Request for Quotation_0timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 111.0,
-                    "max_daily_cap": 21.0,
-                    "max_consecutive_cap": 15.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 111.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "00:00:00",
-                    "sunday": "00:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Joint_Amend Request for Quotation_1timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 18.0,
-                    "max_daily_cap": 4.0,
-                    "max_consecutive_cap": 3.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 18.0,
-                    "is_human": true
-                },
-                "daily_start_times": {
-                    "monday": "01:00:00",
-                    "tuesday": "01:00:00",
-                    "wednesday": "01:00:00",
-                    "thursday": null,
-                    "friday": "01:00:00",
-                    "saturday": "01:00:00",
-                    "sunday": "01:00:00"
-                },
-                "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 16777215,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                },
-                "always_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
-                }
-            }
-        },
-        {
-            "id": "Joint_Amend Purchase Requisition_0timetable",
-            "constraints": {
-                "global_constraints": {
-                    "max_weekly_cap": 13.0,
-                    "max_daily_cap": 4.0,
-                    "max_consecutive_cap": 2.0,
-                    "max_shifts_day": 24,
-                    "max_shifts_week": 13.0,
+                    "max_shifts_week": 46.0,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -943,7 +703,7 @@
                     "thursday": "05:00:00",
                     "friday": "05:00:00",
                     "saturday": null,
-                    "sunday": "05:00:00"
+                    "sunday": null
                 },
                 "never_work_masks": {
                     "monday": 0,
@@ -952,7 +712,87 @@
                     "thursday": 0,
                     "friday": 0,
                     "saturday": 16777215,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
                     "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Shortened completion_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 29.0,
+                    "max_daily_cap": 8.0,
+                    "max_consecutive_cap": 7.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 29.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_W_Personal Loan collection_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 8.0,
+                    "max_daily_cap": 2.0,
+                    "max_consecutive_cap": 1.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 8.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": null,
+                    "saturday": "07:00:00",
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,

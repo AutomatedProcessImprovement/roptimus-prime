@@ -1,0 +1,2128 @@
+{
+    "resource_profiles": [
+        {
+            "id": "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51",
+            "name": "W_Complete application",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Complete application_0",
+                    "name": "Joint_W_Complete application_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Complete application_0timetable",
+                    "assigned_tasks": [
+                        "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Complete application_1",
+                    "name": "Joint_W_Complete application_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Complete application_1timetable",
+                    "assigned_tasks": [
+                        "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Complete application_2",
+                    "name": "Joint_W_Complete application_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Complete application_2timetable",
+                    "assigned_tasks": [
+                        "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Complete application_3",
+                    "name": "Joint_W_Complete application_3",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Complete application_3timetable",
+                    "assigned_tasks": [
+                        "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_726da541-3d47-4a0f-9ee7-b67838f41232",
+            "name": "W_Call after offers",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Call after offers_0",
+                    "name": "Joint_W_Call after offers_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call after offers_0timetable",
+                    "assigned_tasks": [
+                        "node_726da541-3d47-4a0f-9ee7-b67838f41232"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Call after offers_1",
+                    "name": "Joint_W_Call after offers_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call after offers_1timetable",
+                    "assigned_tasks": [
+                        "node_726da541-3d47-4a0f-9ee7-b67838f41232"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Call after offers_2",
+                    "name": "Joint_W_Call after offers_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call after offers_2timetable",
+                    "assigned_tasks": [
+                        "node_726da541-3d47-4a0f-9ee7-b67838f41232"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_9d3e9b16-634a-44b3-9089-f5b475ad4177",
+            "name": "W_Validate application",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Validate application_0",
+                    "name": "Joint_W_Validate application_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Validate application_0timetable",
+                    "assigned_tasks": [
+                        "node_9d3e9b16-634a-44b3-9089-f5b475ad4177"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Validate application_1",
+                    "name": "Joint_W_Validate application_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Validate application_1timetable",
+                    "assigned_tasks": [
+                        "node_9d3e9b16-634a-44b3-9089-f5b475ad4177"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Validate application_2",
+                    "name": "Joint_W_Validate application_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Validate application_2timetable",
+                    "assigned_tasks": [
+                        "node_9d3e9b16-634a-44b3-9089-f5b475ad4177"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Validate application_3",
+                    "name": "Joint_W_Validate application_3",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Validate application_3timetable",
+                    "assigned_tasks": [
+                        "node_9d3e9b16-634a-44b3-9089-f5b475ad4177"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Validate application_4",
+                    "name": "Joint_W_Validate application_4",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Validate application_4timetable",
+                    "assigned_tasks": [
+                        "node_9d3e9b16-634a-44b3-9089-f5b475ad4177"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_9489b2a9-4298-4814-8863-fd071bc2d973",
+            "name": "W_Call incomplete files",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Call incomplete files_0",
+                    "name": "Joint_W_Call incomplete files_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call incomplete files_0timetable",
+                    "assigned_tasks": [
+                        "node_9489b2a9-4298-4814-8863-fd071bc2d973"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Call incomplete files_1",
+                    "name": "Joint_W_Call incomplete files_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call incomplete files_1timetable",
+                    "assigned_tasks": [
+                        "node_9489b2a9-4298-4814-8863-fd071bc2d973"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Call incomplete files_2",
+                    "name": "Joint_W_Call incomplete files_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Call incomplete files_2timetable",
+                    "assigned_tasks": [
+                        "node_9489b2a9-4298-4814-8863-fd071bc2d973"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_f0651721-fcdd-41af-9eab-5453158b3101",
+            "name": "W_Handle leads",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Handle leads_0",
+                    "name": "Joint_W_Handle leads_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Handle leads_0timetable",
+                    "assigned_tasks": [
+                        "node_f0651721-fcdd-41af-9eab-5453158b3101"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_dc26ca33-eda6-4c3b-91b9-62484a8ef441",
+            "name": "W_Assess potential fraud",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Assess potential fraud_0",
+                    "name": "Joint_W_Assess potential fraud_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Assess potential fraud_0timetable",
+                    "assigned_tasks": [
+                        "node_dc26ca33-eda6-4c3b-91b9-62484a8ef441"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Assess potential fraud_1",
+                    "name": "Joint_W_Assess potential fraud_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Assess potential fraud_1timetable",
+                    "assigned_tasks": [
+                        "node_dc26ca33-eda6-4c3b-91b9-62484a8ef441"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_97616a0d-edb2-4d23-8cea-13eb92121f38",
+            "name": "W_Shortened completion",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Shortened completion_0",
+                    "name": "Joint_W_Shortened completion_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Shortened completion_0timetable",
+                    "assigned_tasks": [
+                        "node_97616a0d-edb2-4d23-8cea-13eb92121f38"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_3011e506-d952-421f-b103-a1559719e12b",
+            "name": "W_Personal Loan collection",
+            "resource_list": [
+                {
+                    "id": "Joint_W_Personal Loan collection_0",
+                    "name": "Joint_W_Personal Loan collection_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Personal Loan collection_0timetable",
+                    "assigned_tasks": [
+                        "node_3011e506-d952-421f-b103-a1559719e12b"
+                    ]
+                }
+            ]
+        }
+    ],
+    "arrival_time_distribution": {
+        "distribution_name": "expon",
+        "distribution_params": [
+            {
+                "value": 0
+            },
+            {
+                "value": 559.2999174236169
+            },
+            {
+                "value": 0
+            },
+            {
+                "value": 73817
+            }
+        ]
+    },
+    "arrival_time_calendar": [
+        {
+            "from": "MONDAY",
+            "to": "MONDAY",
+            "beginTime": "06:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "TUESDAY",
+            "to": "TUESDAY",
+            "beginTime": "05:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "WEDNESDAY",
+            "to": "WEDNESDAY",
+            "beginTime": "05:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "THURSDAY",
+            "to": "THURSDAY",
+            "beginTime": "04:00:00",
+            "endTime": "05:00:00"
+        },
+        {
+            "from": "THURSDAY",
+            "to": "THURSDAY",
+            "beginTime": "06:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "FRIDAY",
+            "to": "FRIDAY",
+            "beginTime": "06:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "SATURDAY",
+            "to": "SATURDAY",
+            "beginTime": "07:00:00",
+            "endTime": "19:00:00"
+        },
+        {
+            "from": "SATURDAY",
+            "to": "SATURDAY",
+            "beginTime": "20:00:00",
+            "endTime": "21:00:00"
+        },
+        {
+            "from": "SUNDAY",
+            "to": "SUNDAY",
+            "beginTime": "10:00:00",
+            "endTime": "16:00:00"
+        },
+        {
+            "from": "SUNDAY",
+            "to": "SUNDAY",
+            "beginTime": "19:00:00",
+            "endTime": "20:00:00"
+        }
+    ],
+    "gateway_branching_probabilities": [
+        {
+            "gateway_id": "node_9ae76381-5014-4473-9384-ab33d0dc0b33",
+            "probabilities": [
+                {
+                    "path_id": "node_817f7047-486b-459b-9478-89a73815593f",
+                    "value": 0.041666666666666664
+                },
+                {
+                    "path_id": "node_6e0f5a89-796a-41e7-8b5c-6b07e36e977a",
+                    "value": 0.013888888888888888
+                },
+                {
+                    "path_id": "Flow_0vl4b0d",
+                    "value": 0.8194444444444444
+                },
+                {
+                    "path_id": "Flow_087uttv",
+                    "value": 0.05555555555555555
+                },
+                {
+                    "path_id": "Flow_0zy37ov",
+                    "value": 0.06944444444444445
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_cc3c775b-2edf-403f-ae81-0be431509331",
+            "probabilities": [
+                {
+                    "path_id": "node_d72d0072-5d34-4cc3-846d-9d79f1698929",
+                    "value": 0.2826086956521739
+                },
+                {
+                    "path_id": "node_dcb2c468-c4ee-40a3-803a-3ae0ca08e974",
+                    "value": 0.717391304347826
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_62f9be1d-35d9-4556-bd00-6916cf35caba",
+            "probabilities": [
+                {
+                    "path_id": "node_e462387a-7cd8-4ae1-824c-a9b1b459ef7f",
+                    "value": 0.06500445235975066
+                },
+                {
+                    "path_id": "node_bea022e5-b001-412f-a864-3bcbb23b5087",
+                    "value": 0.9345132086672603
+                },
+                {
+                    "path_id": "Flow_1y0wuqf",
+                    "value": 0.0004823389729890175
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_7ddaee49-2d47-4dca-8b36-99673f3d17a8",
+            "probabilities": [
+                {
+                    "path_id": "node_ce99aa84-3c4e-43b7-b1b2-d4f65e892778",
+                    "value": 0.890210067380103
+                },
+                {
+                    "path_id": "node_91879237-8da3-44eb-b5d3-454563e7a8e5",
+                    "value": 0.10978993261989695
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_304882d6-493f-4875-aa1d-e51409ce7b3a",
+            "probabilities": [
+                {
+                    "path_id": "node_cd6de473-b55d-4d63-88d6-3473d01481bd",
+                    "value": 0.7325966850828729
+                },
+                {
+                    "path_id": "node_8b1a2f78-93c0-4e5a-8616-d4048ff02702",
+                    "value": 0.09171270718232044
+                },
+                {
+                    "path_id": "node_05b0543a-3c73-493d-a7c2-d6d81be85275",
+                    "value": 0.016574585635359115
+                },
+                {
+                    "path_id": "Flow_07y89n5",
+                    "value": 0.13922651933701657
+                },
+                {
+                    "path_id": "Flow_11dxgpf",
+                    "value": 0.019889502762430938
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_384871a1-6f35-4048-a635-638047e4e16b",
+            "probabilities": [
+                {
+                    "path_id": "node_a8263746-c864-4ab2-9a3c-3c23572fb653",
+                    "value": 0.6284962945254602
+                },
+                {
+                    "path_id": "node_711ae3ab-8857-4a50-9aa7-aabb1cac70c9",
+                    "value": 0.09951845906902086
+                },
+                {
+                    "path_id": "node_45addcf9-fca5-494c-8c02-104c13b5cdc0",
+                    "value": 0.000017075919538267136
+                },
+                {
+                    "path_id": "Flow_1cymk4e",
+                    "value": 0.27196817048598065
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_ccb84c8d-b8d7-4f99-8847-f93c76975899",
+            "probabilities": [
+                {
+                    "path_id": "Flow_17llagi",
+                    "value": 0.3166344040636325
+                },
+                {
+                    "path_id": "Flow_1kqn95x",
+                    "value": 0.002794475089874394
+                },
+                {
+                    "path_id": "Flow_1tk53jy",
+                    "value": 0.00004366367327928741
+                },
+                {
+                    "path_id": "Flow_0m4v0cl",
+                    "value": 0.00002910911551952494
+                },
+                {
+                    "path_id": "Flow_1q0vc38",
+                    "value": 0.4623837454698939
+                },
+                {
+                    "path_id": "Flow_1i7xgqp",
+                    "value": 0.21811460258780038
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_a1066245-33ef-4426-81bc-662193781301",
+            "probabilities": [
+                {
+                    "path_id": "node_a55cded7-1fbd-42fb-9e56-19559564be1e",
+                    "value": 0.2548538272706985
+                },
+                {
+                    "path_id": "node_43c49e78-ef3e-45f6-951b-6f962b5df027",
+                    "value": 0.00624860522204865
+                },
+                {
+                    "path_id": "Flow_1hdrja6",
+                    "value": 0.7386744030350368
+                },
+                {
+                    "path_id": "Flow_1srsmko",
+                    "value": 0.0002231644722160232
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_44864e14-3a07-4fcc-8a98-936a471d9244",
+            "probabilities": [
+                {
+                    "path_id": "node_b2cd5fdd-145c-4e81-967a-76720285d503",
+                    "value": 0.2222222222222222
+                },
+                {
+                    "path_id": "node_a8ca232c-001a-43d9-acb4-34ad9d50bac5",
+                    "value": 0.6666666666666666
+                },
+                {
+                    "path_id": "Flow_0rgb8gu",
+                    "value": 0.1111111111111111
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_5fcbd48a-8787-45bb-ba76-1c75b38742f1",
+            "probabilities": [
+                {
+                    "path_id": "node_5cad13e3-35ff-4c70-8a35-65aed87e737f",
+                    "value": 0.4297661204809635
+                },
+                {
+                    "path_id": "node_95abd7fb-07a9-4b75-a993-af74a9be0451",
+                    "value": 0.5669527639397395
+                },
+                {
+                    "path_id": "node_8ad29f36-5ea1-4b9d-86a9-c69dc9b8dc2c",
+                    "value": 0.0027809455214773023
+                },
+                {
+                    "path_id": "Flow_1ut8dum",
+                    "value": 0.0005001700578196587
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_f92196bb-e7ce-4536-a432-3dfb84fdb1e8",
+            "probabilities": [
+                {
+                    "path_id": "node_16caaa9e-8dae-459a-add4-9aee352399cd",
+                    "value": 0.4807513675301889
+                },
+                {
+                    "path_id": "Flow_1xiqikg",
+                    "value": 0.0002580245639384869
+                },
+                {
+                    "path_id": "Flow_0pch1c3",
+                    "value": 0.000533250765472873
+                },
+                {
+                    "path_id": "Flow_0stiigu",
+                    "value": 0.35918739463996974
+                },
+                {
+                    "path_id": "Flow_1c30ugp",
+                    "value": 0.15926996250043005
+                }
+            ]
+        },
+        {
+            "gateway_id": "Gateway_1do1jw1",
+            "probabilities": [
+                {
+                    "path_id": "Flow_0u811p0",
+                    "value": 0.0017067379044226774
+                },
+                {
+                    "path_id": "Flow_1przwba",
+                    "value": 0.9982932620955773
+                }
+            ]
+        },
+        {
+            "gateway_id": "Gateway_0paqik1",
+            "probabilities": [
+                {
+                    "path_id": "Flow_05gvuya",
+                    "value": 0.00034322979234597563
+                },
+                {
+                    "path_id": "Flow_09sfqrz",
+                    "value": 0.999656770207654
+                }
+            ]
+        },
+        {
+            "gateway_id": "Gateway_0iu7ik8",
+            "probabilities": [
+                {
+                    "path_id": "Flow_19qmwaz",
+                    "value": 0.000858074480864939
+                },
+                {
+                    "path_id": "Flow_0561wln",
+                    "value": 0.999141925519135
+                }
+            ]
+        }
+    ],
+    "task_resource_distribution": [
+        {
+            "task_id": "node_3cf3dee7-f556-4ab5-8dd5-6a8dfc3e6c51",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Complete application_0",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.541961794835649
+                        },
+                        {
+                            "value": -0.22044895488588417
+                        },
+                        {
+                            "value": 57.2623440620785
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 3237
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Complete application_1",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 13.365197104763258
+                        },
+                        {
+                            "value": 37.653388089600185
+                        },
+                        {
+                            "value": 31.63363620965808
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 4151
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Complete application_2",
+                    "distribution_name": "gamma",
+                    "distribution_params": [
+                        {
+                            "value": 3.8603503707013083
+                        },
+                        {
+                            "value": -136.77185963721453
+                        },
+                        {
+                            "value": 210.29650726624874
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 7969
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Complete application_3",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.9785317372585183
+                        },
+                        {
+                            "value": 404.68958945499804
+                        },
+                        {
+                            "value": 224.23254026494465
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 8131
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_726da541-3d47-4a0f-9ee7-b67838f41232",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Call after offers_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 12.49137847943616
+                        },
+                        {
+                            "value": 11.035671794346992
+                        },
+                        {
+                            "value": 5.933932362613023
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 2996
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Call after offers_1",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 35.3210205281495
+                        },
+                        {
+                            "value": 14.696452008852383
+                        },
+                        {
+                            "value": 5.474596505453197
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 10189
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Call after offers_2",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 40.164262656136145
+                        },
+                        {
+                            "value": 12.942738794659455
+                        },
+                        {
+                            "value": 9.967835583420392
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 8480
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_9d3e9b16-634a-44b3-9089-f5b475ad4177",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Validate application_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 103.54006217948776
+                        },
+                        {
+                            "value": 1.3095535353572014
+                        },
+                        {
+                            "value": 0.9235440150167331
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 17145
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Validate application_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 0.8970399875837376
+                        },
+                        {
+                            "value": -20.605116394372523
+                        },
+                        {
+                            "value": 244.15030281454165
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 22251
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Validate application_2",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 575.0751857355126
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 15824
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Validate application_3",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 865.0952496954933
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 26012
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Validate application_4",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 8.421378999780424
+                        },
+                        {
+                            "value": 263.3782171377475
+                        },
+                        {
+                            "value": 112.87339946535448
+                        },
+                        {
+                            "value": 29
+                        },
+                        {
+                            "value": 24380
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_9489b2a9-4298-4814-8863-fd071bc2d973",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Call incomplete files_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 89.71303476552494
+                        },
+                        {
+                            "value": 1.9448973266633667
+                        },
+                        {
+                            "value": 1.1183570783046148
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 4725
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Call incomplete files_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 0.8797887574901473
+                        },
+                        {
+                            "value": -18.111238499198585
+                        },
+                        {
+                            "value": 204.33144956884257
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 29604
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Call incomplete files_2",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 452.75925418151905
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 17945
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_f0651721-fcdd-41af-9eab-5453158b3101",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Handle leads_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 57.24163036802889
+                        },
+                        {
+                            "value": 2.978715925775247
+                        },
+                        {
+                            "value": 1.7533201682220831
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 3523
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_dc26ca33-eda6-4c3b-91b9-62484a8ef441",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Assess potential fraud_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 4293.78089263588
+                        },
+                        {
+                            "value": -0.45742181624861833
+                        },
+                        {
+                            "value": 0.15508690087207666
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 53949
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Assess potential fraud_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.8569816838893178
+                        },
+                        {
+                            "value": -9.522528264145421
+                        },
+                        {
+                            "value": 3140.7983535915587
+                        },
+                        {
+                            "value": 22
+                        },
+                        {
+                            "value": 207340
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_97616a0d-edb2-4d23-8cea-13eb92121f38",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Shortened completion_0",
+                    "distribution_name": "gamma",
+                    "distribution_params": [
+                        {
+                            "value": 0.36059958767871114
+                        },
+                        {
+                            "value": 1.9999999999999996
+                        },
+                        {
+                            "value": 925.045860157904
+                        },
+                        {
+                            "value": 2
+                        },
+                        {
+                            "value": 1641
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_3011e506-d952-421f-b103-a1559719e12b",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Personal Loan collection_0",
+                    "distribution_name": "gamma",
+                    "distribution_params": [
+                        {
+                            "value": 0.5107287540460843
+                        },
+                        {
+                            "value": 6.999999999999998
+                        },
+                        {
+                            "value": 31.17668431089679
+                        },
+                        {
+                            "value": 7
+                        },
+                        {
+                            "value": 138
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resource_calendars": [
+        {
+            "id": "Joint_W_Complete application_0timetable",
+            "name": "Joint_W_Complete application_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "16:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Complete application_1timetable",
+            "name": "Joint_W_Complete application_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Complete application_2timetable",
+            "name": "Joint_W_Complete application_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Complete application_3timetable",
+            "name": "Joint_W_Complete application_3timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call after offers_0timetable",
+            "name": "Joint_W_Call after offers_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "16:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call after offers_1timetable",
+            "name": "Joint_W_Call after offers_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call after offers_2timetable",
+            "name": "Joint_W_Call after offers_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Validate application_0timetable",
+            "name": "Joint_W_Validate application_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "07:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "20:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Validate application_1timetable",
+            "name": "Joint_W_Validate application_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "19:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Validate application_2timetable",
+            "name": "Joint_W_Validate application_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "20:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Validate application_3timetable",
+            "name": "Joint_W_Validate application_3timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "16:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Validate application_4timetable",
+            "name": "Joint_W_Validate application_4timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "21:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call incomplete files_0timetable",
+            "name": "Joint_W_Call incomplete files_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "07:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "22:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call incomplete files_1timetable",
+            "name": "Joint_W_Call incomplete files_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "14:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Call incomplete files_2timetable",
+            "name": "Joint_W_Call incomplete files_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Handle leads_0timetable",
+            "name": "Joint_W_Handle leads_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "11:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "20:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Assess potential fraud_0timetable",
+            "name": "Joint_W_Assess potential fraud_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Assess potential fraud_1timetable",
+            "name": "Joint_W_Assess potential fraud_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "06:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "05:00:00",
+                    "endTime": "09:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "16:00:00",
+                    "endTime": "17:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Shortened completion_0timetable",
+            "name": "Joint_W_Shortened completion_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "11:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "11:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "15:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "11:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "15:00:00",
+                    "endTime": "16:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Personal Loan collection_0timetable",
+            "name": "Joint_W_Personal Loan collection_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "17:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "18:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "10:00:00"
+                }
+            ]
+        }
+    ]
+}

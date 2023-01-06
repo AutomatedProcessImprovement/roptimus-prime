@@ -1,1 +1,1795 @@
-{"resource_profiles":[{"id":"node_9812d565-389e-4f26-930c-e52790469964","name":"W_Completeren aanvraag","resource_list":[{"id":"NOT_SET","name":"NOT_SET","cost_per_hour":1,"amount":1,"calendar":"NOT_SETtimetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964","node_2928450d-9787-4670-a0f5-e941198d23d8","node_70267400-3b59-4eb2-a90a-ba042c297a06","node_0645c73c-7cae-42f5-aa10-b067e41bb07e","node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Completeren aanvraag_0","name":"Joint_W_Completeren aanvraag_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Completeren aanvraag_0timetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964"]},{"id":"Joint_W_Completeren aanvraag_1","name":"Joint_W_Completeren aanvraag_1","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Completeren aanvraag_1timetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964"]},{"id":"Joint_W_Completeren aanvraag_2","name":"Joint_W_Completeren aanvraag_2","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Completeren aanvraag_2timetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964"]}]},{"id":"node_2928450d-9787-4670-a0f5-e941198d23d8","name":"W_Afhandelen leads","resource_list":[{"id":"NOT_SET","name":"NOT_SET","cost_per_hour":1,"amount":1,"calendar":"NOT_SETtimetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964","node_2928450d-9787-4670-a0f5-e941198d23d8","node_70267400-3b59-4eb2-a90a-ba042c297a06","node_0645c73c-7cae-42f5-aa10-b067e41bb07e","node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Afhandelen leads_0","name":"Joint_W_Afhandelen leads_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Afhandelen leads_0timetable","assigned_tasks":["node_2928450d-9787-4670-a0f5-e941198d23d8"]},{"id":"Joint_W_Afhandelen leads_1","name":"Joint_W_Afhandelen leads_1","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Afhandelen leads_1timetable","assigned_tasks":["node_2928450d-9787-4670-a0f5-e941198d23d8"]}]},{"id":"node_70267400-3b59-4eb2-a90a-ba042c297a06","name":"W_Nabellen offertes","resource_list":[{"id":"NOT_SET","name":"NOT_SET","cost_per_hour":1,"amount":1,"calendar":"NOT_SETtimetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964","node_2928450d-9787-4670-a0f5-e941198d23d8","node_70267400-3b59-4eb2-a90a-ba042c297a06","node_0645c73c-7cae-42f5-aa10-b067e41bb07e","node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Nabellen offertes_0","name":"Joint_W_Nabellen offertes_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Nabellen offertes_0timetable","assigned_tasks":["node_70267400-3b59-4eb2-a90a-ba042c297a06"]},{"id":"Joint_W_Nabellen offertes_1","name":"Joint_W_Nabellen offertes_1","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Nabellen offertes_1timetable","assigned_tasks":["node_70267400-3b59-4eb2-a90a-ba042c297a06"]}]},{"id":"node_0645c73c-7cae-42f5-aa10-b067e41bb07e","name":"W_Valideren aanvraag","resource_list":[{"id":"NOT_SET","name":"NOT_SET","cost_per_hour":1,"amount":1,"calendar":"NOT_SETtimetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964","node_2928450d-9787-4670-a0f5-e941198d23d8","node_70267400-3b59-4eb2-a90a-ba042c297a06","node_0645c73c-7cae-42f5-aa10-b067e41bb07e","node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Valideren aanvraag_0","name":"Joint_W_Valideren aanvraag_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Valideren aanvraag_0timetable","assigned_tasks":["node_0645c73c-7cae-42f5-aa10-b067e41bb07e"]},{"id":"Joint_W_Valideren aanvraag_1","name":"Joint_W_Valideren aanvraag_1","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Valideren aanvraag_1timetable","assigned_tasks":["node_0645c73c-7cae-42f5-aa10-b067e41bb07e"]},{"id":"Joint_W_Valideren aanvraag_2","name":"Joint_W_Valideren aanvraag_2","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Valideren aanvraag_2timetable","assigned_tasks":["node_0645c73c-7cae-42f5-aa10-b067e41bb07e"]},{"id":"Joint_W_Valideren aanvraag_3","name":"Joint_W_Valideren aanvraag_3","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Valideren aanvraag_3timetable","assigned_tasks":["node_0645c73c-7cae-42f5-aa10-b067e41bb07e"]}]},{"id":"node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16","name":"W_Nabellen incomplete dossiers","resource_list":[{"id":"NOT_SET","name":"NOT_SET","cost_per_hour":1,"amount":1,"calendar":"NOT_SETtimetable","assigned_tasks":["node_9812d565-389e-4f26-930c-e52790469964","node_2928450d-9787-4670-a0f5-e941198d23d8","node_70267400-3b59-4eb2-a90a-ba042c297a06","node_0645c73c-7cae-42f5-aa10-b067e41bb07e","node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Nabellen incomplete dossiers_0","name":"Joint_W_Nabellen incomplete dossiers_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Nabellen incomplete dossiers_0timetable","assigned_tasks":["node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]},{"id":"Joint_W_Nabellen incomplete dossiers_1","name":"Joint_W_Nabellen incomplete dossiers_1","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Nabellen incomplete dossiers_1timetable","assigned_tasks":["node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"]}]},{"id":"node_64e5dfb9-b7b7-4230-a983-c6bffdf27881","name":"W_Beoordelen fraude","resource_list":[{"id":"10188.0","name":"10188.0","cost_per_hour":1,"amount":1,"calendar":"10188.0timetable","assigned_tasks":["node_64e5dfb9-b7b7-4230-a983-c6bffdf27881"]},{"id":"Joint_W_Beoordelen fraude_0","name":"Joint_W_Beoordelen fraude_0","cost_per_hour":1,"amount":1,"calendar":"Joint_W_Beoordelen fraude_0timetable","assigned_tasks":["node_64e5dfb9-b7b7-4230-a983-c6bffdf27881"]}]}],"arrival_time_distribution":{"distribution_name":"lognorm","distribution_params":[{"value":1.4687682698465188},{"value":-3.2987599560227006},{"value":269.9992679281427},{"value":0.006000000001222361},{"value":24906.225000000002}]},"arrival_time_calendar":[{"from":"MONDAY","to":"MONDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"17:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"09:00:00","endTime":"10:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"20:00:00","endTime":"21:00:00"}],"gateway_branching_probabilities":[{"gateway_id":"node_02cc0638-a8dc-43d9-b175-efbce5d4153f","probabilities":[{"path_id":"node_5c63e4af-ad9a-4d31-97a3-1baf5c56a20b","value":0.5141856392294221},{"path_id":"node_8c42619d-4b29-48c4-816b-40f08c0fb802","value":0.48581436077057794}]},{"gateway_id":"node_008cd951-cece-4cba-a116-452a81fe081d","probabilities":[{"path_id":"node_0ee4e08b-dc60-42d3-a294-88ce95edf903","value":0.6324870737233487},{"path_id":"node_be2fbf55-3c09-4957-9b79-b07ca10d76be","value":0.2567826642653808},{"path_id":"node_9472d7fe-de6e-42e7-9c95-5c7164456d57","value":0.11073026201127055}]},{"gateway_id":"node_19d2d442-79ea-408a-85b0-6e49412436f9","probabilities":[{"path_id":"node_dab470cd-d991-4bd3-91b0-f90aee3fc5f3","value":0.8068010299209802},{"path_id":"node_77c1b454-a785-46ea-9d50-ee2af19acec1","value":0.04004261741987037},{"path_id":"Flow_106er2d","value":0.15315635265914943}]},{"gateway_id":"node_c376cd79-6e34-4a40-b1bd-ed23547c9d82","probabilities":[{"path_id":"node_9c73a9b5-3b6c-498e-80b6-df6e4d3a1934","value":0.19296316657504123},{"path_id":"node_620cd7fb-d645-4fb2-a2da-49b747e56b5a","value":0.41029869891881987},{"path_id":"node_721b4986-67fb-4932-9e9e-64b6c320f38f","value":0.39673813450613893}]},{"gateway_id":"node_69ad1851-dcff-4450-8c2a-57b796cb1eb1","probabilities":[{"path_id":"node_dd998880-5d39-4080-bf33-4f50c35505f1","value":0.3735185421180069},{"path_id":"node_891c5267-87fb-453f-be64-21bd7191d0b0","value":0.2773034280616796},{"path_id":"node_2eea862c-4ce7-4b10-904f-a9d7f875767b","value":0.3491780298203135}]},{"gateway_id":"node_d414da11-8487-4b08-af16-0bbd8e1faadf","probabilities":[{"path_id":"node_5a46be7e-9793-460e-a2e3-cb6ee5f675d3","value":0.7439907326962062},{"path_id":"node_774dbe10-b6f9-4d1d-9fb0-d1f84d82bb3a","value":0.18482479003764843},{"path_id":"node_623e60c1-0c50-4180-b3bf-0cc048dea241","value":0.07118447726614538}]},{"gateway_id":"node_49362300-6952-453a-9629-e4df331faae1","probabilities":[{"path_id":"node_8815443d-9be6-499d-b5fb-f520786aec5b","value":0.6666666666666666},{"path_id":"node_5bab301b-9694-43ba-a598-6a53f0ad1f18","value":0.3333333333333333}]},{"gateway_id":"node_fbbcc246-0445-40d2-894b-040a4af771d1","probabilities":[{"path_id":"node_5acf2d0f-c24f-4dca-b839-50e6c8675daa","value":0.9767785998861696},{"path_id":"node_c705a929-283b-4bcd-9640-7a693a208a2c","value":0.023221400113830393}]}],"task_resource_distribution":[{"task_id":"node_9812d565-389e-4f26-930c-e52790469964","resources":[{"resource_id":"NOT_SET","distribution_name":"exponnorm","distribution_params":[{"value":284.17755679365837},{"value":2.1787259066106754},{"value":1.6098693866277292},{"value":0},{"value":40307.346000000005}]},{"resource_id":"Joint_W_Completeren aanvraag_0","distribution_name":"exponnorm","distribution_params":[{"value":159.28100754489319},{"value":3.0961685615784127},{"value":1.3824886588618912},{"value":0.812},{"value":12523.948}]},{"resource_id":"Joint_W_Completeren aanvraag_1","distribution_name":"expon","distribution_params":[{"value":0},{"value":561.8721930986407},{"value":0},{"value":23882.615}]},{"resource_id":"Joint_W_Completeren aanvraag_2","distribution_name":"exponnorm","distribution_params":[{"value":3.576623051284308},{"value":265.9189460588137},{"value":153.20390646071792},{"value":39.229},{"value":11847.73}]}]},{"task_id":"node_2928450d-9787-4670-a0f5-e941198d23d8","resources":[{"resource_id":"NOT_SET","distribution_name":"expon","distribution_params":[{"value":0.673},{"value":332.4695019867549},{"value":0.673},{"value":36538.74799999997}]},{"resource_id":"Joint_W_Afhandelen leads_0","distribution_name":"exponnorm","distribution_params":[{"value":18.506546984339195},{"value":7.879684622249005},{"value":8.346227422202881},{"value":0},{"value":4759.186}]},{"resource_id":"Joint_W_Afhandelen leads_1","distribution_name":"lognorm","distribution_params":[{"value":1.463433012512489},{"value":-6.3525409752079165},{"value":284.35905544692577},{"value":0},{"value":43732.269}]}]},{"task_id":"node_70267400-3b59-4eb2-a90a-ba042c297a06","resources":[{"resource_id":"NOT_SET","distribution_name":"expon","distribution_params":[{"value":0},{"value":336.54656080790716},{"value":0},{"value":48586.71000000001}]},{"resource_id":"Joint_W_Nabellen offertes_0","distribution_name":"exponnorm","distribution_params":[{"value":36.96572606380645},{"value":4.635171359752185},{"value":3.0266310316292655},{"value":0},{"value":3731.5339999999997}]},{"resource_id":"Joint_W_Nabellen offertes_1","distribution_name":"lognorm","distribution_params":[{"value":0.9144374892570624},{"value":-10.44593661548257},{"value":196.9822935291258},{"value":0},{"value":16851.317}]}]},{"task_id":"node_0645c73c-7cae-42f5-aa10-b067e41bb07e","resources":[{"resource_id":"Joint_W_Valideren aanvraag_0","distribution_name":"expon","distribution_params":[{"value":0},{"value":542.5174732842008},{"value":0},{"value":66925.11300000001}]},{"resource_id":"Joint_W_Valideren aanvraag_1","distribution_name":"exponnorm","distribution_params":[{"value":3.2883951358964407},{"value":329.4101984005952},{"value":255.18499458699267},{"value":0},{"value":23783.016000000003}]},{"resource_id":"Joint_W_Valideren aanvraag_2","distribution_name":"exponnorm","distribution_params":[{"value":2.5545937383815107},{"value":719.6965358152473},{"value":368.61797532559467},{"value":37.355},{"value":9412.919999999998}]},{"resource_id":"Joint_W_Valideren aanvraag_3","distribution_name":"exponnorm","distribution_params":[{"value":2.7939047165072104},{"value":940.4654387755099},{"value":414.6433176391286},{"value":54.406},{"value":14342.339}]},{"resource_id":"NOT_SET","distribution_name":"exponnorm","distribution_params":[{"value":1157.5841144334058},{"value":-0.7956609058850903},{"value":0.7934469792853918},{"value":0},{"value":66925.11300000001}]}]},{"task_id":"node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16","resources":[{"resource_id":"NOT_SET","distribution_name":"exponnorm","distribution_params":[{"value":1504.7472849879023},{"value":-0.3064871800730161},{"value":0.2792849421414332},{"value":0},{"value":30417.428}]},{"resource_id":"Joint_W_Nabellen incomplete dossiers_0","distribution_name":"lognorm","distribution_params":[{"value":1.492012782346468},{"value":-1.0015339795623015},{"value":83.63395740269284},{"value":0},{"value":4689.587}]},{"resource_id":"Joint_W_Nabellen incomplete dossiers_1","distribution_name":"lognorm","distribution_params":[{"value":1.0728613316664175},{"value":-14.958990458180356},{"value":438.45623467832934},{"value":0},{"value":36105.712}]}]},{"task_id":"node_64e5dfb9-b7b7-4230-a983-c6bffdf27881","resources":[{"resource_id":"10188.0","distribution_name":"expon","distribution_params":[{"value":0},{"value":55.98978172588832},{"value":0},{"value":5640.838}]},{"resource_id":"Joint_W_Beoordelen fraude_0","distribution_name":"exponnorm","distribution_params":[{"value":3361.326255543958},{"value":0.2707946919965115},{"value":0.17201135796625222},{"value":0.761},{"value":26017.228000000006}]}]}],"resource_calendars":[{"id":"NOT_SETtimetable","name":"NOT_SETtimetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"05:00:00","endTime":"21:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"17:00:00"}]},{"id":"Joint_W_Completeren aanvraag_0timetable","name":"Joint_W_Completeren aanvraag_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"21:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"17:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"09:00:00","endTime":"10:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"20:00:00","endTime":"21:00:00"}]},{"id":"Joint_W_Completeren aanvraag_1timetable","name":"Joint_W_Completeren aanvraag_1timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"08:00:00","endTime":"21:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"16:00:00"}]},{"id":"Joint_W_Completeren aanvraag_2timetable","name":"Joint_W_Completeren aanvraag_2timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"08:00:00","endTime":"21:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"17:00:00"}]},{"id":"Joint_W_Afhandelen leads_0timetable","name":"Joint_W_Afhandelen leads_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"08:00:00","endTime":"17:00:00"}]},{"id":"Joint_W_Afhandelen leads_1timetable","name":"Joint_W_Afhandelen leads_1timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"18:00:00"},{"from":"MONDAY","to":"MONDAY","beginTime":"19:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"07:00:00","endTime":"16:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"17:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"08:00:00","endTime":"16:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"19:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"10:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"11:00:00","endTime":"16:00:00"}]},{"id":"Joint_W_Nabellen offertes_0timetable","name":"Joint_W_Nabellen offertes_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"21:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"16:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"09:00:00","endTime":"10:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"21:00:00","endTime":"22:00:00"}]},{"id":"Joint_W_Nabellen offertes_1timetable","name":"Joint_W_Nabellen offertes_1timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"08:00:00","endTime":"21:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"16:00:00"}]},{"id":"Joint_W_Valideren aanvraag_0timetable","name":"Joint_W_Valideren aanvraag_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"05:00:00","endTime":"18:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"19:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"07:00:00","endTime":"16:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"06:00:00","endTime":"07:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"10:00:00","endTime":"13:00:00"}]},{"id":"Joint_W_Valideren aanvraag_1timetable","name":"Joint_W_Valideren aanvraag_1timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"06:00:00","endTime":"17:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"06:00:00","endTime":"16:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"17:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"06:00:00","endTime":"16:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"17:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"18:00:00","endTime":"19:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"13:00:00"}]},{"id":"Joint_W_Valideren aanvraag_2timetable","name":"Joint_W_Valideren aanvraag_2timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"16:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"06:00:00","endTime":"16:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"05:00:00","endTime":"17:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"05:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"17:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"13:00:00"}]},{"id":"Joint_W_Valideren aanvraag_3timetable","name":"Joint_W_Valideren aanvraag_3timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"17:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"17:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"16:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"16:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"17:00:00","endTime":"18:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"17:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"12:00:00"}]},{"id":"Joint_W_Nabellen incomplete dossiers_0timetable","name":"Joint_W_Nabellen incomplete dossiers_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"06:00:00","endTime":"21:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"06:00:00","endTime":"21:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"06:00:00","endTime":"21:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"06:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"21:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"17:00:00"},{"from":"SUNDAY","to":"SUNDAY","beginTime":"11:00:00","endTime":"13:00:00"}]},{"id":"Joint_W_Nabellen incomplete dossiers_1timetable","name":"Joint_W_Nabellen incomplete dossiers_1timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"08:00:00","endTime":"20:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"09:00:00","endTime":"12:00:00"},{"from":"SATURDAY","to":"SATURDAY","beginTime":"13:00:00","endTime":"16:00:00"}]},{"id":"10188.0timetable","name":"10188.0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"08:00:00","endTime":"11:00:00"},{"from":"MONDAY","to":"MONDAY","beginTime":"12:00:00","endTime":"16:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"13:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"14:00:00","endTime":"15:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"19:00:00","endTime":"20:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"13:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"15:00:00","endTime":"16:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"06:00:00","endTime":"08:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"09:00:00","endTime":"10:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"11:00:00","endTime":"14:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"15:00:00","endTime":"16:00:00"}]},{"id":"Joint_W_Beoordelen fraude_0timetable","name":"Joint_W_Beoordelen fraude_0timetable","time_periods":[{"from":"MONDAY","to":"MONDAY","beginTime":"07:00:00","endTime":"08:00:00"},{"from":"MONDAY","to":"MONDAY","beginTime":"09:00:00","endTime":"12:00:00"},{"from":"MONDAY","to":"MONDAY","beginTime":"14:00:00","endTime":"16:00:00"},{"from":"TUESDAY","to":"TUESDAY","beginTime":"07:00:00","endTime":"15:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"05:00:00","endTime":"08:00:00"},{"from":"WEDNESDAY","to":"WEDNESDAY","beginTime":"12:00:00","endTime":"14:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"07:00:00","endTime":"12:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"13:00:00","endTime":"15:00:00"},{"from":"THURSDAY","to":"THURSDAY","beginTime":"19:00:00","endTime":"20:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"05:00:00","endTime":"06:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"07:00:00","endTime":"08:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"10:00:00","endTime":"11:00:00"},{"from":"FRIDAY","to":"FRIDAY","beginTime":"12:00:00","endTime":"16:00:00"}]}]}
+{
+    "resource_profiles": [
+        {
+            "id": "node_9812d565-389e-4f26-930c-e52790469964",
+            "name": "W_Completeren aanvraag",
+            "resource_list": [
+                {
+                    "id": "NOT_SET",
+                    "name": "NOT_SET",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "NOT_SETtimetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964",
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8",
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Completeren aanvraag_0",
+                    "name": "Joint_W_Completeren aanvraag_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Completeren aanvraag_0timetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Completeren aanvraag_1",
+                    "name": "Joint_W_Completeren aanvraag_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Completeren aanvraag_1timetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Completeren aanvraag_2",
+                    "name": "Joint_W_Completeren aanvraag_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Completeren aanvraag_2timetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_2928450d-9787-4670-a0f5-e941198d23d8",
+            "name": "W_Afhandelen leads",
+            "resource_list": [
+                {
+                    "id": "NOT_SET",
+                    "name": "NOT_SET",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "NOT_SETtimetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964",
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8",
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Afhandelen leads_0",
+                    "name": "Joint_W_Afhandelen leads_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Afhandelen leads_0timetable",
+                    "assigned_tasks": [
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Afhandelen leads_1",
+                    "name": "Joint_W_Afhandelen leads_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Afhandelen leads_1timetable",
+                    "assigned_tasks": [
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+            "name": "W_Nabellen offertes",
+            "resource_list": [
+                {
+                    "id": "NOT_SET",
+                    "name": "NOT_SET",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "NOT_SETtimetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964",
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8",
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Nabellen offertes_0",
+                    "name": "Joint_W_Nabellen offertes_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Nabellen offertes_0timetable",
+                    "assigned_tasks": [
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Nabellen offertes_1",
+                    "name": "Joint_W_Nabellen offertes_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Nabellen offertes_1timetable",
+                    "assigned_tasks": [
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+            "name": "W_Valideren aanvraag",
+            "resource_list": [
+                {
+                    "id": "NOT_SET",
+                    "name": "NOT_SET",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "NOT_SETtimetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964",
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8",
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Valideren aanvraag_0",
+                    "name": "Joint_W_Valideren aanvraag_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Valideren aanvraag_0timetable",
+                    "assigned_tasks": [
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Valideren aanvraag_1",
+                    "name": "Joint_W_Valideren aanvraag_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Valideren aanvraag_1timetable",
+                    "assigned_tasks": [
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Valideren aanvraag_2",
+                    "name": "Joint_W_Valideren aanvraag_2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Valideren aanvraag_2timetable",
+                    "assigned_tasks": [
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Valideren aanvraag_3",
+                    "name": "Joint_W_Valideren aanvraag_3",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Valideren aanvraag_3timetable",
+                    "assigned_tasks": [
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16",
+            "name": "W_Nabellen incomplete dossiers",
+            "resource_list": [
+                {
+                    "id": "NOT_SET",
+                    "name": "NOT_SET",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "NOT_SETtimetable",
+                    "assigned_tasks": [
+                        "node_9812d565-389e-4f26-930c-e52790469964",
+                        "node_2928450d-9787-4670-a0f5-e941198d23d8",
+                        "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+                        "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Nabellen incomplete dossiers_0",
+                    "name": "Joint_W_Nabellen incomplete dossiers_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Nabellen incomplete dossiers_0timetable",
+                    "assigned_tasks": [
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Nabellen incomplete dossiers_1",
+                    "name": "Joint_W_Nabellen incomplete dossiers_1",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Nabellen incomplete dossiers_1timetable",
+                    "assigned_tasks": [
+                        "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "node_64e5dfb9-b7b7-4230-a983-c6bffdf27881",
+            "name": "W_Beoordelen fraude",
+            "resource_list": [
+                {
+                    "id": "10188.0",
+                    "name": "10188.0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "10188.0timetable",
+                    "assigned_tasks": [
+                        "node_64e5dfb9-b7b7-4230-a983-c6bffdf27881"
+                    ]
+                },
+                {
+                    "id": "Joint_W_Beoordelen fraude_0",
+                    "name": "Joint_W_Beoordelen fraude_0",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Joint_W_Beoordelen fraude_0timetable",
+                    "assigned_tasks": [
+                        "node_64e5dfb9-b7b7-4230-a983-c6bffdf27881"
+                    ]
+                }
+            ]
+        }
+    ],
+    "arrival_time_distribution": {
+        "distribution_name": "lognorm",
+        "distribution_params": [
+            {
+                "value": 1.4479238193691986
+            },
+            {
+                "value": -3.7084661144129436
+            },
+            {
+                "value": 269.1850013319502
+            },
+            {
+                "value": 0.006000000000312866
+            },
+            {
+                "value": 21306.225
+            }
+        ]
+    },
+    "arrival_time_calendar": [
+        {
+            "from": "MONDAY",
+            "to": "MONDAY",
+            "beginTime": "09:00:00",
+            "endTime": "22:00:00"
+        },
+        {
+            "from": "TUESDAY",
+            "to": "TUESDAY",
+            "beginTime": "09:00:00",
+            "endTime": "22:00:00"
+        },
+        {
+            "from": "WEDNESDAY",
+            "to": "WEDNESDAY",
+            "beginTime": "09:00:00",
+            "endTime": "22:00:00"
+        },
+        {
+            "from": "THURSDAY",
+            "to": "THURSDAY",
+            "beginTime": "09:00:00",
+            "endTime": "23:00:00"
+        },
+        {
+            "from": "FRIDAY",
+            "to": "FRIDAY",
+            "beginTime": "08:00:00",
+            "endTime": "22:00:00"
+        },
+        {
+            "from": "SATURDAY",
+            "to": "SATURDAY",
+            "beginTime": "11:00:00",
+            "endTime": "19:00:00"
+        },
+        {
+            "from": "SUNDAY",
+            "to": "SUNDAY",
+            "beginTime": "11:00:00",
+            "endTime": "12:00:00"
+        },
+        {
+            "from": "SUNDAY",
+            "to": "SUNDAY",
+            "beginTime": "22:00:00",
+            "endTime": "23:00:00"
+        }
+    ],
+    "gateway_branching_probabilities": [
+        {
+            "gateway_id": "node_02cc0638-a8dc-43d9-b175-efbce5d4153f",
+            "probabilities": [
+                {
+                    "path_id": "node_5c63e4af-ad9a-4d31-97a3-1baf5c56a20b",
+                    "value": 0.5141856392294221
+                },
+                {
+                    "path_id": "node_8c42619d-4b29-48c4-816b-40f08c0fb802",
+                    "value": 0.48581436077057794
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_008cd951-cece-4cba-a116-452a81fe081d",
+            "probabilities": [
+                {
+                    "path_id": "node_0ee4e08b-dc60-42d3-a294-88ce95edf903",
+                    "value": 0.6324870737233487
+                },
+                {
+                    "path_id": "node_be2fbf55-3c09-4957-9b79-b07ca10d76be",
+                    "value": 0.2567826642653808
+                },
+                {
+                    "path_id": "node_9472d7fe-de6e-42e7-9c95-5c7164456d57",
+                    "value": 0.11073026201127055
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_19d2d442-79ea-408a-85b0-6e49412436f9",
+            "probabilities": [
+                {
+                    "path_id": "node_dab470cd-d991-4bd3-91b0-f90aee3fc5f3",
+                    "value": 0.8068010299209802
+                },
+                {
+                    "path_id": "node_77c1b454-a785-46ea-9d50-ee2af19acec1",
+                    "value": 0.04004261741987037
+                },
+                {
+                    "path_id": "Flow_106er2d",
+                    "value": 0.15315635265914943
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_c376cd79-6e34-4a40-b1bd-ed23547c9d82",
+            "probabilities": [
+                {
+                    "path_id": "node_9c73a9b5-3b6c-498e-80b6-df6e4d3a1934",
+                    "value": 0.19296316657504123
+                },
+                {
+                    "path_id": "node_620cd7fb-d645-4fb2-a2da-49b747e56b5a",
+                    "value": 0.41029869891881987
+                },
+                {
+                    "path_id": "node_721b4986-67fb-4932-9e9e-64b6c320f38f",
+                    "value": 0.39673813450613893
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_69ad1851-dcff-4450-8c2a-57b796cb1eb1",
+            "probabilities": [
+                {
+                    "path_id": "node_dd998880-5d39-4080-bf33-4f50c35505f1",
+                    "value": 0.3735185421180069
+                },
+                {
+                    "path_id": "node_891c5267-87fb-453f-be64-21bd7191d0b0",
+                    "value": 0.2773034280616796
+                },
+                {
+                    "path_id": "node_2eea862c-4ce7-4b10-904f-a9d7f875767b",
+                    "value": 0.3491780298203135
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_d414da11-8487-4b08-af16-0bbd8e1faadf",
+            "probabilities": [
+                {
+                    "path_id": "node_5a46be7e-9793-460e-a2e3-cb6ee5f675d3",
+                    "value": 0.7439907326962062
+                },
+                {
+                    "path_id": "node_774dbe10-b6f9-4d1d-9fb0-d1f84d82bb3a",
+                    "value": 0.18482479003764843
+                },
+                {
+                    "path_id": "node_623e60c1-0c50-4180-b3bf-0cc048dea241",
+                    "value": 0.07118447726614538
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_49362300-6952-453a-9629-e4df331faae1",
+            "probabilities": [
+                {
+                    "path_id": "node_8815443d-9be6-499d-b5fb-f520786aec5b",
+                    "value": 0.6666666666666666
+                },
+                {
+                    "path_id": "node_5bab301b-9694-43ba-a598-6a53f0ad1f18",
+                    "value": 0.3333333333333333
+                }
+            ]
+        },
+        {
+            "gateway_id": "node_fbbcc246-0445-40d2-894b-040a4af771d1",
+            "probabilities": [
+                {
+                    "path_id": "node_5acf2d0f-c24f-4dca-b839-50e6c8675daa",
+                    "value": 0.9767785998861696
+                },
+                {
+                    "path_id": "node_c705a929-283b-4bcd-9640-7a693a208a2c",
+                    "value": 0.023221400113830393
+                }
+            ]
+        }
+    ],
+    "task_resource_distribution": [
+        {
+            "task_id": "node_9812d565-389e-4f26-930c-e52790469964",
+            "resources": [
+                {
+                    "resource_id": "NOT_SET",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 283.16381107389225
+                        },
+                        {
+                            "value": 2.184326002885417
+                        },
+                        {
+                            "value": 1.6099600787406407
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 36707.346000000005
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Completeren aanvraag_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 150.84609941281286
+                        },
+                        {
+                            "value": 2.992758346898177
+                        },
+                        {
+                            "value": 1.4601997726985707
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 12523.948
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Completeren aanvraag_1",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 4.174
+                        },
+                        {
+                            "value": 559.0478874172186
+                        },
+                        {
+                            "value": 4.174
+                        },
+                        {
+                            "value": 23882.615
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Completeren aanvraag_2",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 3.5263876245746273
+                        },
+                        {
+                            "value": 267.65405249874243
+                        },
+                        {
+                            "value": 153.97380064467262
+                        },
+                        {
+                            "value": 39.229
+                        },
+                        {
+                            "value": 11847.73
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_2928450d-9787-4670-a0f5-e941198d23d8",
+            "resources": [
+                {
+                    "resource_id": "NOT_SET",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0.673
+                        },
+                        {
+                            "value": 327.67999602648996
+                        },
+                        {
+                            "value": 0.673
+                        },
+                        {
+                            "value": 32938.74799999997
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Afhandelen leads_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 18.40619162125335
+                        },
+                        {
+                            "value": 7.7050314204787504
+                        },
+                        {
+                            "value": 8.397106068118294
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 4759.186
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Afhandelen leads_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.435444997571997
+                        },
+                        {
+                            "value": -5.933825319780754
+                        },
+                        {
+                            "value": 288.7924963271274
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 47704.77900000001
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_70267400-3b59-4eb2-a90a-ba042c297a06",
+            "resources": [
+                {
+                    "resource_id": "NOT_SET",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 797.3184178203155
+                        },
+                        {
+                            "value": 0.22837423187710826
+                        },
+                        {
+                            "value": 0.4196841421540687
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 44986.71000000001
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Nabellen offertes_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 37.496520945656926
+                        },
+                        {
+                            "value": 4.6771334723218345
+                        },
+                        {
+                            "value": 2.985286382824178
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 3731.5339999999997
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Nabellen offertes_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 0.9249348737864753
+                        },
+                        {
+                            "value": -7.791118565739573
+                        },
+                        {
+                            "value": 194.08923902926796
+                        },
+                        {
+                            "value": 7.016
+                        },
+                        {
+                            "value": 13251.317
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_0645c73c-7cae-42f5-aa10-b067e41bb07e",
+            "resources": [
+                {
+                    "resource_id": "Joint_W_Valideren aanvraag_0",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 540.4082247812069
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 59725.113000000005
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Valideren aanvraag_1",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 3.234987381860269
+                        },
+                        {
+                            "value": 328.9570061224554
+                        },
+                        {
+                            "value": 258.8437833448079
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 23783.016000000003
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Valideren aanvraag_2",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 2.5545937383815107
+                        },
+                        {
+                            "value": 719.6965358152473
+                        },
+                        {
+                            "value": 368.61797532559467
+                        },
+                        {
+                            "value": 37.355
+                        },
+                        {
+                            "value": 9412.920000000002
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Valideren aanvraag_3",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 2.7939047165072104
+                        },
+                        {
+                            "value": 940.4654387755099
+                        },
+                        {
+                            "value": 414.6433176391286
+                        },
+                        {
+                            "value": 54.406
+                        },
+                        {
+                            "value": 14342.339
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "NOT_SET",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 925.1671540208388
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 59725.113000000005
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_fdc70cfa-39d2-4a04-80af-c4d73f0eff16",
+            "resources": [
+                {
+                    "resource_id": "NOT_SET",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 2593.467730446234
+                        },
+                        {
+                            "value": -0.33990353374575943
+                        },
+                        {
+                            "value": 0.16222397288743778
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 29512.375
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Nabellen incomplete dossiers_0",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.493611117981449
+                        },
+                        {
+                            "value": -0.9550173802323949
+                        },
+                        {
+                            "value": 83.58841745962329
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 5716.622000000003
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Nabellen incomplete dossiers_1",
+                    "distribution_name": "lognorm",
+                    "distribution_params": [
+                        {
+                            "value": 1.0844788849382847
+                        },
+                        {
+                            "value": -12.326888476927618
+                        },
+                        {
+                            "value": 436.1660839829691
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 39705.712
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "task_id": "node_64e5dfb9-b7b7-4230-a983-c6bffdf27881",
+            "resources": [
+                {
+                    "resource_id": "10188.0",
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 57.467284263959385
+                        },
+                        {
+                            "value": 0
+                        },
+                        {
+                            "value": 5640.838
+                        }
+                    ]
+                },
+                {
+                    "resource_id": "Joint_W_Beoordelen fraude_0",
+                    "distribution_name": "exponnorm",
+                    "distribution_params": [
+                        {
+                            "value": 3361.326255543958
+                        },
+                        {
+                            "value": 0.2707946508366925
+                        },
+                        {
+                            "value": 0.1720113500453344
+                        },
+                        {
+                            "value": 0.761
+                        },
+                        {
+                            "value": 26017.228
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resource_calendars": [
+        {
+            "id": "NOT_SETtimetable",
+            "name": "NOT_SETtimetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "09:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "19:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Completeren aanvraag_0timetable",
+            "name": "Joint_W_Completeren aanvraag_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "22:00:00",
+                    "endTime": "23:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Completeren aanvraag_1timetable",
+            "name": "Joint_W_Completeren aanvraag_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Completeren aanvraag_2timetable",
+            "name": "Joint_W_Completeren aanvraag_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "19:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Afhandelen leads_0timetable",
+            "name": "Joint_W_Afhandelen leads_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "19:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Afhandelen leads_1timetable",
+            "name": "Joint_W_Afhandelen leads_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "21:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "20:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Nabellen offertes_0timetable",
+            "name": "Joint_W_Nabellen offertes_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "12:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Nabellen offertes_1timetable",
+            "name": "Joint_W_Nabellen offertes_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Valideren aanvraag_0timetable",
+            "name": "Joint_W_Valideren aanvraag_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "09:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Valideren aanvraag_1timetable",
+            "name": "Joint_W_Valideren aanvraag_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "20:00:00",
+                    "endTime": "21:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Valideren aanvraag_2timetable",
+            "name": "Joint_W_Valideren aanvraag_2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Valideren aanvraag_3timetable",
+            "name": "Joint_W_Valideren aanvraag_3timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "19:00:00",
+                    "endTime": "20:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "14:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Nabellen incomplete dossiers_0timetable",
+            "name": "Joint_W_Nabellen incomplete dossiers_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "08:00:00",
+                    "endTime": "23:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "19:00:00"
+                },
+                {
+                    "from": "SUNDAY",
+                    "to": "SUNDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "15:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Nabellen incomplete dossiers_1timetable",
+            "name": "Joint_W_Nabellen incomplete dossiers_1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "SATURDAY",
+                    "to": "SATURDAY",
+                    "beginTime": "11:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "10188.0timetable",
+            "name": "10188.0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "10:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "14:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "14:00:00",
+                    "endTime": "15:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "16:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "21:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "12:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "14:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Joint_W_Beoordelen fraude_0timetable",
+            "name": "Joint_W_Beoordelen fraude_0timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "16:00:00",
+                    "endTime": "18:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "14:00:00",
+                    "endTime": "16:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "14:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "15:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "21:00:00",
+                    "endTime": "22:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "07:00:00",
+                    "endTime": "08:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "09:00:00",
+                    "endTime": "11:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "12:00:00",
+                    "endTime": "13:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "15:00:00",
+                    "endTime": "18:00:00"
+                }
+            ]
+        }
+    ]
+}

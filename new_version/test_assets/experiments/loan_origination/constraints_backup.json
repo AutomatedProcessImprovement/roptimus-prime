@@ -9,30 +9,30 @@
             "id": "Clerk-000003timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -49,30 +49,30 @@
             "id": "Clerk-000012timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -89,30 +89,30 @@
             "id": "Clerk-000011timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -129,30 +129,30 @@
             "id": "Clerk-000014timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -169,30 +169,30 @@
             "id": "Clerk-000008timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -209,30 +209,30 @@
             "id": "Clerk-000004timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -249,30 +249,30 @@
             "id": "Clerk-000005timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -289,30 +289,30 @@
             "id": "Clerk-000013timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -329,30 +329,30 @@
             "id": "Clerk-000001timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -369,30 +369,30 @@
             "id": "Clerk-000007timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -409,30 +409,30 @@
             "id": "Clerk-000009timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -449,30 +449,30 @@
             "id": "Clerk-000002timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -489,30 +489,30 @@
             "id": "Clerk-000015timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -529,30 +529,30 @@
             "id": "Clerk-000006timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -569,30 +569,30 @@
             "id": "Clerk-000010timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -609,30 +609,30 @@
             "id": "AML Investigator-000003timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -649,30 +649,30 @@
             "id": "AML Investigator-000002timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -689,30 +689,30 @@
             "id": "AML Investigator-000001timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -729,30 +729,30 @@
             "id": "Appraiser-000003timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": null,
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 16777215,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -769,30 +769,30 @@
             "id": "Appraiser-000002timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": null,
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 16777215,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -809,30 +809,30 @@
             "id": "Appraiser-000001timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": null,
+                    "wednesday": null,
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 16777215,
+                    "wednesday": 16777215,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -849,30 +849,30 @@
             "id": "Loan Officer-000006timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": null,
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 16777215,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -889,30 +889,30 @@
             "id": "Loan Officer-000010timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -929,30 +929,30 @@
             "id": "Loan Officer-000003timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -969,30 +969,30 @@
             "id": "Loan Officer-000002timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1009,30 +1009,30 @@
             "id": "Loan Officer-000008timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 8.0,
+                    "max_consecutive_cap": 8.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1049,30 +1049,30 @@
             "id": "Loan Officer-000004timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": null,
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 16777215,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1089,30 +1089,30 @@
             "id": "Loan Officer-000009timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": "09:00:00",
+                    "saturday": null,
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1129,30 +1129,30 @@
             "id": "Loan Officer-000007timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 20.0,
+                    "max_daily_cap": 8.0,
+                    "max_consecutive_cap": 8.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 20.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1169,30 +1169,30 @@
             "id": "Loan Officer-000005timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1209,30 +1209,30 @@
             "id": "Loan Officer-000001timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 22.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 22.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": "09:00:00",
+                    "tuesday": "09:00:00",
+                    "wednesday": "09:00:00",
+                    "thursday": "09:00:00",
+                    "friday": null,
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1249,30 +1249,30 @@
             "id": "Senior Officer-000003timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 21.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 21.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": null,
+                    "tuesday": "09:00:00",
+                    "wednesday": null,
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 16777215,
+                    "tuesday": 0,
+                    "wednesday": 16777215,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1289,30 +1289,30 @@
             "id": "Senior Officer-000002timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": null,
+                    "tuesday": "09:00:00",
+                    "wednesday": null,
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 16777215,
+                    "tuesday": 0,
+                    "wednesday": 16777215,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -1329,30 +1329,30 @@
             "id": "Senior Officer-000001timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 8,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 19.0,
+                    "max_daily_cap": 9.0,
+                    "max_consecutive_cap": 9.0,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 40,
+                    "max_shifts_week": 19.0,
                     "is_human": true
                 },
                 "daily_start_times": {
-                    "monday": "00:00:00",
-                    "tuesday": "00:00:00",
-                    "wednesday": "00:00:00",
-                    "thursday": "00:00:00",
-                    "friday": "00:00:00",
-                    "saturday": "None",
-                    "sunday": "None"
+                    "monday": null,
+                    "tuesday": "09:00:00",
+                    "wednesday": null,
+                    "thursday": null,
+                    "friday": "09:00:00",
+                    "saturday": "09:00:00",
+                    "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 3,
-                    "tuesday": 3,
-                    "wednesday": 3,
-                    "thursday": 3,
-                    "friday": 3,
-                    "saturday": 3,
-                    "sunday": 3
+                    "monday": 16777215,
+                    "tuesday": 0,
+                    "wednesday": 16777215,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
                 },
                 "always_work_masks": {
                     "monday": 0,

@@ -30,7 +30,7 @@ def execute_algorithm_variants(log_index):
     print(log_name)
 
     max_func_ev = 5000
-    non_opt_ratio = 0.08
+    non_opt_ratio = 0.2
     tot_simulations = 5
 
     # Reset files just in case

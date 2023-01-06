@@ -65,3 +65,6 @@ def generate_constraint_file(sim_params_path, out_file):
 
     with open(out_file, 'w') as j_writter:
         j_writter.write(json.dumps(json_struct, indent=4))
+
+
+generate_constraint_file("./loan_origination/timetable_backup.json", "./loan_origination/constraints_backup.json")

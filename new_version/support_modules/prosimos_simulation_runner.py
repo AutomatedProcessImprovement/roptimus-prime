@@ -97,7 +97,7 @@ def perform_simulations(pools_info,
 
     s_res_list = []
     traces_list = []
-    for i in range(4):
+    for i in range(3):
         s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
         s_res_list.append(s_res)
         traces_list.append(traces)
