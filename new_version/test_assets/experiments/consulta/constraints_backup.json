@@ -9,11 +9,11 @@
             "id": "Starttimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -49,11 +49,11 @@
             "id": "8824timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -89,11 +89,11 @@
             "id": "19019timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -129,11 +129,11 @@
             "id": "Joint_Traer informacion estudiante - banner_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -169,11 +169,11 @@
             "id": "Joint_Radicar Solicitud Homologacion_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -209,11 +209,11 @@
             "id": "Joint_Radicar Solicitud Homologacion_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -249,11 +249,11 @@
             "id": "22475timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -289,11 +289,11 @@
             "id": "677timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -329,11 +329,11 @@
             "id": "Joint_Validar solicitud_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -369,11 +369,11 @@
             "id": "Joint_Validar solicitud_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -409,11 +409,11 @@
             "id": "1007timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -449,11 +449,11 @@
             "id": "15930timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -489,11 +489,11 @@
             "id": "3445timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -529,11 +529,11 @@
             "id": "Joint_Homologacion por grupo de cursos_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -569,11 +569,11 @@
             "id": "Joint_Homologacion por grupo de cursos_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -609,11 +609,11 @@
             "id": "Endtimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -649,11 +649,11 @@
             "id": "Joint_Notificacion estudiante cancelacion soli_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -689,11 +689,11 @@
             "id": "Joint_Cancelar Solicitud_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -729,11 +729,11 @@
             "id": "Joint_Cancelar Solicitud_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -769,11 +769,11 @@
             "id": "26789timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -809,11 +809,11 @@
             "id": "Joint_Recepcion de documentos_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -849,11 +849,11 @@
             "id": "Joint_Revisar curso_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -889,11 +889,11 @@
             "id": "Joint_Revisar curso_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -929,11 +929,11 @@
             "id": "Joint_Revisar curso_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -969,11 +969,11 @@
             "id": "Joint_Evaluacion curso_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1009,11 +1009,11 @@
             "id": "Joint_Evaluacion curso_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1049,11 +1049,11 @@
             "id": "Joint_Evaluacion curso_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1089,11 +1089,11 @@
             "id": "Joint_Validacion final_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1129,11 +1129,11 @@
             "id": "Joint_Visto Bueno Cierre Proceso_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1169,11 +1169,11 @@
             "id": "Joint_Transferir Creditos_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1209,11 +1209,11 @@
             "id": "Joint_Transferir creditos homologables_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1249,11 +1249,11 @@
             "id": "Joint_Cancelar curso_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1289,11 +1289,11 @@
             "id": "Joint_Avanzar recepcion documentos_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -1329,11 +1329,11 @@
             "id": "Joint_Validar solicitud / pre-homologacion_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {

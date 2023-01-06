@@ -1,0 +1,6 @@
+['Joint Pareto Size (without MAD): 14 --------------------------------------------------------']
+Alg_Name                  #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost                  Metric
+initial (production)      -       -      -       -      -    -          -               -           -            45 days, 17:28:15.811807  183481.0                 1.0      
+joint_pareto(production)  5007    5007   14      14     0    1.0        0.0             0.809976    1.0          1 day, 8:16:50.629569    99827.71                 18.497359
+HC_STRICT_CO              5007    5007   14      14     0    1.0        0.0             0.809976    1.0          1 day, 8:16:50.629569    99827.71                 18.497359
+------------------------------------------------------

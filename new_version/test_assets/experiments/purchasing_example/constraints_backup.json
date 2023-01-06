@@ -9,11 +9,11 @@
             "id": "Anne Olwadatimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -49,11 +49,11 @@
             "id": "Joint_Create Purchase Requisition_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -89,11 +89,11 @@
             "id": "Joint_Create Purchase Requisition_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -129,11 +129,11 @@
             "id": "Francis Odelltimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -169,11 +169,11 @@
             "id": "Heinz Gutschmidttimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -209,11 +209,11 @@
             "id": "Maris Freemantimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -249,11 +249,11 @@
             "id": "Joint_Create Request for Quotation_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -289,11 +289,11 @@
             "id": "Karel de Groottimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -329,11 +329,11 @@
             "id": "Magdalena Preduttatimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -369,11 +369,11 @@
             "id": "Francois de Perriertimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -409,11 +409,11 @@
             "id": "Joint_Analyze Quotation Comparison Map_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -449,11 +449,11 @@
             "id": "Joint_Analyze Quotation Comparison Map_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -489,11 +489,11 @@
             "id": "Joint_Choose best option_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -529,11 +529,11 @@
             "id": "Sean Manneytimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -569,11 +569,11 @@
             "id": "Esmeralda Claytimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -609,11 +609,11 @@
             "id": "Karen Clarenstimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -649,11 +649,11 @@
             "id": "Carmen Finacsetimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -689,11 +689,11 @@
             "id": "Kiu Kantimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -729,11 +729,11 @@
             "id": "Joint_Release Purchase Order_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -769,11 +769,11 @@
             "id": "Karalda Nimwadatimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -809,11 +809,11 @@
             "id": "Pedro Alvarestimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -849,11 +849,11 @@
             "id": "Joint_Amend Request for Quotation_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -889,11 +889,11 @@
             "id": "Joint_Amend Request for Quotation_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -929,11 +929,11 @@
             "id": "Joint_Amend Purchase Requisition_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 12,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {

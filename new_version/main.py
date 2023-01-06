@@ -6,7 +6,7 @@ from new_version.support_modules.plot_statistics_handler import print_solution_s
 from new_version.test_assets.experiments.experiment_setup import experiments_file_paths, experiments, \
     reset_after_each_execution
 
-to_execute = {'HC-STRICT': True,
+to_execute = {'HC-STRICT': False,
               'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,

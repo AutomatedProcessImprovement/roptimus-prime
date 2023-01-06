@@ -9,11 +9,11 @@
             "id": "NOT_SETtimetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -49,11 +49,11 @@
             "id": "Joint_W_Completeren aanvraag_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -89,11 +89,11 @@
             "id": "Joint_W_Completeren aanvraag_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -129,11 +129,11 @@
             "id": "Joint_W_Completeren aanvraag_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -169,11 +169,11 @@
             "id": "Joint_W_Afhandelen leads_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -209,11 +209,11 @@
             "id": "Joint_W_Afhandelen leads_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -249,11 +249,11 @@
             "id": "Joint_W_Nabellen offertes_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -289,11 +289,11 @@
             "id": "Joint_W_Nabellen offertes_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -329,11 +329,11 @@
             "id": "Joint_W_Valideren aanvraag_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -369,11 +369,11 @@
             "id": "Joint_W_Valideren aanvraag_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -409,11 +409,11 @@
             "id": "Joint_W_Valideren aanvraag_2timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -449,11 +449,11 @@
             "id": "Joint_W_Valideren aanvraag_3timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -489,11 +489,11 @@
             "id": "Joint_W_Nabellen incomplete dossiers_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -529,11 +529,11 @@
             "id": "Joint_W_Nabellen incomplete dossiers_1timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -569,11 +569,11 @@
             "id": "10188.0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {
@@ -609,11 +609,11 @@
             "id": "Joint_W_Beoordelen fraude_0timetable",
             "constraints": {
                 "global_constraints": {
-                    "max_weekly_cap": 40,
-                    "max_daily_cap": 24,
-                    "max_consecutive_cap": 8,
+                    "max_weekly_cap": 80,
+                    "max_daily_cap": 16,
+                    "max_consecutive_cap": 16,
                     "max_shifts_day": 24,
-                    "max_shifts_week": 20,
+                    "max_shifts_week": 48,
                     "is_human": true
                 },
                 "daily_start_times": {

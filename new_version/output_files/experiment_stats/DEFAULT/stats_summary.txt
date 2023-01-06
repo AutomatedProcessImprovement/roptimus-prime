@@ -1,5 +1,0 @@
-['Joint Pareto Size (without MAD): 6 --------------------------------------------------------']
-Alg_Name               #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
-joint_pareto(DEFAULT)  509     509    6       6      0    1.0        0.0             1.041902    1.0          1 day, 2:39:57.050837    14023619.23
-HC_STRICT(DEFAULT)     509     509    6       6      0    1.0        0.0             1.041902    1.0          1 day, 2:39:57.050837    14023619.23
-------------------------------------------------------
