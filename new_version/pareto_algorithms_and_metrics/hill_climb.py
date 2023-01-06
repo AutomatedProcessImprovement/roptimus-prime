@@ -151,7 +151,6 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
     resources_to_optimize = simulation_info.pool_utilization
 
     resources_to_optimize = sort_resource_by_utilization(resources_to_optimize)
-    print("UTIL OPTIM -> REMOVE")
     for resource in resources_to_optimize:
         resource_to_optimize = resource
         # Collect for each trace, the information of which task was executed on which day
@@ -185,7 +184,6 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
         # iterations_handler = _reset_jsons_rm_ith(res_manager, iterations_handler)
         # res_manager = iterations_handler.resource_manager
 
-    print("REMOVE COST")
 
     resources_to_optimize = {}
     # the first resource in pool_cost is the most expensive
@@ -216,9 +214,6 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                     iterations_handler.time_table_path = new_res_manager.time_table
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
                                               new_res_manager.get_task_pools())
-                    print("---")
-                    print(new_res_manager.get_all_resources_in_dict())
-                    print("---")
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
                         return True
                     else:
@@ -370,7 +365,6 @@ def resolve_remove_resource_json_information(resource, roster_manager):
 
     try:
         resource_id = resource['id']
-        print("Try to remove " + resource_id)
         with open(roster_manager.time_table, 'r') as t_read:
             ttb = json.load(t_read)
         resource_profiles = ttb['resource_profiles']
@@ -464,7 +458,6 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         to_be_added['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
         to_be_added['assigned_tasks'] = [task_to_improve]
 
-        print("Adding new resource " + to_be_added['id'])
 
         to_add = []
         for profile in resource_profiles:
@@ -1027,7 +1020,6 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
             actual_resource_info = [pools_info.pools[res]]
             resource_copy = copy.deepcopy(actual_resource_info)
             for resource in resource_copy:
-                print("Cost - Resource " + resource.id)
                 for day in days:
                     shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
                     indexes = []
@@ -1137,7 +1129,6 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
         resource_copy = actual_resource_info
 
         for resource in resource_copy:
-            print("WT - Resource " + resource.id)
             for day_int in day_to_optimize:
                 day = days[day_int]
 

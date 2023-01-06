@@ -32,9 +32,6 @@ class JsonManager:
     def try_create_dir(self, solution_id):
         if not os.path.exists(self.base_path_folders + str(solution_id)):
             os.makedirs(self.base_path_folders + str(solution_id))
-            print("Dir created")
-        else:
-            print("Dir already exists")
 
     def read_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
         ids = self.read_file_with_ids()
@@ -61,7 +58,6 @@ class JsonManager:
         ids = self.read_file_with_ids()
         if solution_id not in ids:
             ids.append(solution_id)
-        print(ids)
         with open(self.path, "w") as f:
             for sol in ids:
                 f.write(str(sol) + "\n")
@@ -81,12 +77,5 @@ class JsonManager:
                               cons_path):
         ids = self.read_file_with_ids()
         if solution_id in ids:
-            print(self.base_path_folders + str(solution_id) + "/constraints.json")
-            print(self.base_path_folders + str(solution_id) + "/timetable.json")
             shutil.copyfile(self.base_path_folders + str(solution_id) + "/constraints.json", cons_path)
             shutil.copyfile(self.base_path_folders + str(solution_id) + "/timetable.json", ttb_path)
-            # shutil.copyfile(self.base_path_folders + str(solution_id) + "/model.bpmn",
-            #                    "./test_assets/CopiedModel.bpmn")
-
-        else:
-            print("Err: Solution ID not found.")

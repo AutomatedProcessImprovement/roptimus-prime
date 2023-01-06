@@ -100,10 +100,6 @@ class IterationHandler:
         self.resource_manager = RosterManager(self.log_name,
                                               self.resource_manager.time_table,
                                               self.resource_manager.constraints_json)
-        print("==============")
-        print("CLEANED UP JSON TO STARTING ALLOCATION")
-        print(self.current_starting_id)
-        print("==============")
 
 
     def _move_next(self):
@@ -115,10 +111,6 @@ class IterationHandler:
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
-                    print("==============")
-                    print("NEXT ITERATION STARTING ALLOCATION")
-                    print(pools_info.id)
-                    print("==============")
                     self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table,
                                                           self.resource_manager.constraints_json)
                     self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table,
@@ -142,8 +134,6 @@ class IterationHandler:
 
     def try_new_solution(self, pools_info, distance):
         # self.resource_manager.update_roster(pools_info)
-
-        print("Pools info id in generated solutions? " + str(pools_info.id in self.generated_solutions))
         if pools_info.id not in self.generated_solutions:
             # update_resource_pools(pools_info.pools, pools_info.task_pools)  # Updating Simulation Model with new pool allocation
             # Update simulation info with new pools info
@@ -200,7 +190,6 @@ class IterationHandler:
         [is_optimal_candidate, self.pareto_front] = try_update_pareto_front(pools_info.id, simulation_info,
                                                                             self.pareto_front, self.with_mad)
         if is_optimal_candidate:
-            print("Updating priorities")
             self.update_priorities()
 
         is_optimal_candidate = self.check_last_pareto_update_distance(pools_info, simulation_info, is_optimal_candidate)
@@ -209,7 +198,6 @@ class IterationHandler:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
-            print("Retaining information about solution")
             self.jsonManager.read_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
                                                                             self.resource_manager.constraints_json,
                                                                             pools_info.id)
