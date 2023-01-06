@@ -1412,7 +1412,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 0.000029270729821550236
+                            "value": 2.9270729821550236e-05
                         },
                         {
                             "value": 1378.6726560028706
@@ -1516,7 +1516,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 0.00004027400837472026
+                            "value": 4.027400837472026e-05
                         },
                         {
                             "value": 1325.1075374572438
@@ -1775,7 +1775,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 0.000038965365365927844
+                            "value": 3.8965365365927844e-05
                         },
                         {
                             "value": 554.1908722167043
@@ -1796,7 +1796,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 1.5472251894767311e-7
+                            "value": 1.5472251894767311e-07
                         },
                         {
                             "value": 548.9859719138051
@@ -2574,6 +2574,7 @@
             ]
         }
     ],
+    "event_distribution": {},
     "resource_calendars": [
         {
             "id": "Anne Olwadatimetable",
@@ -2699,7 +2700,6 @@
                     "beginTime": "20:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
@@ -3168,7 +3168,6 @@
                     "beginTime": "16:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
@@ -3199,7 +3198,6 @@
                     "beginTime": "20:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -3416,7 +3414,6 @@
                     "beginTime": "18:00:00",
                     "endTime": "21:00:00"
                 },
-                
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",
@@ -4719,7 +4716,6 @@
                     "beginTime": "19:00:00",
                     "endTime": "21:00:00"
                 },
-                
                 {
                     "from": "THURSDAY",
                     "to": "THURSDAY",
@@ -4798,7 +4794,6 @@
                     "beginTime": "21:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -4817,7 +4812,6 @@
                     "beginTime": "13:00:00",
                     "endTime": "21:00:00"
                 },
-                
                 {
                     "from": "SUNDAY",
                     "to": "SUNDAY",
@@ -4992,7 +4986,6 @@
                     "beginTime": "16:00:00",
                     "endTime": "17:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -5155,7 +5148,6 @@
                     "beginTime": "21:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
@@ -5696,7 +5688,6 @@
                     "beginTime": "20:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -6021,7 +6012,6 @@
                     "beginTime": "21:00:00",
                     "endTime": "22:00:00"
                 },
-               
                 {
                     "from": "TUESDAY",
                     "to": "TUESDAY",
@@ -6040,7 +6030,6 @@
                     "beginTime": "18:00:00",
                     "endTime": "21:00:00"
                 },
-                
                 {
                     "from": "WEDNESDAY",
                     "to": "WEDNESDAY",
@@ -6137,7 +6126,6 @@
                     "beginTime": "13:00:00",
                     "endTime": "19:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -6324,7 +6312,6 @@
                     "beginTime": "20:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "SATURDAY",
                     "to": "SATURDAY",
@@ -6727,7 +6714,6 @@
                     "beginTime": "19:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "SUNDAY",
                     "to": "SUNDAY",
@@ -6878,7 +6864,6 @@
                     "beginTime": "20:00:00",
                     "endTime": "21:00:00"
                 },
-                
                 {
                     "from": "THURSDAY",
                     "to": "THURSDAY",
@@ -6891,7 +6876,6 @@
                     "beginTime": "21:00:00",
                     "endTime": "22:00:00"
                 },
-                
                 {
                     "from": "FRIDAY",
                     "to": "FRIDAY",

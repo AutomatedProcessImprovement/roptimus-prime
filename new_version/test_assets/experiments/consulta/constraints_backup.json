@@ -26,13 +26,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -67,10 +67,10 @@
                 },
                 "never_work_masks": {
                     "monday": 16777215,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -106,13 +106,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -146,13 +146,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -186,13 +186,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -226,11 +226,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -266,13 +266,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -306,13 +306,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -346,13 +346,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -386,11 +386,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -426,12 +426,12 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
                     "sunday": 16777215
                 },
                 "always_work_masks": {
@@ -466,11 +466,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -506,11 +506,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -546,13 +546,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -586,13 +586,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
-                    "sunday": 0
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -626,13 +626,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -666,13 +666,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -706,13 +706,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -746,13 +746,13 @@
                     "sunday": "02:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -786,13 +786,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
-                    "sunday": 0
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -826,11 +826,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -866,13 +866,13 @@
                     "sunday": "00:00:00"
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
-                    "sunday": 0
+                    "sunday": 8388609
                 },
                 "always_work_masks": {
                     "monday": 0,
@@ -906,11 +906,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -946,11 +946,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -986,12 +986,12 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
                     "sunday": 16777215
                 },
                 "always_work_masks": {
@@ -1026,11 +1026,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1066,11 +1066,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
+                    "monday": 8388609,
                     "tuesday": 16777215,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1106,11 +1106,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1146,12 +1146,12 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
-                    "saturday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
                     "sunday": 16777215
                 },
                 "always_work_masks": {
@@ -1186,11 +1186,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1226,11 +1226,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1266,11 +1266,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
+                    "monday": 8388609,
                     "tuesday": 16777215,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1308,9 +1308,9 @@
                 "never_work_masks": {
                     "monday": 16777215,
                     "tuesday": 16777215,
-                    "wednesday": 0,
+                    "wednesday": 8388609,
                     "thursday": 16777215,
-                    "friday": 0,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },
@@ -1346,11 +1346,11 @@
                     "sunday": null
                 },
                 "never_work_masks": {
-                    "monday": 0,
-                    "tuesday": 0,
-                    "wednesday": 0,
-                    "thursday": 0,
-                    "friday": 0,
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
                     "saturday": 16777215,
                     "sunday": 16777215
                 },

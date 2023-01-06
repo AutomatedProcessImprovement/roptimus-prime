@@ -7,7 +7,7 @@ from new_version.test_assets.experiments.experiment_setup import experiments_fil
     reset_after_each_execution
 
 to_execute = {'HC-STRICT': False,
-              'HC-FLEX': False,
+              'HC-FLEX': True,
               'TS-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}
@@ -30,7 +30,7 @@ def execute_algorithm_variants(log_index):
     print(log_name)
 
     max_func_ev = 5000
-    non_opt_ratio = 0.2
+    non_opt_ratio = 0.1
     tot_simulations = 5
 
     # Reset files just in case
@@ -83,31 +83,22 @@ def execute_algorithm_variants(log_index):
             reset_after_each_execution(log_name)
 
     if to_execute['METRICS']:
-        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad', 'hill_clmb_combined_with_mad',
-                                                 'hill_clmb_only_calendar_without_mad', 'hill_clmb_only_calendar_with_mad',
-                                                 'hill_clmb_only_add_remove_without_mad', 'hill_clmb_only_add_remove_with_mad',
+        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
+                                                 'hill_clmb_combined_with_mad',
+
+                                                 'hill_clmb_only_calendar_without_mad',
+                                                 'hill_clmb_only_calendar_with_mad',
+
+                                                 'hill_clmb_only_add_remove_without_mad',
+                                                 'hill_clmb_only_add_remove_with_mad',
+
                                                  'hill_clmb_first_calendar_then_add_remove_without_mad',
                                                  'hill_clmb_first_calendar_then_add_remove_with_mad',
+
                                                  'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                  'hill_clmb_first_add_remove_then_calendar_remove_with_mad',
-                                                 # 'hill_clmb_without_mad_orlenys'
                                                  ])
         print_solution_statistics(metrics, log_name)
-
-    # if to_execute['HC-STRICT']:
-    #     hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-    #                tot_simulations, False, False, only_calendar)
-    # if to_execute['HC-FLEX']:
-    #     hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-    #                tot_simulations, False, True, only_calendar)
-    # if to_execute['TS-STRICT']:
-    #     hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-    #                tot_simulations, True, False, only_calendar)
-    # if to_execute['METRICS']:
-    #     metrics = GlobalParetoMetrics(log_name, ['hill_clmb_without_mad', 'hill_clmb_with_mad', 'tabu_srch_without_mad',
-    #                                              'hill_clmb_without_mad_orlenys',
-    #                                              'nsga2'])
-    #     print_solution_statistics(metrics, log_name)
 
 
 def main():
@@ -117,18 +108,15 @@ def main():
 
     # for log_index in range(0, len(experiments)):
     #     execute_algorithm_variants(log_index)
-    # for log_index in [9]:
-    #     try:
-    #         print(log_index)
-    #         execute_algorithm_variants(log_index)
-    #     except:
-    #         pass
 
     # 1st Parameter: Index of the process to optimize -- from list experiment_logs
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(0)
+    execute_algorithm_variants(6)
+    execute_algorithm_variants(7)
+    execute_algorithm_variants(8)
+    execute_algorithm_variants(9)
     os._exit(0)
 
 

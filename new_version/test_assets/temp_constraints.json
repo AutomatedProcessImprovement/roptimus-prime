@@ -1,0 +1,969 @@
+{
+    "time_var": 60,
+    "max_cap": 9999999999,
+    "max_shift_size": 24,
+    "max_shift_blocks": 24,
+    "hours_in_day": 24,
+    "resources": [
+        {
+            "id": "Anne Olwadatimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 125.0,
+                    "max_daily_cap": 19.0,
+                    "max_consecutive_cap": 11.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 125.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Create Purchase Requisition_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 140.0,
+                    "max_daily_cap": 22.0,
+                    "max_consecutive_cap": 16.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 140.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Create Purchase Requisition_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 45.0,
+                    "max_daily_cap": 13.0,
+                    "max_consecutive_cap": 6.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 45.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": null,
+                    "friday": null,
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 16777215,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Francis Odelltimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 97.0,
+                    "max_daily_cap": 17.0,
+                    "max_consecutive_cap": 6.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 97.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Heinz Gutschmidttimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 96.0,
+                    "max_daily_cap": 17.0,
+                    "max_consecutive_cap": 10.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 96.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Maris Freemantimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 95.0,
+                    "max_daily_cap": 17.0,
+                    "max_consecutive_cap": 6.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 95.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Create Request for Quotation_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 106.0,
+                    "max_daily_cap": 18.0,
+                    "max_consecutive_cap": 8.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 106.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Karel de Groottimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 151.0,
+                    "max_daily_cap": 23.0,
+                    "max_consecutive_cap": 23.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 151.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Magdalena Preduttatimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 143.0,
+                    "max_daily_cap": 22.0,
+                    "max_consecutive_cap": 20.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 143.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Francois de Perriertimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 149.0,
+                    "max_daily_cap": 23.0,
+                    "max_consecutive_cap": 23.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 149.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Analyze Quotation Comparison Map_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 115.0,
+                    "max_daily_cap": 20.0,
+                    "max_consecutive_cap": 11.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 115.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Analyze Quotation Comparison Map_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 14.0,
+                    "max_daily_cap": 4.0,
+                    "max_consecutive_cap": 2.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 14.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "02:00:00",
+                    "tuesday": "02:00:00",
+                    "wednesday": "02:00:00",
+                    "thursday": "02:00:00",
+                    "friday": "02:00:00",
+                    "saturday": "02:00:00",
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Choose best option_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 111.0,
+                    "max_daily_cap": 20.0,
+                    "max_consecutive_cap": 11.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 111.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Sean Manneytimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 91.0,
+                    "max_daily_cap": 14.0,
+                    "max_consecutive_cap": 8.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 91.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Esmeralda Claytimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 76.0,
+                    "max_daily_cap": 12.0,
+                    "max_consecutive_cap": 7.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 76.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Karen Clarenstimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 84.0,
+                    "max_daily_cap": 15.0,
+                    "max_consecutive_cap": 6.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 84.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Carmen Finacsetimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 89.0,
+                    "max_daily_cap": 15.0,
+                    "max_consecutive_cap": 8.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 89.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Kiu Kantimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 98.0,
+                    "max_daily_cap": 17.0,
+                    "max_consecutive_cap": 6.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 98.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Release Purchase Order_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 108.0,
+                    "max_daily_cap": 17.0,
+                    "max_consecutive_cap": 9.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 108.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Karalda Nimwadatimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 108.0,
+                    "max_daily_cap": 20.0,
+                    "max_consecutive_cap": 15.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 108.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Pedro Alvarestimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 112.0,
+                    "max_daily_cap": 19.0,
+                    "max_consecutive_cap": 15.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 112.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Amend Request for Quotation_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 111.0,
+                    "max_daily_cap": 21.0,
+                    "max_consecutive_cap": 15.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 111.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "00:00:00",
+                    "tuesday": "00:00:00",
+                    "wednesday": "00:00:00",
+                    "thursday": "00:00:00",
+                    "friday": "00:00:00",
+                    "saturday": "00:00:00",
+                    "sunday": "00:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Amend Request for Quotation_1timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 18.0,
+                    "max_daily_cap": 4.0,
+                    "max_consecutive_cap": 3.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 18.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "01:00:00",
+                    "tuesday": "01:00:00",
+                    "wednesday": "01:00:00",
+                    "thursday": null,
+                    "friday": "01:00:00",
+                    "saturday": "01:00:00",
+                    "sunday": "01:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 16777215,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        },
+        {
+            "id": "Joint_Amend Purchase Requisition_0timetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 13.0,
+                    "max_daily_cap": 4.0,
+                    "max_consecutive_cap": 2.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 13.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "05:00:00",
+                    "tuesday": "05:00:00",
+                    "wednesday": "05:00:00",
+                    "thursday": "05:00:00",
+                    "friday": "05:00:00",
+                    "saturday": null,
+                    "sunday": "05:00:00"
+                },
+                "never_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 16777215,
+                    "sunday": 0
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        }
+    ]
+}

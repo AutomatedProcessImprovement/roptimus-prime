@@ -4,9 +4,12 @@ experiments = {0: "production",
                1: "purchasing_example",
                2: "financial",
                3: "consulta",
-               4: "bpi_2012",
-               5: "bpi_2017",
-               6: "loan_origination"
+               4: "bpi2012",
+               5: "bpi2017",
+               6: "loan_mc_hu",
+               7: "loan_mc_lu",
+               8: "loan_sc_hu",
+               9: "loan_sc_lu"
                }
                # 7: "government",
                # 8: "bpi_2012_edoc",
@@ -42,9 +45,19 @@ experiments_file_paths = {
     # 'credit_application': [bfp + "credit_application/timetable.json",
     #                        bfp + "credit_application/constraints.json",
     #                        bfp + "credit_application/model.bpmn"],
-    'loan_origination': [bfp + "loan_origination/timetable.json",
-                         bfp + "loan_origination/constraints.json",
-                         bfp + "loan_origination/model.bpmn"],
+    'loan_mc_hu': [bfp + "loan_mc_hu/timetable.json",
+                         bfp + "loan_mc_hu/constraints.json",
+                         bfp + "loan_mc_hu/model.bpmn"],
+    'loan_mc_lu': [bfp + "loan_mc_lu/timetable.json",
+                         bfp + "loan_mc_lu/constraints.json",
+                         bfp + "loan_mc_lu/model.bpmn"],
+    'loan_sc_hu': [bfp + "loan_sc_hu/timetable.json",
+                         bfp + "loan_sc_hu/constraints.json",
+                         bfp + "loan_sc_hu/model.bpmn"],
+    'loan_sc_lu': [bfp + "loan_sc_lu/timetable.json",
+                         bfp + "loan_sc_lu/constraints.json",
+                         bfp + "loan_sc_lu/model.bpmn"],
+
 }
 
 

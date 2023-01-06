@@ -6906,5 +6906,7 @@
                 }
             ]
         }
-    ]
+    ],
+    "event_distribution": {}
+
 }
