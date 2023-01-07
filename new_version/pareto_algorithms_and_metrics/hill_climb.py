@@ -49,6 +49,16 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                         it_handler.generated_solutions,
                         it_handler.solution_order,
                         iterations_count[0])
+        print("MAX Number of Iterations Reached") if max_iterations_reached else print("NO Improvement Found")
+        print("Algortithm %s Completed" % algorithm_name)
+        print("Process Name: %s" % log_name)
+        print("Total time (sec): ................ %s " % str(datetime.timedelta(seconds=(time.time() - starting_time))))
+        print("Total Iterations Performed: ...... %d" % iterations_count[0])
+        print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
+        execution_info = read_stats_file(log_name, algorithm_name + '_without_mad')
+        alg_info = AlgorithmResults(execution_info, False)
+        print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
+        print("---------------------------------------------------")
 
     if approach == 'first_calendar_then_add_remove':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
@@ -86,6 +96,16 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                         it_handler.generated_solutions,
                         it_handler.solution_order,
                         iterations_count[0])
+        print("MAX Number of Iterations Reached") if max_iterations_reached else print("NO Improvement Found")
+        print("Algortithm %s Completed" % algorithm_name)
+        print("Process Name: %s" % log_name)
+        print("Total time (sec): ................ %s " % str(datetime.timedelta(seconds=(time.time() - starting_time))))
+        print("Total Iterations Performed: ...... %d" % iterations_count[0])
+        print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
+        execution_info = read_stats_file(log_name, algorithm_name + '_without_mad')
+        alg_info = AlgorithmResults(execution_info, False)
+        print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
+        print("---------------------------------------------------")
 
     if approach == 'first_add_remove_then_calendar':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
@@ -121,6 +141,16 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                         it_handler.generated_solutions,
                         it_handler.solution_order,
                         iterations_count[0])
+        print("MAX Number of Iterations Reached") if max_iterations_reached else print("NO Improvement Found")
+        print("Algortithm %s Completed" % algorithm_name)
+        print("Process Name: %s" % log_name)
+        print("Total time (sec): ................ %s " % str(datetime.timedelta(seconds=(time.time() - starting_time))))
+        print("Total Iterations Performed: ...... %d" % iterations_count[0])
+        print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
+        execution_info = read_stats_file(log_name, algorithm_name + '_without_mad')
+        alg_info = AlgorithmResults(execution_info, False)
+        print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
+        print("---------------------------------------------------")
 
     # save_stats_file(log_name,
     #                 algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
@@ -128,16 +158,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     #                 it_handler.solution_order,
     #                 iterations_count[0])
 
-    print("MAX Number of Iterations Reached") if max_iterations_reached else print("NO Improvement Found")
-    print("Algortithm %s Completed" % algorithm_name)
-    print("Process Name: %s" % log_name)
-    print("Total time (sec): ................ %s " % str(datetime.timedelta(seconds=(time.time() - starting_time))))
-    print("Total Iterations Performed: ...... %d" % iterations_count[0])
-    print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
-    execution_info = read_stats_file(log_name, algorithm_name + '_without_mad')
-    alg_info = AlgorithmResults(execution_info, False)
-    print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
-    print("---------------------------------------------------")
+
 
 
 def resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, res_manager):
