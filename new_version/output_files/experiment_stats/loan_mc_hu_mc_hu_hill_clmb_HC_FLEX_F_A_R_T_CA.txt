@@ -1,0 +1,29 @@
+Function Evaluations:  3968
+Solutions Explored:    3968
+Pareto front size:     16
+In Joint Pareto:       13
+Not In Joint Pareto:   3
+Average Cycle Time:    12 days, 20:58:10.001890
+Average Resource Cost: 37678.396291
+------------------------- METRICS --------------------------
+# Hyperarea Ratio:     0.998707
+# Hausdorff Distance:  4882.544971
+# Delta Metric:        0.780247
+# Purity Metric:       0.812500
+--------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
+[686c742b1122cc7cef4fd1486af7f2e0344f6cf1] -> [aCost: 37237.25, cTime: 11 days, 19:57:22.173369]
+[ba3d1b7844de35e7489ac188e7b99827acd3ec6b] -> [aCost: 44614.77, cTime: 10 days, 19:11:53.113665]
+[64460093e5f4aa1cfc86522cacb1466555a4012e] -> [aCost: 43484.96, cTime: 11 days, 6:28:29.152828]
+[b6c3314c9b932166711857bc59916b8f99b1cf14] -> [aCost: 42509.35, cTime: 11 days, 6:40:24.709500]
+[998188cd9b136f0e75d8f7124dbb3ae431d7548d] -> [aCost: 33792.83, cTime: 15 days, 3:06:37.480973]
+[33aedee3099394576017610a6b09324031a18c85] -> [aCost: 33225.24, cTime: 15 days, 4:42:05.097365]
+[5375f5dd5bd4c9f7e74b90e80aa83c2c858eea1d] -> [aCost: 33206.78, cTime: 15 days, 13:12:36.356412]
+[4705213401550a4bd58d4a2461201f4de5e095e3] -> [aCost: 34211.42, cTime: 13 days, 22:38:58.693416]
+[b823dc18fb890e230ed9fdfa1fd5a4427968d251] -> [aCost: 34233.67, cTime: 13 days, 3:08:12.112581]
+[0c5d899c53afeb4c8c55cf6c5441a0b6b3cc2a00] -> [aCost: 34177.35, cTime: 14 days, 16:05:22.064764]
+[84c84892ea019dd362469bdd69908e1d8bc63d99] -> [aCost: 43527.16, cTime: 11 days, 3:22:56.834768]
+[0f0472da60386ba1ef8c6fd036f6f266ec0a6d67] -> [aCost: 41371.10, cTime: 11 days, 19:08:06.511942]
+[f0bf035a2e0efb0b73bcd964eaf7031caeaabc6c] -> [aCost: 41399.26, cTime: 11 days, 10:36:58.566019]
+[3223b8fbb7e99c6d0321437a3d552ebb24106395] -> [aCost: 35307.57, cTime: 12 days, 21:46:30.560133]
+[0e4933655e78381a74334d020885f396f22bd190] -> [aCost: 35241.24, cTime: 13 days, 0:17:46.052684]
+[c316b2455da91750bdfc36fd770e0747a1b800f6] -> [aCost: 35314.37, cTime: 12 days, 21:06:20.549825]

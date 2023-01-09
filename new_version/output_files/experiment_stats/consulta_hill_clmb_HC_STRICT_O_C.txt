@@ -1,0 +1,18 @@
+Function Evaluations:  43
+Solutions Explored:    43
+Pareto front size:     5
+In Joint Pareto:       0
+Not In Joint Pareto:   5
+Average Cycle Time:    7:24:34.757841
+Average Resource Cost: 40891.092464
+------------------------- METRICS --------------------------
+# Hyperarea Ratio:     0.228117
+# Hausdorff Distance:  32448.850273
+# Delta Metric:        1.012872
+# Purity Metric:       0.000000
+--------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
+[92107a1c6a9d8c884e6c071b65f3e1c99b51fc15] -> [aCost: 39587.38, cTime: 7:28:18.339257]
+[33ac6b3b3410727a363f06dd03cb1f64970980bf] -> [aCost: 42840.48, cTime: 7:16:07.897099]
+[24e17f2f220bf5801ad61c1d92b46f858b1e7239] -> [aCost: 39585.79, cTime: 7:35:45.916309]
+[894409bff37296c7f2b1165612039d5fbddc8423] -> [aCost: 39599.74, cTime: 7:27:52.707611]
+[b1fe142c9a61b2ba40216dcf2922fbee1aab025f] -> [aCost: 42842.07, cTime: 7:14:48.928929]

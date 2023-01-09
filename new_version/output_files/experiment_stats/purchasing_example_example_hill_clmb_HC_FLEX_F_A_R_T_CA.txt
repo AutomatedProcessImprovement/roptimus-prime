@@ -1,0 +1,30 @@
+Function Evaluations:  3827
+Solutions Explored:    3827
+Pareto front size:     17
+In Joint Pareto:       0
+Not In Joint Pareto:   17
+Average Cycle Time:    1 day, 6:53:01.464485
+Average Resource Cost: 59118.496526
+------------------------- METRICS --------------------------
+# Hyperarea Ratio:     0.852994
+# Hausdorff Distance:  10411.833513
+# Delta Metric:        0.842741
+# Purity Metric:       0.000000
+--------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
+[d01fe8e4a295c49d320c8e395a41bff1a817eaac] -> [aCost: 56175.31, cTime: 1 day, 8:14:42.588216]
+[70409367b53ce2a8b1c50db2963a03c9563f9df1] -> [aCost: 54368.24, cTime: 1 day, 11:39:24.837795]
+[07ff6542b7094f3c6a5d9ada1bf6c688da7a919a] -> [aCost: 55173.54, cTime: 1 day, 9:42:17.493230]
+[78ccbedb24fb1eb6f67c71d557a5c88a581722d1] -> [aCost: 53472.33, cTime: 2 days, 1:35:28.834430]
+[75eb83412d36189bd3c9a2a8ec668c03f470f8b7] -> [aCost: 67282.00, cTime: 23:39:55.056218]
+[29ecc5deeba0ae3e2c3897c13f4a6319c4ba342c] -> [aCost: 53678.71, cTime: 1 day, 20:13:32.306132]
+[5813ae6372398177212c0cdc53878ae265eb27ef] -> [aCost: 56006.60, cTime: 1 day, 9:05:11.870500]
+[ae5f2b2e094cc340c58d20ed0c814a060744fa2f] -> [aCost: 57501.40, cTime: 1 day, 7:36:31.374998]
+[9b8791ff35fb73cf5583f111f6f65f9924e22705] -> [aCost: 57910.13, cTime: 1 day, 4:56:52.594873]
+[bbd4d179cf5de79589df7a80c7ea032e29c724c6] -> [aCost: 53911.96, cTime: 1 day, 15:39:50.052427]
+[d899adbab6b661cca59512eb14ceda2d0eae5416] -> [aCost: 63454.17, cTime: 1 day, 0:15:36.926725]
+[94f32ef17fde810ee1dd8c5d5cb1ef2d82c4868e] -> [aCost: 68312.04, cTime: 23:25:39.264792]
+[bd7d8e75b3b5c949f2c825747fb9d5d373206895] -> [aCost: 64837.90, cTime: 23:55:58.931960]
+[5cdeb7f99ee7176bcef3a88b263e63af5ef07a97] -> [aCost: 61308.00, cTime: 1 day, 1:28:59.531997]
+[45ac42694fab0d0adbc03a29256e328cd2a6cea7] -> [aCost: 61417.19, cTime: 1 day, 0:56:37.838456]
+[79bb199c67a6bc67931ac0e1747d24d8abf50861] -> [aCost: 61772.80, cTime: 1 day, 0:49:35.508749]
+[73f830628a0f57ee61fb953644a9f5fcd6b808b6] -> [aCost: 58432.11, cTime: 1 day, 1:45:09.884752]
