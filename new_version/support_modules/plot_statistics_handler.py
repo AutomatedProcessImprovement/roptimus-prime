@@ -36,14 +36,13 @@ def print_solution_statistics(p_metrics, log_name):
     i_mct = initial_metrics.median_cycle_time
     i_mec = initial_metrics.median_execution_cost
 
-    print(i_mct)
-    print(i_mec)
     i_mct_mec = (i_mct, i_mec)
     for a_name in f_eval:
         t_f_eval += f_eval[a_name]
     print_line(file_writer, fill_str('Alg_Name', max_leng) + '  #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  '
                                                              'Hausdorff-Dist  Delta-Sprd  Purity-Rate  '
-                                                             'Ave_Time                 Ave_cost                  Metric')
+                                                             'Ave_Time                 Ave_cost'
+                                                             '                 Cost/Time                 Time/Cost')
     print_pareto_info(file_writer, p_metrics, 'initial (' + log_name + ')', 'initial', t_f_eval, max_leng,
                       p_metrics.joint_pareto_info, p_metrics.total_explored_solution, i_mct_mec)
     print_pareto_info(file_writer, p_metrics, 'joint_pareto(' + log_name + ')', 'joint', t_f_eval, max_leng,
@@ -64,14 +63,16 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
     [in_pareto, ave_time, ave_cost] = find_common_elements(pareto_front, p_metric.joint_pareto_info)
     [l_name, a_name] = extract_log_alg_name(full_name)
 
-    metric_baseline = (i_mct_mec[1] / i_mct_mec[0])
-    metric = ave_cost/ave_time / metric_baseline
+    metric_baseline1 = (i_mct_mec[1] / i_mct_mec[0])
+    metric_baseline2 = (i_mct_mec[0] / i_mct_mec[1])
+    metric1 = ave_cost/ave_time / metric_baseline1
+    metric2 = ave_time/ave_cost / metric_baseline2
     file_path = "%s%s_%s.txt" % (experiments_plots, l_name, a_name)
     if 'joint_pareto' not in alg_name and 'initial' not in full_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])
     if 'initial' in full_name:
-        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
+        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
                    % (fill_str(alg_name, max_len),
                       fill_str(str("-"), 6),
                       fill_str(str("-"), 5),
@@ -84,10 +85,11 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
                       fill_str(str("-"), 11),
                       fill_str(str(str(datetime.timedelta(seconds=i_mct_mec[0]))), 23),
                       fill_str(str(round(i_mct_mec[1], 2)), 23),
-                      fill_str(str(round((i_mct_mec[1] / i_mct_mec[0]) / (i_mct_mec[1] / i_mct_mec[0]), 6)), 9)
+                      fill_str(str(round((i_mct_mec[1] / i_mct_mec[0]) / (i_mct_mec[1] / i_mct_mec[0]), 6)), 23),
+                      fill_str(str(round((i_mct_mec[0] / i_mct_mec[1]) / (i_mct_mec[0] / i_mct_mec[1]), 6)), 23)
                       ))
     else:
-        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
+        print_line(f_writer, '%s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s  %s'
                    % (fill_str(alg_name, max_len),
                       fill_str(str(funct_ev), 6),
                       fill_str(str(total_explored), 5),
@@ -100,7 +102,8 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
                       fill_str(str(round(purity, 6)), 11),
                       fill_str(str(str(datetime.timedelta(seconds=ave_time))), 23),
                       fill_str(str(round(ave_cost, 2)), 23),
-                      fill_str(str(round(metric, 6)), 9)
+                      fill_str(str(round(metric1, 6)), 23),
+                      fill_str(str(round(metric2, 6)), 23)
                       ))
 
 
@@ -120,7 +123,7 @@ def find_common_elements(pareto_front, joint_pareto_info):
 
 def plot_data_profiles(file_path, algorithm_results, log_name, data_type=0):
     func_eval = dict()
-    colors = ['y', 'r', 'b', 'g', 'k', 'm']
+    colors = ['y', 'r', 'b', 'g', 'k', 'm', '#2ca02c', '#8c564b']
     alg_c = 1
     name_files = ["data_profiles_evaluated_functions", "data_profiles_explored_solutions"]
     x_names = ["Function Evaluations", "Explored Solutions"]
