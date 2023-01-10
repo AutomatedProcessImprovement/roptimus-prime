@@ -1578,7 +1578,7 @@
         },
         {
             "id": "sid-BA8B9C72-48FE-4FF1-A2F9-DE78C836A612",
-            "name": "Approve and send\u00c2\u00a0 acceptance pack",
+            "name": "Approve and send  acceptance pack",
             "resource_list": [
                 {
                     "id": "Loan Officer-000008",
@@ -5836,7 +5836,6 @@
             ]
         }
     ],
-    "event_distribution": {},
     "resource_calendars": [
         {
             "id": "D_SYSTEMtimetable",
@@ -6900,5 +6899,6 @@
                 }
             ]
         }
-    ]
+    ],
+    "event_distribution": {}
 }

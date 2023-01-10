@@ -1,20 +1,20 @@
-Function Evaluations:  30
-Solutions Explored:    30
+Function Evaluations:  35
+Solutions Explored:    35
 Pareto front size:     7
 In Joint Pareto:       0
 Not In Joint Pareto:   7
-Average Cycle Time:    1 day, 6:11:08.516545
-Average Resource Cost: 65114.733263
+Average Cycle Time:    1 day, 6:54:21.956780
+Average Resource Cost: 72356.703434
 ------------------------- METRICS --------------------------
-# Hyperarea Ratio:     0.954686
-# Hausdorff Distance:  21745.328346
-# Delta Metric:        0.816660
+# Hyperarea Ratio:     0.964790
+# Hausdorff Distance:  33415.625048
+# Delta Metric:        0.733050
 # Purity Metric:       0.000000
 --------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
-[af4a8db164daeaf010957fa3b31e7586aba9f0e1] -> [aCost: 100672.97, cTime: 1 day, 3:00:26.597866]
-[37af4c2cbafa4bd9b414049fe09c61b9f2521dbc] -> [aCost:  89592.20, cTime: 1 day, 3:01:00.134410]
-[3eb2cf1f64b3838fcae36f5096f7c73b46caf47d] -> [aCost:  60379.33, cTime: 1 day, 3:24:04.125774]
-[fb6b8ba9bf78b23c2eb5dbe0b94975c8fd41b3e5] -> [aCost:  61874.40, cTime: 1 day, 3:16:10.825933]
-[b396c3b2467d6e112cce52f679c4d6e39f76fcba] -> [aCost:  55106.63, cTime: 1 day, 3:58:47.116892]
-[89a486a32ade4aa16dc8a6fad61a04d47044699f] -> [aCost:  47477.42, cTime: 1 day, 8:38:06.984271]
-[b0563226deb0ddeb0c80bab69cc472a3227cb45d] -> [aCost:  40700.18, cTime: 1 day, 17:59:23.830669]
+[a2bacbb484b91ab8707e13b5833c151222111c7a] -> [aCost: 116027.89, cTime: 1 day, 2:59:04.647054]
+[67f983c4abf8efaf3d358305bfba6dfb6d54d017] -> [aCost: 105381.38, cTime: 1 day, 3:04:13.905818]
+[2c30a9a550188e732f8bbbdb6b7f99b301aedd53] -> [aCost:  89944.66, cTime: 1 day, 3:11:23.769373]
+[680a560ccd117a2d8cfe2812a09f12ea2fc3ae87] -> [aCost:  56278.66, cTime: 1 day, 3:13:36.888308]
+[4830df87f8b89ad0afc26774ab5787867245d1d9] -> [aCost:  51422.62, cTime: 1 day, 4:44:42.828240]
+[984983fe892021645c8c055dc4340f86bdc493a6] -> [aCost:  47359.34, cTime: 1 day, 9:06:36.154584]
+[19fa77b4ac0b01dc433afc009cb0715a93762c8a] -> [aCost:  40082.37, cTime: 1 day, 22:00:55.504079]

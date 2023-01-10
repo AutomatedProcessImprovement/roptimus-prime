@@ -1791,5 +1791,6 @@
                 }
             ]
         }
-    ]
+    ],
+    "event_distribution": {}
 }

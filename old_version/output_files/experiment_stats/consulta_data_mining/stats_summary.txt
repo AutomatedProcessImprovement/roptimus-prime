@@ -1,8 +1,0 @@
-['Joint Pareto Size (without MAD): 15 --------------------------------------------------------']
-Alg_Name                            #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
-joint_pareto(consulta_data_mining)  13530   8730   15      15     0    1.0        0.0             1.213946    1.0          0:34:48.266207           255392.18
-HC_STRICT(consulta_data_mining)     271     271    9       7      2    0.939581   114721.23       1.200819    0.777778     0:35:09.010636           190985.81
-HC_FLEX(consulta_data_mining)       1690    1690   12      12     0    0.970996   188411.46       0.887497    1.0          0:34:57.187262           172722.16
-TS_STRICT(consulta_data_mining)     1569    1569   12      12     0    0.95116    209925.04       0.905387    1.0          0:34:57.947020           165531.56
-NSGA-II(consulta_data_mining)       10000   7120   13      13     0    0.999964   11404.6         1.223205    1.0          0:34:52.072994           257557.00
-------------------------------------------------------

@@ -1,22 +1,22 @@
-Function Evaluations:  1730
-Solutions Explored:    1730
+Function Evaluations:  2748
+Solutions Explored:    2748
 Pareto front size:     9
-In Joint Pareto:       0
-Not In Joint Pareto:   9
-Average Cycle Time:    1 day, 7:31:50.145614
-Average Resource Cost: 104588.473464
+In Joint Pareto:       9
+Not In Joint Pareto:   0
+Average Cycle Time:    1 day, 6:03:43.202565
+Average Resource Cost: 51969.641341
 ------------------------- METRICS --------------------------
-# Hyperarea Ratio:     0.348045
-# Hausdorff Distance:  53823.618002
-# Delta Metric:        0.938082
-# Purity Metric:       0.000000
+# Hyperarea Ratio:     0.999561
+# Hausdorff Distance:  3113.369980
+# Delta Metric:        0.832300
+# Purity Metric:       1.000000
 --------------- OPTIMAL RESOURCE ALLOCATIONS ----------------
-[d59e85ccb29764329af6a2a48022234f02a1b735] -> [aCost: 108778.22, cTime: 1 day, 6:25:21.759100]
-[ee46305a0c0c5c1de6570deb5aa1ca7bf426ed38] -> [aCost: 100854.21, cTime: 1 day, 7:32:05.451833]
-[45c8c1401b0237e7f262d9cbc40bfdc29dd5b36e] -> [aCost:  98229.28, cTime: 1 day, 8:05:05.385604]
-[4375c890ee58c20b31f92b160475e493c5d2ce98] -> [aCost: 104929.71, cTime: 1 day, 7:05:36.018808]
-[df2af85b21e674319e13febefc0344d9eee9f503] -> [aCost: 118328.45, cTime: 1 day, 6:10:18.086037]
-[9f48f5dd4eac796d6d020419e2724c8ea489fa60] -> [aCost: 106713.48, cTime: 1 day, 6:52:34.501696]
-[286453c5920f9e189ed4f948e0c83da08dc4cd91] -> [aCost: 104430.98, cTime: 1 day, 7:19:59.409384]
-[789b650047c98fb268a8a4be3605e97e57dc62c1] -> [aCost:  98179.12, cTime: 1 day, 10:34:08.061886]
-[8df77f71f44e00957f4cc85894ddc4729aac3974] -> [aCost: 100852.81, cTime: 1 day, 7:41:22.636175]
+[553f16850a05a2386f6ba9f7d6712a2b2be62998] -> [aCost: 56097.18, cTime: 1 day, 0:57:37.745622]
+[d7c50f23635730c4a0b7034fdd206946f065d14b] -> [aCost: 50523.86, cTime: 1 day, 2:47:49.579947]
+[51eac3ab48910236b9c947520a7590172113299b] -> [aCost: 59922.05, cTime: 1 day, 0:01:42.612002]
+[6ef7a6fc7a08c15bb6c007c3f2df11f6218cb769] -> [aCost: 47796.00, cTime: 1 day, 8:05:19.983121]
+[d50b40ba5ff0e5dad7e7ab0c3e819687ddcc45e5] -> [aCost: 63057.72, cTime: 23:46:50.052760]
+[8492c3096af2d63d46954b4cf9c6e93624f5a40a] -> [aCost: 52946.95, cTime: 1 day, 2:30:16.717427]
+[af32043afe5ba48385a9a70783df5892af7fc5a3] -> [aCost: 43543.33, cTime: 1 day, 18:28:01.714729]
+[8d9c518a32542612bdd69d4079c8ac3362ef601d] -> [aCost: 49117.72, cTime: 1 day, 4:12:49.783711]
+[f869eb9de24e1c2ed1d4aeaa78307aef66cbccdc] -> [aCost: 44721.96, cTime: 1 day, 17:43:00.633764]

@@ -1,8 +1,0 @@
-['Joint Pareto Size (without MAD): 48 --------------------------------------------------------']
-Alg_Name                                   #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost
-joint_pareto(bpi_challenge_2017_filtered)  12689   2918   48      48     0    1.0        0.0             1.206904    1.0          1 day, 5:06:05.705216    382519.28
-HC_STRICT(bpi_challenge_2017_filtered)     73      73     32      29     3    0.999993   21283.35        1.311345    0.90625      1 day, 9:26:56.539187    330561.30
-HC_FLEX(bpi_challenge_2017_filtered)       108     108    34      31     3    0.999993   17290.52        1.27965     0.911765     1 day, 8:33:07.636213    341530.59
-TS_STRICT(bpi_challenge_2017_filtered)     2647    2647   48      48     0    1.0        0.0             1.206904    1.0          1 day, 5:06:05.705216    382519.28
-NSGA-II(bpi_challenge_2017_filtered)       9861    1931   47      47     0    1.0        9033.22         1.244832    1.0          1 day, 5:20:14.360607    372616.00
-------------------------------------------------------
