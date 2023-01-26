@@ -1,7 +1,7 @@
 import json
 
-from bpdfr_simulation_engine.resource_calendar import int_week_days
-from bpdfr_simulation_engine.simulation_properties_parser import parse_resource_calendars
+from ext_tools.Prosimos.bpdfr_simulation_engine.resource_calendar import int_week_days
+from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_resource_calendars
 
 
 def generate_constraint_file(sim_params_path, out_file):

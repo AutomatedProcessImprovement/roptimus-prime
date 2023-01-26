@@ -1,4 +1,4 @@
-from diff_res_bpsim import run_simulation
+from ext_tools.Prosimos.diff_res_bpsim import run_simulation
 import datetime
 import re
 import time
@@ -7,7 +7,7 @@ from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 from support_modules.file_manager import save_simulation_results
 from support_modules.file_manager import temp_bpmn_file
-from PROSIMOS_LOCAL.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
+from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
 
 
 def process_simulations(model_file_path, json_path, total_cases, pools_info):
