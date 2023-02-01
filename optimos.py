@@ -27,7 +27,6 @@ def cli():
 @click.pass_context
 def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach="ARCA"):
     run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach)
-    pass
 
 
 if __name__ == "__main__":

@@ -101,11 +101,11 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
 
 
 def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
-    TO_EXECUTE = {'HC-STRICT': False,
+    to_execute = {'HC-STRICT': False,
                   'HC-FLEX': False,
                   'METRICS': True}
 
-    APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
+    approaches = {"only_calendar": False,  # Only perform optimization on schedule level
                   "only_add_remove": False,  # Only perform optimization on resource level
                   "combined": False,  # schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
                   "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
@@ -114,25 +114,25 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
 
     # Either FLEX or STRICT
     if algorithm == 'HC-FLEX':
-        TO_EXECUTE['HC-FLEX'] = True
+        to_execute['HC-FLEX'] = True
     if algorithm == 'HC-STRICT':
-        TO_EXECUTE['HC-STRICT'] = True
+        to_execute['HC-STRICT'] = True
 
     # Select chosen approaches to execute
     if approach == "ALL":
-        for key in APPROACHES.keys():
-            APPROACHES[key] = True
+        for key in approaches.keys():
+            approaches[key] = True
     else:
         if approach == "CA":
-            APPROACHES['only_calendar'] = True
+            approaches['only_calendar'] = True
         if approach == "AR":
-            APPROACHES['only_add_remove'] = True
+            approaches['only_add_remove'] = True
         if approach == "CO":
-            APPROACHES['combined'] = True
+            approaches['combined'] = True
         if approach == "CAAR":
-            APPROACHES['first_calendar_then_add_remove'] = True
+            approaches['first_calendar_then_add_remove'] = True
         if approach == "ARCA":
-            APPROACHES['first_add_remove_then_calendar'] = True
+            approaches['first_add_remove_then_calendar'] = True
 
         max_func_ev = total_iterations
         non_opt_ratio = 0.1 # Could also be parameterized
@@ -142,56 +142,51 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         # Reset files just in case
         reset_after_each_execution(log_name)
 
-        if APPROACHES['only_calendar'] and not APPROACHES['first_calendar_then_add_remove']:
-            if TO_EXECUTE['HC-STRICT']:
+        if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
+            if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_calendar')
                 reset_after_each_execution(log_name)
-            if TO_EXECUTE['HC-FLEX']:
+            if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_calendar')
                 reset_after_each_execution(log_name)
-        if APPROACHES['only_add_remove'] and not APPROACHES['first_add_remove_then_calendar']:
-            if TO_EXECUTE['HC-STRICT']:
+        if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
+            if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_add_remove')
                 reset_after_each_execution(log_name)
-            if TO_EXECUTE['HC-FLEX']:
+            if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_add_remove')
                 reset_after_each_execution(log_name)
-        if APPROACHES['combined']:
-            if TO_EXECUTE['HC-STRICT']:
+        if approaches['combined']:
+            if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'combined')
                 reset_after_each_execution(log_name)
-            if TO_EXECUTE['HC-FLEX']:
+            if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'combined')
                 reset_after_each_execution(log_name)
-        if APPROACHES['first_calendar_then_add_remove']:
-            if TO_EXECUTE['HC-STRICT']:
+        if approaches['first_calendar_then_add_remove']:
+            if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_calendar_then_add_remove')
                 reset_after_each_execution(log_name)
-            if TO_EXECUTE['HC-FLEX']:
+            if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_calendar_then_add_remove')
                 reset_after_each_execution(log_name)
-        if APPROACHES['first_add_remove_then_calendar']:
-            if TO_EXECUTE['HC-STRICT']:
+        if approaches['first_add_remove_then_calendar']:
+            if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_add_remove_then_calendar')
                 reset_after_each_execution(log_name)
-            if TO_EXECUTE['HC-FLEX']:
+            if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_add_remove_then_calendar')
                 reset_after_each_execution(log_name)
-
-
-
-
-
 
 
 def main():
