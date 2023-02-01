@@ -1,4 +1,13 @@
-# Name the files as following
+# Experiment setup from .zip files
+
+Each of the experiments has a compressed (.zip) folder, containing the following files:
+- json file with simulation information (timetable)
+- BPMN model file
+- json file with local and global constraint information (constraints)
+
+The algorithm accepts only certain filenames.
+
+Use the reference below to set the files up correctly. (if you wish to start from the .zip folder)
 
 ### JSON files (timetable)
 - timetable.json
