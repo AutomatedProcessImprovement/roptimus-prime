@@ -11,10 +11,55 @@ def print_line(file_writer, to_print):
 
 
 def setup_dir(log_name):
-    file_path = "%s%s" % (experiments_plots, log_name)
+    file_path = "%s\\%s" % (experiments_plots, log_name)
     if not os.path.exists(file_path):
         os.makedirs(file_path)
-    return file_path + '/'
+    return file_path + '\\'
+
+
+def return_solution_statistics(p_metrics, log_name):
+    dir_path = setup_dir(log_name)
+    file_writer = open(dir_path + "stats_summary.txt", 'w')
+
+    joint_pareto = ['Joint Pareto Size (without MAD): %d --------------------------------------------------------'
+                    % len(p_metrics.joint_pareto_info)]
+    print_line(file_writer, joint_pareto)
+    max_leng = len(log_name) + 14
+
+    f_eval = plot_data_profiles_microservice(dir_path, p_metrics.algorithm_results, log_name, 0)
+    # plot_data_profiles(dir_path, p_metrics.algorithm_results, log_name, 1)
+    t_f_eval = 0
+    initial_metrics = None
+    for v in p_metrics.algorithm_results.values():
+        initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
+        break
+    i_mct = initial_metrics.median_cycle_time
+    i_mec = initial_metrics.median_execution_cost
+
+    i_mct_mec = (i_mct, i_mec)
+    for a_name in f_eval:
+        t_f_eval += f_eval[a_name]
+    print_line(file_writer, fill_str('Alg_Name', max_leng) + '  #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  '
+                                                             'Hausdorff-Dist  Delta-Sprd  Purity-Rate  '
+                                                             'Ave_Time                 Ave_cost'
+                                                             '     Time Metric     Cost Metric')
+    print_pareto_info(file_writer, p_metrics, 'initial (' + log_name + ')', 'initial', t_f_eval, max_leng,
+                      p_metrics.joint_pareto_info, p_metrics.total_explored_solution, i_mct_mec)
+    print_pareto_info(file_writer, p_metrics, 'joint_pareto(' + log_name + ')', 'joint', t_f_eval, max_leng,
+                      p_metrics.joint_pareto_info, p_metrics.total_explored_solution, i_mct_mec)
+
+    output_file_paths = []
+
+    for alg_name in p_metrics.algorithm_results:
+        [l_name, a_name] = extract_log_alg_name(alg_name)
+        a_name = a_name
+        output_file_paths.append(print_pareto_info(file_writer, p_metrics, a_name, alg_name, f_eval[alg_name], max_leng,
+                                                   p_metrics.algorithm_results[alg_name].pareto_front,
+                                                   len(p_metrics.algorithm_results[alg_name].explored_solutions),
+                                                   i_mct_mec))
+    print_line(file_writer, '------------------------------------------------------')
+
+    return output_file_paths
 
 
 def print_solution_statistics(p_metrics, log_name):
@@ -58,14 +103,15 @@ def print_solution_statistics(p_metrics, log_name):
     plot_pareto_front(dir_path, p_metrics.algorithm_results, p_metrics.joint_pareto_info)
 
 
-def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len, pareto_front, total_explored, i_mct_mec):
+def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len, pareto_front, total_explored,
+                      i_mct_mec):
     [hyperarea_diff, hausdorff_dist, delta, purity] = p_metric.compute_metrics(pareto_front)
     [in_pareto, ave_time, ave_cost] = find_common_elements(pareto_front, p_metric.joint_pareto_info)
     [l_name, a_name] = extract_log_alg_name(full_name)
 
     cost_metric = i_mct_mec[1] / ave_cost
     time_metric = i_mct_mec[0] / ave_time
-    file_path = "%s%s_%s.txt" % (experiments_plots, l_name, a_name)
+    file_path = "%s\\%s_%s.txt" % (experiments_plots, l_name, a_name)
     if 'joint_pareto' not in alg_name and 'initial' not in full_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])
@@ -103,6 +149,7 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
                       fill_str(str(round(time_metric, 6)), 15),
                       fill_str(str(round(cost_metric, 6)), 11)
                       ))
+    return file_path
 
 
 def find_common_elements(pareto_front, joint_pareto_info):
@@ -117,6 +164,56 @@ def find_common_elements(pareto_front, joint_pareto_info):
     return [in_pareto,
             tot_time / len(pareto_front),
             tot_cost / len(pareto_front)]
+
+
+def plot_data_profiles_microservice(file_path, algorithm_results, log_name, data_type=0):
+    func_eval = dict()
+    colors = ['y', 'r', 'b', 'g', 'k', 'm', '#2ca02c', '#8c564b']
+    alg_c = 1
+    name_files = ["data_profiles_evaluated_functions", "data_profiles_explored_solutions"]
+    x_names = ["Function Evaluations", "Explored Solutions"]
+    name_index = 0
+    text_x = []
+    for alg_name in algorithm_results:
+        [log_name, alg_name_1] = extract_log_alg_name(alg_name)
+        solution_list = \
+            solutions_order_stats_file(log_name, alg_name if 'nsga' not in alg_name else alg_name + "_simulation_info")
+        pareto_front = algorithm_results[alg_name].pareto_front
+        if data_type == 1:
+            not_repeated_sol = set()
+            expl_sol = list()
+            for sol_id in solution_list:
+                if sol_id not in not_repeated_sol:
+                    expl_sol.append(sol_id)
+                    not_repeated_sol.add(sol_id)
+            name_index = 1
+            solution_list = expl_sol
+        found_last = False
+        current_pareto = set()
+        x_axis = []
+        y_axis = []
+        i = 0
+        for sol_id in solution_list:
+            if sol_id in pareto_front:
+                current_pareto.add(sol_id)
+            x_axis.append(i)
+            # if not found_last and len(current_pareto) == len(pareto_front):
+            #     text_x.append(i)
+            #     plt.plot(i, 1, color=colors[alg_c], marker='o')
+            #     plt.axvline(x=i, color=colors[alg_c], linestyle='dotted')
+            #     found_last = True
+            y_axis.append(len(current_pareto) / len(pareto_front))
+            i += 1
+        func_eval[alg_name] = len(x_axis)
+        # plt.plot(x_axis, y_axis, color=colors[alg_c], label=alg_name_1)
+        alg_c += 1
+    # plt.legend(framealpha=1, frameon=True)
+    # plt.title('%s' % log_name)
+    # plt.ylabel('Pareto Progress')
+    # plt.xlabel(x_names[name_index])
+    # plt.savefig("%s%s.pdf" % (file_path, name_files[name_index]))
+    # plt.show()
+    return func_eval
 
 
 def plot_data_profiles(file_path, algorithm_results, log_name, data_type=0):
@@ -249,6 +346,7 @@ def fill_str(in_str, m_lenght):
 
 
 def save_allocation_statistics(file_path, algorithm_result, funct_eval, general_info, metrics):
+    print(file_path)
     f_writer = open(file_path, "w")
     f_writer.write("Function Evaluations:  %d\n" % funct_eval)
     f_writer.write("Solutions Explored:    %d\n" % len(algorithm_result.explored_solutions))

@@ -11,10 +11,14 @@ import shutil
 
 
 class JsonManager:
+
     def __init__(self):
         self.ids = []
-        self.path = "./json_files/ids.txt"
-        self.base_path_folders = "./json_files/"
+        curr_dir_path = os.path.abspath(os.path.dirname(__file__))
+        self.path = os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/ids.txt'))
+        self.base_path_folders = os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'))
+        # self.path = "./json_files/ids.txt"
+        # self.base_path_folders = "./json_files/"
 
     def read_file_with_ids(self):
         new_path = self.path
@@ -30,26 +34,28 @@ class JsonManager:
         return self.ids
 
     def try_create_dir(self, solution_id):
-        if not os.path.exists(self.base_path_folders + str(solution_id)):
-            os.makedirs(self.base_path_folders + str(solution_id))
+        if not os.path.exists(os.path.join(self.base_path_folders, solution_id)):
+            os.makedirs(os.path.join(self.base_path_folders, solution_id))
 
     def read_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
+        curr_dir_path = os.path.abspath(os.path.dirname(__file__))
+
         ids = self.read_file_with_ids()
-        out_ttb_path = self.base_path_folders + str(solution_id) + "/timetable.json"
-        out_cons_path = self.base_path_folders + str(solution_id) + "/constraints.json"
-        out_model_path = self.base_path_folders + str(solution_id) + "/model.bpmn"
+        out_ttb_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'timetable.json'))
+        out_cons_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'constraints.json'))
+        out_model_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'model.bpmn'))
 
         self.try_create_dir(str(solution_id))
-
         if solution_id is not None:
             shutil.copyfile(new_ttb_path, out_ttb_path)
             shutil.copyfile(new_cons_path, out_cons_path)
-            shutil.copyfile("./temp_files/CopiedModel.bpmn", out_model_path)
+            shutil.copyfile(os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn')), out_model_path)
             return self.write_new_id_to_file(solution_id)
         else:
             print("Err: Solution ID is of type None.")
 
     def write_new_id_to_file(self, solution_id):
+
         ids = self.read_file_with_ids()
         if solution_id not in ids:
             ids.append(solution_id)
@@ -72,5 +78,5 @@ class JsonManager:
                               cons_path):
         ids = self.read_file_with_ids()
         if solution_id in ids:
-            shutil.copyfile(self.base_path_folders + str(solution_id) + "/constraints.json", cons_path)
-            shutil.copyfile(self.base_path_folders + str(solution_id) + "/timetable.json", ttb_path)
+            shutil.copyfile(os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'constraints.json')), cons_path)
+            shutil.copyfile(os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'timetable.json')), ttb_path)

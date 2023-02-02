@@ -1,4 +1,5 @@
 import json
+import os
 
 from data_structures.RosterInfo import Roster
 
@@ -10,8 +11,12 @@ class RosterManager:
         self.blocks = int(self.roster.shift_block / 60)
         self.constraints_json = constraints
 
-        self.temp_timetable = "./temp_files/temp_timetable.json"
-        self.temp_constraints = "./temp_files/temp_constraints.json"
+        # self.temp_timetable = "./temp_files/temp_timetable.json"
+        # self.temp_constraints = "./temp_files/temp_constraints.json"
+
+        curr_dir_path = os.path.abspath(os.path.dirname(__file__))
+        self.temp_timetable = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_timetable.json'))
+        self.temp_constraints = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_constraints.json'))
 
 
         """

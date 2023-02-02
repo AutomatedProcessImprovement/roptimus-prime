@@ -2,7 +2,8 @@ import os
 
 from pareto_algorithms_and_metrics.hill_climb import hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
-from support_modules.plot_statistics_handler import print_solution_statistics
+from support_modules.file_manager import reset_file_information
+from support_modules.plot_statistics_handler import print_solution_statistics, return_solution_statistics
 from test_assets.experiments.experiment_setup import experiments_file_paths, experiments, \
     reset_after_each_execution
 
@@ -21,12 +22,10 @@ APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule le
 
 
 def execute_algorithm_variants(log_index, to_execute, approaches):
-
     log_name = experiments[log_index]
     timetable_path = experiments_file_paths[log_name][0]
     constraints_path = experiments_file_paths[log_name][1]
     bpmn_path = experiments_file_paths[log_name][2]
-
 
     max_func_ev = 5000
     non_opt_ratio = 0.1
@@ -106,9 +105,7 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
 
 
 def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
-
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
-
 
     to_execute = {'HC-STRICT': False,
                   'HC-FLEX': False,
@@ -149,55 +146,74 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         non_opt_ratio = 0.1
 
         # Needs a parameter as well
-        log_name = "DEFAULT_NAME"
-
+        log_name = "DEFAULT"
 
 
         if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_calendar')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_calendar')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
         if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_add_remove')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_add_remove')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
         if approaches['combined']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'combined')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'combined')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
         if approaches['first_calendar_then_add_remove']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_calendar_then_add_remove')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_calendar_then_add_remove')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
         if approaches['first_add_remove_then_calendar']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_add_remove_then_calendar')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_add_remove_then_calendar')
-                reset_after_each_execution(log_name)
+                reset_file_information(log_name)
+
+        if to_execute['METRICS']:
+            metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
+                                                     'hill_clmb_combined_with_mad',
+
+                                                     'hill_clmb_only_calendar_without_mad',
+                                                     'hill_clmb_only_calendar_with_mad',
+
+                                                     'hill_clmb_only_add_remove_without_mad',
+                                                     'hill_clmb_only_add_remove_with_mad',
+
+                                                     'hill_clmb_first_calendar_then_add_remove_without_mad',
+                                                     'hill_clmb_first_calendar_then_add_remove_with_mad',
+
+                                                     'hill_clmb_first_add_remove_then_calendar_without_mad',
+                                                     'hill_clmb_first_add_remove_then_calendar_with_mad',
+                                                     ])
+            return return_solution_statistics(metrics, log_name)
+
+    return "COMPLETED - NO METRICS"
 
 
 def main():

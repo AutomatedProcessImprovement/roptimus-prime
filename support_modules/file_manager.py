@@ -1,4 +1,5 @@
 import csv
+import os
 from datetime import datetime
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import SolutionSpace, DeviationInfo
@@ -40,20 +41,28 @@ xes_simodbpmn_file_paths = {
                              './input_files/bpmn_simod_models/ConsultaDataMining201618.bpmn']
 }
 
-temp_bpmn_file = './temp_files/CopiedModel.bpmn'
-experiments_plots = './output_files/experiment_stats/'
-results_folder = './output_files/explored_allocations/'
-simulation_results = './output_files/simulation_results/'
+curr_dir_path = os.path.abspath(os.path.dirname(__file__))
+temp_bpmn_file = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn'))
+experiments_plots = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/experiment_stats/'))
+results_folder = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/explored_allocations/'))
+simulation_results = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/simulation_results/'))
 
+# temp_bpmn_file = './temp_files/CopiedModel.bpmn'
+# experiments_plots = './output_files/experiment_stats/'
+# results_folder = './output_files/explored_allocations/'
+# simulation_results = './output_files/simulation_results/'
+
+def reset_file_information(log_name):
+    pass
 
 def save_simulation_results(log_name, pools_info, simulation_list, median_simulation):
     try:
-        with open(simulation_results + ("%s_full.csv" % log_name), mode='a', newline='') as full_csv_file:
-            with open(simulation_results + ("%s_median.csv" % log_name), mode='a', newline='') as median_csv_file:
+        with open(simulation_results + ("\\%s_full.csv" % log_name), mode='a', newline='') as full_csv_file:
+            with open(simulation_results + ("\\%s_median.csv" % log_name), mode='a', newline='') as median_csv_file:
                 update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
     except IOError:
-        with open(simulation_results + ("%s_full.csv" % log_name), mode='w', newline='') as full_csv_file:
-            with open(simulation_results + ("%s_median.csv" % log_name), mode='w', newline='') as median_csv_file:
+        with open(simulation_results + ("\\%s_full.csv" % log_name), mode='w', newline='') as full_csv_file:
+            with open(simulation_results + ("\\%s_median.csv" % log_name), mode='w', newline='') as median_csv_file:
                 update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
 
 
@@ -92,7 +101,7 @@ def save_one_simulation_result(pools_info, csv_file, simulation_info):
 def load_simulation_result(log_name, pools_info):
     try:
         simulation_info = SimulationInfo(pools_info)
-        with open(simulation_results + ("%s_median.csv" % log_name), mode='r') as csv_file:
+        with open(simulation_results + ("\\%s_median.csv" % log_name), mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             file_section = 0
             for row in csv_reader:
@@ -134,8 +143,8 @@ def parse_date(date_str):
 
 
 def create_genetic_stats_files(log_name):
-    with open(results_folder + ("%s_nsga2_simulation_info.csv" % log_name), mode='w', newline='') as simul_csv_file:
-        with open(results_folder + ("%s_nsga2_pools_info.csv" % log_name), mode='w', newline='') as pools_csv_file:
+    with open(results_folder + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='w', newline='') as simul_csv_file:
+        with open(results_folder + ("\\%s_nsga2_pools_info.csv" % log_name), mode='w', newline='') as pools_csv_file:
             simul_csv_writer = csv.writer(simul_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             write_stats_header(simul_csv_writer)
             pools_csv_writer = csv.writer(pools_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -143,8 +152,8 @@ def create_genetic_stats_files(log_name):
 
 
 def update_genetic_stats_file(log_name, it_number, simulation_info, pools_info):
-    with open(results_folder + ("%s_nsga2_simulation_info.csv" % log_name), mode='a', newline='') as simul_csv_file:
-        with open(results_folder + ("%s_nsga2_pools_info.csv" % log_name), mode='a', newline='') as pools_csv_file:
+    with open(results_folder + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='a', newline='') as simul_csv_file:
+        with open(results_folder + ("\\%s_nsga2_pools_info.csv" % log_name), mode='a', newline='') as pools_csv_file:
             simulation_csv_writer = csv.writer(simul_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             write_simulation_info_stats(simulation_csv_writer, it_number, simulation_info, pools_info)
 
@@ -154,7 +163,7 @@ def update_genetic_stats_file(log_name, it_number, simulation_info, pools_info):
 
 # Method for Hill-Climbing and Tabu Search
 def save_stats_file(log_name, algorithm_name, generated_solutions, simulation_order, iteration_count):
-    with open(results_folder + ("%s_%s.csv" % (log_name, algorithm_name)), mode='w', newline='') as csv_file:
+    with open(results_folder + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         csv_writer.writerow(['Total Solutions Generated', "%s" % str(len(generated_solutions))])
@@ -219,7 +228,7 @@ def write_pools_info_stats(csv_writer, it_number, simulation_info, pools_info):
 
 def read_genetic_stats_file(log_name):
     try:
-        with open(results_folder + ("%s_nsga2_simulation_info.csv" % log_name), mode='r') as simulation_csv_file:
+        with open(results_folder + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='r') as simulation_csv_file:
             with open(results_folder + ("%s_nsga2_pools_info.csv" % log_name), mode='r') as pools_csv_file:
                 simulation_csv_reader = csv.reader(simulation_csv_file, delimiter=',')
                 pools_csv_reader = csv.reader(pools_csv_file, delimiter=',')
@@ -255,7 +264,7 @@ def read_stats_file(log_name, algorithm_name):
     if algorithm_name == 'nsga2':
         return read_genetic_stats_file(log_name)
     try:
-        with open(results_folder + ("%s_%s.csv" % (log_name, algorithm_name)), mode='r') as csv_file:
+        with open(results_folder + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             explored_solutions = dict()
             resource_pools = dict()
@@ -280,7 +289,7 @@ def read_stats_file(log_name, algorithm_name):
 
 def solutions_order_stats_file(log_name, algorithm_name):
     try:
-        with open(results_folder + ("%s.csv" % algorithm_name), mode='r') as csv_file:
+        with open(results_folder + ("\\%s.csv" % algorithm_name), mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             solution_list = list()
             block_count = 0

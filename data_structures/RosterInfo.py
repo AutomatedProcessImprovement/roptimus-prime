@@ -29,11 +29,11 @@ class Roster:
 
         resource_map = []
 
+
         for i in ttb['resource_calendars']:
             for j in cons['resources']:
                 if i['id'] == j['id']:
                     resource_map.append(Resource(j, i, cons['time_var']))
-
         self.resources = resource_map
         self.shift_block = cons['time_var']
         self.max_cap = cons['max_cap']

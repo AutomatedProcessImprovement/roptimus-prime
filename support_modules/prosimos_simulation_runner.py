@@ -14,7 +14,7 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    (result, traces) = run_simulation(model_file_path, json_path, total_cases, starting_at="2023-01-01T00:00:00.000000+00:00") # ,
+    (result, traces) = run_simulation(model_file_path, json_path, total_cases) # ,
 
     _, cal_map, _, _, _, _ = parse_json_sim_parameters(json_path)
 
