@@ -15,7 +15,7 @@ from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from data_structures.RosterManager import RosterManager
 import hashlib
 
-temp_bpmn_file = './test_assets/CopiedModel.bpmn'
+temp_bpmn_file = './temp_files/CopiedModel.bpmn'
 
 
 def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):

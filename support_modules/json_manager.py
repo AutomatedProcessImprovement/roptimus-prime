@@ -35,11 +35,6 @@ class JsonManager:
 
     def read_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
         ids = self.read_file_with_ids()
-        if new_ttb_path == "":
-            new_ttb_path = "./test_assets/experiments/production/timetable.json"
-        if new_cons_path == "":
-            new_cons_path = "./test_assets/experiments/production/constraints.json"
-
         out_ttb_path = self.base_path_folders + str(solution_id) + "/timetable.json"
         out_cons_path = self.base_path_folders + str(solution_id) + "/constraints.json"
         out_model_path = self.base_path_folders + str(solution_id) + "/model.bpmn"
@@ -49,7 +44,7 @@ class JsonManager:
         if solution_id is not None:
             shutil.copyfile(new_ttb_path, out_ttb_path)
             shutil.copyfile(new_cons_path, out_cons_path)
-            shutil.copyfile("./test_assets/CopiedModel.bpmn", out_model_path)
+            shutil.copyfile("./temp_files/CopiedModel.bpmn", out_model_path)
             return self.write_new_id_to_file(solution_id)
         else:
             print("Err: Solution ID is of type None.")

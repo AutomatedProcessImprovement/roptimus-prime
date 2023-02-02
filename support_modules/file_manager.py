@@ -40,7 +40,7 @@ xes_simodbpmn_file_paths = {
                              './input_files/bpmn_simod_models/ConsultaDataMining201618.bpmn']
 }
 
-temp_bpmn_file = './test_assets/CopiedModel.bpmn'
+temp_bpmn_file = './temp_files/CopiedModel.bpmn'
 experiments_plots = './output_files/experiment_stats/'
 results_folder = './output_files/explored_allocations/'
 simulation_results = './output_files/simulation_results/'

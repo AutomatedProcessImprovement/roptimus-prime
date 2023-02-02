@@ -7,7 +7,7 @@ from test_assets.experiments.experiment_setup import experiments_file_paths, exp
     reset_after_each_execution
 
 TO_EXECUTE = {'HC-STRICT': False,
-              'HC-FLEX': False,
+              'HC-FLEX': True,
               'TS-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}
@@ -34,6 +34,11 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
 
     # Reset files just in case
     reset_after_each_execution(log_name)
+
+    print(log_name)
+    print(timetable_path)
+    print(constraints_path)
+    print(bpmn_path)
 
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
@@ -101,6 +106,10 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
 
 
 def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
+
+    # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
+
+
     to_execute = {'HC-STRICT': False,
                   'HC-FLEX': False,
                   'METRICS': True}
@@ -135,12 +144,14 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             approaches['first_add_remove_then_calendar'] = True
 
         max_func_ev = total_iterations
-        non_opt_ratio = 0.1 # Could also be parameterized
 
+        # Could also be parameterized
+        non_opt_ratio = 0.1
+
+        # Needs a parameter as well
         log_name = "DEFAULT_NAME"
 
-        # Reset files just in case
-        reset_after_each_execution(log_name)
+
 
         if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
             if to_execute['HC-STRICT']:
@@ -194,14 +205,14 @@ def main():
     # for log_index in range(0, len(experiment_logs)):
     #     execute_algorithm_variants(log_index, 10000, 0.08, 15)
 
-    for log_index in range(0, len(experiments)):
-        execute_algorithm_variants(log_index, TO_EXECUTE, APPROACHES)
+    # for log_index in range(0, len(experiments)):
+    #     execute_algorithm_variants(log_index, TO_EXECUTE, APPROACHES)
 
     # 1st Parameter: Index of the process to optimize -- from list experiment_logs
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    # execute_algorithm_variants(0)
+    execute_algorithm_variants(2, TO_EXECUTE, APPROACHES)
     os._exit(0)
 
 
