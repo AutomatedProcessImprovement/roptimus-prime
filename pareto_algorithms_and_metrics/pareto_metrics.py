@@ -1,7 +1,11 @@
+import json
+import os
 import sys
 import math
 
 from support_modules.file_manager import read_stats_file
+
+curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
 
 class ExtremeValues:
@@ -37,12 +41,23 @@ class ExtremeValues:
         if is_greater_than(s_time, self.worst_time_point[1], s_cost, self.worst_time_point[0]):
             self.worst_time_point = [s_cost, s_time]
 
-
 class AlgorithmResults:
     def __init__(self, execution_info, with_mad):
         self.explored_solutions = execution_info[0]
         self.resource_pools = execution_info[1]
         [self.pareto_front, self.initial_solution] = find_pareto_front([self.explored_solutions], with_mad)
+
+        for key in self.pareto_front:
+            print(key)
+
+            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/constraints.json")), 'r') as c_read:
+                cons = json.load(c_read)
+            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/timetable.json")), 'r') as t_read:
+                ttb = json.load(t_read)
+
+            self.pareto_front[key].sim_params = ttb
+            self.pareto_front[key].cons_params = cons
+
 
 
 class GlobalParetoMetrics:

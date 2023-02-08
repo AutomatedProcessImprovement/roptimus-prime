@@ -3,7 +3,8 @@ import os
 from pareto_algorithms_and_metrics.hill_climb import hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import reset_file_information
-from support_modules.plot_statistics_handler import print_solution_statistics, return_solution_statistics
+from support_modules.plot_statistics_handler import print_solution_statistics, return_solution_statistics, \
+    save_allocation_statistics_into_SolutionObject, return_api_solution_statistics
 from test_assets.experiments.experiment_setup import experiments_file_paths, experiments, \
     reset_after_each_execution
 
@@ -13,11 +14,11 @@ TO_EXECUTE = {'HC-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}
 
-APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
-              "only_add_remove": True,  # Only perform optimization on resource level
-              "combined": True,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
-              "first_calendar_then_add_remove": True,  # Only calendar until No_improvement found, then add/remove
-              "first_add_remove_then_calendar": True  # Only add/remove until No_improvement found, then calendar
+APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
+              "only_add_remove": False,  # Only perform optimization on resource level
+              "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
+              "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
+              "first_add_remove_then_calendar": False  # Only add/remove until No_improvement found, then calendar
               }
 
 
@@ -211,7 +212,8 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                      'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                      'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                      ])
-            return return_solution_statistics(metrics, log_name)
+            # return
+            return return_api_solution_statistics(metrics, log_name)
 
     return "COMPLETED - NO METRICS"
 

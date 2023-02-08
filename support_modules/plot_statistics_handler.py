@@ -1,7 +1,9 @@
+import json
 import os
 import datetime
 import matplotlib.pyplot as plt
 
+from data_structures.solution_space import SolutionOutputObject
 from support_modules.file_manager import solutions_order_stats_file, experiments_plots
 
 
@@ -15,6 +17,41 @@ def setup_dir(log_name):
     if not os.path.exists(file_path):
         os.makedirs(file_path)
     return file_path + '\\'
+
+
+def return_api_solution_statistics(p_metrics, log_name):
+    f_eval = plot_data_profiles_microservice(p_metrics.algorithm_results, log_name, 0)
+
+    t_f_eval = 0
+    for a_name in f_eval:
+        t_f_eval += f_eval[a_name]
+    initial_metrics = None
+    for v in p_metrics.algorithm_results.values():
+        initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
+        break
+    i_mct = initial_metrics.median_cycle_time
+    i_mec = initial_metrics.median_execution_cost
+
+    i_mct_mec = (i_mct, i_mec)
+
+    solution_objects = []
+    for alg in p_metrics.algorithm_results:
+        [l_name, a_name] = extract_log_alg_name(alg)
+        alg_res = p_metrics.algorithm_results[alg]
+
+        [hyperarea_diff, hausdorff_dist, delta, purity] = p_metrics.compute_metrics(p_metrics.joint_pareto_info)
+        [in_pareto, ave_time, ave_cost] = find_common_elements(p_metrics.joint_pareto_info, p_metrics.joint_pareto_info)
+
+        time_metric = i_mct_mec[0] / ave_time
+        cost_metric = i_mct_mec[1] / ave_cost
+
+        out = save_allocation_statistics_into_SolutionObject(a_name,alg_res, t_f_eval,
+                                                       [in_pareto, ave_time, ave_cost],
+                                                       [hyperarea_diff, hausdorff_dist, delta, purity],
+                                                       [time_metric, cost_metric])
+        solution_objects.append(out)
+    json_string = json.dumps([ob.__dict__ for ob in solution_objects])
+    return json_string
 
 
 def return_solution_statistics(p_metrics, log_name):
@@ -166,7 +203,7 @@ def find_common_elements(pareto_front, joint_pareto_info):
             tot_cost / len(pareto_front)]
 
 
-def plot_data_profiles_microservice(file_path, algorithm_results, log_name, data_type=0):
+def plot_data_profiles_microservice(algorithm_results, log_name, data_type=0):
     func_eval = dict()
     colors = ['y', 'r', 'b', 'g', 'k', 'm', '#2ca02c', '#8c564b']
     alg_c = 1
@@ -343,6 +380,36 @@ def extract_log_alg_name(full_alg_name):
 
 def fill_str(in_str, m_lenght):
     return in_str + (' ' * (m_lenght - len(in_str)))
+
+
+def save_allocation_statistics_into_SolutionObject(alg_name, algorithm_result, funct_eval, general_info, metrics, impr_index):
+
+    out = SolutionOutputObject()
+    out.name = alg_name
+    out.time_metric = impr_index[0]
+    out.cost_metric = impr_index[1]
+
+    out.func_ev = funct_eval
+    out.total_explored = 0  # TODO Which value?
+    out.pareto_size = len(algorithm_result.pareto_front)
+    out.in_jp = general_info[0]
+    out.ave_time = general_info[1]
+    out.ave_cost = general_info[2]
+
+    out.hyperarea = metrics[0]
+    out.hausd_dist = metrics[1]
+    out.delta_sprd = metrics[2]
+    out.purity_rate = metrics[3]
+
+    out.pareto_values = []
+    for v in algorithm_result.pareto_front:
+        new_obj = dict(name=v, sim_params=algorithm_result.pareto_front[v].sim_params,
+                       cons_params=algorithm_result.pareto_front[v].cons_params,
+                       median_cycle_time=algorithm_result.pareto_front[v].median_cycle_time,
+                       median_execution_cost=algorithm_result.pareto_front[v].median_execution_cost,)
+        out.pareto_values.append(new_obj)
+
+    return out
 
 
 def save_allocation_statistics(file_path, algorithm_result, funct_eval, general_info, metrics):
