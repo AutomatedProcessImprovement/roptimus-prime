@@ -232,6 +232,13 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             # print(output)
             with open(save_path+"\\results.json", 'w') as o:
                 o.write(output)
+
+            # Remove all files in json_files for next task:
+            path = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'json_files'))
+            for _dir in os.listdir(path):
+                if _dir != 'ids.txt':
+                    shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
+
             return os.path.abspath(os.path.join(save_path, 'results.json')), output
 
     return "COMPLETED - NO METRICS"
