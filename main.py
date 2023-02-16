@@ -228,7 +228,11 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                      'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                      ])
             # return
-            return return_api_solution_statistics(metrics, log_name)
+            output = return_api_solution_statistics(metrics, log_name)
+            # print(output)
+            with open(save_path+"\\results.json", 'w') as o:
+                o.write(output)
+            return os.path.abspath(os.path.join(save_path, 'results.json')), output
 
     return "COMPLETED - NO METRICS"
 

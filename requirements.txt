@@ -7,5 +7,5 @@ scipy~=1.7.1
 pytest~=6.2.5
 pandas~=1.4.1
 python-dateutil~=2.8.2
--e git+https://github.com/AutomatedProcessImprovement/Prosimos.git@db0e1f05bcea2924e2e2853d6ea7326f6b2ea614#egg=DiffResBP_Simulator&subdirectory=../../../ext_tools/Prosimos
+-e git+https://github.com/AutomatedProcessImprovement/Prosimos.git@3eae6c5e322a534bb47068f6373e9af572268c8f#egg=DiffResBP_Simulator&subdirectory=../../../ext_tools/Prosimos
 
