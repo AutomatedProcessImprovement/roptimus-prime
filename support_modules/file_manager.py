@@ -1,5 +1,6 @@
 import csv
 import os
+import shutil
 from datetime import datetime
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import SolutionSpace, DeviationInfo
@@ -57,8 +58,8 @@ def reset_file_information(log_name):
 
 def save_simulation_results(log_name, pools_info, simulation_list, median_simulation):
     try:
-        with open(simulation_results + ("\\%s_full.csv" % log_name), mode='a', newline='') as full_csv_file:
-            with open(simulation_results + ("\\%s_median.csv" % log_name), mode='a', newline='') as median_csv_file:
+        with open(simulation_results + ("%s_full.csv" % log_name), mode='a', newline='') as full_csv_file:
+            with open(simulation_results + ("%s_median.csv" % log_name), mode='a', newline='') as median_csv_file:
                 update_simulation_files(pools_info, full_csv_file, median_csv_file, simulation_list, median_simulation)
     except IOError:
         with open(simulation_results + ("\\%s_full.csv" % log_name), mode='w', newline='') as full_csv_file:
@@ -306,3 +307,46 @@ def solutions_order_stats_file(log_name, algorithm_name):
             return solution_list
     except IOError:
         return None
+
+
+def initialize_files(save_path, bpmn_path, sim_params_path, constraints_path):
+    # Initialize timetable
+    shutil.copyfile(sim_params_path,
+                    os.path.join(save_path, "timetable_backup.json"))
+    # Initialize constraints
+    shutil.copyfile(constraints_path,
+                    os.path.join(save_path, "constraints_backup.json"))
+    # Initialize model
+    shutil.copyfile(bpmn_path,
+                    os.path.join(save_path, "model_backup.bpmn"))
+
+    # Copy timetable
+    shutil.copyfile(os.path.join(save_path, "timetable_backup.json"),
+                    os.path.join(save_path, "timetable.json"))
+    # Copy constraints
+    shutil.copyfile(os.path.join(save_path, "constraints_backup.json"),
+                    os.path.join(save_path, "constraints.json"))
+    # Copy model
+    shutil.copyfile(os.path.join(save_path, "model_backup.bpmn"),
+                    os.path.join(save_path, "model.bpmn"))
+
+
+def reset_after_each_execution(save_path):
+    # Assuming the original files are saved under the names :
+    # Timetable -> timetable_backup.json
+    # Constraints -> constraints_backup.json
+    # BPMN -> model_backup.bpmn
+
+    # Copy timetable
+    shutil.copyfile(os.path.join(save_path, "timetable_backup.json"),
+                    os.path.join(save_path, "timetable.json"))
+    # Copy constraints
+    shutil.copyfile(os.path.join(save_path, "constraints_backup.json"),
+                    os.path.join(save_path, "constraints.json"))
+    # Copy model
+    shutil.copyfile(os.path.join(save_path, "model_backup.bpmn"),
+                    os.path.join(save_path, "model.bpmn"))
+
+    # After resetting ttb, also wipe out json_files dir and ids.txt
+    with open("./json_files/ids.txt", 'w'):
+        pass

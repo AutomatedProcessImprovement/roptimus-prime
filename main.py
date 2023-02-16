@@ -1,12 +1,11 @@
 import os
+import shutil
 
 from pareto_algorithms_and_metrics.hill_climb import hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
-from support_modules.file_manager import reset_file_information
-from support_modules.plot_statistics_handler import print_solution_statistics, return_solution_statistics, \
-    save_allocation_statistics_into_SolutionObject, return_api_solution_statistics
-from test_assets.experiments.experiment_setup import experiments_file_paths, experiments, \
-    reset_after_each_execution
+from support_modules.file_manager import initialize_files, reset_after_each_execution, reset_file_information
+from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics
+from test_assets.experiments.experiment_setup import experiments_file_paths, experiments
 
 TO_EXECUTE = {'HC-STRICT': False,
               'HC-FLEX': True,
@@ -106,7 +105,12 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
 
 
 def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
+
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
+
+    # TODO
+    #  - Path where to make copy of original files
+    #  - Path where to write results
 
     to_execute = {'HC-STRICT': False,
                   'HC-FLEX': False,
@@ -141,60 +145,71 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         if approach == "ARCA":
             approaches['first_add_remove_then_calendar'] = True
 
-        max_func_ev = total_iterations
+        max_func_ev = int(total_iterations)
 
         # Could also be parameterized
         non_opt_ratio = 0.1
 
         # Needs a parameter as well
-        log_name = "DEFAULT"
+        log_name = "DEFAULT_NAME"
 
+        # Path where to save copies of original cons/simparams
+        path_to_copies = ".\\temp_files"
+        save_path = os.path.join(path_to_copies, log_name)
+
+        if not os.path.exists(save_path):
+            os.mkdir(save_path)
+
+        try:
+            initialize_files(save_path, bpmn_path, sim_params_path, constraints_path)
+        except Exception:
+            print("Oh no")
 
         if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_calendar')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_calendar')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
         if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'only_add_remove')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'only_add_remove')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
         if approaches['combined']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'combined')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'combined')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
         if approaches['first_calendar_then_add_remove']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_calendar_then_add_remove')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_calendar_then_add_remove')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
         if approaches['first_add_remove_then_calendar']:
             if to_execute['HC-STRICT']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, False, 'first_add_remove_then_calendar')
-                reset_file_information(log_name)
+                reset_after_each_execution(save_path)
             if to_execute['HC-FLEX']:
                 hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                            False, True, 'first_add_remove_then_calendar')
-                reset_file_information(log_name)
+                reset_after_each_execution(log_name)
 
         if to_execute['METRICS']:
             metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
