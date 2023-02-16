@@ -154,8 +154,9 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         log_name = "DEFAULT_NAME"
 
         # Path where to save copies of original cons/simparams
-        path_to_copies = ".\\temp_files"
-        save_path = os.path.join(path_to_copies, log_name)
+        temp_files_path = os.path.join(os.path.abspath(__file__), '..', 'temp_files', log_name)
+        # path_to_copies = ".\\temp_files"
+        save_path = temp_files_path
 
         if not os.path.exists(save_path):
             os.mkdir(save_path)
