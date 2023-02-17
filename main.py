@@ -105,7 +105,7 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path=None):
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path=None, log_name=None):
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -152,7 +152,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         non_opt_ratio = 0.1
 
         # Needs a parameter as well
-        log_name = "DEFAULT_NAME"
+        log_name = log_name
 
         # Path where to save copies of original cons/simparams
         temp_files_path = os.path.join(os.path.abspath(__file__), '..', 'temp_files', log_name)
