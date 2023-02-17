@@ -155,7 +155,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         log_name = log_name
 
         # Path where to save copies of original cons/simparams
-        temp_files_path = os.path.join(os.path.abspath(__file__), '..', 'temp_files', log_name)
+        temp_files_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'temp_files', log_name)
         # path_to_copies = ".\\temp_files"
         save_path = temp_files_path
 
@@ -232,7 +232,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             # return
             output = return_api_solution_statistics(metrics, log_name)
             # print(output)
-            path = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'json_files'))
+            path = os.path.abspath(os.path.join(os.path.abspath(__file__), '../..', 'json_files'))
             for _dir in os.listdir(path):
                 if _dir != 'ids.txt':
                     shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)

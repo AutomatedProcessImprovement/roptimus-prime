@@ -1,8 +1,6 @@
 import click
 
-from pathlib import Path
-
-from main import run_optimization
+from pareto_algorithms_and_metrics.main import run_optimization
 
 
 @click.group()
