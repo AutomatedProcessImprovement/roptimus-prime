@@ -50,7 +50,7 @@ def return_api_solution_statistics(p_metrics, log_name):
                                                        [hyperarea_diff, hausdorff_dist, delta, purity],
                                                        [time_metric, cost_metric])
         solution_objects.append(out)
-    json_string = json.dumps([ob.__dict__ for ob in solution_objects])
+    json_string = [ob.__dict__ for ob in solution_objects]
     return json_string
 
 

@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 
@@ -104,7 +105,7 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path=None):
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -231,16 +232,22 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             # return
             output = return_api_solution_statistics(metrics, log_name)
             # print(output)
-            with open(save_path+"\\results.json", 'w') as o:
-                o.write(output)
-
-            # Remove all files in json_files for next task:
             path = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', 'json_files'))
             for _dir in os.listdir(path):
                 if _dir != 'ids.txt':
                     shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
 
-            return os.path.abspath(os.path.join(save_path, 'results.json')), output
+            with open(stat_out_path, mode='w') as stat_file:
+                stat_file.write(json.dumps(output))
+
+            return output
+
+            # with open(save_path+"\\results.json", 'w') as o:
+            #     o.write(output)
+
+            # Remove all files in json_files for next task:
+
+            # return os.path.abspath(os.path.join(save_path, 'results.json')), output
 
     return "COMPLETED - NO METRICS"
 

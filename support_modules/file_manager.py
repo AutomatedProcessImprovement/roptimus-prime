@@ -348,5 +348,6 @@ def reset_after_each_execution(save_path):
                     os.path.join(save_path, "model.bpmn"))
 
     # After resetting ttb, also wipe out json_files dir and ids.txt
-    with open("./json_files/ids.txt", 'w'):
+    print()
+    with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json_files\\ids.txt')), 'w'):
         pass
