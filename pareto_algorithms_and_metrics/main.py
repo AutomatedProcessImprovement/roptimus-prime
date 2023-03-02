@@ -211,7 +211,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_add_remove_then_calendar')
-            reset_after_each_execution(log_name)
+            reset_after_each_execution(save_path)
 
     if to_execute['METRICS']:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
