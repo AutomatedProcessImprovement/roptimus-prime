@@ -146,101 +146,101 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         if approach == "ARCA":
             approaches['first_add_remove_then_calendar'] = True
 
-        max_func_ev = int(total_iterations)
+    max_func_ev = int(total_iterations)
 
-        # Could also be parameterized
-        non_opt_ratio = 0.1
+    # Could also be parameterized
+    non_opt_ratio = 0.1
 
-        # Needs a parameter as well
-        log_name = log_name
+    # Needs a parameter as well
+    log_name = log_name
 
-        # Path where to save copies of original cons/simparams
-        temp_files_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'temp_files', log_name)
-        # path_to_copies = ".\\temp_files"
-        save_path = temp_files_path
+    # Path where to save copies of original cons/simparams
+    temp_files_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'temp_files', log_name)
+    # path_to_copies = ".\\temp_files"
+    save_path = temp_files_path
 
-        if not os.path.exists(save_path):
-            os.mkdir(save_path)
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
 
-        try:
-            initialize_files(save_path, bpmn_path, sim_params_path, constraints_path)
-        except Exception:
-            print("Oh no")
+    try:
+        initialize_files(save_path, bpmn_path, sim_params_path, constraints_path)
+    except Exception:
+        print("Oh no")
 
-        if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
-            if to_execute['HC-STRICT']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, False, 'only_calendar')
-                reset_after_each_execution(save_path)
-            if to_execute['HC-FLEX']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, True, 'only_calendar')
-                reset_after_each_execution(save_path)
-        if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
-            if to_execute['HC-STRICT']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, False, 'only_add_remove')
-                reset_after_each_execution(save_path)
-            if to_execute['HC-FLEX']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, True, 'only_add_remove')
-                reset_after_each_execution(save_path)
-        if approaches['combined']:
-            if to_execute['HC-STRICT']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, False, 'combined')
-                reset_after_each_execution(save_path)
-            if to_execute['HC-FLEX']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, True, 'combined')
-                reset_after_each_execution(save_path)
-        if approaches['first_calendar_then_add_remove']:
-            if to_execute['HC-STRICT']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, False, 'first_calendar_then_add_remove')
-                reset_after_each_execution(save_path)
-            if to_execute['HC-FLEX']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, True, 'first_calendar_then_add_remove')
-                reset_after_each_execution(save_path)
-        if approaches['first_add_remove_then_calendar']:
-            if to_execute['HC-STRICT']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, False, 'first_add_remove_then_calendar')
-                reset_after_each_execution(save_path)
-            if to_execute['HC-FLEX']:
-                hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                           False, True, 'first_add_remove_then_calendar')
-                reset_after_each_execution(log_name)
+    if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
+        if to_execute['HC-STRICT']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, False, 'only_calendar')
+            reset_after_each_execution(save_path)
+        if to_execute['HC-FLEX']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, True, 'only_calendar')
+            reset_after_each_execution(save_path)
+    if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
+        if to_execute['HC-STRICT']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, False, 'only_add_remove')
+            reset_after_each_execution(save_path)
+        if to_execute['HC-FLEX']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, True, 'only_add_remove')
+            reset_after_each_execution(save_path)
+    if approaches['combined']:
+        if to_execute['HC-STRICT']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, False, 'combined')
+            reset_after_each_execution(save_path)
+        if to_execute['HC-FLEX']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, True, 'combined')
+            reset_after_each_execution(save_path)
+    if approaches['first_calendar_then_add_remove']:
+        if to_execute['HC-STRICT']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, False, 'first_calendar_then_add_remove')
+            reset_after_each_execution(save_path)
+        if to_execute['HC-FLEX']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, True, 'first_calendar_then_add_remove')
+            reset_after_each_execution(save_path)
+    if approaches['first_add_remove_then_calendar']:
+        if to_execute['HC-STRICT']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, False, 'first_add_remove_then_calendar')
+            reset_after_each_execution(save_path)
+        if to_execute['HC-FLEX']:
+            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+                       False, True, 'first_add_remove_then_calendar')
+            reset_after_each_execution(log_name)
 
-        if to_execute['METRICS']:
-            metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
-                                                     'hill_clmb_combined_with_mad',
+    if to_execute['METRICS']:
+        metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
+                                                 'hill_clmb_combined_with_mad',
 
-                                                     'hill_clmb_only_calendar_without_mad',
-                                                     'hill_clmb_only_calendar_with_mad',
+                                                 'hill_clmb_only_calendar_without_mad',
+                                                 'hill_clmb_only_calendar_with_mad',
 
-                                                     'hill_clmb_only_add_remove_without_mad',
-                                                     'hill_clmb_only_add_remove_with_mad',
+                                                 'hill_clmb_only_add_remove_without_mad',
+                                                 'hill_clmb_only_add_remove_with_mad',
 
-                                                     'hill_clmb_first_calendar_then_add_remove_without_mad',
-                                                     'hill_clmb_first_calendar_then_add_remove_with_mad',
+                                                 'hill_clmb_first_calendar_then_add_remove_without_mad',
+                                                 'hill_clmb_first_calendar_then_add_remove_with_mad',
 
-                                                     'hill_clmb_first_add_remove_then_calendar_without_mad',
-                                                     'hill_clmb_first_add_remove_then_calendar_with_mad',
-                                                     ])
-            # return
-            output = return_api_solution_statistics(metrics, log_name)
-            # print(output)
-            path = os.path.abspath(os.path.join(os.path.abspath(__file__), '../..', 'json_files'))
-            for _dir in os.listdir(path):
-                if _dir != 'ids.txt':
-                    shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
+                                                 'hill_clmb_first_add_remove_then_calendar_without_mad',
+                                                 'hill_clmb_first_add_remove_then_calendar_with_mad',
+                                                 ])
+        # return
+        output = return_api_solution_statistics(metrics, log_name)
+        # print(output)
+        path = os.path.abspath(os.path.join(os.path.abspath(__file__), '../..', 'json_files'))
+        for _dir in os.listdir(path):
+            if _dir != 'ids.txt':
+                shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
 
-            with open(stat_out_path, mode='w') as stat_file:
-                stat_file.write(json.dumps(output))
+        with open(stat_out_path, mode='w') as stat_file:
+            stat_file.write(json.dumps(output))
 
-            return output
+        return output
 
             # with open(save_path+"\\results.json", 'w') as o:
             #     o.write(output)

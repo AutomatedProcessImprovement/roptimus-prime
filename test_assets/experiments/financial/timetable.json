@@ -2795,7 +2795,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 0.000036494052454996936
+                            "value": 3.6494052454996936e-05
                         },
                         {
                             "value": 1378.6711085226686
@@ -2881,7 +2881,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 0.00004027400837472026
+                            "value": 4.027400837472026e-05
                         },
                         {
                             "value": 1325.1075374572438
@@ -3488,7 +3488,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 1.5472251894767311e-7
+                            "value": 1.5472251894767311e-07
                         },
                         {
                             "value": 548.9859719138051
@@ -4005,7 +4005,7 @@
                     "distribution_name": "exponnorm",
                     "distribution_params": [
                         {
-                            "value": 2.6913258332269618e-8
+                            "value": 2.6913258332269618e-08
                         },
                         {
                             "value": 501.66725699860353
@@ -4603,6 +4603,7 @@
             ]
         }
     ],
+    "event_distribution": {},
     "resource_calendars": [
         {
             "id": "Kim Passatimetable",
@@ -9902,6 +9903,5 @@
                 }
             ]
         }
-    ],
-    "event_distribution": {}
+    ]
 }
