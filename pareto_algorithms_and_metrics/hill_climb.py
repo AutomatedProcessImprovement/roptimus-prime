@@ -988,25 +988,28 @@ def solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, it
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
 
-                    shift_arr[r_idx + 1] = 1
-                    shift_arr[l_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Adding left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
+                    if r_idx != 23:
+                        # print("Right index is not 23 -> 23:59 so cannot go more right that day.")
 
-                    shift_arr[r_idx + 1] = 1
-                    shift_arr[l_idx] = 0
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Moving left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
-                    # No valid move, reset and go next
-                    shift_arr[r_idx + 1] = 0
-                    shift_arr[l_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
+                        shift_arr[r_idx + 1] = 1
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
+
+                        shift_arr[r_idx + 1] = 1
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Moving left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
+                        # No valid move, reset and go next
+                        shift_arr[r_idx + 1] = 0
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
         # All moves and resources on this task have been tried, stop.
         return False
     return False
@@ -1172,26 +1175,28 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
 
-                    shift_arr[l_idx - 1] = 1
-                    shift_arr[r_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Adding left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
+                    if l_idx != 0:
+                        # print("Left index is not 0 -> 00:00 so cannot go more left that day.")
+                        shift_arr[l_idx - 1] = 1
+                        shift_arr[r_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                    shift_arr[l_idx - 1] = 1
-                    shift_arr[r_idx] = 0
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
-                    if resource.verify_timetable(day):
-                        # Moving left is valid, run sim
-                        if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                            return True
+                        shift_arr[l_idx - 1] = 1
+                        shift_arr[r_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
 
-                    # No valid move, reset and go next
-                    shift_arr[l_idx - 1] = 0
-                    shift_arr[r_idx] = 1
-                    resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Moving left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
+                        # No valid move, reset and go next
+                        shift_arr[l_idx - 1] = 0
+                        shift_arr[r_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
         # All moves and resources on this task have been tried, stop.
         return False
     return False
