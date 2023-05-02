@@ -1,44 +1,155 @@
-Prosimos checkout : 3eae6c5e322a534bb47068f6373e9af572268c8f
+# Optimos
+__Resource allocation and optimisation of Business Processes with Differentiated Resources__
 
-# bpm-r-opt
-__Silhouetting the Cost-Time Front: Multi-Objective Resource Optimization in Business Processes__
+Optimos is a Business Process Optimisation Engine that support differentiated resources. The notion of a resource pool is replaces with resource profiles. 
+Resource profiles are unique to each resource and entail the calendar, the tasks assigned and, differentiated performance parameters relevant to the resource.
 
-This repository contains the implementation and experimental results of a multi-objective optimization approach to compute a set of Pareto-optimal resource allocations for a given business process minimizing the resource cost and cycle time. 
+This repository contains the implementation and experimental results of a multi-objective optimisation approach to compute a set of Pareto-optimal resource allocation for a given business process, minimising the resource cost and time.
 
-The source code includes two variants of the hill-climbing algorithm, named __HC-STRICT__ and __HC-FLEX__, one implementation of the tabu-search algorithm named __TS-STRICT__ and one implementation of the genetic algorithm __NSGA-II__. 
+The source code includes two variants of the hill-climbing algorithm, named __HC-STRICT__ and __HC-FLEX__. 
+Future work may include the implementation of the tabu-search algorithm.
 
-Download or clone the source code. Then, to execute the four algorithms and display the experimental results, i.e., which compare the algorithms regarding different metrics, perform the following steps.    
+Optimos makes use of Prosimos: checkout - [3eae6c5e322a534bb47068f6373e9af572268c8f](https://github.com/AutomatedProcessImprovement/Prosimos/commit/3eae6c5e322a534bb47068f6373e9af572268c8f)
 
-## Input and Output
 
-The algorithms take as input simulation models discovered from event logs. The folder __./input_files/bpmn_simod_models/__ contains the simulation models corresponding to the eight business processes used in the experiments. These models were discovered from event logs (7 of them from real-life business processes) using the tool named Simod (https://github.com/AdaptiveBProcess/Simod). Because several of the event logs used in the experiments are proprietary, we are not sharing them publicly in the repository. Instead, we share the simulation models discovered after anonymizing the event logs. To execute the algorithms on other business processes, add the corresponding simulation models into this folder.
+## Getting started
+#### Prerequisites
+For this code repository to function properly, please ensure you have the necessary development environment set up on your system:
+- Python 3.8+
+- Pip 21.2.3+
+- Dependencies mentioned in [requirements.txt](https://github.com/AutomatedProcessImprovement/roptimus-prime/blob/main/requirements.txt)
 
-The folder __output_files__ contains the results obtained by each algorithm on each of the business processes used in the experiments. This folder contains four sub-folders. The folder __./output_files/simulation_results/__ includes the results of each simulation performed with the tool BIMP (https://bimp.cs.ut.ee/) used to assess each resource allocation. The folder __./output_files/explored_allocations/__ contains the complete information regarding all the resource allocations obtained on each of the iterations performed by each algorithm. The folder __./output_files/experiment_stats/__ includes all the graphical plots and statistics retrieved by each metric used to assess the algorithms' performance. Finally, the folder __./output_files/bimp_temp_files/__ contains some temporal files produced by the engine BIMP with the simulation results. Note that these folders contain all the data obtained from the experiments. New runs of the algorithms on other models or modifying the existing models' parameters would add new files or modify the existing ones.
+#### Clone the respository and install dependencies
+```
+git clone --recurse-submodules https://github.com/AutomatedProcessImprovement/roptimus-prime
+```
+OR 
+```
+git clone https://github.com/AutomatedProcessImprovement/roptimus-prime
+git submodule update --init --recursive
+```
 
-> Note that the files in __./output_files/simulation_results/__ were compressed due to their size. For the algorithms to use those files, they must be unzipped. In other words, when running the algorithms, they check in the corresponding unzipped (.csv) file if the simulation results of each generated resource allocation exist. Otherwise, the model is simulated using the engine BIMP. Thus, if the corresponding simulation files do not exist after the first simulation, a new file will be created to memorize (and re-use) the incoming simulation results. 
+The [PROSIMOS](https://github.com/AutomatedProcessImprovement/Prosimos/tree/main) Simulation Engine will be installed as a submodule. Optimos relies on Prosimos for the simulations required during optimisation.
 
-## Execution Steps
 
-### Prerequisites
-- Python 3.8: https://www.python.org/downloads/release/python-380/,
-- Java 1.8:   https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html.
+## Using Optimos
 
-All the algorithms can be executed by running the Python script __./bpropt.py__ in the root directory. By default, it will print in the terminal the experimental results corresponding to the business process named _production_, which corresponds to the default configuration in the script __./bpropt.py__. 
+Optimos in its command-line format requires three files to perform an optimisation:
+- BPMN Model
+- Simulation parameters (JSON format - Refer to [Prosimos](https://github.com/AutomatedProcessImprovement/Prosimos/tree/main) for more information about the format)
+- Constraint parameters (JSON format)
 
-The following mapping in __./bpropt.py__ restricts which algorithms to execute: 
 
-    to_execute = {'HC-STRICT': False,
-                  'HC-FLEX': False,
-                  'TS-STRICT': False,
-                  'NSGA-II': False,
-                  'METRICS': True}
+#### Resource constraint parameters
+The Constraint parameters file is responsible for defining the boundaries of the optimisation task. These parameters are split into the following sections:
 
-Acccordingly, to selectively execute one or multiple algorithms, set the corresponding values to _True_ before executing the script. Similarly, setting the value of _'METRICS'_ to _True_ will calculate the performance metrics generating the corresponding graphics and statistics once all the algorithms' execution finishes. 
+- time_var: Represents the granularity of the optimisation task in minutes. This number can either be 60, 30 or 15. E.g., 60 = the day is divided into 24, 60 minute slots. (Only 60 is currently implemented)
+- max_cap: Represents the maximum person-hours that can be performed in the process per week. This number is shared by all resources, meaning that in total, the participating resources cannot work more than __X__ hours.
+- max_shift_size: ___to be removed___
+- hours_in_day: How many days does a day consist of. This parameters is subject to removal
+- resources: List of participating resources. Each of these entries has their own subset of parameters, customisable for each entry, such as the max_shifts_day, is_human, ...
 
-The mapping _experiment_logs_ in __./bpropt.py__ indexes the names of the business processes used in the experimentation. The corresponding file paths to the inputs/outputs of each process are stored in the mapping _xes_simodbpmn_file_paths_ in the file __./support_modules/file_manager.py__. Thus, adding a new process or changing the input/output paths of the existing ones only requires updating those two mappings accordingly.
+__Note__:
 
-Finally, from the function _main_, it is possible to execute the selected algorithms on all the processes (remove comments in lines 50-51) indexed in the mapping _experiment_logs_. Also, the selected algorithms can be executed on only one process by specifying its index in _experiment_logs_ as the first input parameter of the function _execute_algorithm_variants_ (line 57). The remaining input parameters of the function _execute_algorithm_variants_ corresponds to the maximum number of resource allocations to generate, the maximum ratio of consecutive non-optimal allocations to generate regarding the maximum amount of allocations, and the last parameter is the number of simulations to run to assess each resource allocation.  
+- daily_start_times is not implemented currently
+- never_work_mask and always_work_mask are integers representing a binary number that, when written in string format: e.g., __111100011__, converts to when the resource can or cannot work, with 1 meaning yes and 0 meaning no in the respective section
 
+Example:
+```
+{
+    "time_var": 60,
+    "max_cap": 9999999999,
+    "max_shift_size": 24,
+    "max_shift_blocks": 24,
+    "hours_in_day": 24,
+    "resources": [
+        {
+            "id": "NOT_SETtimetable",
+            "constraints": {
+                "global_constraints": {
+                    "max_weekly_cap": 78.0,
+                    "max_daily_cap": 15.0,
+                    "max_consecutive_cap": 14.0,
+                    "max_shifts_day": 24,
+                    "max_shifts_week": 78.0,
+                    "is_human": true
+                },
+                "daily_start_times": {
+                    "monday": "07:00:00",
+                    "tuesday": "07:00:00",
+                    "wednesday": "07:00:00",
+                    "thursday": "07:00:00",
+                    "friday": "07:00:00",
+                    "saturday": "07:00:00",
+                    "sunday": null
+                },
+                "never_work_masks": {
+                    "monday": 8388609,
+                    "tuesday": 8388609,
+                    "wednesday": 8388609,
+                    "thursday": 8388609,
+                    "friday": 8388609,
+                    "saturday": 8388609,
+                    "sunday": 16777215
+                },
+                "always_work_masks": {
+                    "monday": 0,
+                    "tuesday": 0,
+                    "wednesday": 0,
+                    "thursday": 0,
+                    "friday": 0,
+                    "saturday": 0,
+                    "sunday": 0
+                }
+            }
+        }
+    ]
+}
+```
+
+## Output
+
+Optimos as command-line tool is capable of generating multiple output files that give insight into the results of the optimisation task.
+The following files are created after a task has finished:
+
+- Comparative metrics: the different approaches are pitched against each other so you can see which approach/algorithm combination performed better overall.
+```
+['Joint Pareto Size (without MAD): 3 --------------------------------------------------------']
+Alg_Name                    #_F_Ev  #_Sol  P_Size  In_JP  !JP  Hyperarea  Hausdorff-Dist  Delta-Sprd  Purity-Rate  Ave_Time                 Ave_cost     Time Metric     Cost Metric
+initial (DEFAULT_NAME)      -       -      -       -      -    -          -               -           -            1 day, 9:14:10.546229    112996.14    1.0              1.0        
+joint_pareto(DEFAULT_NAME)  19      19     3       3      0    1.0        0.0             0.21386     1.0          1 day, 7:42:18.805322    108078.92    1.04829          1.045497   
+HC_STRICT_O_C               19      19     3       3      0    1.0        0.0             0.21386     1.0          1 day, 7:42:18.805322    108078.92    1.04829          1.045497   
+------------------------------------------------------
+```
+- [simulation parameters and constraint parameters of each optimal solution.](./json_files)
+- Plots to visualise the Pareto-Distribution and progress of the algorithm (PDF format)
+
+## Executing experiments
+The experiments used for testing are available [here](./test_assets/experiments). The experiments are ready to run out-of-the-box. However, there is a clean .zip file available if you wish to reproduce the setup as well.
+Keep in mind that the following must always be present for the experiment to run.
+- constraints.json
+- constraints_backup.json (initially a clean copy of constraints.json)
+- model.bpmn
+- timetable.json
+- timetable_backup.json (initially a clean copy of timetable.json)
+
+You can change the log you wish to run in [main.py](./pareto_algorithms_and_metrics/main.py), function _main()_
+The __TO_EXECUTE__ and __APPROACHES__ objects define which algorithm/approach combination you wish to use.
+
+```
+TO_EXECUTE = {'HC-STRICT': True, # Hill Climb Strict
+              'HC-FLEX': True, # Hill Climb Flex
+              'TS-STRICT': False, # Not implemented
+              'NSGA-II': False, # Not implemented
+              'METRICS': True} # Retrieve the comparative results after execution
+
+APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
+              "only_add_remove": False,  # Only perform optimization on resource level
+              "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
+              "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
+              "first_add_remove_then_calendar": False  # Only add/remove until No_improvement found, then calendar
+              }
+```
 
 
 
