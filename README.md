@@ -15,21 +15,20 @@ Optimos makes use of Prosimos: checkout - [3eae6c5e322a534bb47068f6373e9af572268
 ## Getting started
 #### Prerequisites
 For this code repository to function properly, please ensure you have the necessary development environment set up on your system:
-- Python 3.8+
-- Pip 21.2.3+
-- Dependencies mentioned in [requirements.txt](https://github.com/AutomatedProcessImprovement/roptimus-prime/blob/main/requirements.txt)
+- Python 3.9+
+- Poetry 1.4.2
+- Dependencies mentioned in [pyproject.toml](https://github.com/AutomatedProcessImprovement/roptimus-prime/blob/main/pyproject.toml)
 
 #### Clone the respository and install dependencies
 ```
-git clone --recurse-submodules https://github.com/AutomatedProcessImprovement/roptimus-prime
-```
-OR 
-```
 git clone https://github.com/AutomatedProcessImprovement/roptimus-prime
-git submodule update --init --recursive
 ```
 
-The [PROSIMOS](https://github.com/AutomatedProcessImprovement/Prosimos/tree/main) Simulation Engine will be installed as a submodule. Optimos relies on Prosimos for the simulations required during optimisation.
+Set up environment and submodules using Poetry:
+```
+poetry install
+```
+[PROSIMOS](https://github.com/AutomatedProcessImprovement/Prosimos/tree/main) Simulation Engine is a submodule. Optimos relies on Prosimos for the simulations required during optimisation.
 
 
 ## Using Optimos
