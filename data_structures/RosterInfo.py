@@ -93,8 +93,10 @@ class Roster:
                 cap_sum += sum_of_binary_ones(df)
         if cap_sum > self.max_cap:
             print("Err: Global resource max capacity surpassed")
+            return False
         else:
             print("Max_cap ok")
+            return True
         # for idx, row in roster.iterrows():
         #     row = row[["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
         #     for val in row:

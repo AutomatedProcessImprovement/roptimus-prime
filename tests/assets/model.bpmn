@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:qbp="http://www.qbp-simulator.com/Schema201212" xmlns:ap="http://apromore.org" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_1vbcfs4">
+    <bpmn:extensionElements>
+      <qbp:processSimulationInfo id="qbp_91aab5c3-6361-442d-8345-d3f7608ec0fa" processInstances="10000" currency="EUR" startDateTime="2023-02-26T00:00:00.000Z">
+        <qbp:errors />
+        <qbp:arrivalRateDistribution type="EXPONENTIAL" mean="NaN" arg1="20" arg2="NaN" rawMean="NaN" rawArg1="NaN" rawArg2="NaN">
+          <qbp:timeUnit>seconds</qbp:timeUnit>
+        </qbp:arrivalRateDistribution>
+        <qbp:statsOptions trimStartProcessInstances="1" trimEndProcessInstances="1" />
+        <qbp:timetables>
+          <qbp:timetable id="qbp_c5e0e98b-d3cf-4325-a8b7-6c61413cdeb9" name="Entity1timetable">
+            <qbp:rules>
+              <qbp:rule id="8320246a-ea13-44b3-8306-6fecf76e847a" name="Timeslot" fromTime="11:00:00.000+00:00" toTime="15:00:00.000+00:00" fromWeekDay="MONDAY" toWeekDay="FRIDAY" />
+            </qbp:rules>
+          </qbp:timetable>
+          <qbp:timetable id="qbp_a4c55c5c-5a35-4121-8677-f981de5d8f1d" name="Entity2timetable">
+            <qbp:rules>
+              <qbp:rule id="670282ac-c232-43f6-833b-f39f8f27f09d" name="Timeslot" fromTime="04:00:00.000+00:00" toTime="22:00:00.000+00:00" fromWeekDay="MONDAY" toWeekDay="FRIDAY" />
+            </qbp:rules>
+          </qbp:timetable>
+        </qbp:timetables>
+        <qbp:resources>
+          <qbp:resource id="QBP_DEFAULT_RESOURCE" name="Entity1timetable" totalAmount="1" costPerHour="1" timetableId="qbp_c5e0e98b-d3cf-4325-a8b7-6c61413cdeb9" />
+          <qbp:resource id="qbp_84de7406-73fb-4f4d-8280-54d484dcfb58" name="Entity2timetable" totalAmount="1" costPerHour="1" timetableId="qbp_a4c55c5c-5a35-4121-8677-f981de5d8f1d" />
+        </qbp:resources>
+        <qbp:elements>
+          <qbp:element elementId="Activity_1phqtb3">
+            <qbp:durationDistribution type="EXPONENTIAL" mean="NaN" arg1="3600" arg2="NaN" rawMean="NaN" rawArg1="NaN" rawArg2="NaN">
+              <qbp:timeUnit>seconds</qbp:timeUnit>
+            </qbp:durationDistribution>
+            <qbp:resourceIds>
+              <qbp:resourceId>QBP_DEFAULT_RESOURCE</qbp:resourceId>
+            </qbp:resourceIds>
+          </qbp:element>
+          <qbp:element elementId="Activity_0l36g76">
+            <qbp:durationDistribution type="EXPONENTIAL" mean="3600" arg1="3600" arg2="NaN" rawMean="NaN" rawArg1="NaN" rawArg2="NaN">
+              <qbp:timeUnit>seconds</qbp:timeUnit>
+            </qbp:durationDistribution>
+            <qbp:resourceIds>
+              <qbp:resourceId>qbp_84de7406-73fb-4f4d-8280-54d484dcfb58</qbp:resourceId>
+            </qbp:resourceIds>
+          </qbp:element>
+        </qbp:elements>
+        <qbp:sequenceFlows />
+      </qbp:processSimulationInfo>
+      <ap:img src="" />
+      <ap:icon elIconName="" />
+      <ap:icons />
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_0pu8wir" name="Company" processRef="Process_1">
+      <bpmn:extensionElements>
+        <ap:img src="" />
+        <ap:icon elIconName="" />
+        <ap:icons />
+      </bpmn:extensionElements>
+    </bpmn:participant>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0joiwl9">
+      <bpmn:lane id="Lane_1dsxbyb" name="Entity1timetable">
+        <bpmn:extensionElements>
+          <ap:img src="" />
+          <ap:icon elIconName="" />
+          <ap:icons />
+        </bpmn:extensionElements>
+        <bpmn:flowNodeRef>Activity_1phqtb3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1cvd9af" name="Entity2timetable">
+        <bpmn:extensionElements>
+          <ap:img src="" />
+          <ap:icon elIconName="" />
+          <ap:icons />
+        </bpmn:extensionElements>
+        <bpmn:flowNodeRef>Activity_0l36g76</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0yausst</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="Activity_1phqtb3" name="Entity1_Activity1">
+      <bpmn:extensionElements>
+        <ap:img src="" />
+        <ap:icon elIconName="" />
+        <ap:icons />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12rhzec</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gcrqpt</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_12rhzec" sourceRef="StartEvent_1" targetRef="Activity_1phqtb3" />
+    <bpmn:task id="Activity_0l36g76" name="Entity2_Activity2">
+      <bpmn:extensionElements>
+        <ap:img src="" />
+        <ap:icon elIconName="" />
+        <ap:icons />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0gcrqpt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mps39a</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_0yausst" name="Case finishes">
+      <bpmn:extensionElements>
+        <ap:img src="" />
+        <ap:icon elIconName="" />
+        <ap:icons />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0mps39a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0gcrqpt" sourceRef="Activity_1phqtb3" targetRef="Activity_0l36g76" />
+    <bpmn:sequenceFlow id="Flow_0mps39a" sourceRef="Activity_0l36g76" targetRef="Event_0yausst" />
+    <bpmn:startEvent id="StartEvent_1" name="Case arrives">
+      <bpmn:extensionElements>
+        <ap:img src="" />
+        <ap:icon elIconName="" />
+        <ap:icons />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_12rhzec</bpmn:outgoing>
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1vbcfs4">
+      <bpmndi:BPMNShape id="Participant_0pu8wir_di" bpmnElement="Participant_0pu8wir" isHorizontal="true">
+        <dc:Bounds x="-448" y="-250" width="600" height="480" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1dsxbyb_di" bpmnElement="Lane_1dsxbyb" isHorizontal="true">
+        <dc:Bounds x="-418" y="-250" width="570" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1cvd9af_di" bpmnElement="Lane_1cvd9af" isHorizontal="true">
+        <dc:Bounds x="-418" y="0" width="570" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_12rhzec_di" bpmnElement="Flow_12rhzec">
+        <di:waypoint x="-332" y="-120" />
+        <di:waypoint x="-230" y="-120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gcrqpt_di" bpmnElement="Flow_0gcrqpt">
+        <di:waypoint x="-180" y="-80" />
+        <di:waypoint x="-180" y="60" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mps39a_di" bpmnElement="Flow_0mps39a">
+        <di:waypoint x="-130" y="100" />
+        <di:waypoint x="12" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1phqtb3_di" bpmnElement="Activity_1phqtb3">
+        <dc:Bounds x="-230" y="-160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l36g76_di" bpmnElement="Activity_0l36g76">
+        <dc:Bounds x="-230" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yausst_di" bpmnElement="Event_0yausst">
+        <dc:Bounds x="12" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="125" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-368" y="-138" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-378" y="-95" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

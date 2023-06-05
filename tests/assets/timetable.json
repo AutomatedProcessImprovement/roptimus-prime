@@ -1,0 +1,185 @@
+{
+    "resource_profiles": [
+        {
+            "id": "sid-cd20077b-8a4e-4e7d-a03f-ab1f89d7bebb",
+            "name": "Entity2 task",
+            "resource_list": [
+                {
+                    "id": "Entity2",
+                    "name": "Entity2",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Entity2timetable",
+                    "assigned_tasks": [
+                        "sid-cd20077b-8a4e-4e7d-a03f-ab1f89d7bebb"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "sid-7582aa81-12ca-4fb1-9124-b29e1d788777",
+            "name": "Entity1 task",
+            "resource_list": [
+                {
+                    "id": "Entity1",
+                    "name": "Entity1 task",
+                    "cost_per_hour": 1,
+                    "amount": 1,
+                    "calendar": "Entity1timetable",
+                    "assignedTasks": [
+                        "sid-7582aa81-12ca-4fb1-9124-b29e1d788777"
+                    ]
+                }
+            ]
+        }
+    ],
+    "arrival_time_distribution": {
+        "distribution_name": "expon",
+        "distribution_params": [
+            {
+                "value": 10
+            },
+            {
+                "value": 10
+            },
+            {
+                "value": 60
+            },
+            {
+                "value": 900
+            }
+        ]
+    },
+    "arrival_time_calendar": [
+        {
+            "from": "MONDAY",
+            "to": "SUNDAY",
+            "beginTime": "00:00:00",
+            "endTime": "23:59:59"
+        }
+    ],
+    "gateway_branching_probabilities": [],
+    "task_resource_distribution": [
+        {
+            "task_id": "sid-7582aa81-12ca-4fb1-9124-b29e1d788777",
+            "resources": [
+                {
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 5
+                        },
+                        {
+                            "value": 10
+                        },
+                        {
+                            "value": 60
+                        },
+                        {
+                            "value": 900
+                        }
+                    ],
+                    "resource_id": "Entity1timetable"
+                }
+            ]
+        },
+        {
+            "task_id": "sid-cd20077b-8a4e-4e7d-a03f-ab1f89d7bebb",
+            "resources": [
+                {
+                    "distribution_name": "expon",
+                    "distribution_params": [
+                        {
+                            "value": 5
+                        },
+                        {
+                            "value": 10
+                        },
+                        {
+                            "value": 60
+                        },
+                        {
+                            "value": 900
+                        }
+                    ],
+                    "resource_id": "Entity2timetable"
+                }
+            ]
+        }
+    ],
+    "event_distribution": [],
+    "resource_calendars": [
+        {
+            "id": "Entity2timetable",
+            "name": "Entity2timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "17:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "13:00:00",
+                    "endTime": "17:00:00"
+                }
+            ]
+        },
+        {
+            "id": "Entity1timetable",
+            "name": "Entity1timetable",
+            "time_periods": [
+                {
+                    "from": "MONDAY",
+                    "to": "MONDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "TUESDAY",
+                    "to": "TUESDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "WEDNESDAY",
+                    "to": "WEDNESDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "THURSDAY",
+                    "to": "THURSDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "10:00:00"
+                },
+                {
+                    "from": "FRIDAY",
+                    "to": "FRIDAY",
+                    "beginTime": "04:00:00",
+                    "endTime": "10:00:00"
+                }
+            ]
+        }
+    ]
+}

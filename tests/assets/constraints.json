@@ -1,0 +1,89 @@
+{
+  "time_var": 60,
+  "max_cap": 9999999999,
+  "max_shift_size": 24,
+  "max_shift_blocks": 24,
+  "hours_in_day": 24,
+  "resources": [
+    {
+      "id": "Entity2timetable",
+      "constraints": {
+        "global_constraints": {
+          "max_weekly_cap": 20,
+          "max_daily_cap": 4,
+          "max_consecutive_cap": 4,
+          "max_shifts_day": 24,
+          "max_shifts_week": 20,
+          "is_human": true
+        },
+        "daily_start_times": {
+          "monday": "13:00:00",
+          "tuesday": "13:00:00",
+          "wednesday": "13:00:00",
+          "thursday": "13:00:00",
+          "friday": "13:00:00",
+          "saturday": null,
+          "sunday": null
+        },
+        "never_work_masks": {
+          "monday": 8388609,
+          "tuesday": 8388609,
+          "wednesday": 8388609,
+          "thursday": 8388609,
+          "friday": 8388609,
+          "saturday": 8388609,
+          "sunday": 8388609
+        },
+        "always_work_masks": {
+          "monday": 0,
+          "tuesday": 0,
+          "wednesday": 0,
+          "thursday": 0,
+          "friday": 0,
+          "saturday": 0,
+          "sunday": 0
+        }
+      }
+    },
+    {
+      "id": "Entity1timetable",
+      "constraints": {
+        "global_constraints": {
+          "max_weekly_cap": 30,
+          "max_daily_cap": 6,
+          "max_consecutive_cap": 6,
+          "max_shifts_day": 24,
+          "max_shifts_week": 30,
+          "is_human": true
+        },
+        "daily_start_times": {
+          "monday": "04:00:00",
+          "tuesday": "04:00:00",
+          "wednesday": "04:00:00",
+          "thursday": "04:00:00",
+          "friday": "04:00:00",
+          "saturday": null,
+          "sunday": null
+        },
+        "never_work_masks": {
+          "monday": 8388609,
+          "tuesday": 8388609,
+          "wednesday": 8388609,
+          "thursday": 8388609,
+          "friday": 8388609,
+          "saturday": 8388609,
+          "sunday": 8388609
+        },
+        "always_work_masks": {
+          "monday": 0,
+          "tuesday": 0,
+          "wednesday": 0,
+          "thursday": 0,
+          "friday": 0,
+          "saturday": 0,
+          "sunday": 0
+        }
+      }
+    }
+  ]
+}
