@@ -55,7 +55,7 @@ __Note__:
 - never_work_mask and always_work_mask are integers representing a binary number that, when written in string format: e.g., __111100011__, converts to when the resource can or cannot work, with 1 meaning yes and 0 meaning no in the respective section
 
 Example:
-```
+```json
 {
     "time_var": 60,
     "max_cap": 9999999999,
