@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "optimos"
+version = "0.9.0"
+description = "Optimos is a resource allocation optimization engine for business processes with differentiated resources. Part of PIX toolset"
+authors = ["Jonas Berx - Orlenys López-Pintado"]
+readme = "README.md"
+packages = [
+    {include = "data_structures"},
+    {include = "support_modules"},
+    {include = "pareto_algorithms_and_metrics"}
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+click = "^8.1.3"
+numpy = "^1.24.3"
+pandas = "^2.0.1"
+python-dateutil = "^2.8.2"
+pytz = "^2023.3"
+scipy = "^1.10.1"
+pm4py = "^2.7.4"
+pix-framework = "^0.8.7"
+simpy = "^4.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1"
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
