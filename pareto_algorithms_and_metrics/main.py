@@ -9,12 +9,12 @@ from support_modules.plot_statistics_handler import print_solution_statistics, r
 from test_assets.experiments.experiment_setup import experiments_file_paths, experiments
 
 TO_EXECUTE = {'HC-STRICT': False,
-              'HC-FLEX': True,
+              'HC-FLEX': False,
               'TS-STRICT': False,
               'NSGA-II': False,
               'METRICS': True}
 
-APPROACHES = {"only_calendar": False,  # Only perform optimization on schedule level
+APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule level
               "only_add_remove": False,  # Only perform optimization on resource level
               "combined": False,  # Combine schedule + resource optimization -> (WT/Cost/IT | Add/Remove) in 1 iteration
               "first_calendar_then_add_remove": False,  # Only calendar until No_improvement found, then add/remove
@@ -28,63 +28,75 @@ def execute_algorithm_variants(log_index, to_execute, approaches):
     constraints_path = experiments_file_paths[log_name][1]
     bpmn_path = experiments_file_paths[log_name][2]
 
-    max_func_ev = 5000
+    max_func_ev = 100
     non_opt_ratio = 0.1
     tot_simulations = 5
 
     # Reset files just in case
-    reset_after_each_execution(log_name)
+    # reset_after_each_execution(log_name)
 
     print(log_name)
     print(timetable_path)
     print(constraints_path)
     print(bpmn_path)
+    save_path = "../test_assets/experiments"
 
-    if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
-        if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_calendar')
-            reset_after_each_execution(log_name)
-        if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_calendar')
-            reset_after_each_execution(log_name)
-    if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
-        if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_add_remove')
-            reset_after_each_execution(log_name)
-        if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_add_remove')
-            reset_after_each_execution(log_name)
-    if approaches['combined']:
-        if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'combined')
-            reset_after_each_execution(log_name)
-        if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'combined')
-            reset_after_each_execution(log_name)
-    if approaches['first_calendar_then_add_remove']:
-        if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_calendar_then_add_remove')
-            reset_after_each_execution(log_name)
-        if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_calendar_then_add_remove')
-            reset_after_each_execution(log_name)
-    if approaches['first_add_remove_then_calendar']:
-        if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_add_remove_then_calendar')
-            reset_after_each_execution(log_name)
-        if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_add_remove_then_calendar')
-            reset_after_each_execution(log_name)
+    for approach in approaches:
+        if approaches[approach]:
+            if to_execute['HC-STRICT']:
+                hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+                           False, False, approach)
+                reset_after_each_execution(os.path.join(save_path, log_name))
+            if to_execute['HC-FLEX']:
+                hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+                           False, True, approach)
+                reset_after_each_execution(os.path.join(save_path, log_name))
+
+    # if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
+    #     if to_execute['HC-STRICT']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, False, 'only_calendar')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    #     if to_execute['HC-FLEX']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, True, 'only_calendar')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    # if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
+    #     if to_execute['HC-STRICT']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, False, 'only_add_remove')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    #     if to_execute['HC-FLEX']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, True, 'only_add_remove')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    # if approaches['combined']:
+    #     if to_execute['HC-STRICT']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, False, 'combined')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    #     if to_execute['HC-FLEX']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, True, 'combined')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    # if approaches['first_calendar_then_add_remove']:
+    #     if to_execute['HC-STRICT']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, False, 'first_calendar_then_add_remove')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    #     if to_execute['HC-FLEX']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, True, 'first_calendar_then_add_remove')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    # if approaches['first_add_remove_then_calendar']:
+    #     if to_execute['HC-STRICT']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, False, 'first_add_remove_then_calendar')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
+    #     if to_execute['HC-FLEX']:
+    #         hill_climb(log_name, bpmn_path, timetable_path, constraints_path, max_func_ev, non_opt_ratio,
+    #                    False, True, 'first_add_remove_then_calendar')
+    #         reset_after_each_execution(os.path.join(save_path, log_name))
 
     if to_execute['METRICS']:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
@@ -264,7 +276,7 @@ def main():
     # 2nd Parameter: Max Number of function evaluations (i.e. resource allocations to assess through simulation)
     # 3rd Parameter: Max Number (ratio) of function evaluations without discovering a Pareto-optimal solution
     # 4th Parameter: Number of simulations to perform per resource allocation
-    execute_algorithm_variants(2, TO_EXECUTE, APPROACHES)
+    execute_algorithm_variants(7, TO_EXECUTE, APPROACHES)
     os._exit(0)
 
 

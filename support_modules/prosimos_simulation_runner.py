@@ -1,22 +1,24 @@
-from ext_tools.Prosimos.diff_res_bpsim import run_simulation
 import datetime
 import re
 import time
 
+from prosimos import simulation_engine, simulation_properties_parser
+
+# from diff_res_bpsim import run_simulation
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 from support_modules.file_manager import save_simulation_results
 from support_modules.file_manager import temp_bpmn_file
-from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
+# from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
 
 
 def process_simulations(model_file_path, json_path, total_cases, pools_info):
     starting_time = time.time()
 
     # Perform simulation with Prosimos -> Returns [{...}, {...}, {...}, sim_start, sim_end]
-    (result, traces) = run_simulation(model_file_path, json_path, total_cases) # ,
+    (result, traces) = simulation_engine.run_simulation(model_file_path, json_path, total_cases)  # ,
 
-    _, cal_map, _, _, _, _ = parse_json_sim_parameters(json_path)
+    _, cal_map, _, _, _, _, _, _, _ = simulation_properties_parser.parse_json_sim_parameters(json_path)
 
     simulation_info = SimulationInfo(pools_info)
     simulation_info.simulation_time = time.time() - starting_time
@@ -25,13 +27,15 @@ def process_simulations(model_file_path, json_path, total_cases, pools_info):
 
     for pool in pools_info.pools:
         if pool in result[2].keys():
-            simulation_info.update_resource_utilization(result[2][pool].r_profile.resource_id, result[2][pool].utilization)
+            simulation_info.update_resource_utilization(result[2][pool].r_profile.resource_id,
+                                                        result[2][pool].utilization)
             simulation_info.update_resource_available_time(result[2][pool].r_profile.resource_id,
                                                            result[2][pool].available_time)
         else:
             simulation_info.update_resource_utilization(pool, 0)
-            simulation_info.update_resource_available_time(pool, cal_map[pool].find_working_time(simulation_start_end[0],
-                                                                                         simulation_start_end[1]))
+            simulation_info.update_resource_available_time(pool,
+                                                           cal_map[pool].find_working_time(simulation_start_end[0],
+                                                                                           simulation_start_end[1]))
 
     for i in pools_info.task_pools:
         if i in result[1].keys():

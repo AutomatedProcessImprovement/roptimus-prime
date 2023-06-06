@@ -348,7 +348,7 @@ class Resource:
         resource_calendar = {'id': self.id + "timetable", 'name': self.id + "timetable", 'time_periods': []}
 
         roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
-        for name, data in roster_df.iteritems():
+        for name, data in roster_df.items():
             row = data.values[0]
 
             # Since 24hr blocks, a day always starts at 00:00:00
