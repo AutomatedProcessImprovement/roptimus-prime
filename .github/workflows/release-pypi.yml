@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: PyPI
-      url: https://pypi.org/project/optimos/
+      url: https://pypi.org/project/optimos
     permissions:
       id-token: write
       contents: write
       packages: write
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: [ 3.9 ]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
