@@ -753,6 +753,27 @@ stringdist = "*"
 tqdm = "*"
 
 [[package]]
+name = "prosimos"
+version = "1.2.4"
+description = ""
+optional = false
+python-versions = ">=3.9,<3.12"
+files = [
+    {file = "prosimos-1.2.4-py3-none-any.whl", hash = "sha256:ab49094b76ca9f2ba64d90a059ecf8302bd9226809ec963bb77d2da07a5cb35f"},
+    {file = "prosimos-1.2.4.tar.gz", hash = "sha256:9be97bb89e6e6c2319701939f3a118a18883b49a6320cf4ad603c6f657b858b5"},
+]
+
+[package.dependencies]
+click = ">=8.1.3,<9.0.0"
+numpy = ">=1.24.3,<2.0.0"
+pandas = ">=2.0.1,<3.0.0"
+pix-framework = ">=0.8.7,<0.9.0"
+pm4py = ">=2.7.4,<3.0.0"
+python-dateutil = ">=2.8.2,<3.0.0"
+pytz = ">=2023.3,<2024.0"
+scipy = ">=1.10.1,<2.0.0"
+
+[[package]]
 name = "pydotplus"
 version = "2.0.2"
 description = "Python interface to Graphviz's Dot language"
@@ -967,4 +988,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "bb92d1db71d014adeb1be54056cc1693d725732e6ce1238f4aaf218b7b57a3d7"
+content-hash = "f4537f9ea59aa9b2fc4f917154317571d92ad2feb6ff74ce72ce5fcdc27cb56b"

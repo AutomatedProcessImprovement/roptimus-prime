@@ -42,7 +42,7 @@ def generate_constraint_file(sim_params_path, out_file):
             for w_day in c_info.work_rest_count:
                 c_day = int_week_days[w_day].lower()
                 daily_start_times[c_day] = min_date_str if c_info.work_rest_count[w_day][0] > 0 else None
-                never_work_masks[c_day] = mask_24_hour if daily_start_times[c_day] is None else 8388609
+                never_work_masks[c_day] = mask_24_hour if daily_start_times[c_day] is None else 0
                 always_work_masks[c_day] = 0  # will keep untouched to always allowing removal
 
             local_constraints.append({
@@ -63,5 +63,7 @@ def generate_constraint_file(sim_params_path, out_file):
         "hours_in_day": 24,
         'resources': local_constraints}
 
-    with open(out_file, 'w') as j_writter:
-        j_writter.write(json.dumps(json_struct, indent=4))
+    # with open(out_file, 'w') as j_writter:
+    #     j_writter.write(json.dumps(json_struct, indent=4))
+
+    return json_struct

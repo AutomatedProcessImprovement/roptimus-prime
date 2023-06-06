@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import sys
+from itertools import groupby
 from shutil import copyfile
 import time
 import datetime
@@ -16,10 +17,8 @@ from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from data_structures.RosterManager import RosterManager
 import hashlib
 
-
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 temp_bpmn_file = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn'))
-
 
 def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):
     cost_type = 1
@@ -163,8 +162,6 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     #                 iterations_count[0])
 
 
-
-
 def resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, res_manager):
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
@@ -208,7 +205,6 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
 
         # iterations_handler = _reset_jsons_rm_ith(res_manager, iterations_handler)
         # res_manager = iterations_handler.resource_manager
-
 
     resources_to_optimize = {}
     # the first resource in pool_cost is the most expensive
@@ -482,7 +478,6 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         to_be_added['name'] += "_COPY" + h.hexdigest()[:10]
         to_be_added['calendar'] = resource_id + "_COPY" + h.hexdigest()[:10] + "timetable"
         to_be_added['assigned_tasks'] = [task_to_improve]
-
 
         to_add = []
         for profile in resource_profiles:
@@ -971,24 +966,37 @@ def solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, it
 
             for day_int in day_to_optimize:
                 day = days[day_int]
-
+                # day = 'saturday'
                 shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
-                indexes = []
                 i_idx = 0
+                ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
+                indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
                 for idx in range(len(shift_arr)):
+
                     # Collect all shift blocks outer indexes
-                    if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
-                        indexes.append([0, 0])
-                        indexes[i_idx][0] = idx
-                    if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
-                        indexes[i_idx][1] = idx
-                        i_idx += 1
+                    # TODO BIG STUFF NEEDS TO BE ADRESSED HERE
+                    if shift_arr[idx] == 1 and 0 <= idx - 1 < len(shift_arr):
+                        if shift_arr[idx - 1] == 0:
+                            indexes.append([0, 0])
+                        if idx == 0:
+                            indexes[i_idx][0] = idx
+                        else:
+                            if shift_arr[idx - 1] == 0:
+                                indexes[i_idx][0] = idx
+                    if shift_arr[idx] == 1:
+                        if idx == 23:
+                            indexes[i_idx][1] = idx
+                        else:
+                            if shift_arr[idx + 1] == 0:
+                                indexes[i_idx][1] = idx
+                                i_idx += 1
                 # TODO after finishing loop, try adding left, else try moving whole shift left
                 for block in range(len(indexes)):
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
 
-                    if r_idx != 23:
+                    if r_idx < 23:
+                        print(r_idx)
                         # print("Right index is not 23 -> 23:59 so cannot go more right that day.")
 
                         shift_arr[r_idx + 1] = 1
@@ -1050,49 +1058,55 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
             for resource in resource_copy:
                 for day in days:
                     shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
-                    indexes = []
                     i_idx = 0
-                    for idx in range(len(shift_arr)):
-                        # Collect all shift blocks outer indexes
-                        if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
-                            indexes.append([0, 0])
-                            indexes[i_idx][0] = idx
-                        if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
-                            indexes[i_idx][1] = idx
-                            i_idx += 1
-                    # Try reduce size both sides, try reduce left, try reduce right
+                    ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
+                    indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
 
                     for block in range(len(indexes)):
                         l_idx = indexes[block][0]
                         r_idx = indexes[block][1]
 
-                        shift_arr[r_idx] = 0
-                        shift_arr[l_idx] = 0
-                        resource.set_shifts(_list_to_binary(shift_arr), day)
-                        if resource.verify_timetable(day):
-                            # Adding left is valid, run sim
-                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                return True
-                        shift_arr[r_idx] = 1
-                        shift_arr[l_idx] = 0
-                        resource.set_shifts(_list_to_binary(shift_arr), day)
-                        if resource.verify_timetable(day):
-                            # Moving left is valid, run sim
-                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                return True
+                        if l_idx == r_idx:
+                            print("Resource shift is only of size 1")
+                            shift_arr[l_idx] = 0
+                            shift_arr[r_idx] = 0
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                            if resource.verify_timetable(day):
+                                # Adding left is valid, run sim
+                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                    return True
 
-                        shift_arr[r_idx] = 0
-                        shift_arr[l_idx] = 1
-                        resource.set_shifts(_list_to_binary(shift_arr), day)
-                        if resource.verify_timetable(day):
-                            # Adding left is valid, run sim
-                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                return True
+                            shift_arr[l_idx] = 1
+                            shift_arr[r_idx] = 1
 
-                        # No valid move, reset and go next
-                        shift_arr[r_idx] = 1
-                        shift_arr[l_idx] = 1
-                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        elif l_idx != r_idx:
+                            shift_arr[r_idx] = 0
+                            shift_arr[l_idx] = 0
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                            if resource.verify_timetable(day):
+                                # Adding left is valid, run sim
+                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                    return True
+                            shift_arr[r_idx] = 1
+                            shift_arr[l_idx] = 0
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                            if resource.verify_timetable(day):
+                                # Moving left is valid, run sim
+                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                    return True
+
+                            shift_arr[r_idx] = 0
+                            shift_arr[l_idx] = 1
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                            if resource.verify_timetable(day):
+                                # Adding left is valid, run sim
+                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                    return True
+
+                            # No valid move, reset and go next
+                            shift_arr[r_idx] = 1
+                            shift_arr[l_idx] = 1
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
             # All moves and resources on this task have been tried, stop.
     return False
 
@@ -1161,42 +1175,68 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
                 day = days[day_int]
 
                 shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
-                indexes = []
+
                 i_idx = 0
-                for idx in range(len(shift_arr)):
-                    # Collect all shift blocks outer indexes
-                    if shift_arr[idx] == 1 and shift_arr[idx - 1] == 0:
-                        indexes.append([0, 0])
-                        indexes[i_idx][0] = idx
-                    if shift_arr[idx] == 1 and shift_arr[idx + 1] == 0:
-                        indexes[i_idx][1] = idx
-                        i_idx += 1
+                ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
+                indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
+
                 for block in range(len(indexes)):
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
 
-                    if l_idx != 0:
-                        # print("Left index is not 0 -> 00:00 so cannot go more left that day.")
+                    # During this step the algorithm tries to shift the schedule of the resource.
+                    # This step specifically adds another granule left or moves the entire granule one step left.
+                    # If the move is valid then the configuration is passed to the simulator.
+                    # If the move also proves to be an improvement then we return TRUE.
+                    # Else if no valid moves can be found nor improvements then we return FALSE
+
+                    # STEP 1: cover 23 - 01 bug
+                    if l_idx > 0:
+                        # Left index is not the lowest index possible. So moving left (into the previous day) is not possible.
+
+                        # STEP 2: attempt to add a new granule left.
                         shift_arr[l_idx - 1] = 1
                         shift_arr[r_idx] = 1
                         resource.set_shifts(_list_to_binary(shift_arr), day)
                         if resource.verify_timetable(day):
-                            # Adding left is valid, run sim
                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
                                 return True
 
+                        # STEP 3: adding left was not successful/ improving, so we try to move left
                         shift_arr[l_idx - 1] = 1
                         shift_arr[r_idx] = 0
                         resource.set_shifts(_list_to_binary(shift_arr), day)
-
                         if resource.verify_timetable(day):
-                            # Moving left is valid, run sim
                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
                                 return True
-                        # No valid move, reset and go next
+
+                        # STEP 4: moving left was not successful/ improving, reset positions and continue next
                         shift_arr[l_idx - 1] = 0
                         shift_arr[r_idx] = 1
                         resource.set_shifts(_list_to_binary(shift_arr), day)
+
+                    # if l_idx != 0:
+                    #     # print("Left index is not 0 -> 00:00 so cannot go more left that day.")
+                    #     shift_arr[l_idx - 1] = 1
+                    #     shift_arr[r_idx] = 1
+                    #     resource.set_shifts(_list_to_binary(shift_arr), day)
+                    #     if resource.verify_timetable(day):
+                    #         # Adding left is valid, run sim
+                    #         if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                    #             return True
+                    #
+                    #     shift_arr[l_idx - 1] = 1
+                    #     shift_arr[r_idx] = 0
+                    #     resource.set_shifts(_list_to_binary(shift_arr), day)
+                    #
+                    #     if resource.verify_timetable(day):
+                    #         # Moving left is valid, run sim
+                    #         if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                    #             return True
+                    #     # No valid move, reset and go next
+                    #     shift_arr[l_idx - 1] = 0
+                    #     shift_arr[r_idx] = 1
+                    #     resource.set_shifts(_list_to_binary(shift_arr), day)
         # All moves and resources on this task have been tried, stop.
         return False
     return False

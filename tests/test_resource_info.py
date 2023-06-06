@@ -5,8 +5,8 @@ import pytest
 from data_structures.ResourceInfo import Resource
 from data_structures.RosterInfo import Roster
 
-TIMETABLE_JSON = "./assets/timetable.json"
-CONSTRAINTS_JSON = "./assets/constraints.json"
+TIMETABLE_JSON = "tests/assets/timetable.json"
+CONSTRAINTS_JSON = "tests/assets/constraints.json"
 
 
 @pytest.fixture

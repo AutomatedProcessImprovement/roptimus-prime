@@ -9,13 +9,14 @@ experiments = {0: "production",
                6: "loan_mc_hu",
                7: "loan_mc_lu",
                8: "loan_sc_hu",
-               9: "loan_sc_lu"
+               9: "loan_sc_lu",
+               10: "simple_model"
                }
                # 7: "government",
                # 8: "bpi_2012_edoc",
                # 9: "credit_application",
 
-bfp = "./test_assets/experiments/"
+bfp = "../test_assets/experiments/"
 
 experiments_file_paths = {
     'production': [bfp + "production/timetable.json",
@@ -57,6 +58,9 @@ experiments_file_paths = {
     'loan_sc_lu': [bfp + "loan_sc_lu/timetable.json",
                          bfp + "loan_sc_lu/constraints.json",
                          bfp + "loan_sc_lu/model.bpmn"],
+    'simple_model': [bfp + "simple_model/timetable.json",
+                             bfp + "simple_model/constraints.json",
+                             bfp + "simple_model/model.bpmn"],
 
 }
 
