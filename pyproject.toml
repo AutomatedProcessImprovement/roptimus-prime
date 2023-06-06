@@ -2,12 +2,12 @@
 name = "optimos"
 version = "0.9.2"
 description = "Optimos is a resource allocation optimization engine for business processes with differentiated resources. Part of PIX toolset"
-authors = ["Jonas Berx - Orlenys López-Pintado"]
+authors = ["Jonas Berx <jonas.berx@ut.ee>", "Orlenys López-Pintado <orlenys.lopez.pintado@ut.ee>"]
 readme = "README.md"
 packages = [
-    {include = "data_structures"},
-    {include = "support_modules"},
-    {include = "pareto_algorithms_and_metrics"}
+    { include = "data_structures" },
+    { include = "support_modules" },
+    { include = "pareto_algorithms_and_metrics" }
 ]
 
 [tool.poetry.dependencies]
