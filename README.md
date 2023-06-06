@@ -1,4 +1,8 @@
 # Optimos
+![build](https://github.com/AutomatedProcessImprovement/roptimus-prime/actions/workflows/python.yml/badge.svg)
+![release](https://github.com/AutomatedProcessImprovement/roptimus-prime/actions/workflows/release-pypi.yml/badge.svg)
+![version](https://img.shields.io/github/v/tag/AutomatedProcessImprovement/roptimus-prime)
+
 __Resource allocation and optimisation of Business Processes with Differentiated Resources__
 
 Optimos is a Business Process Optimisation Engine that support differentiated resources. The notion of a resource pool is replaces with resource profiles. 
