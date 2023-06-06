@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "optimos"
-version = "0.9.0"
+version = "0.9.2"
 description = "Optimos is a resource allocation optimization engine for business processes with differentiated resources. Part of PIX toolset"
 authors = ["Jonas Berx - Orlenys López-Pintado"]
 readme = "README.md"

@@ -9,7 +9,7 @@ This repository contains the implementation and experimental results of a multi-
 The source code includes two variants of the hill-climbing algorithm, named __HC-STRICT__ and __HC-FLEX__. 
 Future work may include the implementation of the tabu-search algorithm.
 
-Optimos makes use of Prosimos: checkout - [3eae6c5e322a534bb47068f6373e9af572268c8f](https://github.com/AutomatedProcessImprovement/Prosimos/commit/3eae6c5e322a534bb47068f6373e9af572268c8f)
+Optimos makes use of the [Prosimos](https://github.com/AutomatedProcessImprovement/Prosimos/commit/3eae6c5e322a534bb47068f6373e9af572268c8f) simulation engine.
 
 
 ## Getting started
@@ -28,8 +28,6 @@ Set up environment and submodules using Poetry:
 ```
 poetry install
 ```
-[PROSIMOS](https://github.com/AutomatedProcessImprovement/Prosimos/tree/main) Simulation Engine is a submodule. Optimos relies on Prosimos for the simulations required during optimisation.
-
 
 ## Using Optimos
 
