@@ -19,11 +19,11 @@ def cli():
               help='Maximum number of iterations allowed')
 @click.option('--algorithm', required=True,
               help='Algorithm to simulate [HC-STRICT / HC-FLEX]')
-@click.option('--approach', required=False,
+@click.option('--approach', required=False, default="ARCA",
               help='OPTIONAL: Approach to simulate [CA / AR / CO / CAAR / ARCA / ALL]')
 @click.pass_context
-def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach="ARCA"):
-    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach)
+def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
+    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach,"opti-output" , "DEFAULT_NAME")
 
 
 if __name__ == "__main__":
