@@ -1,6 +1,7 @@
 import csv
 import os
 import shutil
+import tempfile
 from datetime import datetime
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import SolutionSpace, DeviationInfo
@@ -43,10 +44,10 @@ xes_simodbpmn_file_paths = {
 }
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
-temp_bpmn_file = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn'))
-experiments_plots = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/experiment_stats/'))
-results_folder = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/explored_allocations/'))
-simulation_results = os.path.abspath(os.path.join(curr_dir_path, '..', 'output_files/simulation_results/'))
+temp_bpmn_file = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'CopiedModel.bpmn'))
+experiments_plots = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'output_files/experiment_stats/'))
+results_folder = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'output_files/explored_allocations/'))
+simulation_results = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'output_files/simulation_results/'))
 
 # temp_bpmn_file = './temp_files/CopiedModel.bpmn'
 # experiments_plots = './output_files/experiment_stats/'
@@ -349,5 +350,5 @@ def reset_after_each_execution(save_path):
 
     # After resetting ttb, also wipe out json_files dir and ids.txt
     print()
-    with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json_files\\ids.txt')), 'w'):
+    with open(os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files/','ids.txt')), 'w'):
         pass

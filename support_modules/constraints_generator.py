@@ -1,6 +1,5 @@
 import json
-import sys,os
-sys.path.append( os.path.dirname(__file__)+'/../ext_tools/Prosimos/')
+
 from ext_tools.Prosimos.bpdfr_simulation_engine.resource_calendar import int_week_days
 from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_resource_calendars
 

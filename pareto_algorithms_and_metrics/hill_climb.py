@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import sys
+import tempfile
 from itertools import groupby
 from shutil import copyfile
 import time
@@ -18,7 +19,7 @@ from data_structures.RosterManager import RosterManager
 import hashlib
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
-temp_bpmn_file = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn'))
+
 
 def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):
     cost_type = 1
@@ -26,6 +27,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     non_opt_ratio = float(non_opt_ratio)
 
     # SETUP
+    temp_bpmn_file = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'CopiedModel.bpmn'))
     copyfile(bpmn_path, temp_bpmn_file)
     rm = RosterManager(approach, time_table, constraints)
     starting_time = time.time()

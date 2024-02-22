@@ -1,5 +1,6 @@
 import json
 import os
+import tempfile
 
 from data_structures.RosterInfo import Roster
 
@@ -15,8 +16,9 @@ class RosterManager:
         # self.temp_constraints = "./temp_files/temp_constraints.json"
 
         curr_dir_path = os.path.abspath(os.path.dirname(__file__))
-        self.temp_timetable = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_timetable.json'))
-        self.temp_constraints = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_constraints.json'))
+        
+        self.temp_timetable = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'temp_timetable.json'))
+        self.temp_constraints = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'temp_constraints.json'))
 
 
         """

@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import math
+import tempfile
 
 from support_modules.file_manager import read_stats_file
 
@@ -50,9 +51,9 @@ class AlgorithmResults:
         for key in self.pareto_front:
             print(key)
 
-            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/constraints.json")), 'r') as c_read:
+            with open(os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files/'+str(key)+"/constraints.json")), 'r') as c_read:
                 cons = json.load(c_read)
-            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/timetable.json")), 'r') as t_read:
+            with open(os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files/'+str(key)+"/timetable.json")), 'r') as t_read:
                 ttb = json.load(t_read)
 
             self.pareto_front[key].sim_params = ttb
