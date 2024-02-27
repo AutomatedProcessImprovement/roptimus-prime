@@ -1,4 +1,0 @@
-[submodule "ext_tools/Prosimos"]
-	path = ext_tools/Prosimos
-	url = https://github.com/AutomatedProcessImprovement/Prosimos
-	branch = optimos_microservice
