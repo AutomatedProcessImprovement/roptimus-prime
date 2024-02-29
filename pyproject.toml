@@ -22,7 +22,7 @@ pm4py = "^2.7.4"
 pix-framework = "^0.8.7"
 simpy = "^4.0.1"
 prosimos = "^1.2.4"
-DiffResBP_Simulator = { git = "https://github.com/sinnaj-r/Prosimos.git", branch = "optimos_microservice" }
+DiffResBP_Simulator = { git = "https://github.com/AutomatedProcessImprovement/Prosimos.git", branch = "optimos_microservice" }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"
