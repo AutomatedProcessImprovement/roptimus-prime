@@ -3,9 +3,13 @@ import os
 import shutil
 import tempfile
 from datetime import datetime
+from typing import Dict, Optional
+from data_structures.iteration_info import IterationInfo
+from data_structures.pools_info import PoolInfo
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import SolutionSpace, DeviationInfo
 from data_structures.solution_space import ResourceInfo
+
 
 date_format = "%Y-%m-%d %H:%M:%S.%f%z"
 date_format_1 = "%Y-%m-%d %H:%M:%S%z"
@@ -100,7 +104,7 @@ def save_one_simulation_result(pools_info, csv_file, simulation_info):
     csv_writer.writerow([])
 
 
-def load_simulation_result(log_name, pools_info):
+def load_simulation_result(log_name: str, pools_info: PoolInfo):
     try:
         simulation_info = SimulationInfo(pools_info)
         with open(simulation_results + ("\\%s_median.csv" % log_name), mode='r') as csv_file:
@@ -164,7 +168,7 @@ def update_genetic_stats_file(log_name, it_number, simulation_info, pools_info):
 
 
 # Method for Hill-Climbing and Tabu Search
-def save_stats_file(log_name, algorithm_name, generated_solutions, simulation_order, iteration_count):
+def save_stats_file(log_name:str, algorithm_name:str, generated_solutions: Dict[str, IterationInfo], simulation_order:list[str], iteration_count:int):
     with open(results_folder + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
@@ -227,14 +231,14 @@ def write_pools_info_stats(csv_writer, it_number, simulation_info, pools_info):
                              str(simulation_info.pool_utilization[resource_name]),
                              str(1)])
 
-
-def read_genetic_stats_file(log_name):
+StatsType = tuple[dict[str, SolutionSpace], dict[str, list[ResourceInfo]]]
+def read_genetic_stats_file(log_name:str) -> Optional[StatsType]:
     try:
         with open(results_folder + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='r') as simulation_csv_file:
             with open(results_folder + ("%s_nsga2_pools_info.csv" % log_name), mode='r') as pools_csv_file:
                 simulation_csv_reader = csv.reader(simulation_csv_file, delimiter=',')
                 pools_csv_reader = csv.reader(pools_csv_file, delimiter=',')
-                explored_solutions = dict()
+                explored_solutions: Dict[str, SolutionSpace] = dict()
                 block_count = False
                 for row in simulation_csv_reader:
                     if len(row) < 2:
@@ -245,7 +249,7 @@ def read_genetic_stats_file(log_name):
                     if block_count:
                         explored_solutions[row[1]] = SolutionSpace(int(row[0]), float(row[2]), float(row[3]),
                                                                    float(row[5]), float(row[6]), float(row[4]))
-                resource_pools = dict()
+                resource_pools: Dict[str, list[ResourceInfo]] = dict()
                 block_count = False
                 for row in pools_csv_reader:
                     if len(row) < 2:
@@ -257,19 +261,19 @@ def read_genetic_stats_file(log_name):
                         if row[1] not in resource_pools:
                             resource_pools[row[1]] = list()
                         resource_pools[row[1]].append(ResourceInfo(row[2], float(row[3]), float(row[4]), float(row[5])))
-                return [explored_solutions, resource_pools]
+                return (explored_solutions, resource_pools)
     except IOError:
         return None
 
 
-def read_stats_file(log_name, algorithm_name):
+def read_stats_file(log_name:str, algorithm_name:str) -> Optional[StatsType]:
     if algorithm_name == 'nsga2':
         return read_genetic_stats_file(log_name)
     try:
         with open(results_folder + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
-            explored_solutions = dict()
-            resource_pools = dict()
+            explored_solutions: Dict[str, SolutionSpace] = dict()
+            resource_pools:Dict[str, list[ResourceInfo]] = dict()
             block_count = 0
             for row in csv_reader:
                 if len(row) < 2:
@@ -284,12 +288,25 @@ def read_stats_file(log_name, algorithm_name):
                     if row[1] not in resource_pools:
                         resource_pools[row[1]] = list()
                     resource_pools[row[1]].append(ResourceInfo(row[2], int(row[3]), float(row[4]), float(row[5])))
-            return [explored_solutions, resource_pools]
+            return (explored_solutions, resource_pools)
     except IOError:
         return None
 
+def get_stats_without_writing(generated_solutions: Dict[str, 'IterationInfo'], simulation_order:list[str]) -> Optional[StatsType]:
+    explored_solutions: Dict[str, SolutionSpace] = dict()
+    resource_pools:Dict[str, list[ResourceInfo]] = dict()
 
-def solutions_order_stats_file(log_name, algorithm_name):
+    for sol_id in simulation_order:
+        pools_info = generated_solutions[sol_id].pools_info
+        simulation_info = generated_solutions[sol_id].simulation_info
+        explored_solutions[sol_id] = SolutionSpace(generated_solutions[sol_id].it_number, simulation_info.execution_cost(),
+                                                   simulation_info.cycle_time(), simulation_info.deviation_info.p_cycle_time_deviation,
+                                                   simulation_info.deviation_info.p_execution_duration_deviation, simulation_info.simulation_duration())
+        resource_pools[sol_id] = list()
+        for resource_name in pools_info.pools:
+            resource_pools[sol_id].append(ResourceInfo(resource_name, 1, simulation_info.pool_utilization[resource_name], 1))
+
+def solutions_order_stats_file(log_name, algorithm_name:str)-> Optional[list[str]]:
     try:
         with open(results_folder + ("\\%s.csv" % algorithm_name), mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')

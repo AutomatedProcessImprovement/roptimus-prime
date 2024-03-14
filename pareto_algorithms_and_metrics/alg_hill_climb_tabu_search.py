@@ -73,7 +73,7 @@ def solution_sorting_by_pool_outturn(iteration_info, iterations_handler, iterati
                     sorted(pools_info.pools.items(), key=lambda x: simulation_info.pool_time_outturn(x[1].name),
                            reverse=True)]
 
-    mean_outturn = [0, 0]
+    mean_outturn: list[float] = [0, 0]
     for pool in sorted_pools[0]:
         mean_outturn[0] += simulation_info.pool_cost_outturn(pool[0])
         mean_outturn[1] += simulation_info.pool_time_outturn(pool[0])

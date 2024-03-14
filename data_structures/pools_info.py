@@ -1,11 +1,13 @@
+from data_structures.ResourceInfo import Resource
 from support_modules.key_generator import generate_custom_resource_id, generate_pools_info_id
+from data_structures.timetable import ResourceListItem
 
 class PoolInfo:
-    def __init__(self, resource_map, task_pools):
+    def __init__(self, resource_map: dict[str, Resource], task_pools: dict[str, list[ResourceListItem]]):
         self.pools = resource_map
         self.task_pools = task_pools
 
-        self.task_allocations = {}
+        self.task_allocations: dict[str, list[int]] = {}
         self._task_list = []
         for task in task_pools:
             self._task_list.append(task)

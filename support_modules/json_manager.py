@@ -41,7 +41,7 @@ class JsonManager:
         if not os.path.exists(os.path.join(self.base_path_folders, solution_id)):
             os.makedirs(os.path.join(self.base_path_folders, solution_id))
 
-    def read_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
+    def write_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
         curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
         ids = self.read_file_with_ids()

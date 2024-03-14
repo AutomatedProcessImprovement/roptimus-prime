@@ -3,6 +3,8 @@ import json
 import pandas as pd
 
 from data_structures.ResourceInfo import Resource
+from data_structures.constraints import ConstraintsType
+from data_structures.timetable import ResourceListItem, TimetableType
 from support_modules.helpers import sum_of_binary_ones
 
 
@@ -19,15 +21,15 @@ class Roster:
 
     def __init__(self, name, time_table, constraints):
         self.roster_name = name
-        self.task_pools = dict()
+        self.task_pools: dict[str, list[ResourceListItem]] = dict()
 
         with open(time_table, 'r') as t_read:
-            ttb = json.load(t_read)
+            ttb: TimetableType = json.load(t_read)
 
         with open(constraints, 'r') as c_read:
-            cons = json.load(c_read)
+            cons: ConstraintsType = json.load(c_read)
 
-        resource_map = []
+        resource_map: list[Resource] = []
 
 
         for i in ttb['resource_calendars']:

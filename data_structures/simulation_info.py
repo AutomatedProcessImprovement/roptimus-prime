@@ -1,13 +1,16 @@
+from datetime import datetime
+from typing import Dict, Optional
+from data_structures.pools_info import PoolInfo
 from data_structures.solution_space import DeviationInfo
 
 
 class SimulationInfo:
-    def __init__(self, pools_info=None):
-        self.pools_info = pools_info
-        self.mean_process_cycle_time = 0
-        self.simulation_start_date = None
-        self.simulation_end_date = None
-        self.simulation_time = None
+    def __init__(self, pools_info: PoolInfo):
+        self.pools_info: PoolInfo = pools_info
+        self.mean_process_cycle_time: float = 0
+        self.simulation_start_date:Optional[datetime] = None
+        self.simulation_end_date:Optional[datetime] = None
+        self.simulation_time: float = 0
 
         self.deviation_info = DeviationInfo(0.0, 0.0)
 
@@ -16,17 +19,14 @@ class SimulationInfo:
         self.pool_time = dict()
 
         self.pool_cost = dict()
-        self.total_pool_cost = 0
-        self.total_pool_time = 0
+        self.total_pool_cost: float = 0
+        self.total_pool_time: float = 0
 
-        self.available_time = dict()
+        self.available_time: Dict[str, float] = dict()
 
     # TODO -> Add resources that did not participate in the process, put pool_time = 0 and pool_cost = duration * cost_hour
     def init_pool_time_cost(self):
         return
-
-    def available_time(self):
-        return self.available_time
 
     def cycle_time(self):
         return self.mean_process_cycle_time
@@ -35,7 +35,10 @@ class SimulationInfo:
         return self.pools_info.pools_total_cost * self.simulation_duration() / 3600
 
     def simulation_duration(self):
-        return (self.simulation_end_date - self.simulation_start_date).total_seconds()
+        if self.simulation_start_date is not None and self.simulation_end_date is not None:
+            return (self.simulation_end_date - self.simulation_start_date).total_seconds()
+        else:
+            return 0
 
     def pool_time_outturn(self, pool_name):
         return self.pool_time[pool_name] / self.total_pool_time

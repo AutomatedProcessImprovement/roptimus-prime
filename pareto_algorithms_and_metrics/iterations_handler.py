@@ -1,18 +1,14 @@
 import copy
+from typing import Dict, Optional
 
 from data_structures.RosterManager import RosterManager
+from data_structures.iteration_info import IterationInfo, IterationNextType
+from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
+from data_structures.simulation_info import SimulationInfo
 from support_modules.prosimos_simulation_runner import perform_simulations
 from pareto_algorithms_and_metrics.pareto_metrics import try_update_pareto_front, min_dist_from_pareto
 from support_modules.json_manager import JsonManager
-
-
-class IterationInfo:
-    def __init__(self, pools_info, simulation_info, it_number, non_optimal_distance=0):
-        self.it_number = it_number
-        self.pools_info = copy.deepcopy(pools_info)
-        self.simulation_info = copy.deepcopy(simulation_info)
-        self.non_optimal_distance = non_optimal_distance
 
 
 def _in_non_optimal_distance_thresold(distance):
@@ -20,7 +16,7 @@ def _in_non_optimal_distance_thresold(distance):
 
 
 class IterationHandler:
-    def __init__(self, log_name, pools_info, is_tabu_search, with_mad, resource_manager):
+    def __init__(self, log_name, pools_info:PoolInfo, is_tabu_search, with_mad, resource_manager, iteration_callback):
 
         self.log_name = log_name
         self.is_tabu_search = is_tabu_search
@@ -34,7 +30,7 @@ class IterationHandler:
         simulation_info = simulation[0]
         self.traces = simulation[1]
 
-        self.generated_solutions = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
+        self.generated_solutions:Dict[str,IterationInfo] = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
         self.solution_order = [pools_info.id]
         self.pareto_front = {pools_info.id: simulation_info}
 
@@ -49,18 +45,20 @@ class IterationHandler:
                                       self._solution_quality(simulation_info))
 
         self.jsonManager = JsonManager()
-        self.jsonManager.read_accepted_solution_timetable_to_json_files(
+        self.jsonManager.write_accepted_solution_timetable_to_json_files(
             self.time_table_path, self.resource_manager.constraints_json, pools_info.id)
         self.current_starting_id = pools_info.id
+
+        self.iteration_callback = iteration_callback
 
     def update_priorities(self):
         for in_discarded in [True, False]:
             new_queue = PriorityQueue()
             old_queue = self.discarded_queue if in_discarded else self.execution_queue
             while not old_queue.is_empty():
-                sol_id = old_queue.pop_task()
-                simulation_info = self.generated_solutions[sol_id].simulation_info
-                new_queue.add_task(self.generated_solutions[sol_id].pools_info.id,
+                sol_id = old_queue.pop_task()    
+                simulation_info = self.generated_solutions[sol_id].simulation_info # type: ignore
+                new_queue.add_task(self.generated_solutions[sol_id].pools_info.id, # type: ignore
                                    self._solution_quality(simulation_info))
             if in_discarded:
                 self.discarded_queue = new_queue
@@ -82,15 +80,18 @@ class IterationHandler:
     def pq_size_print(self):
         return len(self.execution_queue.pq)
 
-    def next(self):
+    def next(self) -> IterationNextType:
         to_return = self._move_next()
         if self.is_tabu_search and to_return[0] is None:
             current_solution = self.discarded_queue.pop_task()
-            return [None, None, -1] if current_solution is None \
-                else [self.generated_solutions[current_solution].pools_info,
+            return (None, None, -1) if current_solution is None \
+                else (self.generated_solutions[current_solution].pools_info,
                       self.generated_solutions[current_solution].simulation_info,
-                      self.generated_solutions[current_solution].non_optimal_distance]
+                      self.generated_solutions[current_solution].non_optimal_distance)
         return to_return
+
+    def getCurrentIterationInfo(self):
+        return self.generated_solutions[self.current_starting_id]
 
     def clean_up_json(self):
         self.jsonManager.retrieve_json_from_id(self.current_starting_id,
@@ -101,7 +102,7 @@ class IterationHandler:
                                               self.resource_manager.constraints_json)
 
 
-    def _move_next(self):
+    def _move_next(self) -> IterationNextType:
         if not self.execution_queue.is_empty():
             current_solution = self.execution_queue.pop_task()
 
@@ -117,13 +118,13 @@ class IterationHandler:
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
-                    return [pools_info,
+                    return (pools_info,
                             simulation_info,
-                            self.generated_solutions[current_solution].non_optimal_distance]
+                            self.generated_solutions[current_solution].non_optimal_distance)
                 elif self.is_tabu_search:
                     self.discarded_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
                 current_solution = self.execution_queue.pop_task()
-        return [None, None, -1]
+        return (None, None, -1)
 
     def solutions_count(self):
         return len(self.generated_solutions)
@@ -197,7 +198,7 @@ class IterationHandler:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
-            self.jsonManager.read_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
+            self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
                                                                             self.resource_manager.constraints_json,
                                                                             pools_info.id)
             return True

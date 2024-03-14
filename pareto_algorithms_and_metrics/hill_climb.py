@@ -9,19 +9,21 @@ from shutil import copyfile
 import time
 import datetime
 import random
+from typing import Callable, Optional
 from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 from support_modules.file_manager import save_stats_file, read_stats_file
 from support_modules.helpers import _list_to_binary, _bitmap_to_valid_structure
-from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
+from pareto_algorithms_and_metrics.iterations_handler import IterationHandler, IterationNextType
 from data_structures.RosterManager import RosterManager
 import hashlib
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
+IterationCallbackType = Optional[Callable[[IterationNextType], None]]
 
-def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):
+def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach, iteration_callback:IterationCallbackType=None):
     cost_type = 1
     max_func_ev = int(max_func_ev)
     non_opt_ratio = float(non_opt_ratio)
@@ -35,7 +37,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     algorithm_name += "_" + approach
 
     initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
-    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rm)
+    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rm, iteration_callback)
     max_iterations_reached = True
 
     iterations_count = [0]
@@ -46,6 +48,8 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info) if iteration_callback is not None else None
+             
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           approach)
 
@@ -61,6 +65,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
@@ -73,6 +78,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
 
@@ -93,6 +99,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
 
@@ -108,6 +115,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
@@ -120,6 +128,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
         save_stats_file(log_name,
@@ -139,6 +148,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
         save_stats_file(log_name,
@@ -153,6 +163,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
@@ -164,9 +175,9 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     #                 iterations_count[0])
 
 
-def resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, res_manager):
+def resolve_remove_resources_in_process(iteration_info: IterationNextType, iterations_handler, iterations_count, res_manager):
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
-    if pools_info is None:
+    if pools_info is None or simulation_info is None:
         return None
     iterations_count[0] += 1
 
@@ -192,6 +203,7 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                 ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
                 if ready_to_sim[0]:
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
                     iterations_handler.time_table_path = new_res_manager.time_table
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -233,6 +245,7 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                 ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
                 if ready_to_sim[0]:
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
                     iterations_handler.time_table_path = new_res_manager.time_table
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -250,7 +263,7 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
     return False
 
 
-def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count,
+def solution_resolve_optimization(iteration_info: IterationNextType, iterations_handler, iterations_count,
                                   approach):
     s1 = False
     s2 = False
@@ -258,28 +271,28 @@ def solution_resolve_optimization(iteration_info, iterations_handler, iterations
     s4 = False
     s5 = False
     if approach == 'only_calendar' or approach == 'combined':
-        print("WT")
+        print("Waiting Time")
         s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
                                                       iterations_handler.resource_manager)
         print("Cost")
         s2 = solution_traces_optimize_cost(iteration_info, iterations_handler,
                                            iterations_count, iterations_handler.resource_manager)
-        print("IT")
+        print("Idle Time")
         s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler,
                                                    iterations_count, iterations_handler.resource_manager)
 
     if approach == 'only_add_remove' or approach == 'combined':
-        print("WT | Add")
+        print("Waiting Time | Add Resource")
         s4 = resolve_add_resources_in_process(iteration_info, iterations_handler,
                                               iterations_count, iterations_handler.resource_manager)
-        print("Cost | Remove")
+        print("Cost | Remove Resource")
         s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler,
                                                  iterations_count, iterations_handler.resource_manager)
 
     return s1 or s2 or s3 or s4 or s5
 
 
-def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):
+def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences) -> tuple[bool, Optional[RosterManager]]:
     # 0.1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
     shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
     shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
@@ -381,7 +394,7 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
 # 3. For each task where resource no longer performs, remove task_resource_distribution
 
 
-def resolve_remove_resource_json_information(resource, roster_manager):
+def resolve_remove_resource_json_information(resource, roster_manager) -> tuple[bool, Optional[RosterManager]]:
     # 1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
     shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
     shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
@@ -693,6 +706,7 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                 if ready_to_sim[0]:
                     # Update it_handler RosterManager() with new RosterManager()
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
                     iterations_handler.time_table_path = new_res_manager.time_table
 
@@ -740,6 +754,7 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     if ready_to_sim[0]:
                         # Update it_handler RosterManager() with new RosterManager()
                         new_res_manager = ready_to_sim[1]
+                        assert new_res_manager is not None
                         iterations_handler.resource_manager = new_res_manager
                         iterations_handler.time_table_path = new_res_manager.time_table
 
@@ -879,7 +894,7 @@ def solution_sorting_by_pool_outturn(iteration_info, iterations_handler, iterati
         sorted(pools_info.pools.items(), key=lambda x: simulation_info.pool_time_outturn(x[1].resource_name),
                reverse=True)]
 
-    mean_outturn = [0, 0]
+    mean_outturn: list[float] = [0, 0]
     for pool in sorted_pools[0]:
         mean_outturn[0] += simulation_info.pool_cost_outturn(pool[0])
         mean_outturn[1] += simulation_info.pool_time_outturn(pool[0])
@@ -1113,7 +1128,7 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
     return False
 
 
-def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count, resource_manager):
+def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count, resource_manager) -> Optional[bool]:
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
         return None

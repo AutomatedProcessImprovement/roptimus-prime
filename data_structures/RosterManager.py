@@ -2,6 +2,7 @@ import json
 import os
 import tempfile
 
+from data_structures.ResourceInfo import Resource
 from data_structures.RosterInfo import Roster
 
 
@@ -48,7 +49,7 @@ class RosterManager:
         return self.roster.resources
 
     def get_all_resources_in_dict(self):
-        res_dict = dict()
+        res_dict: dict[str, Resource] = dict()
         for res in self.get_all_resources():
             res_dict[res.id] = res
         return res_dict

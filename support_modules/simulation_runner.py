@@ -127,4 +127,4 @@ def extract_simulation_dates_from_simulation_log(file_path):
 
 def parse_date(date_str):
     return datetime.datetime.strptime(
-        re.search(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', date_str).group(), '%Y-%m-%d %H:%M:%S')
+        re.search(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', date_str).group(), '%Y-%m-%d %H:%M:%S') # type: ignore

@@ -3,7 +3,7 @@ import os
 import shutil
 import tempfile
 
-from pareto_algorithms_and_metrics.hill_climb import hill_climb
+from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import initialize_files, reset_after_each_execution, reset_file_information
 from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics
@@ -118,7 +118,7 @@ APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule le
 #         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path=None, log_name=None):
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None):
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -187,47 +187,47 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_calendar')
+                       False, False, 'only_calendar', iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_calendar')
+                       False, True, 'only_calendar', iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_add_remove')
+                       False, False, 'only_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_add_remove')
+                       False, True, 'only_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['combined']:
         if to_execute['HC-STRICT']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'combined')
+                       False, False, 'combined',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'combined')
+                       False, True, 'combined',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_calendar_then_add_remove')
+                       False, False, 'first_calendar_then_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_calendar_then_add_remove')
+                       False, True, 'first_calendar_then_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_add_remove_then_calendar')
+                       False, False, 'first_add_remove_then_calendar',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_add_remove_then_calendar')
+                       False, True, 'first_add_remove_then_calendar',iteration_callback)
             reset_after_each_execution(save_path)
 
     if to_execute['METRICS']:
