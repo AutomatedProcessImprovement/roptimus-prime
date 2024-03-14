@@ -6,6 +6,7 @@ from typing import List
 from data_structures.ResourceInfo import Resource
 from data_structures.RosterInfo import Roster
 from data_structures.timetable import ResourceCalendarsItem, TimetableType
+from support_modules.file_manager import  TMP_FOLDER
 
 
 class RosterManager:
@@ -14,14 +15,9 @@ class RosterManager:
         self.time_table_path: str = time_table_path
         self.blocks = int(self.roster.shift_block / 60)
         self.constraints_path = constraints_path
-
-        # self.temp_timetable = "./temp_files/temp_timetable.json"
-        # self.temp_constraints = "./temp_files/temp_constraints.json"
-
-        curr_dir_path = os.path.abspath(os.path.dirname(__file__))
         
-        self.temp_timetable = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'temp_timetable.json'))
-        self.temp_constraints = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'temp_constraints.json'))
+        self.intermediate_timetable_path = os.path.abspath(os.path.join(TMP_FOLDER, 'intermediate_timetable.json'))
+        self.intermediate_constraints_path = os.path.abspath(os.path.join(TMP_FOLDER, 'intermediate_constraints.json'))
 
 
         """
@@ -152,15 +148,13 @@ class RosterManager:
                         'resource_calendars': self.to_json()}
 
     def write_to_file(self):
-        out_path = self.time_table_path
-
         with open(self.time_table_path, 'r') as t_read:
             ttb:TimetableType = json.load(t_read)
         
         rest_of_info = self.generateTimetableJson(ttb)
 
-        with open(out_path, 'w') as out:
+        with open(self.time_table_path, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
         out.close()
 
-        return out_path
+        return self.time_table_path

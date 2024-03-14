@@ -83,3 +83,20 @@ class SimulationInfo:
 
     def resource_utilization_for(self, pool_name):
         return self.pool_utilization[pool_name] if pool_name in self.pool_utilization[pool_name] else 0
+
+    def to_json(self):
+        return {
+            'pools_info': self.pools_info.to_json(),
+            'mean_process_cycle_time': self.mean_process_cycle_time,
+            'simulation_start_date': str(self.simulation_start_date) if self.simulation_start_date is not None else None,
+            'simulation_end_date': str(self.simulation_end_date) if self.simulation_end_date is not None else None,
+            'simulation_time': self.simulation_time,
+            'deviation_info': self.deviation_info.to_json(),
+            'pool_utilization': self.pool_utilization,
+            'pool_time': self.pool_time,
+            'pool_cost': self.pool_cost,
+            'total_pool_cost': self.total_pool_cost,
+            'total_pool_time': self.total_pool_time,
+            'available_time': self.available_time
+        }
+        

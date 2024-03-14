@@ -50,6 +50,13 @@ class DeviationInfo:
         if self.dev_type == 1:
             return min(self.p_execution_duration_deviation, self.p_cycle_time_deviation)
         return max(self.p_execution_duration_deviation, self.p_cycle_time_deviation)
+    
+    def to_json(self):
+        return {
+            "cycle_time_deviation": self.p_cycle_time_deviation,
+            "execution_duration_deviation": self.p_execution_duration_deviation,
+            "dev_type": self.dev_type
+        }
 
 
 class SolutionOutputObject:
@@ -81,6 +88,3 @@ class SolutionOutputParetoValue(TypedDict):
     median_cycle_time: float
     median_execution_cost: float
     
-
-class SolutionJSONOutput(TypedDict):
-    pass

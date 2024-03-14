@@ -15,7 +15,7 @@ from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 
 from support_modules.file_manager import read_stats_file
-from support_modules.file_manager import temp_bpmn_file
+from support_modules.file_manager import BACKUP_BPMN_PATH
 
 from support_modules.file_manager import save_stats_file
 
@@ -23,7 +23,7 @@ from support_modules.file_manager import save_stats_file
 def refined_hill_pareto(log_name, xes_path, bpmn_path, max_func_ev, non_opt_ratio, tot_simulations, is_tabu, with_mad):
     cost_type = 1
 
-    copyfile(bpmn_path, temp_bpmn_file)
+    copyfile(bpmn_path, BACKUP_BPMN_PATH)
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
 

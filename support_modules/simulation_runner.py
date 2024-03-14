@@ -7,7 +7,7 @@ import os
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 
-from support_modules.file_manager import temp_bpmn_file
+from support_modules.file_manager import BACKUP_BPMN_PATH
 from support_modules.file_manager import save_simulation_results
 from support_modules.file_manager import load_simulation_result
 
@@ -17,7 +17,7 @@ def perform_simulation(pools_info,
                        simulations_count,
                        solution_index,
                        bimp_engine_path="./bimp_simulation_engine/qbp-simulator-engine.jar",
-                       model_file_path=temp_bpmn_file,
+                       model_file_path=BACKUP_BPMN_PATH,
                        results_file_path="./output_files/bimp_temp_files/output.csv",
                        simulation_log="./output_files/bimp_temp_files/output.txt"):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))

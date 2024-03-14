@@ -342,6 +342,28 @@ class Resource:
     # Compare two resources with each other
     def __eq__(self, other):
         return self.id == other.id  # and self.resource_name == other.resource_name
+    
+    def to_json(self):
+        return {
+            'id': self.id,
+            'resource_name': self.resource_name,
+            'time_var': self.time_var,
+            'total_amount': self.total_amount,
+            'cost_per_hour': self.cost_per_hour,
+            'custom_id': self.custom_id,
+            'max_weekly_cap': self.max_weekly_cap,
+            'max_daily_cap': self.max_daily_cap,
+            'max_consecutive_cap': self.max_consecutive_cap,
+            'max_shifts_day': self.max_shifts_day,
+            'max_shifts_week': self.max_shifts_week,
+            'is_human': self.is_human,
+            'daily_start_times': self.daily_start_times,
+            'never_work_masks': self.never_work_masks,
+            'always_work_masks': self.always_work_masks,
+            'day_free_cap': self.day_free_cap,
+            'remaining_shifts': self.remaining_shifts,
+            'shifts': self.shifts.to_dict(orient='index')
+        }
 
     # Write Resource object to a dict for easy conversion to JSON
     # TODO Rewrite bits instead of lists

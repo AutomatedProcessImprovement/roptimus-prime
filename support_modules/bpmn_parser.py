@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from data_structures.pools_info import PoolInfo
-from support_modules.file_manager import temp_bpmn_file
+from support_modules.file_manager import BACKUP_BPMN_PATH
 
 bpmn_schema_url = 'http://www.omg.org/spec/BPMN/20100524/MODEL'
 camunda_schema_url = 'http://camunda.org/schema/1.0/bpmn'
@@ -11,7 +11,7 @@ simod_ns = {'qbp': 'http://www.qbp-simulator.com/Schema201212'}
 
 
 def update_resource_pools(resource_pools={}, task_pools={}, task_ids={}):
-    tree = ET.parse(temp_bpmn_file)
+    tree = ET.parse(BACKUP_BPMN_PATH)
     root = tree.getroot()
 
     if len(task_pools) > 0:
@@ -26,11 +26,11 @@ def update_resource_pools(resource_pools={}, task_pools={}, task_ids={}):
         bpmn_resources = root.find('xmlns:process', bpmn_element_ns).find('xmlns:extensionElements', bpmn_element_ns).find("qbp:processSimulationInfo", simod_ns).find("qbp:resources", simod_ns)
         for resource in bpmn_resources:
             resource.attrib["totalAmount"] = str(resource_pools[resource.attrib["name"]].total_amount)
-        tree.write(temp_bpmn_file)
+        tree.write(BACKUP_BPMN_PATH)
 
 
 def update_resource_cost(resource_costs={}):
-    tree = ET.parse(temp_bpmn_file)
+    tree = ET.parse(BACKUP_BPMN_PATH)
     root = tree.getroot()
 
     bpmn_resources = root.find('xmlns:process', bpmn_element_ns).find('xmlns:extensionElements', bpmn_element_ns).find("qbp:processSimulationInfo", simod_ns).find("qbp:resources", simod_ns)
@@ -38,11 +38,11 @@ def update_resource_cost(resource_costs={}):
         # resource.attrib["costPerHour"] = "1" if len(resource_costs) == 0 \
         #     else str(resource_costs[resource.attrib["name"]])
         pass
-    tree.write(temp_bpmn_file)
+    tree.write(BACKUP_BPMN_PATH)
 
 
 def parse_simulation_model(resource_manager):
-    tree = ET.parse(temp_bpmn_file)
+    tree = ET.parse(BACKUP_BPMN_PATH)
     root = tree.getroot()
     # descendants = list(root.iter())
     simod_root = root.find('xmlns:process', bpmn_element_ns).find('xmlns:extensionElements', bpmn_element_ns).find('qbp:processSimulationInfo', simod_ns)

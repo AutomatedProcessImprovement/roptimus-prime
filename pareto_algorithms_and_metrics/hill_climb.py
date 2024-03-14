@@ -15,7 +15,7 @@ from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
 from data_structures.timetable import ResourceListItem, TimetableType
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
-from support_modules.file_manager import save_stats_file, read_stats_file
+from support_modules.file_manager import BACKUP_BPMN_PATH, save_stats_file, read_stats_file
 from support_modules.helpers import _list_to_binary, _bitmap_to_valid_structure
 from pareto_algorithms_and_metrics.iterations_handler import IterationHandler, IterationNextType
 from data_structures.RosterManager import RosterManager
@@ -25,21 +25,21 @@ curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
 IterationCallbackType = Optional[Callable[[IterationNextType], None]]
 
-def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach, iteration_callback:IterationCallbackType=None):
+def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None):
     cost_type = 1
     max_func_ev = int(max_func_ev)
     non_opt_ratio = float(non_opt_ratio)
 
     # SETUP
-    temp_bpmn_file = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', 'CopiedModel.bpmn'))
-    copyfile(bpmn_path, temp_bpmn_file)
-    rm = RosterManager(approach, time_table, constraints)
+    
+    copyfile(bpmn_path, BACKUP_BPMN_PATH)
+    rosterManager = RosterManager(approach, time_table_path, constraints_path)
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
     algorithm_name += "_" + approach
 
-    initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
-    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rm, iteration_callback)
+    initial_pools_info = PoolInfo(rosterManager.get_all_resources_in_dict(), rosterManager.get_task_pools())
+    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rosterManager, iteration_callback)
     max_iterations_reached = True
 
     iterations_count = [0]
@@ -177,7 +177,7 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     #                 iterations_count[0])
 
 
-def resolve_remove_resources_in_process(iteration_info: IterationNextType, iterations_handler, iterations_count, res_manager):
+def resolve_remove_resources_in_process(iteration_info: IterationNextType, iterations_handler:IterationHandler, iterations_count: list[int], res_manager: RosterManager):
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None or simulation_info is None:
         return None
@@ -296,8 +296,8 @@ def solution_resolve_optimization(iteration_info: IterationNextType, iterations_
 
 def resolve_reschedule_resource_json_information(resource: ResourceListItem, roster_manager: RosterManager, task_to_improve: str, task_resource_occurences) -> tuple[bool, Optional[RosterManager]]:
     # 0.1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
-    shutil.copyfile(roster_manager.time_table_path, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_path, roster_manager.temp_constraints)
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
     try:
         # 1. Find resource and check his tasks
         tasks_resource_can_perform = resource['assigned_tasks']
@@ -398,8 +398,8 @@ def resolve_reschedule_resource_json_information(resource: ResourceListItem, ros
 
 def resolve_remove_resource_json_information(resource:ResourceListItem, roster_manager:RosterManager) -> tuple[bool, Optional[RosterManager]]:
     # 1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
-    shutil.copyfile(roster_manager.time_table_path, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_path, roster_manager.temp_constraints)
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
 
     try:
         resource_id = resource['id']
@@ -472,8 +472,8 @@ def resolve_remove_resource_json_information(resource:ResourceListItem, roster_m
 
 
 def resolve_add_resource_json_information(resource:ResourceListItem, roster_manager: RosterManager, task_to_improve:str):
-    shutil.copyfile(roster_manager.time_table_path, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_path, roster_manager.temp_constraints)
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
     # Step 1: Create copy of current timetable.json and constraints.json
     try:
         # Collect timetable information that will be modified
@@ -628,8 +628,8 @@ def _reset_jsons_rm_ith(roster_manager: RosterManager, iterations_handler:Iterat
 
 
 def _reset_jsons(roster_manager:RosterManager):
-    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table_path)
-    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_path)
+    shutil.copyfile(roster_manager.intermediate_timetable_path, roster_manager.time_table_path)
+    shutil.copyfile(roster_manager.intermediate_constraints_path, roster_manager.constraints_path)
 
 
 def resolve_add_resources_in_process(iteration_info:IterationNextType, iterations_handler:IterationHandler, iterations_count:list[int], roster_manager:RosterManager):

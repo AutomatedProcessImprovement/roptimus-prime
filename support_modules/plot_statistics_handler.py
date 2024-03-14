@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from data_structures.solution_space import SolutionOutputObject, SolutionOutputParetoValue
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults, GlobalParetoMetrics
-from support_modules.file_manager import solutions_order_stats_file, experiments_plots
+from support_modules.file_manager import solutions_order_stats_file, EXPERIMENTS_PLOTS_PATH
 
 
 
@@ -16,7 +16,7 @@ def print_line(file_writer, to_print):
 
 
 def setup_dir(log_name):
-    file_path = "%s\\%s" % (experiments_plots, log_name)
+    file_path = "%s\\%s" % (EXPERIMENTS_PLOTS_PATH, log_name)
     if not os.path.exists(file_path):
         os.makedirs(file_path)
     return file_path + '\\'
@@ -36,7 +36,6 @@ def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str)
     i_mct = initial_metrics.median_cycle_time
     i_mec = initial_metrics.median_execution_cost
 
-    i_mct_mec = (i_mct, i_mec)
 
     solution_objects = []
     for alg in p_metrics.algorithm_results:
@@ -46,8 +45,8 @@ def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str)
         [hyperarea_diff, hausdorff_dist, delta, purity] = p_metrics.compute_metrics(p_metrics.joint_pareto_info)
         [in_pareto, ave_time, ave_cost] = find_common_elements(p_metrics.joint_pareto_info, p_metrics.joint_pareto_info)
 
-        time_metric = i_mct_mec[0] / ave_time
-        cost_metric = i_mct_mec[1] / ave_cost
+        time_metric = i_mct / ave_time
+        cost_metric = i_mec / ave_cost
         general_info = (in_pareto, ave_time, ave_cost)
         metrics = (hyperarea_diff, hausdorff_dist, delta, purity)
         impr_index= (time_metric, cost_metric)
@@ -158,7 +157,7 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
 
     cost_metric = i_mct_mec[1] / ave_cost
     time_metric = i_mct_mec[0] / ave_time
-    file_path = "%s\\%s_%s.txt" % (experiments_plots, l_name, a_name)
+    file_path = "%s\\%s_%s.txt" % (EXPERIMENTS_PLOTS_PATH, l_name, a_name)
     if 'joint_pareto' not in alg_name and 'initial' not in full_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])

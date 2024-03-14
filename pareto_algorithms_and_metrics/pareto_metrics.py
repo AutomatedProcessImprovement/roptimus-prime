@@ -7,7 +7,7 @@ from typing import Dict
 
 from data_structures.constraints import ConstraintsType
 from data_structures.solution_space import SolutionSpace
-from support_modules.file_manager import StatsType, read_stats_file
+from support_modules.file_manager import SOLUTIONS_FOLDER, StatsType, read_stats_file
 from data_structures.timetable import  TimetableType
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
@@ -55,9 +55,9 @@ class AlgorithmResults:
         for key in self.pareto_front:
             print(key)
 
-            with open(os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files/'+str(key)+"/constraints.json")), 'r') as c_read:
+            with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"constraints.json")), 'r') as c_read:
                 cons: ConstraintsType = json.load(c_read)
-            with open(os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files/'+str(key)+"/timetable.json")), 'r') as t_read:
+            with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"timetable.json")), 'r') as t_read:
                 ttb: TimetableType = json.load(t_read)
 
             self.pareto_front[key].sim_params = ttb

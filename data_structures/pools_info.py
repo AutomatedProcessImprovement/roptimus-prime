@@ -38,6 +38,14 @@ class PoolInfo:
     def get_pool_for(self, task_name):
         if task_name in self.task_pools:
             return self.task_pools[task_name]
+        
+    def to_json(self):
+        return {
+            'pools': {k: v.to_json() for k, v in self.pools.items()},
+            'task_pools': self.task_pools,
+            'task_allocations': self.task_allocations,
+            'id': self.id
+        }
 
 
 # class Resource:

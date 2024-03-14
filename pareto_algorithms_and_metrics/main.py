@@ -5,7 +5,7 @@ import tempfile
 
 from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
-from support_modules.file_manager import initialize_files, reset_after_each_execution, reset_file_information
+from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, reset_after_each_execution, reset_file_information
 from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics
 # from test_assets.experiments.experiment_setup import experiments_file_paths, experiments
 
@@ -168,65 +168,64 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
     log_name = log_name
 
     # Path where to save copies of original cons/simparams
-    temp_files_path = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/', ))
-    subfolders = ['output_files', 'json_files', "experiment_stats","explored_allocations",    "simulation_results"]
-    for subfolder in subfolders:
-        os.makedirs(os.path.abspath(os.path.join(temp_files_path, subfolder)), exist_ok=True)
+    save_path = TMP_FOLDER
 
+    print("Running optimization for: " + log_name)
+    print("Save path: " + save_path)
     
-    # path_to_copies = ".\\temp_files"
-    save_path = temp_files_path
-    
-    
-
     try:
         initialize_files(save_path, bpmn_path, sim_params_path, constraints_path)
     except Exception:
         print("Oh no")
 
+    tmp_bpmn_path = os.path.join(save_path, "model.bpmn")
+    tmp_timetable_path = os.path.join(save_path, "timetable.json")
+    tmp_constraints_path = os.path.join(save_path, "constraints.json")
+
+
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_calendar', iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_calendar', iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['combined']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'combined',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'combined',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_calendar_then_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_calendar_then_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_add_remove_then_calendar',iteration_callback)
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, bpmn_path, sim_params_path, constraints_path, max_func_ev, non_opt_ratio,
+            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_add_remove_then_calendar',iteration_callback)
             reset_after_each_execution(save_path)
 
@@ -249,7 +248,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         # return
         output = return_api_solution_statistics(metrics, log_name)
         # print(output)
-        path = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos/',  'json_files'))
+        path = SOLUTIONS_FOLDER
         for _dir in os.listdir(path):
             if _dir != 'ids.txt':
                 shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)

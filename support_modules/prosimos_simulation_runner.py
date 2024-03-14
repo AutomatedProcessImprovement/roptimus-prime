@@ -8,7 +8,7 @@ from prosimos import simulation_engine, simulation_properties_parser
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 from support_modules.file_manager import save_simulation_results
-from support_modules.file_manager import temp_bpmn_file
+from support_modules.file_manager import BACKUP_BPMN_PATH
 
 
 def process_simulations(model_file_path, json_path, total_cases, pools_info):
@@ -76,7 +76,7 @@ def perform_simulations(pools_info,
                         log_name,
                         solution_index,
                         json_path,
-                        model_file_path=temp_bpmn_file,
+                        model_file_path=BACKUP_BPMN_PATH,
                         stat_out_path="./output_files/bimp_temp_files/output.csv",
                         starting_at=None):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
