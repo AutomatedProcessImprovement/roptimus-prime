@@ -1,10 +1,11 @@
 import json
+from typing import List
 
 import pandas as pd
 
 from data_structures.ResourceInfo import Resource
 from data_structures.constraints import ConstraintsType
-from data_structures.timetable import ResourceListItem, TimetableType
+from data_structures.timetable import ResourceCalendarsItem, ResourceListItem, TimetableType
 from support_modules.helpers import sum_of_binary_ones
 
 
@@ -117,5 +118,5 @@ class Roster:
     def print_roster(self):
         return self.roster.to_string()
 
-    def to_json(self):
+    def to_json(self) -> List[ResourceCalendarsItem]:
         return [ob.to_dict() for ob in self.resources]

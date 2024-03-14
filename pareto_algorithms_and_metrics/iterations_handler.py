@@ -22,7 +22,7 @@ class IterationHandler:
         self.is_tabu_search = is_tabu_search
         self.with_mad = with_mad
 
-        self.resource_manager = resource_manager
+        self.resource_manager: RosterManager = resource_manager
         self.time_table_path = self.resource_manager.write_to_file()
 
         simulation = perform_simulations(pools_info, log_name, 0,
@@ -46,7 +46,7 @@ class IterationHandler:
 
         self.jsonManager = JsonManager()
         self.jsonManager.write_accepted_solution_timetable_to_json_files(
-            self.time_table_path, self.resource_manager.constraints_json, pools_info.id)
+            self.time_table_path, self.resource_manager.constraints_path, pools_info.id)
         self.current_starting_id = pools_info.id
 
         self.iteration_callback = iteration_callback
@@ -95,11 +95,11 @@ class IterationHandler:
 
     def clean_up_json(self):
         self.jsonManager.retrieve_json_from_id(self.current_starting_id,
-                                               self.resource_manager.time_table,
-                                               self.resource_manager.constraints_json)
+                                               self.resource_manager.time_table_path,
+                                               self.resource_manager.constraints_path)
         self.resource_manager = RosterManager(self.log_name,
-                                              self.resource_manager.time_table,
-                                              self.resource_manager.constraints_json)
+                                              self.resource_manager.time_table_path,
+                                              self.resource_manager.constraints_path)
 
 
     def _move_next(self) -> IterationNextType:
@@ -111,10 +111,10 @@ class IterationHandler:
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
-                    self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table,
-                                                          self.resource_manager.constraints_json)
-                    self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table,
-                                                          self.resource_manager.constraints_json)
+                    self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table_path,
+                                                          self.resource_manager.constraints_path)
+                    self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table_path,
+                                                          self.resource_manager.constraints_path)
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
@@ -198,8 +198,8 @@ class IterationHandler:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
-            self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
-                                                                            self.resource_manager.constraints_json,
+            self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table_path,
+                                                                            self.resource_manager.constraints_path,
                                                                             pools_info.id)
             return True
         return False

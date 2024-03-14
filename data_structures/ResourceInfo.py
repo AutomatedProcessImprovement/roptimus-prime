@@ -2,6 +2,7 @@ import datetime
 from itertools import groupby
 
 import pandas as pd
+from data_structures.timetable import ResourceCalendarsItem, TimePeriodsItem
 from support_modules.helpers import datetime_range, sum_of_binary_ones, _calculate_shifts, \
     _get_consecutive_shift_lengths, \
     _bitmap_to_valid_structure
@@ -220,7 +221,7 @@ class Resource:
         #         changeable.append(1)
 
     # Verify always_work_mask and never_work_mask
-    def verify_masks(self, day=None):
+    def verify_masks(self, day=None) -> bool: # type: ignore
         if day is None:
             for i in self.always_work_masks:
                 return self.verify_masks(i)
@@ -344,8 +345,8 @@ class Resource:
 
     # Write Resource object to a dict for easy conversion to JSON
     # TODO Rewrite bits instead of lists
-    def to_dict(self):
-        resource_calendar = {'id': self.id + "timetable", 'name': self.id + "timetable", 'time_periods': []}
+    def to_dict(self) -> ResourceCalendarsItem:
+        resource_calendar = ResourceCalendarsItem({'id': self.id + "timetable", 'name': self.id + "timetable", 'time_periods': []})
 
         roster_df = self.shifts[['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']]
         for name, data in roster_df.items():
@@ -362,15 +363,14 @@ class Resource:
             for block in grouped:
                 key, val = block
                 if key == 1:
-                    t_block = {
-                        'from': str(name).upper(),
-                        'to': str(name).upper(),
-                    }
                     shift_start = current_time
                     shift_end = shift_start + (datetime.timedelta(minutes=self.time_var) * val)
-
-                    t_block['beginTime'] = shift_start.time().strftime("%H:%M:%S")
-                    t_block['endTime'] = shift_end.time().strftime("%H:%M:%S")
+                    t_block = TimePeriodsItem({
+                        'from': str(name).upper(),
+                        'to': str(name).upper(),
+                        'beginTime': shift_start.time().strftime("%H:%M:%S"),
+                        'endTime': shift_end.time().strftime("%H:%M:%S")
+                    })
 
                     current_time = shift_end
                     resource_calendar['time_periods'].append(t_block)

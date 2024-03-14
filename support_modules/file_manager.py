@@ -305,6 +305,7 @@ def get_stats_without_writing(generated_solutions: Dict[str, 'IterationInfo'], s
         resource_pools[sol_id] = list()
         for resource_name in pools_info.pools:
             resource_pools[sol_id].append(ResourceInfo(resource_name, 1, simulation_info.pool_utilization[resource_name], 1))
+    return (explored_solutions, resource_pools)
 
 def solutions_order_stats_file(log_name, algorithm_name:str)-> Optional[list[str]]:
     try:

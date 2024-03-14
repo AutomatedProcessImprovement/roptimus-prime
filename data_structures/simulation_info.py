@@ -14,11 +14,11 @@ class SimulationInfo:
 
         self.deviation_info = DeviationInfo(0.0, 0.0)
 
-        self.pool_utilization = dict()
+        self.pool_utilization: Dict[str,float] = dict()
 
-        self.pool_time = dict()
+        self.pool_time: Dict[str,float] = dict()
 
-        self.pool_cost = dict()
+        self.pool_cost:Dict[str,float] = dict()
         self.total_pool_cost: float = 0
         self.total_pool_time: float = 0
 

@@ -1,17 +1,19 @@
 import json
 import os
 import tempfile
+from typing import List
 
 from data_structures.ResourceInfo import Resource
 from data_structures.RosterInfo import Roster
+from data_structures.timetable import ResourceCalendarsItem, TimetableType
 
 
 class RosterManager:
-    def __init__(self, name, time_table, constraints):
-        self.roster = Roster(name, time_table, constraints)
-        self.time_table = time_table
+    def __init__(self, name:str, time_table_path:str, constraints_path:str):
+        self.roster = Roster(name, time_table_path, constraints_path)
+        self.time_table_path: str = time_table_path
         self.blocks = int(self.roster.shift_block / 60)
-        self.constraints_json = constraints
+        self.constraints_path = constraints_path
 
         # self.temp_timetable = "./temp_files/temp_timetable.json"
         # self.temp_constraints = "./temp_files/temp_constraints.json"
@@ -130,7 +132,7 @@ class RosterManager:
 
 
 
-    def to_json(self):
+    def to_json(self) -> List[ResourceCalendarsItem]:
         return self.roster.to_json()
 
     def update_roster(self, pool_info):
@@ -140,19 +142,22 @@ class RosterManager:
                 r.set_shifts(resource.shifts)
         self.write_to_file()
 
-    def write_to_file(self):
-        out_path = self.time_table
-
-        with open(self.time_table, 'r') as t_read:
-            ttb = json.load(t_read)
-
-        rest_of_info = {'resource_profiles': ttb['resource_profiles'],
-                        'arrival_time_distribution': ttb['arrival_time_distribution'],
-                        'arrival_time_calendar': ttb['arrival_time_calendar'],
-                        'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
-                        'task_resource_distribution': ttb['task_resource_distribution'],
-                        'event_distribution': ttb['event_distribution'],
+    def generateTimetableJson(self, existing_timetable: TimetableType):
+         return {'resource_profiles': existing_timetable['resource_profiles'],
+                        'arrival_time_distribution': existing_timetable['arrival_time_distribution'],
+                        'arrival_time_calendar': existing_timetable['arrival_time_calendar'],
+                        'gateway_branching_probabilities': existing_timetable['gateway_branching_probabilities'],
+                        'task_resource_distribution': existing_timetable['task_resource_distribution'],
+                        'event_distribution': existing_timetable['event_distribution'],
                         'resource_calendars': self.to_json()}
+
+    def write_to_file(self):
+        out_path = self.time_table_path
+
+        with open(self.time_table_path, 'r') as t_read:
+            ttb:TimetableType = json.load(t_read)
+        
+        rest_of_info = self.generateTimetableJson(ttb)
 
         with open(out_path, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))

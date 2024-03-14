@@ -80,3 +80,7 @@ class SolutionOutputParetoValue(TypedDict):
     cons_params: ConstraintsType
     median_cycle_time: float
     median_execution_cost: float
+    
+
+class SolutionJSONOutput(TypedDict):
+    pass
