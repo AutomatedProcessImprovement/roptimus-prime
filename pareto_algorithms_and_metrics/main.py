@@ -247,28 +247,27 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
-        # return
-        # output = return_api_solution_statistics_json(metrics, log_name)
-
+    
         output_solutions = []
-        for algorithm in metrics.algorithm_results:
+        for full_name in metrics.algorithm_results:
+            algorithm = full_name.replace(log_name + "_", "")
             output = read_stats_file(log_name, algorithm)
             assert output is not None
 
             explored_results = metrics.algorithm_results["%s_%s" % (log_name, algorithm)]
             
 
-            solution_ids = explored_results.explored_solutions.keys()
+            pareto_front_ids = explored_results.pareto_front.keys()
             
-            for solution_id in solution_ids:
-                sim_params =  explored_results.explored_solutions[solution_id].sim_params
-                cons_params = explored_results.explored_solutions[solution_id].cons_params
+            for pareto_front_id in pareto_front_ids:
+                sim_params =  explored_results.pareto_front[pareto_front_id].sim_params
+                cons_params = explored_results.pareto_front[pareto_front_id].cons_params
                 assert sim_params is not None
                 assert cons_params is not None
-                resources_info = output[1][key]
+                resources_info = output[1][pareto_front_id]
                 resources_info_dict = {resource_info.resource_name: resource_info for resource_info in resources_info}
                 solution = SolutionJson(
-                    solution_space=output[0][key],
+                    solution_space=output[0][pareto_front_id],
                     resources_info=resources_info_dict,
                     sim_params=sim_params,
                     cons_params=cons_params
@@ -284,11 +283,13 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         # print(output)
         path = SOLUTIONS_FOLDER
         for _dir in os.listdir(path):
+            if _dir == '.DS_Store':
+                continue
             if _dir != 'ids.txt':
                 shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
 
         with open(stat_out_path, mode='w') as stat_file:
-            stat_file.write(json.dumps(output))
+            stat_file.write(json.dumps(output, default=lambda x: x.to_json()))
 
         return output
 

@@ -43,6 +43,9 @@ class ResourceInfo:
         self.resource_count = resource_count
         self.resource_utilization = resource_utilization
         self.cost_per_unit = cost_per_unit
+    
+    def to_json(self):
+        return self.__dict__
 
 
 class DeviationInfo:

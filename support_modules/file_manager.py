@@ -122,7 +122,8 @@ def save_one_simulation_result(pools_info, csv_file, simulation_info):
 def load_simulation_result(log_name: str, pools_info: PoolInfo):
     try:
         simulation_info = SimulationInfo(pools_info)
-        with open(SIMULATION_RESULTS_PATH + ("\\%s_median.csv" % log_name), mode='r') as csv_file:
+        median_csv_path = os.path.join(SIMULATION_RESULTS_PATH, ("%s_median.csv" % log_name))
+        with open(median_csv_path, mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             file_section = 0
             for row in csv_reader:
@@ -164,8 +165,10 @@ def parse_date(date_str):
 
 
 def create_genetic_stats_files(log_name):
-    with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='w', newline='') as simul_csv_file:
-        with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_nsga2_pools_info.csv" % log_name), mode='w', newline='') as pools_csv_file:
+    simulation_info_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_simulation_info.csv" % log_name))
+    pools_info_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_pools_info.csv" % log_name))
+    with open(simulation_info_file_path, mode='w', newline='') as simul_csv_file:
+        with open(pools_info_file_path, mode='w', newline='') as pools_csv_file:
             simul_csv_writer = csv.writer(simul_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             write_stats_header(simul_csv_writer)
             pools_csv_writer = csv.writer(pools_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -173,8 +176,10 @@ def create_genetic_stats_files(log_name):
 
 
 def update_genetic_stats_file(log_name, it_number, simulation_info, pools_info):
-    with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='a', newline='') as simul_csv_file:
-        with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_nsga2_pools_info.csv" % log_name), mode='a', newline='') as pools_csv_file:
+    stats_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_simulation_info.csv" % log_name))
+    pools_info_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_pools_info.csv" % log_name))
+    with open(stats_file_path, mode='a', newline='') as simul_csv_file:
+        with open(pools_info_file_path, mode='a', newline='') as pools_csv_file:
             simulation_csv_writer = csv.writer(simul_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             write_simulation_info_stats(simulation_csv_writer, it_number, simulation_info, pools_info)
 
@@ -184,7 +189,8 @@ def update_genetic_stats_file(log_name, it_number, simulation_info, pools_info):
 
 # Method for Hill-Climbing and Tabu Search
 def save_stats_file(log_name:str, algorithm_name:str, generated_solutions: Dict[str, IterationInfo], simulation_order:list[str], iteration_count:int):
-    with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='w', newline='') as csv_file:
+    csv_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_%s.csv" % (log_name, algorithm_name)))
+    with open(csv_file_path, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         csv_writer.writerow(['Total Solutions Generated', "%s" % str(len(generated_solutions))])
@@ -248,9 +254,11 @@ def write_pools_info_stats(csv_writer, it_number, simulation_info, pools_info):
 
 StatsType = tuple[dict[str, SolutionSpace], dict[str, list[ResourceInfo]]]
 def read_genetic_stats_file(log_name:str) -> Optional[StatsType]:
+    stats_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_simulation_info.csv" % log_name))
+    pools_info_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_nsga2_pools_info.csv" % log_name))
     try:
-        with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_nsga2_simulation_info.csv" % log_name), mode='r') as simulation_csv_file:
-            with open(EXPLORED_ALLOCATIONS_PATH + ("%s_nsga2_pools_info.csv" % log_name), mode='r') as pools_csv_file:
+        with open(stats_file_path, mode='r') as simulation_csv_file:
+            with open(pools_info_file_path, mode='r') as pools_csv_file:
                 simulation_csv_reader = csv.reader(simulation_csv_file, delimiter=',')
                 pools_csv_reader = csv.reader(pools_csv_file, delimiter=',')
                 explored_solutions: Dict[str, SolutionSpace] = dict()
@@ -285,7 +293,8 @@ def read_stats_file(log_name:str, algorithm_name:str) -> Optional[StatsType]:
     if algorithm_name == 'nsga2':
         return read_genetic_stats_file(log_name)
     try:
-        with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s_%s.csv" % (log_name, algorithm_name)), mode='r') as csv_file:
+        csv_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_%s.csv" % (log_name, algorithm_name)))
+        with open(csv_file_path, mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             explored_solutions: Dict[str, SolutionSpace] = dict()
             resource_pools:Dict[str, list[ResourceInfo]] = dict()
@@ -324,7 +333,8 @@ def get_stats_without_writing(generated_solutions: Dict[str, 'IterationInfo'], s
 
 def solutions_order_stats_file(log_name, algorithm_name:str)-> Optional[list[str]]:
     try:
-        with open(EXPLORED_ALLOCATIONS_PATH + ("\\%s.csv" % algorithm_name), mode='r') as csv_file:
+        csv_file_path = os.path.join(EXPLORED_ALLOCATIONS_PATH, ("%s_%s.csv" % (log_name, algorithm_name)))
+        with open(csv_file_path, mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             solution_list = list()
             block_count = 0
