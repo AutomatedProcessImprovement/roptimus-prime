@@ -2,11 +2,12 @@ import json
 import os
 import shutil
 import tempfile
+from typing import Optional
 
 from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, reset_after_each_execution, reset_file_information
-from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics
+from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics, return_api_solution_statistics_json
 # from test_assets.experiments.experiment_setup import experiments_file_paths, experiments
 
 TO_EXECUTE = {'HC-STRICT': False,
@@ -118,7 +119,7 @@ APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule le
 #         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None):
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None) -> Optional[GlobalParetoMetrics]:
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -246,7 +247,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
         # return
-        output = return_api_solution_statistics(metrics, log_name)
+        output = return_api_solution_statistics_json(metrics, log_name)
         # print(output)
         path = SOLUTIONS_FOLDER
         for _dir in os.listdir(path):
@@ -256,7 +257,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         with open(stat_out_path, mode='w') as stat_file:
             stat_file.write(json.dumps(output))
 
-        return output
+        return metrics
 
             # with open(save_path+"\\results.json", 'w') as o:
             #     o.write(output)
@@ -265,7 +266,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
 
             # return os.path.abspath(os.path.join(save_path, 'results.json')), output
 
-    return "COMPLETED - NO METRICS"
+    return None
 
 
 def main():

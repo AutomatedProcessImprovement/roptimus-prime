@@ -37,7 +37,7 @@ def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str)
     i_mec = initial_metrics.median_execution_cost
 
 
-    solution_objects = []
+    solution_objects: list[SolutionOutputObject] = []
     for alg in p_metrics.algorithm_results:
         [l_name, a_name] = extract_log_alg_name(alg)
         alg_res = p_metrics.algorithm_results[alg]
@@ -56,7 +56,12 @@ def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str)
                                                        metrics,
                                                        impr_index)
         solution_objects.append(out)
-    json_string = [ob.__dict__ for ob in solution_objects]
+    return solution_objects
+
+def return_api_solution_statistics_json(p_metrics: GlobalParetoMetrics, log_name:str):
+    solutions = return_api_solution_statistics(p_metrics, log_name)
+    json_string = [ob.__dict__ for ob in solutions]
+
     return json_string
 
 
