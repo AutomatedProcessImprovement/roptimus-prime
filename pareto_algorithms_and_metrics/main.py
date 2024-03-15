@@ -4,7 +4,8 @@ import shutil
 import tempfile
 from typing import Optional
 
-from data_structures.solution_json_output import FullOutputJson, SolutionJson
+from data_structures.iteration_info import IterationInfo
+from data_structures.solution_json_output import FullOutputJson
 from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, read_stats_file, reset_after_each_execution, reset_file_information
@@ -184,51 +185,60 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
     tmp_timetable_path = os.path.join(save_path, "timetable.json")
     tmp_constraints_path = os.path.join(save_path, "constraints.json")
 
-
+    solutions_iteration_infos: list[IterationInfo] = []
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_calendar', iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_calendar', iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_add_remove',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_add_remove',iteration_callback)
             reset_after_each_execution(save_path)
     if approaches['combined']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'combined',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'combined',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_calendar_then_add_remove',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_calendar_then_add_remove',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_add_remove_then_calendar',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
-            hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
+            it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_add_remove_then_calendar',iteration_callback)
+            solutions_iteration_infos.extend(it_infos or [])
             reset_after_each_execution(save_path)
 
     if to_execute['METRICS']:
@@ -248,36 +258,11 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
     
-        output_solutions = []
-        for full_name in metrics.algorithm_results:
-            algorithm = full_name.replace(log_name + "_", "")
-            output = read_stats_file(log_name, algorithm)
-            assert output is not None
-
-            explored_results = metrics.algorithm_results["%s_%s" % (log_name, algorithm)]
-            
-
-            pareto_front_ids = explored_results.pareto_front.keys()
-            
-            for pareto_front_id in pareto_front_ids:
-                sim_params =  explored_results.pareto_front[pareto_front_id].sim_params
-                cons_params = explored_results.pareto_front[pareto_front_id].cons_params
-                assert sim_params is not None
-                assert cons_params is not None
-                resources_info = output[1][pareto_front_id]
-                resources_info_dict = {resource_info.resource_name: resource_info for resource_info in resources_info}
-                solution = SolutionJson(
-                    solution_space=output[0][pareto_front_id],
-                    resources_info=resources_info_dict,
-                    sim_params=sim_params,
-                    cons_params=cons_params
-                )
-                output_solutions.append(solution)
-                
+        
         output = FullOutputJson(
             name=log_name,
             initial_simulation_info=None,
-            final_solutions=output_solutions,
+            final_solutions=list(map(lambda x: x.simulation_info, solutions_iteration_infos)),
             current_solution_info=None,
             final_solution_metrics=return_api_solution_statistics(metrics, log_name)
         )
@@ -290,7 +275,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                 shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
 
         with open(stat_out_path, mode='w') as stat_file:
-            stat_file.write(json.dumps(output, default=lambda x: x.to_json()))
+            stat_file.write(json.dumps(output, default=lambda x: x.to_json() if hasattr(x, 'to_json') else x.__dict__))
 
         return output
 

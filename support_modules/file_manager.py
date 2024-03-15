@@ -239,7 +239,7 @@ def write_pools_info_header(csv_writer):
                          'Resource',
                          'Allocation',
                          'Utilization',
-                         'Single Resource cost per time unit'])
+                         'Single Resource cost per time unit',])
 
 
 def write_pools_info_stats(csv_writer, it_number, simulation_info, pools_info):

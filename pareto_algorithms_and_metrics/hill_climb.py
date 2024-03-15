@@ -11,6 +11,7 @@ import datetime
 import random
 from typing import Callable, Optional
 from data_structures.constraints import ConstraintsType
+from data_structures.iteration_info import IterationInfo
 from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
 from data_structures.timetable import ResourceListItem, TimetableType
@@ -25,7 +26,7 @@ curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
 IterationCallbackType = Optional[Callable[[IterationNextType], None]]
 
-def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None):
+def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None) -> Optional[list[IterationInfo]]:
     cost_type = 1
     max_func_ev = int(max_func_ev)
     non_opt_ratio = float(non_opt_ratio)
@@ -71,6 +72,8 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+    
 
     if approach == 'first_calendar_then_add_remove':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
@@ -121,6 +124,8 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+
 
     if approach == 'first_add_remove_then_calendar':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
@@ -169,6 +174,8 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+
 
     # save_stats_file(log_name,
     #                 algorithm_name + ('_with_mad' if with_mad else '_without_mad'),

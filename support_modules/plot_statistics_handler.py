@@ -227,8 +227,9 @@ def plot_data_profiles_microservice(algorithm_results, log_name, data_type=0):
     text_x = []
     for alg_name in algorithm_results:
         [log_name, alg_name_1] = extract_log_alg_name(alg_name)
+        alg_name_without_log_name = alg_name.replace(log_name + "_", "")
         solution_list = \
-            solutions_order_stats_file(log_name, alg_name if 'nsga' not in alg_name else alg_name + "_simulation_info")
+            solutions_order_stats_file(log_name, alg_name_without_log_name if 'nsga' not in alg_name_without_log_name else alg_name_without_log_name + "_simulation_info")
         assert solution_list is not None
         pareto_front = algorithm_results[alg_name].pareto_front
         if data_type == 1:
@@ -360,11 +361,11 @@ def extract_log_alg_name(full_alg_name:str):
     for i in range(1, len(name_list)):
         if name_list[i] in algs:
             break
-        log_name += '_' + name_list[i]
+        
     for i in range(1, len(name_list)):
         if name_list[i] in approaches:
             break
-        log_name += '_' + name_list[i]
+        
     alg_name = ''
     if 'hill' in name_list:
         alg_name = 'HC_'
