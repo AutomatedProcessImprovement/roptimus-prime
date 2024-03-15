@@ -89,16 +89,10 @@ class SolutionOutputObject:
         self.ave_cost :float = 0
         self.time_metric :float = 0
         self.cost_metric :float = 0
-        self.pareto_values: list[SolutionOutputParetoValue] = []
+        
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
     
     
-class SolutionOutputParetoValue(TypedDict):
-    name: str
-    sim_params: TimetableType
-    cons_params: ConstraintsType
-    median_cycle_time: float
-    median_execution_cost: float
-    
+

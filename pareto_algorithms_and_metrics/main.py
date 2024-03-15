@@ -278,7 +278,8 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             name=log_name,
             initial_simulation_info=None,
             final_solutions=output_solutions,
-            current_solution_info=None
+            current_solution_info=None,
+            final_solution_metrics=return_api_solution_statistics(metrics, log_name)
         )
         # print(output)
         path = SOLUTIONS_FOLDER

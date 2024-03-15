@@ -15,5 +15,6 @@ class FullOutputJson(TypedDict):
     name: str
     initial_simulation_info: Optional[SolutionJson]
     final_solutions: Optional[list[SolutionJson]]
+    final_solution_metrics: Optional[list[SolutionOutputObject]]
     current_solution_info: Optional[SolutionJson]
     

@@ -4,7 +4,7 @@ import datetime
 from typing import Dict, TypedDict
 import matplotlib.pyplot as plt
 
-from data_structures.solution_space import SolutionOutputObject, SolutionOutputParetoValue
+from data_structures.solution_space import SolutionOutputObject
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults, GlobalParetoMetrics
 from support_modules.file_manager import solutions_order_stats_file, EXPERIMENTS_PLOTS_PATH
 
@@ -60,9 +60,9 @@ def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str)
 
 def return_api_solution_statistics_json(p_metrics: GlobalParetoMetrics, log_name:str):
     solutions = return_api_solution_statistics(p_metrics, log_name)
-    json_string = [ob.__dict__ for ob in solutions]
+    json_dict = [ob.__dict__ for ob in solutions]
 
-    return json_string
+    return json_dict
 
 
 def return_solution_statistics(p_metrics, log_name):
@@ -417,14 +417,7 @@ def save_allocation_statistics_into_SolutionObject(alg_name:str, algorithm_resul
     out.delta_sprd = metrics[2]
     out.purity_rate = metrics[3]
 
-    out.pareto_values = []
-    for v in algorithm_result.pareto_front:
-        new_obj = SolutionOutputParetoValue(name=v, sim_params=algorithm_result.pareto_front[v].sim_params, # type: ignore
-                       cons_params=algorithm_result.pareto_front[v].cons_params, # type: ignore
-                       median_cycle_time=algorithm_result.pareto_front[v].median_cycle_time,
-                       median_execution_cost=algorithm_result.pareto_front[v].median_execution_cost,)
-        out.pareto_values.append(new_obj)
-
+  
     return out
 
 
