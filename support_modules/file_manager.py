@@ -1,14 +1,17 @@
 import csv
+import json
 import os
 import shutil
 import tempfile
 from datetime import datetime
 from typing import Dict, Optional
+from data_structures.constraints import ConstraintsType
 from data_structures.iteration_info import IterationInfo
 from data_structures.pools_info import PoolInfo
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import SolutionSpace, DeviationInfo
 from data_structures.solution_space import ResourceInfo
+from data_structures.timetable import TimetableType
 
 
 date_format = "%Y-%m-%d %H:%M:%S.%f%z"
@@ -382,3 +385,14 @@ def reset_after_each_execution(save_path):
     print()
     with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,'ids.txt')), 'w'):
         pass
+
+
+def load_timetable_for_key(key: str):
+    with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"timetable.json")), 'r') as t_read:
+        timetable: TimetableType = json.load(t_read)
+    return timetable
+
+def load_constraints_for_key(key: str):
+    with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"constraints.json")), 'r') as c_read:
+        constraints: ConstraintsType = json.load(c_read)
+    return constraints
