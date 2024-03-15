@@ -5,7 +5,7 @@ from data_structures.solution_space import ResourceInfo, SolutionOutputObject, S
 from data_structures.timetable import TimetableType
 from support_modules.file_manager import StatsType
 
-class Solution(TypedDict):
+class SolutionJson(TypedDict):
     solution_space: SolutionSpace
     resources_info: dict[str,ResourceInfo]
     sim_params: TimetableType
@@ -13,7 +13,7 @@ class Solution(TypedDict):
 
 class FullOutputJson(TypedDict):
     name: str
-    initial_simulation_info: Optional[Solution]
-    final_solutions: Optional[list[Solution]]
-    current_solution_info: Optional[Solution]
+    initial_simulation_info: Optional[SolutionJson]
+    final_solutions: Optional[list[SolutionJson]]
+    current_solution_info: Optional[SolutionJson]
     

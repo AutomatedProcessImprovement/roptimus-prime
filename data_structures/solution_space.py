@@ -27,7 +27,7 @@ class SolutionSpace:
 
 
 class ResourceInfo:
-    def __init__(self, resource_name, resource_count, resource_utilization, cost_per_unit):
+    def __init__(self, resource_name:str, resource_count:float, resource_utilization:float, cost_per_unit:float):
         self.resource_name = resource_name
         self.resource_count = resource_count
         self.resource_utilization = resource_utilization

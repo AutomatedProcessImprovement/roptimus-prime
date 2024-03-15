@@ -4,9 +4,10 @@ import shutil
 import tempfile
 from typing import Optional
 
+from data_structures.solution_json_output import FullOutputJson, SolutionJson
 from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
-from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, reset_after_each_execution, reset_file_information
+from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, read_stats_file, reset_after_each_execution, reset_file_information
 from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics, return_api_solution_statistics_json
 # from test_assets.experiments.experiment_setup import experiments_file_paths, experiments
 
@@ -119,7 +120,7 @@ APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule le
 #         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None) -> Optional[GlobalParetoMetrics]:
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None) -> Optional[FullOutputJson]:
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -247,7 +248,39 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
         # return
-        output = return_api_solution_statistics_json(metrics, log_name)
+        # output = return_api_solution_statistics_json(metrics, log_name)
+
+        output_solutions = []
+        for algorithm in metrics.algorithm_results:
+            output = read_stats_file(log_name, algorithm)
+            assert output is not None
+
+            explored_results = metrics.algorithm_results["%s_%s" % (log_name, algorithm)]
+            
+
+            solution_ids = explored_results.explored_solutions.keys()
+            
+            for solution_id in solution_ids:
+                sim_params =  explored_results.explored_solutions[solution_id].sim_params
+                cons_params = explored_results.explored_solutions[solution_id].cons_params
+                assert sim_params is not None
+                assert cons_params is not None
+                resources_info = output[1][key]
+                resources_info_dict = {resource_info.resource_name: resource_info for resource_info in resources_info}
+                solution = SolutionJson(
+                    solution_space=output[0][key],
+                    resources_info=resources_info_dict,
+                    sim_params=sim_params,
+                    cons_params=cons_params
+                )
+                output_solutions.append(solution)
+                
+        output = FullOutputJson(
+            name=log_name,
+            initial_simulation_info=None,
+            final_solutions=output_solutions,
+            current_solution_info=None
+        )
         # print(output)
         path = SOLUTIONS_FOLDER
         for _dir in os.listdir(path):
@@ -257,7 +290,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
         with open(stat_out_path, mode='w') as stat_file:
             stat_file.write(json.dumps(output))
 
-        return metrics
+        return output
 
             # with open(save_path+"\\results.json", 'w') as o:
             #     o.write(output)
