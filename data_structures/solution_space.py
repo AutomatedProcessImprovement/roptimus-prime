@@ -24,6 +24,17 @@ class SolutionSpace:
 
     def execution_cost(self):
         return self.median_execution_cost
+    
+    def to_json(self):
+        return {
+            "it_number": self.it_number,
+            "median_execution_cost": self.median_execution_cost,
+            "median_cycle_time": self.median_cycle_time,
+            "simulation_duration": self._simulation_duration,
+            "deviation_info": self.deviation_info.to_json(),
+            "sim_params": self.sim_params,
+            "cons_params": self.cons_params
+        }
 
 
 class ResourceInfo:
