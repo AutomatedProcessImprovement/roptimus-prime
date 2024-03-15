@@ -1,7 +1,7 @@
 from typing import Optional, TypedDict
 from data_structures.constraints import ConstraintsType
 from data_structures.simulation_info import SimulationInfo
-from data_structures.solution_space import ResourceInfo, SolutionOutputObject, SolutionOutputParetoValue, SolutionSpace
+from data_structures.solution_space import ResourceInfo, SolutionOutputObject, SolutionSpace
 from data_structures.timetable import TimetableType
 from support_modules.file_manager import StatsType
 

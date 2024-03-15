@@ -32,8 +32,6 @@ class SolutionSpace:
             "median_cycle_time": self.median_cycle_time,
             "simulation_duration": self._simulation_duration,
             "deviation_info": self.deviation_info.to_json(),
-            "sim_params": self.sim_params,
-            "cons_params": self.cons_params
         }
 
 
