@@ -397,12 +397,18 @@ def reset_after_each_execution(save_path):
         pass
 
 
-def load_timetable_for_key(key: str):
-    with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"timetable.json")), 'r') as t_read:
+def load_timetable_for_key(key: str) -> Optional[TimetableType]:
+    path = os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"timetable.json"))
+    if not os.path.exists(path):
+        return None
+    with open(path, 'r') as t_read:
         timetable: TimetableType = json.load(t_read)
     return timetable
 
-def load_constraints_for_key(key: str):
-    with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"constraints.json")), 'r') as c_read:
+def load_constraints_for_key(key: str) -> Optional[ConstraintsType]:
+    path = os.path.abspath(os.path.join(SOLUTIONS_FOLDER,str(key),"constraints.json"))
+    if not os.path.exists(path):
+        return None
+    with open(path, 'r') as c_read:
         constraints: ConstraintsType = json.load(c_read)
     return constraints

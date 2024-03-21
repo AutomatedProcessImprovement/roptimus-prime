@@ -5,7 +5,7 @@ import tempfile
 from typing import Optional
 
 from data_structures.iteration_info import IterationInfo
-from data_structures.solution_json_output import FullOutputJson
+from data_structures.solution_json_output import FullOutputJson, iteration_info_to_solution
 from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, read_stats_file, reset_after_each_execution, reset_file_information
@@ -257,13 +257,13 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
-    
-        
+        solution_outputs = list(map(iteration_info_to_solution, solutions_iteration_infos))
+        valid_solution_outputs = [x for x in solution_outputs if x is not None]
         output = FullOutputJson(
             name=log_name,
-            initial_simulation_info=None,
-            final_solutions=list(map(lambda x: x.simulation_info, solutions_iteration_infos)),
-            current_solution_info=None,
+            initial_solution=next(iteration_info_to_solution(x) for x in solutions_iteration_infos if x.it_number == 0),
+            final_solutions=valid_solution_outputs,
+            current_solution=None,
             final_solution_metrics=return_api_solution_statistics(metrics, log_name)
         )
         # print(output)
@@ -287,6 +287,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             # return os.path.abspath(os.path.join(save_path, 'results.json')), output
 
     return None
+
 
 
 def main():
