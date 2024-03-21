@@ -185,61 +185,61 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
     tmp_timetable_path = os.path.join(save_path, "timetable.json")
     tmp_constraints_path = os.path.join(save_path, "constraints.json")
 
-    solutions_iteration_infos_per_aproach: dict[str, list[IterationInfo]] = {}
+    solutions_iteration_infos_per_approach: dict[str, list[IterationInfo]] = {}
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_calendar', iteration_callback)
-            solutions_iteration_infos_per_aproach['only_calendar'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['only_calendar_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_calendar', iteration_callback)
-            solutions_iteration_infos_per_aproach['only_calendar'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['only_calendar_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'only_add_remove',iteration_callback)
-            solutions_iteration_infos_per_aproach['only_add_remove'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['only_add_remove_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'only_add_remove',iteration_callback)
-            solutions_iteration_infos_per_aproach['only_add_remove'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['only_add_remove_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['combined']:
         if to_execute['HC-STRICT']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'combined',iteration_callback)
-            solutions_iteration_infos_per_aproach['combined'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['combined_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'combined',iteration_callback)
-            solutions_iteration_infos_per_aproach['combined'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['combined_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_calendar_then_add_remove']:
         if to_execute['HC-STRICT']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_calendar_then_add_remove',iteration_callback)
-            solutions_iteration_infos_per_aproach['first_calendar_then_add_remove'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['first_calendar_then_add_remove_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_calendar_then_add_remove',iteration_callback)
-            solutions_iteration_infos_per_aproach['first_calendar_then_add_remove'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['first_calendar_then_add_remove_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_add_remove_then_calendar']:
         if to_execute['HC-STRICT']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, False, 'first_add_remove_then_calendar',iteration_callback)
-            solutions_iteration_infos_per_aproach['first_add_remove_then_calendar'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['first_add_remove_then_calendar_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
         if to_execute['HC-FLEX']:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
                        False, True, 'first_add_remove_then_calendar',iteration_callback)
-            solutions_iteration_infos_per_aproach['first_add_remove_then_calendar'] = (it_infos or [])
+            solutions_iteration_infos_per_approach['first_add_remove_then_calendar_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
 
     if to_execute['METRICS']:
@@ -258,7 +258,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
-        solutions_iteration_infos = list(solutions_iteration_infos_per_aproach.values())[0]
+        solutions_iteration_infos = list(solutions_iteration_infos_per_approach.values())[0]
         solution_outputs = list(map(iteration_info_to_solution, solutions_iteration_infos))
         valid_solution_outputs = [x for x in solution_outputs if x is not None]
         output = FullOutputJson(
