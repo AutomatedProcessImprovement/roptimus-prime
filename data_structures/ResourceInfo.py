@@ -362,7 +362,7 @@ class Resource:
             'always_work_masks': self.always_work_masks,
             'day_free_cap': self.day_free_cap,
             'remaining_shifts': self.remaining_shifts,
-            'shifts': self.shifts.to_dict(orient='index')
+            'shifts': self.shifts.to_dict(orient='records')
         }
 
     # Write Resource object to a dict for easy conversion to JSON

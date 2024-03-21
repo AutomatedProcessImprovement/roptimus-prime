@@ -89,7 +89,7 @@ class SolutionOutputObject:
         self.cost_metric :float = 0
         
 
-    def toJSON(self):
+    def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
     
     
