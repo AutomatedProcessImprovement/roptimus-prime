@@ -16,7 +16,7 @@ def _in_non_optimal_distance_thresold(distance):
 
 
 class IterationHandler:
-    def __init__(self, log_name, pools_info:PoolInfo, is_tabu_search, with_mad, resource_manager, iteration_callback):
+    def __init__(self, log_name, pools_info:PoolInfo, is_tabu_search, with_mad, resource_manager):
 
         self.log_name = log_name
         self.is_tabu_search = is_tabu_search
@@ -49,7 +49,6 @@ class IterationHandler:
             self.time_table_path, self.resource_manager.constraints_path, pools_info.id)
         self.current_starting_id = pools_info.id
 
-        self.iteration_callback = iteration_callback
 
     def update_priorities(self):
         for in_discarded in [True, False]:
