@@ -258,12 +258,12 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
                                                  'hill_clmb_first_add_remove_then_calendar_without_mad',
                                                  'hill_clmb_first_add_remove_then_calendar_with_mad',
                                                  ])
-        solutions_iteration_infos = list(solutions_iteration_infos_per_approach.values())[0]
+        solutions_iteration_infos = [ (approach, info)  for (approach, infos) in  solutions_iteration_infos_per_approach.items() for info in infos]
         solution_outputs = list(map(iteration_info_to_solution, solutions_iteration_infos))
         valid_solution_outputs = [x for x in solution_outputs if x is not None]
         output = FullOutputJson(
             name=log_name,
-            initial_solution=next(iteration_info_to_solution(x) for x in solutions_iteration_infos if x.it_number == 0),
+            initial_solution=next(iteration_info_to_solution(x) for x in solutions_iteration_infos if x[1].it_number == 0),
             final_solutions=valid_solution_outputs,
             current_solution=None,
             final_solution_metrics=return_api_solution_statistics(metrics, log_name)

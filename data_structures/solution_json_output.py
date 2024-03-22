@@ -10,6 +10,7 @@ class SolutionJson(TypedDict):
     solution_info: SimulationInfo
     sim_params: TimetableType
     cons_params: ConstraintsType
+    name: str
 
 
 class FullOutputJson(TypedDict):
@@ -20,7 +21,8 @@ class FullOutputJson(TypedDict):
     current_solution: Optional[SolutionJson]
     
 
-def iteration_info_to_solution(iteration: IterationInfo) -> Optional[SolutionJson]:
+def iteration_info_to_solution(iteration_entry: tuple[str, IterationInfo]) -> Optional[SolutionJson]:
+        approach, iteration = iteration_entry
         key = iteration.pools_info.id
         sim_params = load_timetable_for_key(key)
         cons_params = load_constraints_for_key(key)
@@ -30,4 +32,5 @@ def iteration_info_to_solution(iteration: IterationInfo) -> Optional[SolutionJso
             solution_info=iteration.simulation_info,
             sim_params=sim_params,
             cons_params=cons_params,
+            name=f"{approach} #{iteration.it_number}"
         )
