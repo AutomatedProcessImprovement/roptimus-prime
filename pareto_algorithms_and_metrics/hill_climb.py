@@ -24,7 +24,7 @@ import hashlib
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
-IterationCallbackType = Optional[Callable[[IterationNextType, str], None]]
+IterationCallbackType = Optional[Callable[[IterationNextType, str, int], None]]
 
 def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None) -> Optional[list[IterationInfo]]:
     cost_type = 1
@@ -51,7 +51,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
                 break
 
             iteration_info = it_handler.next()
-            iteration_callback(iteration_info, approach) if iteration_callback is not None else None
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
              
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           approach)
@@ -83,7 +83,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
                 break
 
             iteration_info = it_handler.next()
-            iteration_callback(iteration_info, approach) if iteration_callback is not None else None
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
 
@@ -104,7 +104,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
                 break
 
             iteration_info = it_handler.next()
-            iteration_callback(iteration_info, approach) if iteration_callback is not None else None
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
 
@@ -135,7 +135,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
                 break
 
             iteration_info = it_handler.next()
-            iteration_callback(iteration_info, approach) if iteration_callback is not None else None
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
         save_stats_file(log_name,
@@ -155,7 +155,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
                 break
 
             iteration_info = it_handler.next()
-            iteration_callback(iteration_info, approach) if iteration_callback is not None else None
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
         save_stats_file(log_name,
