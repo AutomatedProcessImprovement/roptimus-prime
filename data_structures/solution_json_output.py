@@ -11,6 +11,7 @@ class SolutionJson(TypedDict):
     sim_params: TimetableType
     cons_params: ConstraintsType
     name: str
+    iteration: int
 
 
 class FullOutputJson(TypedDict):
@@ -32,5 +33,6 @@ def iteration_info_to_solution(iteration_entry: tuple[str, IterationInfo]) -> Op
             solution_info=iteration.simulation_info,
             sim_params=sim_params,
             cons_params=cons_params,
-            name=f"{approach} #{iteration.it_number}"
+            name=approach,
+            iteration=iteration.it_number
         )
