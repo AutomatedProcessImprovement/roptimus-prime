@@ -22,11 +22,19 @@ from pareto_algorithms_and_metrics.iterations_handler import IterationHandler, I
 from data_structures.RosterManager import RosterManager
 import hashlib
 
+class Cancelable:
+    should_be_cancelled: bool = False
+
+    def cancel(self):
+        self.should_be_cancelled = True
+
+
+
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
 IterationCallbackType = Optional[Callable[[IterationNextType, str, int], None]]
 
-def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None) -> Optional[list[IterationInfo]]:
+def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None, processing_request:Cancelable = Cancelable()) -> Optional[list[IterationInfo]]:
     cost_type = 1
     max_func_ev = int(max_func_ev)
     non_opt_ratio = float(non_opt_ratio)
@@ -45,7 +53,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
 
     iterations_count = [0]
     if approach == 'only_calendar' or approach == 'only_add_remove' or approach == 'combined':
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
@@ -77,7 +85,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
 
     if approach == 'first_calendar_then_add_remove':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
-        while it_handler.solutions_count() < max_func_ev / 2:
+        while it_handler.solutions_count() < max_func_ev / 2 and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
@@ -98,7 +106,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
         for sol_id, sim_info in it_handler.pareto_front.items():
             it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
 
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
@@ -129,7 +137,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
 
     if approach == 'first_add_remove_then_calendar':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
-        while it_handler.solutions_count() < max_func_ev / 2:
+        while it_handler.solutions_count() < max_func_ev / 2 and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
@@ -149,7 +157,7 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
         for sol_id, sim_info in it_handler.pareto_front.items():
             it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
 
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break

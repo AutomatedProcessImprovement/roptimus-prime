@@ -6,7 +6,7 @@ from typing import Optional
 
 from data_structures.iteration_info import IterationInfo
 from data_structures.solution_json_output import FullOutputJson, iteration_info_to_solution
-from pareto_algorithms_and_metrics.hill_climb import IterationCallbackType, hill_climb
+from pareto_algorithms_and_metrics.hill_climb import Cancelable, IterationCallbackType, hill_climb
 from pareto_algorithms_and_metrics.pareto_metrics import GlobalParetoMetrics
 from support_modules.file_manager import BASE_FOLDER, SOLUTIONS_FOLDER, TMP_FOLDER, initialize_files, read_stats_file, reset_after_each_execution, reset_file_information
 from support_modules.plot_statistics_handler import print_solution_statistics, return_api_solution_statistics, return_api_solution_statistics_json
@@ -121,7 +121,7 @@ APPROACHES = {"only_calendar": True,  # Only perform optimization on schedule le
 #         print_solution_statistics(metrics, log_name)
 
 
-def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None) -> Optional[FullOutputJson]:
+def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach, stat_out_path:str, log_name:str, iteration_callback:IterationCallbackType=None, processing_request: Cancelable=Cancelable()) -> Optional[FullOutputJson]:
 
     # Before running algortihm, clean up temp_files in ./json_files | ./temp_files
 
@@ -187,62 +187,62 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
 
     solutions_iteration_infos_per_approach: dict[str, list[IterationInfo]] = {}
     if approaches['only_calendar'] and not approaches['first_calendar_then_add_remove']:
-        if to_execute['HC-STRICT']:
+        if to_execute['HC-STRICT'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_calendar', iteration_callback)
+                       False, False, 'only_calendar', iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['only_calendar_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
-        if to_execute['HC-FLEX']:
+        if to_execute['HC-FLEX'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_calendar', iteration_callback)
+                       False, True, 'only_calendar', iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['only_calendar_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['only_add_remove'] and not approaches['first_add_remove_then_calendar']:
-        if to_execute['HC-STRICT']:
+        if to_execute['HC-STRICT'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'only_add_remove',iteration_callback)
+                       False, False, 'only_add_remove',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['only_add_remove_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
-        if to_execute['HC-FLEX']:
+        if to_execute['HC-FLEX'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'only_add_remove',iteration_callback)
+                       False, True, 'only_add_remove',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['only_add_remove_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['combined']:
-        if to_execute['HC-STRICT']:
+        if to_execute['HC-STRICT'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'combined',iteration_callback)
+                       False, False, 'combined',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['combined_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
-        if to_execute['HC-FLEX']:
+        if to_execute['HC-FLEX'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'combined',iteration_callback)
+                       False, True, 'combined',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['combined_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_calendar_then_add_remove']:
-        if to_execute['HC-STRICT']:
+        if to_execute['HC-STRICT'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_calendar_then_add_remove',iteration_callback)
+                       False, False, 'first_calendar_then_add_remove',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['first_calendar_then_add_remove_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
-        if to_execute['HC-FLEX']:
+        if to_execute['HC-FLEX'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_calendar_then_add_remove',iteration_callback)
+                       False, True, 'first_calendar_then_add_remove',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['first_calendar_then_add_remove_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
     if approaches['first_add_remove_then_calendar']:
-        if to_execute['HC-STRICT']:
+        if to_execute['HC-STRICT'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, False, 'first_add_remove_then_calendar',iteration_callback)
+                       False, False, 'first_add_remove_then_calendar',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['first_add_remove_then_calendar_without_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
-        if to_execute['HC-FLEX']:
+        if to_execute['HC-FLEX'] and not processing_request.should_be_cancelled:
             it_infos = hill_climb(log_name, tmp_bpmn_path, tmp_timetable_path, tmp_constraints_path, max_func_ev, non_opt_ratio,
-                       False, True, 'first_add_remove_then_calendar',iteration_callback)
+                       False, True, 'first_add_remove_then_calendar',iteration_callback, processing_request)
             solutions_iteration_infos_per_approach['first_add_remove_then_calendar_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
 
-    if to_execute['METRICS']:
+    if to_execute['METRICS'] and not processing_request.should_be_cancelled:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
                                                  'hill_clmb_combined_with_mad',
 
