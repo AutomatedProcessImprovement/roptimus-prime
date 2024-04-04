@@ -242,7 +242,7 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             solutions_iteration_infos_per_approach['first_add_remove_then_calendar_with_mad'] = (it_infos or [])
             reset_after_each_execution(save_path)
 
-    if to_execute['METRICS'] and not processing_request.should_be_cancelled:
+    if to_execute['METRICS']:
         metrics = GlobalParetoMetrics(log_name, ['hill_clmb_combined_without_mad',
                                                  'hill_clmb_combined_with_mad',
 
