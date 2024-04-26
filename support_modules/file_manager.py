@@ -354,6 +354,8 @@ def solutions_order_stats_file(log_name, algorithm_name:str)-> Optional[list[str
 
 
 def initialize_files(save_path, bpmn_path, sim_params_path, constraints_path):
+    # Ensure folder exists
+    os.makedirs(save_path, exist_ok=True)
     # Initialize timetable
     shutil.copyfile(sim_params_path,
                     os.path.join(save_path, "timetable_backup.json"))
