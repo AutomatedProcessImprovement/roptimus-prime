@@ -40,6 +40,8 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
     non_opt_ratio = float(non_opt_ratio)
 
     # SETUP
+    print("Starting Hill-Climb with Files %s, %s, %s" % (bpmn_path, time_table_path, constraints_path))
+
     
     copyfile(bpmn_path, BACKUP_BPMN_PATH)
     rosterManager = RosterManager(approach, time_table_path, constraints_path)
