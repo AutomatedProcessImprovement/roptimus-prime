@@ -28,6 +28,7 @@ def iteration_info_to_solution(iteration_entry: tuple[str, IterationInfo]) -> Op
         sim_params = load_timetable_for_key(key)
         cons_params = load_constraints_for_key(key)
         if sim_params is None or cons_params is None:
+            print(f'Can\'t retrieve Simulation Paramters / Constraints for {iteration.pools_info.id} (#{iteration.it_number})')
             return None
         return SolutionJson(
             solution_info=iteration.simulation_info,

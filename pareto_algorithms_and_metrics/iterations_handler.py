@@ -193,13 +193,16 @@ class IterationHandler:
 
         is_optimal_candidate = self.check_last_pareto_update_distance(pools_info, simulation_info, is_optimal_candidate)
 
+        # We always write the solution down, so we have it for later reference, e.g. b frontend
+        self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table_path,
+                                                                            self.resource_manager.constraints_path,
+                                                                            pools_info.id)
+
         if is_optimal_candidate:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
-            self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table_path,
-                                                                            self.resource_manager.constraints_path,
-                                                                            pools_info.id)
+            
             return True
         return False
 
