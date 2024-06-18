@@ -95,7 +95,7 @@ def perform_simulations(pools_info,
 
     # SEQUENTIAL RUN -
 
-    s_res_list = []
+    s_res_list: list[SimulationInfo] = []
     traces_list = []
     for i in range(3):
         s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
@@ -117,7 +117,7 @@ def perform_simulations(pools_info,
     # return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time), traces
 
 
-def estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time):
+def estimate_median_absolute_deviation(pools_info, log_name, simulation_results:list[SimulationInfo], parallel_start_time):
     by_cycle_time = sorted(simulation_results, key=lambda x: x.mean_process_cycle_time)
     by_duration = sorted(simulation_results, key=lambda x: x.simulation_duration())
     total_parallel_time = time.time() - parallel_start_time

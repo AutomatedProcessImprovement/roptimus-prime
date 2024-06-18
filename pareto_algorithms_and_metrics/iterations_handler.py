@@ -27,7 +27,7 @@ class IterationHandler:
 
         simulation = perform_simulations(pools_info, log_name, 0,
                                          self.time_table_path)
-        simulation_info = simulation[0]
+        simulation_info:SimulationInfo = simulation[0]
         self.traces = simulation[1]
 
         self.generated_solutions:Dict[str,IterationInfo] = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
