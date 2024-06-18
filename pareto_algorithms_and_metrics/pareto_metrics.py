@@ -130,7 +130,7 @@ def find_joint_pareto(algorithm_results: Dict[str,AlgorithmResults], joint_extre
     return (joint_pareto, len(full_solutions))
 
 
-def try_update_pareto_front(new_sol_id, new_solution, pareto_front, with_mad):
+def try_update_pareto_front(new_sol_id:str, new_solution: SolutionSpace, pareto_front: ParetoFrontType, with_mad) :
     if not in_pareto_front(new_solution, pareto_front, with_mad):
         return [False, pareto_front]
     new_pareto = {new_sol_id: new_solution}
@@ -158,18 +158,18 @@ def update_good_bad_points(extreme_values, pareto_front):
         extreme_values.update_good_bad_points(pareto_front[sol_id])
 
 
-def is_dominated_by(dominated_info, dominant_info, with_mad):
+def is_dominated_by(dominated_info:SolutionSpace, dominant_info, with_mad):
     is_not_mad_dominated = is_non_mad_dominated(dominated_info, dominant_info)
     return is_not_mad_dominated and is_mad_dominated(dominated_info, dominant_info) if with_mad \
         else is_not_mad_dominated
 
 
-def is_non_mad_dominated(dominated_info, dominant_info):
+def is_non_mad_dominated(dominated_info:SolutionSpace, dominant_info: SolutionSpace):
     return dominant_info.cycle_time() < dominated_info.cycle_time() \
            and dominant_info.execution_cost() < dominated_info.execution_cost()
 
 
-def is_mad_dominated(dominated_info, dominant_info):
+def is_mad_dominated(dominated_info:SolutionSpace, dominant_info: SolutionSpace):
     dev_dominated = dominated_info.deviation_info
     dev_dominant = dominant_info.deviation_info
     return \
