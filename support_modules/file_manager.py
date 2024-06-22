@@ -50,13 +50,15 @@ xes_simodbpmn_file_paths = {
                              './input_files/bpmn_simod_models/ConsultaDataMining201618.bpmn']
 }
 
-BASE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos'))
+BASE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), 'roptimos-prime'))
 TMP_FOLDER = os.path.abspath(os.path.join(BASE_FOLDER,'temp'))
 OUTPUT_FOLDER = os.path.abspath(os.path.join(BASE_FOLDER,'output'))
 SOLUTIONS_FOLDER = os.path.abspath(os.path.join(BASE_FOLDER,'solutions'))
 EXPERIMENTS_PLOTS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'experiment_stats'))
 EXPLORED_ALLOCATIONS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'explored_allocations'))
 SIMULATION_RESULTS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'simulation_results'))
+
+
 
 folders = [
     TMP_FOLDER,
@@ -71,6 +73,12 @@ for folder in folders:
 
 BACKUP_BPMN_PATH = os.path.abspath(os.path.join(TMP_FOLDER, 'CopiedModel.bpmn'))
 
+C_FOLDER = os.path.abspath(os.path.join(os.path.abspath(os.getcwd()), os.pardir))
+BPM_DEMO_FOLDER = os.path.join(C_FOLDER, 'test_assets', 'demo')
+
+
+def demo_file_path(file_name):
+    return os.path.join(BPM_DEMO_FOLDER, file_name)
 
 
 def reset_file_information(log_name):

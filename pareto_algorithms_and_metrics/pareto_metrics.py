@@ -217,7 +217,11 @@ def gamma_delta_metric(pareto_front:ParetoFrontType, joint_extreme_values:Extrem
         mean_diff_sum:float = 0
         for i in range(0, len(distances)):
             mean_diff_sum += abs(distances[i] - mean_distance)
-        delta_metric = (d_0 + d_n + mean_diff_sum) / (d_0 + d_n + (len(distances) * mean_distance))
+        if (d_0 + d_n + (len(distances) * mean_distance)) > 0:
+            delta_metric = (d_0 + d_n + mean_diff_sum) / (d_0 + d_n + (len(distances) * mean_distance))
+        else:
+            delta_metric = sys.float_info.max
+
         index += 1
     return (gamma_metric, delta_metric)
 

@@ -106,7 +106,7 @@ class IterationHandler:
             current_solution = self.execution_queue.pop_task()
 
             while current_solution is not None:
-                self.generated_solutions
+                # self.generated_solutions
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
