@@ -10,7 +10,7 @@ import os.path
 # ! Always read IDS file first before performing any operation.
 import shutil
 
-from support_modules.file_manager import BACKUP_BPMN_PATH, SOLUTIONS_FOLDER
+from support_modules.file_manager import  SOLUTIONS_FOLDER
 
 
 class JsonManager:
@@ -43,7 +43,7 @@ class JsonManager:
         if not os.path.exists(os.path.join(self.base_path_folders, solution_id)):
             os.makedirs(os.path.join(self.base_path_folders, solution_id))
 
-    def write_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, solution_id):
+    def write_accepted_solution_timetable_to_json_files(self, new_ttb_path, new_cons_path, new_model_path, solution_id):
         out_ttb_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'timetable.json'))
         out_cons_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'constraints.json'))
         out_model_path = os.path.abspath(os.path.join(self.base_path_folders, solution_id, 'model.bpmn'))
@@ -52,8 +52,7 @@ class JsonManager:
         if solution_id is not None:
             shutil.copyfile(new_ttb_path, out_ttb_path)
             shutil.copyfile(new_cons_path, out_cons_path)
-
-            shutil.copyfile(BACKUP_BPMN_PATH, out_model_path)
+            shutil.copyfile(new_model_path, out_model_path)
             return self.write_new_id_to_file(solution_id)
         else:
             print("Err: Solution ID is of type None.")

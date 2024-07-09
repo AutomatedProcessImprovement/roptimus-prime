@@ -24,7 +24,7 @@ def perform_simulation(pools_info,
     simulated_info = load_simulation_result(log_name, pools_info)
     if simulated_info is not None:
         return simulated_info
-    simulation_results = list()
+    simulation_results:list[SimulationInfo] = list()
     skipped = 0
     while simulations_count > 0:
         # Executing simulation with BIMP
@@ -81,7 +81,7 @@ def perform_simulation(pools_info,
     return estimate_median_absolute_deviation(pools_info, log_name, simulation_results)
 
 
-def estimate_median_absolute_deviation(pools_info, log_name, simulation_results):
+def estimate_median_absolute_deviation(pools_info, log_name, simulation_results:list[SimulationInfo]):
     by_cycle_time = sorted(simulation_results, key=lambda x: x.mean_process_cycle_time)
     by_duration = sorted(simulation_results, key=lambda x: x.simulation_duration())
 

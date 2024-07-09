@@ -76,9 +76,8 @@ def perform_simulations(pools_info,
                         log_name,
                         solution_index,
                         json_path,
-                        model_file_path=BACKUP_BPMN_PATH,
-                        stat_out_path="./output_files/bimp_temp_files/output.csv",
-                        starting_at=None):
+                        model_file_path,
+                        ):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
     # simulated_info = load_simulation_result(log_name, pools_info)
     parallel_start_time = time.time()

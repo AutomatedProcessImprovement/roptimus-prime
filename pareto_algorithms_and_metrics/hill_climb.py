@@ -43,8 +43,8 @@ def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, m
     print("Starting Hill-Climb with Files %s, %s, %s" % (bpmn_path, time_table_path, constraints_path))
 
     
-    copyfile(bpmn_path, BACKUP_BPMN_PATH)
-    rosterManager = RosterManager(approach, time_table_path, constraints_path)
+    
+    rosterManager = RosterManager(approach, time_table_path, constraints_path, bpmn_path)
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
     algorithm_name += "_" + approach
@@ -379,7 +379,7 @@ def resolve_reschedule_resource_json_information(resource: ResourceListItem, ros
                 with open(roster_manager.time_table_path, 'w') as out:
                     out.write(json.dumps(rest_of_info, indent=4))
                 return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
-                                           roster_manager.constraints_path)
+                                           roster_manager.constraints_path, roster_manager.bpmn_path)
             else:
                 return False, None
         else:
@@ -481,7 +481,7 @@ def resolve_remove_resource_json_information(resource:ResourceListItem, roster_m
                 c_write.write(json.dumps(constraints_info, indent=4))
 
             return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
-                                       roster_manager.constraints_path)
+                                       roster_manager.constraints_path, roster_manager.bpmn_path)
         else:
             return False, None
     except Exception as n:
@@ -575,7 +575,7 @@ def resolve_add_resource_json_information(resource:ResourceListItem, roster_mana
             t_write.write(json.dumps(constraints_info, indent=4))
 
         return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
-                                   roster_manager.constraints_path)
+                                   roster_manager.constraints_path,roster_manager.bpmn_path)
 
         # 1. Get resource_profile to copy
         # resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
@@ -637,7 +637,7 @@ def _reset_jsons_rm_ith(roster_manager: RosterManager, iterations_handler:Iterat
     _reset_jsons(roster_manager)
 
     new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
-                                    roster_manager.constraints_path)
+                                    roster_manager.constraints_path,roster_manager.bpmn_path)
     iterations_handler.resource_manager = new_res_manager
     iterations_handler.time_table_path = new_res_manager.time_table_path
 

@@ -1,6 +1,7 @@
 import json
 import os
 import tempfile
+import time
 from typing import List
 
 from data_structures.ResourceInfo import Resource
@@ -10,14 +11,18 @@ from support_modules.file_manager import  TMP_FOLDER
 
 
 class RosterManager:
-    def __init__(self, name:str, time_table_path:str, constraints_path:str):
+    def __init__(self, name:str, time_table_path:str, constraints_path:str, bpmn_path: str):
         self.roster = Roster(name, time_table_path, constraints_path)
         self.time_table_path: str = time_table_path
         self.blocks = int(self.roster.shift_block / 60)
         self.constraints_path = constraints_path
+        self.bpmn_path = bpmn_path
+
+        tmp_folder_name = os.path.join(TMP_FOLDER, str(time.time()))
+        os.makedirs(tmp_folder_name, exist_ok=True)
         
-        self.intermediate_timetable_path = os.path.abspath(os.path.join(TMP_FOLDER, 'intermediate_timetable.json'))
-        self.intermediate_constraints_path = os.path.abspath(os.path.join(TMP_FOLDER, 'intermediate_constraints.json'))
+        self.intermediate_timetable_path = os.path.abspath(os.path.join(tmp_folder_name, 'intermediate_timetable.json'))
+        self.intermediate_constraints_path = os.path.abspath(os.path.join(tmp_folder_name,'intermediate_constraints.json'))
 
 
         """

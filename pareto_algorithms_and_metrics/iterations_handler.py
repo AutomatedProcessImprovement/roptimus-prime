@@ -26,7 +26,7 @@ class IterationHandler:
         self.time_table_path = self.resource_manager.write_to_file()
 
         simulation = perform_simulations(pools_info, log_name, 0,
-                                         self.time_table_path)
+                                         self.time_table_path,model_file_path=resource_manager.bpmn_path )
         simulation_info:SimulationInfo = simulation[0]
         self.traces = simulation[1]
 
@@ -46,7 +46,7 @@ class IterationHandler:
 
         self.jsonManager = JsonManager()
         self.jsonManager.write_accepted_solution_timetable_to_json_files(
-            self.time_table_path, self.resource_manager.constraints_path, pools_info.id)
+            self.time_table_path, self.resource_manager.constraints_path, self.resource_manager.bpmn_path, pools_info.id)
         self.current_starting_id = pools_info.id
 
 
@@ -98,7 +98,8 @@ class IterationHandler:
                                                self.resource_manager.constraints_path)
         self.resource_manager = RosterManager(self.log_name,
                                               self.resource_manager.time_table_path,
-                                              self.resource_manager.constraints_path)
+                                              self.resource_manager.constraints_path,
+                                              self.resource_manager.bpmn_path)
 
 
     def _move_next(self) -> IterationNextType:
@@ -113,7 +114,7 @@ class IterationHandler:
                     self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table_path,
                                                           self.resource_manager.constraints_path)
                     self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table_path,
-                                                          self.resource_manager.constraints_path)
+                                                          self.resource_manager.constraints_path, self.resource_manager.bpmn_path)
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
@@ -140,7 +141,9 @@ class IterationHandler:
             (simulation_info, traces) = perform_simulations(pools_info,
                                                             self.log_name,
                                                             len(self.generated_solutions),
-                                                            json_path=self.time_table_path)  # Running/retrieving simulation results
+                                                            json_path=self.time_table_path,
+                                                            model_file_path=self.resource_manager.bpmn_path
+                                                            )  # Running/retrieving simulation results
             self.traces = traces
             if simulation_info is None:
                 self.clean_up_json()
@@ -196,6 +199,7 @@ class IterationHandler:
         # We always write the solution down, so we have it for later reference, e.g. b frontend
         self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table_path,
                                                                             self.resource_manager.constraints_path,
+                                                                            self.resource_manager.bpmn_path,
                                                                             pools_info.id)
 
         if is_optimal_candidate:
