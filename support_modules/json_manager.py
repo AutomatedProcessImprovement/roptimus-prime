@@ -9,6 +9,7 @@ import os.path
 
 # ! Always read IDS file first before performing any operation.
 import shutil
+import time
 
 from support_modules.file_manager import  SOLUTIONS_FOLDER
 
@@ -17,12 +18,14 @@ class JsonManager:
 
     def __init__(self):
         self.ids = []
+
+        time_stamp = str(time.time())
         
-        self.path = os.path.abspath(os.path.join(SOLUTIONS_FOLDER+'/ids.txt'))
+        self.base_path_folders = os.path.abspath(os.path.join(SOLUTIONS_FOLDER, time_stamp))
+        self.path = os.path.abspath(os.path.join(self.base_path_folders,'/ids.txt'))
         if not os.path.exists(self.path):
             with open(self.path, "w") as f:
                 f.write("")
-        self.base_path_folders = SOLUTIONS_FOLDER
         # self.path = "./json_files/ids.txt"
         # self.base_path_folders = "./json_files/"
 
