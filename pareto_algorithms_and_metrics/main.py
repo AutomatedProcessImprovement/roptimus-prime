@@ -287,13 +287,13 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
             current_solution=None,
             final_solution_metrics=return_api_solution_statistics(metrics, log_name)
         )
-        # print(output)
-        path = SOLUTIONS_FOLDER
-        for _dir in os.listdir(path):
-            if _dir == '.DS_Store':
-                continue
-            if _dir != 'ids.txt':
-                shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
+        # TODO: Correctly Clear Output files
+        # path = SOLUTIONS_FOLDER
+        # for _dir in os.listdir(path):
+        #     if _dir == '.DS_Store':
+        #         continue
+        #     if _dir != 'ids.txt':
+        #         shutil.rmtree(os.path.abspath(os.path.join(path, _dir)), ignore_errors=False, onerror=None)
 
         with open(stat_out_path, mode='w') as stat_file:
             stat_file.write(json.dumps(output, default=lambda x: x.to_json() if hasattr(x, 'to_json') else x.__dict__))

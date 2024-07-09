@@ -401,10 +401,6 @@ def reset_after_each_execution(save_path):
     shutil.copyfile(os.path.join(save_path, "model_backup.bpmn"),
                     os.path.join(save_path, "model.bpmn"))
 
-    # After resetting ttb, also wipe out json_files dir and ids.txt
-    print()
-    with open(os.path.abspath(os.path.join(SOLUTIONS_FOLDER,'ids.txt')), 'w'):
-        pass
 
 
 def load_timetable_for_key(key: str) -> Optional[TimetableType]:
