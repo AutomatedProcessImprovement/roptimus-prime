@@ -1,10 +1,13 @@
 import json
 import os
 import datetime
+from typing import Dict, TypedDict
 import matplotlib.pyplot as plt
 
 from data_structures.solution_space import SolutionOutputObject
-from support_modules.file_manager import solutions_order_stats_file, experiments_plots
+from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults, GlobalParetoMetrics
+from support_modules.file_manager import solutions_order_stats_file, EXPERIMENTS_PLOTS_PATH
+
 
 
 def print_line(file_writer, to_print):
@@ -13,13 +16,13 @@ def print_line(file_writer, to_print):
 
 
 def setup_dir(log_name):
-    file_path = "%s\\%s" % (experiments_plots, log_name)
+    file_path = "%s\\%s" % (EXPERIMENTS_PLOTS_PATH, log_name)
     if not os.path.exists(file_path):
         os.makedirs(file_path)
     return file_path + '\\'
 
 
-def return_api_solution_statistics(p_metrics, log_name):
+def return_api_solution_statistics(p_metrics: GlobalParetoMetrics, log_name:str):
     f_eval = plot_data_profiles_microservice(p_metrics.algorithm_results, log_name, 0)
 
     t_f_eval = 0
@@ -29,12 +32,12 @@ def return_api_solution_statistics(p_metrics, log_name):
     for v in p_metrics.algorithm_results.values():
         initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
         break
+    assert initial_metrics is not None
     i_mct = initial_metrics.median_cycle_time
     i_mec = initial_metrics.median_execution_cost
 
-    i_mct_mec = (i_mct, i_mec)
 
-    solution_objects = []
+    solution_objects: list[SolutionOutputObject] = []
     for alg in p_metrics.algorithm_results:
         [l_name, a_name] = extract_log_alg_name(alg)
         alg_res = p_metrics.algorithm_results[alg]
@@ -42,16 +45,24 @@ def return_api_solution_statistics(p_metrics, log_name):
         [hyperarea_diff, hausdorff_dist, delta, purity] = p_metrics.compute_metrics(p_metrics.joint_pareto_info)
         [in_pareto, ave_time, ave_cost] = find_common_elements(p_metrics.joint_pareto_info, p_metrics.joint_pareto_info)
 
-        time_metric = i_mct_mec[0] / ave_time
-        cost_metric = i_mct_mec[1] / ave_cost
+        time_metric = i_mct / ave_time
+        cost_metric = i_mec / ave_cost
+        general_info = (in_pareto, ave_time, ave_cost)
+        metrics = (hyperarea_diff, hausdorff_dist, delta, purity)
+        impr_index= (time_metric, cost_metric)
 
         out = save_allocation_statistics_into_SolutionObject(a_name,alg_res, t_f_eval,
-                                                       [in_pareto, ave_time, ave_cost],
-                                                       [hyperarea_diff, hausdorff_dist, delta, purity],
-                                                       [time_metric, cost_metric])
+                                                       general_info,
+                                                       metrics,
+                                                       impr_index)
         solution_objects.append(out)
-    json_string = [ob.__dict__ for ob in solution_objects]
-    return json_string
+    return solution_objects
+
+def return_api_solution_statistics_json(p_metrics: GlobalParetoMetrics, log_name:str):
+    solutions = return_api_solution_statistics(p_metrics, log_name)
+    json_dict = [ob.__dict__ for ob in solutions]
+
+    return json_dict
 
 
 def return_solution_statistics(p_metrics, log_name):
@@ -63,13 +74,15 @@ def return_solution_statistics(p_metrics, log_name):
     print_line(file_writer, joint_pareto)
     max_leng = len(log_name) + 14
 
-    f_eval = plot_data_profiles_microservice(dir_path, p_metrics.algorithm_results, log_name, 0)
+    f_eval = plot_data_profiles_microservice(p_metrics.algorithm_results, log_name, 0)
     # plot_data_profiles(dir_path, p_metrics.algorithm_results, log_name, 1)
     t_f_eval = 0
     initial_metrics = None
     for v in p_metrics.algorithm_results.values():
         initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
         break
+
+    assert initial_metrics is not None
     i_mct = initial_metrics.median_cycle_time
     i_mec = initial_metrics.median_execution_cost
 
@@ -115,6 +128,7 @@ def print_solution_statistics(p_metrics, log_name):
     for v in p_metrics.algorithm_results.values():
         initial_metrics = v.explored_solutions.get(p_metrics.initial_solution)
         break
+    assert initial_metrics is not None
     i_mct = initial_metrics.median_cycle_time
     i_mec = initial_metrics.median_execution_cost
 
@@ -148,7 +162,7 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
 
     cost_metric = i_mct_mec[1] / ave_cost
     time_metric = i_mct_mec[0] / ave_time
-    file_path = "%s\\%s_%s.txt" % (experiments_plots, l_name, a_name)
+    file_path = "%s\\%s_%s.txt" % (EXPERIMENTS_PLOTS_PATH, l_name, a_name)
     if 'joint_pareto' not in alg_name and 'initial' not in full_name:
         save_allocation_statistics(file_path, p_metric.algorithm_results[full_name], funct_ev,
                                    [in_pareto, ave_time, ave_cost], [hyperarea_diff, hausdorff_dist, delta, purity])
@@ -189,22 +203,22 @@ def print_pareto_info(f_writer, p_metric, alg_name, full_name, funct_ev, max_len
     return file_path
 
 
-def find_common_elements(pareto_front, joint_pareto_info):
-    in_pareto = 0
-    tot_time = 0
-    tot_cost = 0
+def find_common_elements(pareto_front, joint_pareto_info) -> tuple[float,float,float]:
+    in_pareto:float = 0
+    tot_time:float = 0
+    tot_cost:float = 0
     for sol_id in pareto_front:
         tot_time += pareto_front[sol_id].cycle_time()
         tot_cost += pareto_front[sol_id].execution_cost()
         if sol_id in joint_pareto_info:
             in_pareto += 1
-    return [in_pareto,
+    return (in_pareto,
             tot_time / len(pareto_front),
-            tot_cost / len(pareto_front)]
+            tot_cost / len(pareto_front))
 
 
 def plot_data_profiles_microservice(algorithm_results, log_name, data_type=0):
-    func_eval = dict()
+    func_eval: Dict[str, int] = dict()
     colors = ['y', 'r', 'b', 'g', 'k', 'm', '#2ca02c', '#8c564b']
     alg_c = 1
     name_files = ["data_profiles_evaluated_functions", "data_profiles_explored_solutions"]
@@ -213,8 +227,10 @@ def plot_data_profiles_microservice(algorithm_results, log_name, data_type=0):
     text_x = []
     for alg_name in algorithm_results:
         [log_name, alg_name_1] = extract_log_alg_name(alg_name)
+        alg_name_without_log_name = alg_name.replace(log_name + "_", "")
         solution_list = \
-            solutions_order_stats_file(log_name, alg_name if 'nsga' not in alg_name else alg_name + "_simulation_info")
+            solutions_order_stats_file(log_name, alg_name_without_log_name if 'nsga' not in alg_name_without_log_name else alg_name_without_log_name + "_simulation_info")
+        assert solution_list is not None
         pareto_front = algorithm_results[alg_name].pareto_front
         if data_type == 1:
             not_repeated_sol = set()
@@ -265,6 +281,7 @@ def plot_data_profiles(file_path, algorithm_results, log_name, data_type=0):
         [log_name, alg_name_1] = extract_log_alg_name(alg_name)
         solution_list = \
             solutions_order_stats_file(log_name, alg_name if 'nsga' not in alg_name else alg_name + "_simulation_info")
+        assert solution_list is not None
         pareto_front = algorithm_results[alg_name].pareto_front
         if data_type == 1:
             not_repeated_sol = set()
@@ -336,7 +353,7 @@ def plot_pareto_front(file_path, algorithm_results, joint_pareto_info):
         plt.show()
 
 
-def extract_log_alg_name(full_alg_name):
+def extract_log_alg_name(full_alg_name:str):
     name_list = full_alg_name.split("_")
     log_name = name_list[0]
     algs = ['hill', 'tabu', 'nsga2', 'with', 'without']
@@ -344,11 +361,11 @@ def extract_log_alg_name(full_alg_name):
     for i in range(1, len(name_list)):
         if name_list[i] in algs:
             break
-        log_name += '_' + name_list[i]
+        
     for i in range(1, len(name_list)):
         if name_list[i] in approaches:
             break
-        log_name += '_' + name_list[i]
+        
     alg_name = ''
     if 'hill' in name_list:
         alg_name = 'HC_'
@@ -382,7 +399,7 @@ def fill_str(in_str, m_lenght):
     return in_str + (' ' * (m_lenght - len(in_str)))
 
 
-def save_allocation_statistics_into_SolutionObject(alg_name, algorithm_result, funct_eval, general_info, metrics, impr_index):
+def save_allocation_statistics_into_SolutionObject(alg_name:str, algorithm_result:AlgorithmResults, funct_eval: int, general_info: tuple[float, float, float], metrics: tuple[float, float, float, float], impr_index: tuple[float, float]):
 
     out = SolutionOutputObject()
     out.name = alg_name
@@ -401,14 +418,7 @@ def save_allocation_statistics_into_SolutionObject(alg_name, algorithm_result, f
     out.delta_sprd = metrics[2]
     out.purity_rate = metrics[3]
 
-    out.pareto_values = []
-    for v in algorithm_result.pareto_front:
-        new_obj = dict(name=v, sim_params=algorithm_result.pareto_front[v].sim_params,
-                       cons_params=algorithm_result.pareto_front[v].cons_params,
-                       median_cycle_time=algorithm_result.pareto_front[v].median_cycle_time,
-                       median_execution_cost=algorithm_result.pareto_front[v].median_execution_cost,)
-        out.pareto_values.append(new_obj)
-
+  
     return out
 
 
@@ -451,3 +461,5 @@ def print_allocation_info(f_writer, algorithm_result, sol_id, max_len):
                  % (space + a_cost,
                     str(str(datetime.timedelta(seconds=algorithm_result.pareto_front[sol_id].cycle_time())))))
     f_writer.write(to_print)
+
+

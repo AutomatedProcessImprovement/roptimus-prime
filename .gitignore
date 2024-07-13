@@ -7,3 +7,4 @@ dist/
 output_files/
 .pytest_cache/
 env
+temp_files/

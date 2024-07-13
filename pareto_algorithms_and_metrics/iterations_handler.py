@@ -1,18 +1,14 @@
 import copy
+from typing import Dict, Optional
 
 from data_structures.RosterManager import RosterManager
+from data_structures.iteration_info import IterationInfo, IterationNextType
+from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
+from data_structures.simulation_info import SimulationInfo
 from support_modules.prosimos_simulation_runner import perform_simulations
 from pareto_algorithms_and_metrics.pareto_metrics import try_update_pareto_front, min_dist_from_pareto
 from support_modules.json_manager import JsonManager
-
-
-class IterationInfo:
-    def __init__(self, pools_info, simulation_info, it_number, non_optimal_distance=0):
-        self.it_number = it_number
-        self.pools_info = copy.deepcopy(pools_info)
-        self.simulation_info = copy.deepcopy(simulation_info)
-        self.non_optimal_distance = non_optimal_distance
 
 
 def _in_non_optimal_distance_thresold(distance):
@@ -20,21 +16,21 @@ def _in_non_optimal_distance_thresold(distance):
 
 
 class IterationHandler:
-    def __init__(self, log_name, pools_info, is_tabu_search, with_mad, resource_manager):
+    def __init__(self, log_name, pools_info:PoolInfo, is_tabu_search, with_mad, resource_manager):
 
         self.log_name = log_name
         self.is_tabu_search = is_tabu_search
         self.with_mad = with_mad
 
-        self.resource_manager = resource_manager
+        self.resource_manager: RosterManager = resource_manager
         self.time_table_path = self.resource_manager.write_to_file()
 
         simulation = perform_simulations(pools_info, log_name, 0,
-                                         self.time_table_path)
-        simulation_info = simulation[0]
+                                         self.time_table_path,model_file_path=resource_manager.bpmn_path )
+        simulation_info:SimulationInfo = simulation[0]
         self.traces = simulation[1]
 
-        self.generated_solutions = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
+        self.generated_solutions:Dict[str,IterationInfo] = {pools_info.id: IterationInfo(pools_info, simulation_info, 0)}
         self.solution_order = [pools_info.id]
         self.pareto_front = {pools_info.id: simulation_info}
 
@@ -49,18 +45,19 @@ class IterationHandler:
                                       self._solution_quality(simulation_info))
 
         self.jsonManager = JsonManager()
-        self.jsonManager.read_accepted_solution_timetable_to_json_files(
-            self.time_table_path, self.resource_manager.constraints_json, pools_info.id)
+        self.jsonManager.write_accepted_solution_timetable_to_json_files(
+            self.time_table_path, self.resource_manager.constraints_path, self.resource_manager.bpmn_path, pools_info.id)
         self.current_starting_id = pools_info.id
+
 
     def update_priorities(self):
         for in_discarded in [True, False]:
             new_queue = PriorityQueue()
             old_queue = self.discarded_queue if in_discarded else self.execution_queue
             while not old_queue.is_empty():
-                sol_id = old_queue.pop_task()
-                simulation_info = self.generated_solutions[sol_id].simulation_info
-                new_queue.add_task(self.generated_solutions[sol_id].pools_info.id,
+                sol_id = old_queue.pop_task()    
+                simulation_info = self.generated_solutions[sol_id].simulation_info # type: ignore
+                new_queue.add_task(self.generated_solutions[sol_id].pools_info.id, # type: ignore
                                    self._solution_quality(simulation_info))
             if in_discarded:
                 self.discarded_queue = new_queue
@@ -82,48 +79,52 @@ class IterationHandler:
     def pq_size_print(self):
         return len(self.execution_queue.pq)
 
-    def next(self):
+    def next(self) -> IterationNextType:
         to_return = self._move_next()
         if self.is_tabu_search and to_return[0] is None:
             current_solution = self.discarded_queue.pop_task()
-            return [None, None, -1] if current_solution is None \
-                else [self.generated_solutions[current_solution].pools_info,
+            return (None, None, -1) if current_solution is None \
+                else (self.generated_solutions[current_solution].pools_info,
                       self.generated_solutions[current_solution].simulation_info,
-                      self.generated_solutions[current_solution].non_optimal_distance]
+                      self.generated_solutions[current_solution].non_optimal_distance)
         return to_return
+
+    def getCurrentIterationInfo(self):
+        return self.generated_solutions[self.current_starting_id]
 
     def clean_up_json(self):
         self.jsonManager.retrieve_json_from_id(self.current_starting_id,
-                                               self.resource_manager.time_table,
-                                               self.resource_manager.constraints_json)
+                                               self.resource_manager.time_table_path,
+                                               self.resource_manager.constraints_path)
         self.resource_manager = RosterManager(self.log_name,
-                                              self.resource_manager.time_table,
-                                              self.resource_manager.constraints_json)
+                                              self.resource_manager.time_table_path,
+                                              self.resource_manager.constraints_path,
+                                              self.resource_manager.bpmn_path)
 
 
-    def _move_next(self):
+    def _move_next(self) -> IterationNextType:
         if not self.execution_queue.is_empty():
             current_solution = self.execution_queue.pop_task()
 
             while current_solution is not None:
-                self.generated_solutions
+                # self.generated_solutions
                 pools_info = self.generated_solutions[current_solution].pools_info
                 simulation_info = self.generated_solutions[current_solution].simulation_info
                 if pools_info.id in self.pareto_front:
-                    self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table,
-                                                          self.resource_manager.constraints_json)
-                    self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table,
-                                                          self.resource_manager.constraints_json)
+                    self.jsonManager.retrieve_json_from_id(current_solution, self.resource_manager.time_table_path,
+                                                          self.resource_manager.constraints_path)
+                    self.resource_manager = RosterManager(self.log_name, self.resource_manager.time_table_path,
+                                                          self.resource_manager.constraints_path, self.resource_manager.bpmn_path)
                     # self.resource_manager.time_table = "./json_files/"+str(current_solution)+"/timetable.json"
                     # self.resource_manager.constraints_json = "./json_files/"+str(current_solution)+"/constraints.json"
                     self.current_starting_id = current_solution
-                    return [pools_info,
+                    return (pools_info,
                             simulation_info,
-                            self.generated_solutions[current_solution].non_optimal_distance]
+                            self.generated_solutions[current_solution].non_optimal_distance)
                 elif self.is_tabu_search:
                     self.discarded_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
                 current_solution = self.execution_queue.pop_task()
-        return [None, None, -1]
+        return (None, None, -1)
 
     def solutions_count(self):
         return len(self.generated_solutions)
@@ -140,7 +141,9 @@ class IterationHandler:
             (simulation_info, traces) = perform_simulations(pools_info,
                                                             self.log_name,
                                                             len(self.generated_solutions),
-                                                            json_path=self.time_table_path)  # Running/retrieving simulation results
+                                                            json_path=self.time_table_path,
+                                                            model_file_path=self.resource_manager.bpmn_path
+                                                            )  # Running/retrieving simulation results
             self.traces = traces
             if simulation_info is None:
                 self.clean_up_json()
@@ -193,13 +196,17 @@ class IterationHandler:
 
         is_optimal_candidate = self.check_last_pareto_update_distance(pools_info, simulation_info, is_optimal_candidate)
 
+        # We always write the solution down, so we have it for later reference, e.g. b frontend
+        self.jsonManager.write_accepted_solution_timetable_to_json_files(self.resource_manager.time_table_path,
+                                                                            self.resource_manager.constraints_path,
+                                                                            self.resource_manager.bpmn_path,
+                                                                            pools_info.id)
+
         if is_optimal_candidate:
             # IF: New solution is not dominated by the previous current solution
             # AND the dimention that isn't improving does not deviate too much from initial solution
             self.execution_queue.add_task(pools_info.id, self._solution_quality(simulation_info))
-            self.jsonManager.read_accepted_solution_timetable_to_json_files(self.resource_manager.time_table,
-                                                                            self.resource_manager.constraints_json,
-                                                                            pools_info.id)
+            
             return True
         return False
 

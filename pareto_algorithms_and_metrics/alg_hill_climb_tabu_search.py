@@ -15,7 +15,7 @@ from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
 
 from support_modules.file_manager import read_stats_file
-from support_modules.file_manager import temp_bpmn_file
+from support_modules.file_manager import BACKUP_BPMN_PATH
 
 from support_modules.file_manager import save_stats_file
 
@@ -23,7 +23,7 @@ from support_modules.file_manager import save_stats_file
 def refined_hill_pareto(log_name, xes_path, bpmn_path, max_func_ev, non_opt_ratio, tot_simulations, is_tabu, with_mad):
     cost_type = 1
 
-    copyfile(bpmn_path, temp_bpmn_file)
+    copyfile(bpmn_path, BACKUP_BPMN_PATH)
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
 
@@ -73,7 +73,7 @@ def solution_sorting_by_pool_outturn(iteration_info, iterations_handler, iterati
                     sorted(pools_info.pools.items(), key=lambda x: simulation_info.pool_time_outturn(x[1].name),
                            reverse=True)]
 
-    mean_outturn = [0, 0]
+    mean_outturn: list[float] = [0, 0]
     for pool in sorted_pools[0]:
         mean_outturn[0] += simulation_info.pool_cost_outturn(pool[0])
         mean_outturn[1] += simulation_info.pool_time_outturn(pool[0])

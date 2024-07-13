@@ -1,29 +1,29 @@
-import click
 
+from click.decorators import option, pass_context,group
 from pareto_algorithms_and_metrics.main import run_optimization
 
 
-@click.group()
+@group()
 def cli():
     pass
 
 
 @cli.command()
-@click.option('--bpmn_path', required=True,
+@option('--bpmn_path', required=True,
               help='Path to the BPMN model with the process model')
-@click.option('--sim_params_path', required=True,
+@option('--sim_params_path', required=True,
               help='Path to the JSON file with the simulation parameters')
-@click.option('--constraints_path', required=True,
+@option('--constraints_path', required=True,
               help='Path to the JSON file with the resource constraints for the optimization')
-@click.option('--total_iterations', required=True,
+@option('--total_iterations', required=True,
               help='Maximum number of iterations allowed')
-@click.option('--algorithm', required=True,
+@option('--algorithm', required=True,
               help='Algorithm to simulate [HC-STRICT / HC-FLEX]')
-@click.option('--approach', required=False,
+@option('--approach', required=False, default="ARCA",
               help='OPTIONAL: Approach to simulate [CA / AR / CO / CAAR / ARCA / ALL]')
-@click.pass_context
-def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach="ARCA"):
-    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach)
+@pass_context
+def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
+    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach,"opti-output" , "DEFAULT")
 
 
 if __name__ == "__main__":

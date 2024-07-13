@@ -2,8 +2,13 @@ import json
 import os
 import sys
 import math
+import tempfile
+from typing import Dict
 
-from support_modules.file_manager import read_stats_file
+from data_structures.constraints import ConstraintsType
+from data_structures.solution_space import SolutionSpace
+from support_modules.file_manager import SOLUTIONS_FOLDER, StatsType, load_constraints_for_key, load_timetable_for_key, read_stats_file
+from data_structures.timetable import  TimetableType
 
 curr_dir_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -42,28 +47,21 @@ class ExtremeValues:
             self.worst_time_point = [s_cost, s_time]
 
 class AlgorithmResults:
-    def __init__(self, execution_info, with_mad):
+    def __init__(self, execution_info: StatsType, with_mad:bool):
         self.explored_solutions = execution_info[0]
         self.resource_pools = execution_info[1]
         [self.pareto_front, self.initial_solution] = find_pareto_front([self.explored_solutions], with_mad)
 
         for key in self.pareto_front:
-            print(key)
-
-            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/constraints.json")), 'r') as c_read:
-                cons = json.load(c_read)
-            with open(os.path.abspath(os.path.join(curr_dir_path, '..', 'json_files/'+str(key)+"/timetable.json")), 'r') as t_read:
-                ttb = json.load(t_read)
-
-            self.pareto_front[key].sim_params = ttb
-            self.pareto_front[key].cons_params = cons
+            self.pareto_front[key].sim_params = load_timetable_for_key(key)
+            self.pareto_front[key].cons_params = load_constraints_for_key(key)
 
 
-
+ParetoFrontType = dict[str, SolutionSpace]
 class GlobalParetoMetrics:
     def __init__(self, log_name, algorithm_names):
         self.initial_solution = ''
-        self.algorithm_results = dict()
+        self.algorithm_results:Dict[str,AlgorithmResults] = dict()
         self.joint_extreme_values = ExtremeValues()
         for alg_name in algorithm_names:
             execution_info = read_stats_file(log_name, alg_name)
@@ -77,20 +75,20 @@ class GlobalParetoMetrics:
                                                                                    self.joint_extreme_values)
         self.joint_pareto_hyperarea = hyperarea_metric(self.joint_pareto_info, self.joint_extreme_values)
 
-    def compute_metrics(self, pareto_front):
+    def compute_metrics(self, pareto_front: ParetoFrontType) -> tuple[float, float, float, float]:
         gamma_delta = gamma_delta_metric(pareto_front, self.joint_extreme_values)
         hyperarea_diff = hyperarea_ratio(pareto_front, self.joint_extreme_values, self.joint_pareto_hyperarea)
         hausdorff_dist = averaged_hausdorff_distance(pareto_front, self.joint_pareto_info)
         purity = purity_metric(pareto_front, self.joint_pareto_info)
-        return [hyperarea_diff, hausdorff_dist, gamma_delta[1], purity]
+        return (hyperarea_diff, hausdorff_dist, gamma_delta[1], purity)
 
 
 # ------------- Pareto Front Operations --------------------- #
 # ----------------------------------------------------------- #
 
-def find_pareto_front(explored_solutions_list, with_mad):
-    pareto_front = dict()
-    f_pareto_front = dict()
+def find_pareto_front(explored_solutions_list: list[dict[str, SolutionSpace]], with_mad: bool):
+    pareto_front:ParetoFrontType = dict()
+    f_pareto_front:ParetoFrontType = dict()
     initial_solution = ''
     for explored_solutions in explored_solutions_list:
         for sol_id in explored_solutions:
@@ -106,13 +104,13 @@ def find_pareto_front(explored_solutions_list, with_mad):
                 pareto_front[sol_id] = explored_solutions[sol_id]
             f_pareto_front = try_update_pareto_front(sol_id, explored_solutions[sol_id], f_pareto_front, with_mad)[1]
 
-    return [pareto_front, initial_solution]
+    return (pareto_front, initial_solution)
 
 
-def find_joint_pareto(algorithm_results, joint_extreme_values):
-    joint_pareto = dict()
-    full_solutions = set()
-    temp_pareto = dict()
+def find_joint_pareto(algorithm_results: Dict[str,AlgorithmResults], joint_extreme_values: ExtremeValues) -> tuple[ParetoFrontType, int]:
+    joint_pareto: dict[str, SolutionSpace] = dict()
+    full_solutions: set[str] = set()
+    temp_pareto:dict[str, SolutionSpace] = dict()
     for alg_name in algorithm_results:
         explored_solutions = algorithm_results[alg_name].explored_solutions
         update_good_bad_points(joint_extreme_values, explored_solutions)
@@ -129,10 +127,10 @@ def find_joint_pareto(algorithm_results, joint_extreme_values):
         if add_pareto:
             joint_pareto[sol_cand] = temp_pareto[sol_cand]
     update_extreme_values(joint_extreme_values, joint_pareto)
-    return [joint_pareto, len(full_solutions)]
+    return (joint_pareto, len(full_solutions))
 
 
-def try_update_pareto_front(new_sol_id, new_solution, pareto_front, with_mad):
+def try_update_pareto_front(new_sol_id:str, new_solution: SolutionSpace, pareto_front: ParetoFrontType, with_mad) :
     if not in_pareto_front(new_solution, pareto_front, with_mad):
         return [False, pareto_front]
     new_pareto = {new_sol_id: new_solution}
@@ -160,18 +158,18 @@ def update_good_bad_points(extreme_values, pareto_front):
         extreme_values.update_good_bad_points(pareto_front[sol_id])
 
 
-def is_dominated_by(dominated_info, dominant_info, with_mad):
+def is_dominated_by(dominated_info:SolutionSpace, dominant_info, with_mad):
     is_not_mad_dominated = is_non_mad_dominated(dominated_info, dominant_info)
     return is_not_mad_dominated and is_mad_dominated(dominated_info, dominant_info) if with_mad \
         else is_not_mad_dominated
 
 
-def is_non_mad_dominated(dominated_info, dominant_info):
+def is_non_mad_dominated(dominated_info:SolutionSpace, dominant_info: SolutionSpace):
     return dominant_info.cycle_time() < dominated_info.cycle_time() \
            and dominant_info.execution_cost() < dominated_info.execution_cost()
 
 
-def is_mad_dominated(dominated_info, dominant_info):
+def is_mad_dominated(dominated_info:SolutionSpace, dominant_info: SolutionSpace):
     dev_dominated = dominated_info.deviation_info
     dev_dominant = dominant_info.deviation_info
     return \
@@ -193,7 +191,7 @@ def purity_metric(pareto_front, global_pareto):
     return in_global_pareto / len(pareto_front)
 
 
-def gamma_delta_metric(pareto_front, joint_extreme_values):
+def gamma_delta_metric(pareto_front:ParetoFrontType, joint_extreme_values:ExtremeValues) -> tuple[float, float]:
     sorted_values = [sorted(pareto_front, key=lambda x: pareto_front[x].execution_cost()),
                      sorted(pareto_front, key=lambda x: pareto_front[x].cycle_time())]
     gamma_metric = 0
@@ -215,16 +213,20 @@ def gamma_delta_metric(pareto_front, joint_extreme_values):
             gamma_metric = max(gamma_metric, distances[i - 1])
             p_cost = c_cost
             p_time = c_time
-        mean_distance = 0 if len(sorted_array) == 1 else total_distance_sum / (len(sorted_array) - 1)
-        mean_diff_sum = 0
+        mean_distance:float = 0 if len(sorted_array) == 1 else total_distance_sum / (len(sorted_array) - 1)
+        mean_diff_sum:float = 0
         for i in range(0, len(distances)):
             mean_diff_sum += abs(distances[i] - mean_distance)
-        delta_metric = (d_0 + d_n + mean_diff_sum) / (d_0 + d_n + (len(distances) * mean_distance))
+        if (d_0 + d_n + (len(distances) * mean_distance)) > 0:
+            delta_metric = (d_0 + d_n + mean_diff_sum) / (d_0 + d_n + (len(distances) * mean_distance))
+        else:
+            delta_metric = sys.float_info.max
+
         index += 1
-    return [gamma_metric, delta_metric]
+    return (gamma_metric, delta_metric)
 
 
-def hyperarea_metric(pareto_front, global_extreme_values):
+def hyperarea_metric(pareto_front, global_extreme_values) -> float:
     sorted_optimals = sorted(pareto_front, key=lambda x: pareto_front[x].cycle_time())
     inferior_area = 0
     c_cost = global_extreme_values.max_cost
@@ -238,12 +240,12 @@ def hyperarea_metric(pareto_front, global_extreme_values):
     return inferior_area
 
 
-def hyperarea_ratio(pareto_front, global_extreme_values, joint_pareto_hyperarea):
+def hyperarea_ratio(pareto_front: ParetoFrontType, global_extreme_values: ExtremeValues, joint_pareto_hyperarea: float) -> float:
     pareto_hyperarea = hyperarea_metric(pareto_front, global_extreme_values)
     return pareto_hyperarea / joint_pareto_hyperarea
 
 
-def averaged_hausdorff_distance(pareto_front, joint_pareto):
+def averaged_hausdorff_distance(pareto_front:ParetoFrontType, joint_pareto:ParetoFrontType) -> float:
     return max(compute_d_xy_norm_2(pareto_front, joint_pareto), compute_d_xy_norm_2(joint_pareto, pareto_front))
 
 

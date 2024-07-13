@@ -8,8 +8,7 @@ from prosimos import simulation_engine, simulation_properties_parser
 from data_structures.simulation_info import SimulationInfo
 from data_structures.solution_space import DeviationInfo
 from support_modules.file_manager import save_simulation_results
-from support_modules.file_manager import temp_bpmn_file
-# from ext_tools.Prosimos.bpdfr_simulation_engine.simulation_properties_parser import parse_json_sim_parameters
+from support_modules.file_manager import BACKUP_BPMN_PATH
 
 
 def process_simulations(model_file_path, json_path, total_cases, pools_info):
@@ -77,9 +76,8 @@ def perform_simulations(pools_info,
                         log_name,
                         solution_index,
                         json_path,
-                        model_file_path=temp_bpmn_file,
-                        stat_out_path="./output_files/bimp_temp_files/output.csv",
-                        starting_at=None):
+                        model_file_path,
+                        ):
     print("Running Simulation for Solution # %d (ID: %s) ..." % (solution_index, pools_info.id))
     # simulated_info = load_simulation_result(log_name, pools_info)
     parallel_start_time = time.time()
@@ -96,7 +94,7 @@ def perform_simulations(pools_info,
 
     # SEQUENTIAL RUN -
 
-    s_res_list = []
+    s_res_list: list[SimulationInfo] = []
     traces_list = []
     for i in range(3):
         s_res, traces = process_simulations(model_file_path, json_path, 550, pools_info)
@@ -118,7 +116,7 @@ def perform_simulations(pools_info,
     # return estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time), traces
 
 
-def estimate_median_absolute_deviation(pools_info, log_name, simulation_results, parallel_start_time):
+def estimate_median_absolute_deviation(pools_info, log_name, simulation_results:list[SimulationInfo], parallel_start_time):
     by_cycle_time = sorted(simulation_results, key=lambda x: x.mean_process_cycle_time)
     by_duration = sorted(simulation_results, key=lambda x: x.simulation_duration())
     total_parallel_time = time.time() - parallel_start_time

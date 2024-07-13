@@ -1,22 +1,28 @@
 import json
 import os
+import tempfile
+import time
+from typing import List
 
+from data_structures.ResourceInfo import Resource
 from data_structures.RosterInfo import Roster
+from data_structures.timetable import ResourceCalendarsItem, TimetableType
+from support_modules.file_manager import  TMP_FOLDER
 
 
 class RosterManager:
-    def __init__(self, name, time_table, constraints):
-        self.roster = Roster(name, time_table, constraints)
-        self.time_table = time_table
+    def __init__(self, name:str, time_table_path:str, constraints_path:str, bpmn_path: str):
+        self.roster = Roster(name, time_table_path, constraints_path)
+        self.time_table_path: str = time_table_path
         self.blocks = int(self.roster.shift_block / 60)
-        self.constraints_json = constraints
+        self.constraints_path = constraints_path
+        self.bpmn_path = bpmn_path
 
-        # self.temp_timetable = "./temp_files/temp_timetable.json"
-        # self.temp_constraints = "./temp_files/temp_constraints.json"
-
-        curr_dir_path = os.path.abspath(os.path.dirname(__file__))
-        self.temp_timetable = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_timetable.json'))
-        self.temp_constraints = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/temp_constraints.json'))
+        tmp_folder_name = os.path.join(TMP_FOLDER, str(time.time()))
+        os.makedirs(tmp_folder_name, exist_ok=True)
+        
+        self.intermediate_timetable_path = os.path.abspath(os.path.join(tmp_folder_name, 'intermediate_timetable.json'))
+        self.intermediate_constraints_path = os.path.abspath(os.path.join(tmp_folder_name,'intermediate_constraints.json'))
 
 
         """
@@ -46,7 +52,7 @@ class RosterManager:
         return self.roster.resources
 
     def get_all_resources_in_dict(self):
-        res_dict = dict()
+        res_dict: dict[str, Resource] = dict()
         for res in self.get_all_resources():
             res_dict[res.id] = res
         return res_dict
@@ -127,7 +133,7 @@ class RosterManager:
 
 
 
-    def to_json(self):
+    def to_json(self) -> List[ResourceCalendarsItem]:
         return self.roster.to_json()
 
     def update_roster(self, pool_info):
@@ -137,22 +143,23 @@ class RosterManager:
                 r.set_shifts(resource.shifts)
         self.write_to_file()
 
-    def write_to_file(self):
-        out_path = self.time_table
-
-        with open(self.time_table, 'r') as t_read:
-            ttb = json.load(t_read)
-
-        rest_of_info = {'resource_profiles': ttb['resource_profiles'],
-                        'arrival_time_distribution': ttb['arrival_time_distribution'],
-                        'arrival_time_calendar': ttb['arrival_time_calendar'],
-                        'gateway_branching_probabilities': ttb['gateway_branching_probabilities'],
-                        'task_resource_distribution': ttb['task_resource_distribution'],
-                        'event_distribution': ttb['event_distribution'],
+    def generateTimetableJson(self, existing_timetable: TimetableType):
+         return {'resource_profiles': existing_timetable['resource_profiles'],
+                        'arrival_time_distribution': existing_timetable['arrival_time_distribution'],
+                        'arrival_time_calendar': existing_timetable['arrival_time_calendar'],
+                        'gateway_branching_probabilities': existing_timetable['gateway_branching_probabilities'],
+                        'task_resource_distribution': existing_timetable['task_resource_distribution'],
+                        'event_distribution': existing_timetable['event_distribution'],
                         'resource_calendars': self.to_json()}
 
-        with open(out_path, 'w') as out:
+    def write_to_file(self):
+        with open(self.time_table_path, 'r') as t_read:
+            ttb:TimetableType = json.load(t_read)
+        
+        rest_of_info = self.generateTimetableJson(ttb)
+
+        with open(self.time_table_path, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
         out.close()
 
-        return out_path
+        return self.time_table_path

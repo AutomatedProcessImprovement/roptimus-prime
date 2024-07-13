@@ -3,47 +3,66 @@ import json
 import os
 import shutil
 import sys
+import tempfile
 from itertools import groupby
 from shutil import copyfile
 import time
 import datetime
 import random
+from typing import Callable, Optional
+from data_structures.constraints import ConstraintsType
+from data_structures.iteration_info import IterationInfo
 from data_structures.pools_info import PoolInfo
 from data_structures.priority_queue import PriorityQueue
+from data_structures.timetable import ResourceListItem, TimetableType
 from pareto_algorithms_and_metrics.pareto_metrics import AlgorithmResults
-from support_modules.file_manager import save_stats_file, read_stats_file
+from support_modules.file_manager import BACKUP_BPMN_PATH, save_stats_file, read_stats_file
 from support_modules.helpers import _list_to_binary, _bitmap_to_valid_structure
-from pareto_algorithms_and_metrics.iterations_handler import IterationHandler
+from pareto_algorithms_and_metrics.iterations_handler import IterationHandler, IterationNextType
 from data_structures.RosterManager import RosterManager
 import hashlib
 
-curr_dir_path = os.path.abspath(os.path.dirname(__file__))
-temp_bpmn_file = os.path.abspath(os.path.join(curr_dir_path, '..', 'temp_files/CopiedModel.bpmn'))
+class Cancelable:
+    should_be_cancelled: bool = False
 
-def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_opt_ratio, is_tabu, with_mad, approach):
+    def cancel(self):
+        self.should_be_cancelled = True
+
+
+
+curr_dir_path = os.path.abspath(os.path.dirname(__file__))
+
+IterationCallbackType = Optional[Callable[[IterationNextType, str, int], None]]
+
+def hill_climb(log_name, bpmn_path, time_table_path:str, constraints_path:str, max_func_ev, non_opt_ratio, is_tabu:bool, with_mad:bool, approach:str, iteration_callback:IterationCallbackType=None, processing_request:Cancelable = Cancelable()) -> Optional[list[IterationInfo]]:
     cost_type = 1
     max_func_ev = int(max_func_ev)
     non_opt_ratio = float(non_opt_ratio)
 
     # SETUP
-    copyfile(bpmn_path, temp_bpmn_file)
-    rm = RosterManager(approach, time_table, constraints)
+    print("Starting Hill-Climb with Files %s, %s, %s" % (bpmn_path, time_table_path, constraints_path))
+
+    
+    
+    rosterManager = RosterManager(approach, time_table_path, constraints_path, bpmn_path)
     starting_time = time.time()
     algorithm_name = 'tabu_srch' if is_tabu else 'hill_clmb'
     algorithm_name += "_" + approach
 
-    initial_pools_info = PoolInfo(rm.get_all_resources_in_dict(), rm.get_task_pools())
-    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rm)
+    initial_pools_info = PoolInfo(rosterManager.get_all_resources_in_dict(), rosterManager.get_task_pools())
+    it_handler = IterationHandler(log_name, initial_pools_info, is_tabu, with_mad, rosterManager)
     max_iterations_reached = True
 
     iterations_count = [0]
     if approach == 'only_calendar' or approach == 'only_add_remove' or approach == 'combined':
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
+             
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           approach)
 
@@ -59,18 +78,22 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+    
 
     if approach == 'first_calendar_then_add_remove':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
-        while it_handler.solutions_count() < max_func_ev / 2:
+        while it_handler.solutions_count() < max_func_ev / 2 and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
 
@@ -85,12 +108,13 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         for sol_id, sim_info in it_handler.pareto_front.items():
             it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
 
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
 
@@ -106,18 +130,22 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+
 
     if approach == 'first_add_remove_then_calendar':
         # Collect solutions that are in Pareto, add them to the queue and run optim again.
-        while it_handler.solutions_count() < max_func_ev / 2:
+        while it_handler.solutions_count() < max_func_ev / 2 and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_add_remove')
         save_stats_file(log_name,
@@ -131,12 +159,13 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         for sol_id, sim_info in it_handler.pareto_front.items():
             it_handler.execution_queue.add_task(sol_id, it_handler._solution_quality(sim_info))
 
-        while it_handler.solutions_count() < max_func_ev:
+        while it_handler.solutions_count() < max_func_ev and not processing_request.should_be_cancelled:
             if it_handler.pareto_update_distance >= non_opt_ratio * max_func_ev or not it_handler.has_next():
                 max_iterations_reached = False
                 break
 
             iteration_info = it_handler.next()
+            iteration_callback(iteration_info, approach, it_handler.solutions_count()) if iteration_callback is not None else None
             solution_resolve_optimization(iteration_info, it_handler, iterations_count,
                                           'only_calendar')
         save_stats_file(log_name,
@@ -151,9 +180,12 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
         print("Total Iterations Performed: ...... %d" % iterations_count[0])
         print("Total Solutions Explored: ........ %d" % len(it_handler.generated_solutions))
         execution_info = read_stats_file(log_name, algorithm_name + ('_with_mad' if with_mad else '_without_mad'))
+        assert execution_info is not None
         alg_info = AlgorithmResults(execution_info, False)
         print("Discovered Pareto Size: .......... %d" % len(alg_info.pareto_front))
         print("---------------------------------------------------")
+        return sorted(it_handler.generated_solutions.values(), key=lambda x: it_handler.solution_order.index(x.pools_info.id))
+
 
     # save_stats_file(log_name,
     #                 algorithm_name + ('_with_mad' if with_mad else '_without_mad'),
@@ -162,9 +194,9 @@ def hill_climb(log_name, bpmn_path, time_table, constraints, max_func_ev, non_op
     #                 iterations_count[0])
 
 
-def resolve_remove_resources_in_process(iteration_info, iterations_handler, iterations_count, res_manager):
+def resolve_remove_resources_in_process(iteration_info: IterationNextType, iterations_handler:IterationHandler, iterations_count: list[int], res_manager: RosterManager):
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
-    if pools_info is None:
+    if pools_info is None or simulation_info is None:
         return None
     iterations_count[0] += 1
 
@@ -190,8 +222,9 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                 ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
                 if ready_to_sim[0]:
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
+                    iterations_handler.time_table_path = new_res_manager.time_table_path
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
                                               new_res_manager.get_task_pools())
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
@@ -231,8 +264,9 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
                 ready_to_sim = resolve_remove_resource_json_information(res, res_manager)
                 if ready_to_sim[0]:
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
+                    iterations_handler.time_table_path = new_res_manager.time_table_path
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
                                               new_res_manager.get_task_pools())
                     if _try_solution_new_resource(new_pools_info, iterations_handler, distance):
@@ -248,39 +282,39 @@ def resolve_remove_resources_in_process(iteration_info, iterations_handler, iter
     return False
 
 
-def solution_resolve_optimization(iteration_info, iterations_handler, iterations_count,
-                                  approach):
+def solution_resolve_optimization(iteration_info: IterationNextType, iterations_handler:IterationHandler, iterations_count:list[int],
+                                  approach:str):
     s1 = False
     s2 = False
     s3 = False
     s4 = False
     s5 = False
     if approach == 'only_calendar' or approach == 'combined':
-        print("WT")
+        print("Waiting Time")
         s1 = solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count,
                                                       iterations_handler.resource_manager)
         print("Cost")
         s2 = solution_traces_optimize_cost(iteration_info, iterations_handler,
                                            iterations_count, iterations_handler.resource_manager)
-        print("IT")
+        print("Idle Time")
         s3 = solution_traces_sorting_by_idle_times(iteration_info, iterations_handler,
                                                    iterations_count, iterations_handler.resource_manager)
 
     if approach == 'only_add_remove' or approach == 'combined':
-        print("WT | Add")
+        print("Waiting Time | Add Resource")
         s4 = resolve_add_resources_in_process(iteration_info, iterations_handler,
                                               iterations_count, iterations_handler.resource_manager)
-        print("Cost | Remove")
+        print("Cost | Remove Resource")
         s5 = resolve_remove_resources_in_process(iteration_info, iterations_handler,
                                                  iterations_count, iterations_handler.resource_manager)
 
     return s1 or s2 or s3 or s4 or s5
 
 
-def resolve_reschedule_resource_json_information(resource, roster_manager, task_to_improve, task_resource_occurences):
+def resolve_reschedule_resource_json_information(resource: ResourceListItem, roster_manager: RosterManager, task_to_improve: str, task_resource_occurences) -> tuple[bool, Optional[RosterManager]]:
     # 0.1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
-    shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
     try:
         # 1. Find resource and check his tasks
         tasks_resource_can_perform = resource['assigned_tasks']
@@ -302,8 +336,8 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
             resource['assigned_tasks'].remove(task_to_remove)
 
             resource_id = resource['id']
-            with open(roster_manager.time_table, 'r') as t_read:
-                ttb = json.load(t_read)
+            with open(roster_manager.time_table_path, 'r') as t_read:
+                ttb: TimetableType = json.load(t_read)
             resource_profiles = ttb['resource_profiles']
             task_resource_distribution = ttb['task_resource_distribution']
 
@@ -342,10 +376,10 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
                                 'event_distribution': ttb['event_distribution'],
                                 'resource_calendars': ttb['resource_calendars']}
 
-                with open(roster_manager.time_table, 'w') as out:
+                with open(roster_manager.time_table_path, 'w') as out:
                     out.write(json.dumps(rest_of_info, indent=4))
-                return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                           roster_manager.constraints_json)
+                return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
+                                           roster_manager.constraints_path, roster_manager.bpmn_path)
             else:
                 return False, None
         else:
@@ -379,15 +413,15 @@ def resolve_reschedule_resource_json_information(resource, roster_manager, task_
 # 3. For each task where resource no longer performs, remove task_resource_distribution
 
 
-def resolve_remove_resource_json_information(resource, roster_manager):
+def resolve_remove_resource_json_information(resource:ResourceListItem, roster_manager:RosterManager) -> tuple[bool, Optional[RosterManager]]:
     # 1 !!! MAKE BACKUP OF CONSTRAINTS AND TIMETABLE
-    shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
 
     try:
         resource_id = resource['id']
-        with open(roster_manager.time_table, 'r') as t_read:
-            ttb = json.load(t_read)
+        with open(roster_manager.time_table_path, 'r') as t_read:
+            ttb: TimetableType = json.load(t_read)
         resource_profiles = ttb['resource_profiles']
         task_resource_distribution = ttb['task_resource_distribution']
         resource_calendars = ttb['resource_calendars']
@@ -423,17 +457,17 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                             'event_distribution': ttb['event_distribution'],
                             'resource_calendars': resource_calendars}
 
-            with open(roster_manager.time_table, 'w') as out:
+            with open(roster_manager.time_table_path, 'w') as out:
                 out.write(json.dumps(rest_of_info, indent=4))
 
             # 4. Make changes to constraints json
-            with open(roster_manager.constraints_json, 'r') as c_read:
-                cons = json.load(c_read)
+            with open(roster_manager.constraints_path, 'r') as c_read:
+                cons: ConstraintsType = json.load(c_read)
 
             constraint_profiles = cons['resources']
             constraints_to_be_removed = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"),
                                              None)
-            constraint_profiles.remove(constraints_to_be_removed)
+            constraint_profiles.remove(constraints_to_be_removed) # type: ignore
 
             # 5.1 After all changes have been made, overwrite JSON with constraints.
             constraints_info = {'time_var': cons['time_var'],
@@ -443,26 +477,26 @@ def resolve_remove_resource_json_information(resource, roster_manager):
                                 'hours_in_day': cons['hours_in_day'],
                                 'resources': constraint_profiles}
 
-            with open(roster_manager.constraints_json, 'w') as c_write:
+            with open(roster_manager.constraints_path, 'w') as c_write:
                 c_write.write(json.dumps(constraints_info, indent=4))
 
-            return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                       roster_manager.constraints_json)
+            return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
+                                       roster_manager.constraints_path, roster_manager.bpmn_path)
         else:
             return False, None
     except Exception as n:
         raise Exception(n)
 
 
-def resolve_add_resource_json_information(resource, roster_manager, task_to_improve):
-    shutil.copyfile(roster_manager.time_table, roster_manager.temp_timetable)
-    shutil.copyfile(roster_manager.constraints_json, roster_manager.temp_constraints)
+def resolve_add_resource_json_information(resource:ResourceListItem, roster_manager: RosterManager, task_to_improve:str):
+    shutil.copyfile(roster_manager.time_table_path, roster_manager.intermediate_timetable_path)
+    shutil.copyfile(roster_manager.constraints_path, roster_manager.intermediate_constraints_path)
     # Step 1: Create copy of current timetable.json and constraints.json
     try:
         # Collect timetable information that will be modified
         resource_id = resource['id']
-        with open(roster_manager.time_table, 'r') as t_read:
-            ttb = json.load(t_read)
+        with open(roster_manager.time_table_path, 'r') as t_read:
+            ttb: TimetableType = json.load(t_read)
         resource_profiles = ttb['resource_profiles']
         task_resource_distribution = ttb['task_resource_distribution']
         resource_calendars = ttb['resource_calendars']
@@ -517,10 +551,10 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
                         'event_distribution': ttb['event_distribution'],
                         'resource_calendars': resource_calendars}
 
-        with open(roster_manager.time_table, 'w') as out:
+        with open(roster_manager.time_table_path, 'w') as out:
             out.write(json.dumps(rest_of_info, indent=4))
 
-        with open(roster_manager.constraints_json, 'r') as c_read:
+        with open(roster_manager.constraints_path, 'r') as c_read:
             cons = json.load(c_read)
         constraint_profiles = cons['resources']
 
@@ -537,11 +571,11 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
                             'hours_in_day': cons['hours_in_day'],
                             'resources': constraint_profiles}
 
-        with open(roster_manager.constraints_json, 'w') as t_write:
+        with open(roster_manager.constraints_path, 'w') as t_write:
             t_write.write(json.dumps(constraints_info, indent=4))
 
-        return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                   roster_manager.constraints_json)
+        return True, RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
+                                   roster_manager.constraints_path,roster_manager.bpmn_path)
 
         # 1. Get resource_profile to copy
         # resource_task_profile = next((x for x in resource_profiles if x['id'] == task_to_improve), None)
@@ -581,7 +615,7 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         # resource_calendars.append(new_resource)
 
         # 4. Make changes to constraints json
-        # with open(roster_manager.constraints_json, 'r') as c_read:
+        # with open(roster_manager.constraints_path, 'r') as c_read:
         #     cons = json.load(c_read)
         # constraint_profiles = cons['resources']
         # constraints_to_be_copied = next((x for x in constraint_profiles if x['id'] == resource_id + "timetable"), None)
@@ -597,25 +631,25 @@ def resolve_add_resource_json_information(resource, roster_manager, task_to_impr
         raise Exception(n)
 
 
-def _reset_jsons_rm_ith(roster_manager, iterations_handler):
+def _reset_jsons_rm_ith(roster_manager: RosterManager, iterations_handler:IterationHandler):
     # Simulation did not return a good solution, reset all changed objects
     # Timetable, Constraints, RosterManager() + update it_handler
     _reset_jsons(roster_manager)
 
-    new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table,
-                                    roster_manager.constraints_json)
+    new_res_manager = RosterManager(roster_manager.roster.roster_name, roster_manager.time_table_path,
+                                    roster_manager.constraints_path,roster_manager.bpmn_path)
     iterations_handler.resource_manager = new_res_manager
-    iterations_handler.time_table_path = new_res_manager.time_table
+    iterations_handler.time_table_path = new_res_manager.time_table_path
 
     return iterations_handler
 
 
-def _reset_jsons(roster_manager):
-    shutil.copyfile(roster_manager.temp_timetable, roster_manager.time_table)
-    shutil.copyfile(roster_manager.temp_constraints, roster_manager.constraints_json)
+def _reset_jsons(roster_manager:RosterManager):
+    shutil.copyfile(roster_manager.intermediate_timetable_path, roster_manager.time_table_path)
+    shutil.copyfile(roster_manager.intermediate_constraints_path, roster_manager.constraints_path)
 
 
-def resolve_add_resources_in_process(iteration_info, iterations_handler, iterations_count, roster_manager):
+def resolve_add_resources_in_process(iteration_info:IterationNextType, iterations_handler:IterationHandler, iterations_count:list[int], roster_manager:RosterManager):
     # print(len(roster_manager.roster.resources))
     # Default information setup
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
@@ -667,7 +701,7 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     # Update it_handler RosterManaer() with new RosterManager()
                     new_res_manager = ready_to_sim[1]
                     iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
+                    iterations_handler.time_table_path = new_res_manager.time_table_path
 
                     # Generate new PoolInfo from new RosterManager()
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -691,8 +725,9 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                 if ready_to_sim[0]:
                     # Update it_handler RosterManager() with new RosterManager()
                     new_res_manager = ready_to_sim[1]
+                    assert new_res_manager is not None
                     iterations_handler.resource_manager = new_res_manager
-                    iterations_handler.time_table_path = new_res_manager.time_table
+                    iterations_handler.time_table_path = new_res_manager.time_table_path
 
                     # Generate new PoolInfo from new RosterManager()
                     new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -738,8 +773,9 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                     if ready_to_sim[0]:
                         # Update it_handler RosterManager() with new RosterManager()
                         new_res_manager = ready_to_sim[1]
+                        assert new_res_manager is not None
                         iterations_handler.resource_manager = new_res_manager
-                        iterations_handler.time_table_path = new_res_manager.time_table
+                        iterations_handler.time_table_path = new_res_manager.time_table_path
 
                         # Generate new PoolInfo from new RosterManager()
                         new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -762,7 +798,7 @@ def resolve_add_resources_in_process(iteration_info, iterations_handler, iterati
                         # Update it_handler RosterManaer() with new RosterManager()
                         new_res_manager = ready_to_sim[1]
                         iterations_handler.resource_manager = new_res_manager
-                        iterations_handler.time_table_path = new_res_manager.time_table
+                        iterations_handler.time_table_path = new_res_manager.time_table_path
 
                         # Generate new PoolInfo from new RosterManager()
                         new_pools_info = PoolInfo(new_res_manager.get_all_resources_in_dict(),
@@ -877,7 +913,7 @@ def solution_sorting_by_pool_outturn(iteration_info, iterations_handler, iterati
         sorted(pools_info.pools.items(), key=lambda x: simulation_info.pool_time_outturn(x[1].resource_name),
                reverse=True)]
 
-    mean_outturn = [0, 0]
+    mean_outturn: list[float] = [0, 0]
     for pool in sorted_pools[0]:
         mean_outturn[0] += simulation_info.pool_cost_outturn(pool[0])
         mean_outturn[1] += simulation_info.pool_time_outturn(pool[0])
@@ -971,42 +1007,47 @@ def solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, it
                 i_idx = 0
                 ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
                 indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
-                for idx in range(len(shift_arr)):
+                indexes = _find_working_indexes(ranges, shift_arr)
 
-                    # Collect all shift blocks outer indexes
-                    # TODO BIG STUFF NEEDS TO BE ADRESSED HERE
-                    if shift_arr[idx] == 1 and 0 <= idx - 1 < len(shift_arr):
-                        if shift_arr[idx - 1] == 0:
-                            indexes.append([0, 0])
-                        if idx == 0:
-                            indexes[i_idx][0] = idx
-                        else:
-                            if shift_arr[idx - 1] == 0:
-                                indexes[i_idx][0] = idx
-                    if shift_arr[idx] == 1:
-                        if idx == 23:
-                            indexes[i_idx][1] = idx
-                        else:
-                            if shift_arr[idx + 1] == 0:
-                                indexes[i_idx][1] = idx
-                                i_idx += 1
+                # TODO NO IDEA WHY THIS IS REQUIRED, IT DOESN'T MAKE SENSE, SO I WON'T CONSIDER IT BY NOW
+                # for idx in range(len(shift_arr)):
+                #
+                #     # Collect all shift blocks outer indexes
+                #     # TODO BIG STUFF NEEDS TO BE ADRESSED HERE
+                #     if shift_arr[idx] == 1 and 0 <= idx - 1 < len(shift_arr):
+                #         if shift_arr[idx - 1] == 0:
+                #             indexes.append([0, 0])
+                #         if idx == 0:
+                #             indexes[i_idx][0] = idx
+                #         else:
+                #             if shift_arr[idx - 1] == 0:
+                #                 indexes[i_idx][0] = idx
+                #     if shift_arr[idx] == 1:
+                #         if idx == 23:
+                #             indexes[i_idx][1] = idx
+                #         else:
+                #             if shift_arr[idx + 1] == 0:
+                #                 indexes[i_idx][1] = idx
+                #                 i_idx += 1
                 # TODO after finishing loop, try adding left, else try moving whole shift left
                 for block in range(len(indexes)):
                     l_idx = indexes[block][0]
                     r_idx = indexes[block][1]
 
                     if r_idx < 23:
-                        print(r_idx)
+                        # print(r_idx)
                         # print("Right index is not 23 -> 23:59 so cannot go more right that day.")
 
+                        # PERTURBATION 3 (R+):  attempt to add a new granule to the right
                         shift_arr[r_idx + 1] = 1
-                        shift_arr[l_idx] = 1
+                        # shift_arr[l_idx] = 1  # No idea what's going on here
                         resource.set_shifts(_list_to_binary(shift_arr), day)
                         if resource.verify_timetable(day):
                             # Adding left is valid, run sim
                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
                                 return True
 
+                        # PERTURBATION 3 (>>):  shifting the whole granule
                         shift_arr[r_idx + 1] = 1
                         shift_arr[l_idx] = 0
                         resource.set_shifts(_list_to_binary(shift_arr), day)
@@ -1014,9 +1055,21 @@ def solution_traces_sorting_by_idle_times(iteration_info, iterations_handler, it
                             # Moving left is valid, run sim
                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
                                 return True
+
+                        # PERTURBATION 3 (LR+):  adding two granules, i.e., left and right
+                        if l_idx > 0:
+                            shift_arr[r_idx + 1] = 1
+                            shift_arr[l_idx] = 1
+                            shift_arr[l_idx - 1] = 1
+                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                            if resource.verify_timetable(day):
+                                # Moving left is valid, run sim
+                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                    return True
+
                         # No valid move, reset and go next
                         shift_arr[r_idx + 1] = 0
-                        shift_arr[l_idx] = 1
+                        shift_arr[l_idx - 1] = 0
                         resource.set_shifts(_list_to_binary(shift_arr), day)
         # All moves and resources on this task have been tried, stop.
         return False
@@ -1044,6 +1097,8 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
     resource_to_optimize = sort_resource_by_cost(resources_to_optimize)
     # resource_to_optimize = resource_to_optimize[0]
     # Collect for each trace, the information of which task was executed on which day
+
+    # TODO check this block that doesn't make sense
     tasks_of_resource = []
     for task in pools_info.task_pools:
         for resource in pools_info.task_pools[task]:
@@ -1051,67 +1106,131 @@ def solution_traces_optimize_cost(iteration_info, iterations_handler, iterations
                 tasks_of_resource.append(task)
 
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-    for task in tasks_of_resource:
-        for res in resource_to_optimize:
-            actual_resource_info = [pools_info.pools[res]]
-            resource_copy = copy.deepcopy(actual_resource_info)
-            for resource in resource_copy:
-                for day in days:
-                    shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
-                    i_idx = 0
-                    ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
-                    indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
+    for res in resource_to_optimize:
+        actual_resource_info = [pools_info.pools[res]]
+        resource_copy = copy.deepcopy(actual_resource_info)
+        for resource in resource_copy:
+            for day in days:
+                shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
+                i_idx = 0
+                ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
+                # indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
+                indexes = _find_working_indexes(ranges, shift_arr)
 
-                    for block in range(len(indexes)):
-                        l_idx = indexes[block][0]
-                        r_idx = indexes[block][1]
+                for block in range(len(indexes)):
+                    l_idx = indexes[block][0]
+                    r_idx = indexes[block][1]
 
-                        if l_idx == r_idx:
-                            print("Resource shift is only of size 1")
-                            shift_arr[l_idx] = 0
-                            shift_arr[r_idx] = 0
-                            resource.set_shifts(_list_to_binary(shift_arr), day)
-                            if resource.verify_timetable(day):
-                                # Adding left is valid, run sim
-                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                    return True
+                    if l_idx == r_idx:
+                        print("Resource shift is only of size 1")
+                        shift_arr[l_idx] = 0
+                        shift_arr[r_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                            shift_arr[l_idx] = 1
-                            shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 1
+                        shift_arr[r_idx] = 1
 
-                        elif l_idx != r_idx:
-                            shift_arr[r_idx] = 0
-                            shift_arr[l_idx] = 0
-                            resource.set_shifts(_list_to_binary(shift_arr), day)
-                            if resource.verify_timetable(day):
-                                # Adding left is valid, run sim
-                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                    return True
-                            shift_arr[r_idx] = 1
-                            shift_arr[l_idx] = 0
-                            resource.set_shifts(_list_to_binary(shift_arr), day)
-                            if resource.verify_timetable(day):
-                                # Moving left is valid, run sim
-                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                    return True
+                    elif l_idx != r_idx:
+                        # PERTURBATION 2 (LR-): removing 2 granules, left and right
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                            shift_arr[r_idx] = 0
-                            shift_arr[l_idx] = 1
-                            resource.set_shifts(_list_to_binary(shift_arr), day)
-                            if resource.verify_timetable(day):
-                                # Adding left is valid, run sim
-                                if _try_solution(resource_copy, pools_info, iterations_handler, distance):
-                                    return True
+                        # PERTURBATION 2 (L-): removing 1 granule to the left
+                        shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 0
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Moving left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
 
-                            # No valid move, reset and go next
-                            shift_arr[r_idx] = 1
-                            shift_arr[l_idx] = 1
-                            resource.set_shifts(_list_to_binary(shift_arr), day)
+                        # PERTURBATION 2 (R-): removing 1 granule to the right
+                        shift_arr[r_idx] = 0
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+                        if resource.verify_timetable(day):
+                            # Adding left is valid, run sim
+                            if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+                                return True
+
+                        # No valid move, reset and go next
+                        shift_arr[r_idx] = 1
+                        shift_arr[l_idx] = 1
+                        resource.set_shifts(_list_to_binary(shift_arr), day)
+    # for task in tasks_of_resource:
+    #     for res in resource_to_optimize:
+    #         actual_resource_info = [pools_info.pools[res]]
+    #         resource_copy = copy.deepcopy(actual_resource_info)
+    #         for resource in resource_copy:
+    #             for day in days:
+    #                 shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
+    #                 i_idx = 0
+    #                 ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
+    #                 indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
+    #
+    #                 for block in range(len(indexes)):
+    #                     l_idx = indexes[block][0]
+    #                     r_idx = indexes[block][1]
+    #
+    #                     if l_idx == r_idx:
+    #                         print("Resource shift is only of size 1")
+    #                         shift_arr[l_idx] = 0
+    #                         shift_arr[r_idx] = 0
+    #                         resource.set_shifts(_list_to_binary(shift_arr), day)
+    #                         if resource.verify_timetable(day):
+    #                             # Adding left is valid, run sim
+    #                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+    #                                 return True
+    #
+    #                         shift_arr[l_idx] = 1
+    #                         shift_arr[r_idx] = 1
+    #
+    #                     elif l_idx != r_idx:
+    #                         shift_arr[r_idx] = 0
+    #                         shift_arr[l_idx] = 0
+    #                         resource.set_shifts(_list_to_binary(shift_arr), day)
+    #                         if resource.verify_timetable(day):
+    #                             # Adding left is valid, run sim
+    #                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+    #                                 return True
+    #                         shift_arr[r_idx] = 1
+    #                         shift_arr[l_idx] = 0
+    #                         resource.set_shifts(_list_to_binary(shift_arr), day)
+    #                         if resource.verify_timetable(day):
+    #                             # Moving left is valid, run sim
+    #                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+    #                                 return True
+    #
+    #                         shift_arr[r_idx] = 0
+    #                         shift_arr[l_idx] = 1
+    #                         resource.set_shifts(_list_to_binary(shift_arr), day)
+    #                         if resource.verify_timetable(day):
+    #                             # Adding left is valid, run sim
+    #                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
+    #                                 return True
+    #
+    #                         # No valid move, reset and go next
+    #                         shift_arr[r_idx] = 1
+    #                         shift_arr[l_idx] = 1
+    #                         resource.set_shifts(_list_to_binary(shift_arr), day)
             # All moves and resources on this task have been tried, stop.
     return False
 
 
-def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count, resource_manager):
+def _find_working_indexes(ranges, shifts):
+    return [[r[0], r[-1]] for r in ranges if len(r) > 1 and shifts[r[0]] == 1 and shifts[r[-1]] == 1]
+
+
+def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler, iterations_count, resource_manager) -> Optional[bool]:
     pools_info, simulation_info, distance = iteration_info[0], iteration_info[1], iteration_info[2]
     if pools_info is None:
         return None
@@ -1176,9 +1295,14 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
 
                 shift_arr = _bitmap_to_valid_structure(resource.shifts[day][0], 1)
 
+                # for i in range(0, len(shift_arr)):
+                #     if (i < 8 or i > 16) and shift_arr[i] == 1:
+                #         print("hola")
+
                 i_idx = 0
                 ranges = [list(g) for _, g in groupby(range(len(shift_arr)), lambda _idx: shift_arr[_idx])]
-                indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1]
+                # indexes = [[r[0], r[-1]] for r in ranges if len(r) > 1] -- replaced by next line
+                indexes = _find_working_indexes(ranges, shift_arr)
 
                 for block in range(len(indexes)):
                     l_idx = indexes[block][0]
@@ -1194,15 +1318,15 @@ def solution_traces_sorting_by_waiting_times(iteration_info, iterations_handler,
                     if l_idx > 0:
                         # Left index is not the lowest index possible. So moving left (into the previous day) is not possible.
 
-                        # STEP 2: attempt to add a new granule left.
+                        # STEP 2: (L+) attempt to add a new granule left
                         shift_arr[l_idx - 1] = 1
-                        shift_arr[r_idx] = 1
+                        # shift_arr[r_idx] = 1  -- this doesn't make sense, double check
                         resource.set_shifts(_list_to_binary(shift_arr), day)
                         if resource.verify_timetable(day):
                             if _try_solution(resource_copy, pools_info, iterations_handler, distance):
                                 return True
 
-                        # STEP 3: adding left was not successful/ improving, so we try to move left
+                        # STEP 3: (<<) adding left was not successful/ improving, so we try to move left
                         shift_arr[l_idx - 1] = 1
                         shift_arr[r_idx] = 0
                         resource.set_shifts(_list_to_binary(shift_arr), day)

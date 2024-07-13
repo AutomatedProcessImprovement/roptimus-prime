@@ -81,6 +81,3 @@ def reset_after_each_execution(name_of_experiment):
     shutil.copyfile(bfp + name_of_experiment + "/model_backup.bpmn",
                     bfp + name_of_experiment + "/model.bpmn")
 
-    # After resetting ttb, also wipe out json_files dir and ids.txt
-    with open("./json_files/ids.txt", 'w'):
-        pass
