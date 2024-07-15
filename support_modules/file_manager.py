@@ -58,7 +58,11 @@ EXPERIMENTS_PLOTS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'experiment
 EXPLORED_ALLOCATIONS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'explored_allocations'))
 SIMULATION_RESULTS_PATH = os.path.abspath(os.path.join(OUTPUT_FOLDER, 'simulation_results'))
 
-
+print("\n####################### OUTPUT #######################")
+print(f"Optimos Base Path: {BASE_FOLDER}")
+print(f"Results Output Path: {OUTPUT_FOLDER}")
+print(f"Results CSV Path: {EXPLORED_ALLOCATIONS_PATH}")
+print("######################################################\n")
 
 folders = [
     TMP_FOLDER,

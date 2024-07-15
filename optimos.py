@@ -23,7 +23,7 @@ def cli():
               help='OPTIONAL: Approach to simulate [CA / AR / CO / CAAR / ARCA / ALL]')
 @pass_context
 def start_optimization(ctx, bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach):
-    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach,"opti-output" , "DEFAULT")
+    run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterations, algorithm, approach,"optimos-results.json" , "DEFAULT")
 
 
 if __name__ == "__main__":

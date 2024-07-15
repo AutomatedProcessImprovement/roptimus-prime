@@ -179,7 +179,6 @@ def run_optimization(bpmn_path, sim_params_path, constraints_path, total_iterati
     save_path = os.path.join(TMP_FOLDER, str(time.time()))
 
     print("Running optimization for: " + log_name)
-    print("Save path: " + save_path)
 
     try:
         initialize_files(save_path, bpmn_path, sim_params_path, constraints_path)
