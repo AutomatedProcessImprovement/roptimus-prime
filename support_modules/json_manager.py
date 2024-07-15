@@ -21,8 +21,8 @@ class JsonManager:
 
         time_stamp = str(time.time())
         
-        self.base_path_folders = os.path.abspath(os.path.join(SOLUTIONS_FOLDER))
-        self.path = os.path.abspath(os.path.join(self.base_path_folders,f'/ids-{time_stamp}.txt'))
+        self.base_path_folders = os.path.abspath(SOLUTIONS_FOLDER)
+        self.path = os.path.abspath(os.path.join(self.base_path_folders,f'ids-{time_stamp}.txt'))
         if not os.path.exists(self.path):
             with open(self.path, "w") as f:
                 f.write("")
